@@ -1,0 +1,23 @@
+{
+    "cmsis-csolution.actions": [
+        {
+            "path": "UART_AutoFlow.csolution.yml",
+            "target": "ARMCLANG",
+            "config": {
+                "run": "Flash Device",
+                "debug": "Embedded Debug"
+            }
+        },
+        {
+            "path": "UART_AutoFlow.csolution.yml",
+            "target": "GNUC",
+            "config": {
+                "run": "Flash Device",
+                "debug": "Embedded Debug"
+            }
+        }
+    ],
+    "clangd.arguments": [
+        "--compile-commands-dir=e:\\Working_zone\\M23\\6_M2U51G\\BSP_cooking\\BSP\\1_bsp_20250116\\SampleCode\\StdDriver\\UART_AutoFlow\\VSCode\\out\\UART_AutoFlow\\ARMCLANG\\Release"
+    ]
+}
