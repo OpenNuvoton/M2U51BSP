@@ -214,8 +214,7 @@ int32_t main(void)
             FMC_BootLD, RO=0x0F100000. ICE download algorithm to LDROM
         2. Reset MCU to execute FMC_MultiBoot.
     */
-    PutString("\n\n");
-    PutString("+---------------------------+\n");
+    PutString("\n+---------------------------+\n");
     PutString("|   Multi-Boot Sample Code  |\n");
     PutString("+---------------------------+\n");
 
@@ -337,7 +336,7 @@ int32_t main(void)
     }
     if (g_FMC_i32ErrCode != 0)
     {
-        printf("Set Vector failed!\n");
+        PutString("Set Vector failed!\n");
         while (1);
     }
 
