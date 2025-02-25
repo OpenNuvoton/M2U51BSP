@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\Library\Device\Nuvoton\M2003\Include;..\..\..\..\Library\StdDriver\inc;..\..\..\..\Library\CMSIS\Core\Include;..\</IncludePath>
+              <IncludePath>..\..\..\..\Library\Device\Nuvoton\M2U51\Include;..\..\..\..\Library\StdDriver\inc;..\..\..\..\Library\CMSIS\Core\Include;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
