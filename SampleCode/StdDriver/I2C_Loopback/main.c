@@ -17,10 +17,10 @@
 uint32_t g_u32Slave_buff_addr;
 uint8_t g_au8SlvData[256];
 uint8_t g_au8SlvRxData[3];
-uint8_t g_u8DeviceAddr;
+volatile uint8_t g_u8DeviceAddr;
 uint8_t g_au8MstTxData[3];
-uint8_t g_u8MstRxData;
-uint8_t g_u8MstDataLen;
+volatile uint8_t g_u8MstRxData;
+volatile uint8_t g_u8MstDataLen;
 uint8_t g_u8SlvDataLen;
 volatile uint8_t g_u8MstEndFlag = 0;
 

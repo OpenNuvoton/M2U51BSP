@@ -95,7 +95,7 @@ void I2C0_Close(void)
 int32_t main(void)
 {
     uint32_t i;
-    uint8_t txbuf[256] = {0}, rDataBuf[256] = {0};
+    uint8_t txbuf[128] = {0}, rDataBuf[128] = {0};
 
     /* Init System, IP clock and multi-function I/O. */
     SYS_Init();
@@ -124,12 +124,12 @@ int32_t main(void)
     g_u8DeviceAddr = 0x15;
 
     /* Prepare data for transmission */
-    for(i = 0; i < 256; i++)
+    for(i = 0; i < 128; i++)
     {
         txbuf[i] = (uint8_t) i + 3;
     }
 
-    for(i = 0; i < 256; i += 32)
+    for(i = 0; i < 128; i += 32)
     {
         /* Write 32 bytes data to Slave */
         while(I2C_WriteMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, i, &txbuf[i], 32) < 32);
@@ -140,10 +140,10 @@ int32_t main(void)
     printf("\n");
 
     /* Use Multi Bytes Read from Slave (Two Registers) */
-    while(I2C_ReadMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, 0x0000, rDataBuf, 256) < 256);
+    while(I2C_ReadMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, 0x0000, rDataBuf, 128) < 128);
 
     /* Compare TX data and RX data */
-    for(i = 0; i < 256; i++)
+    for(i = 0; i < 128; i++)
     {
         if(txbuf[i] != rDataBuf[i])
             printf("Data compare fail... R[%d] Data: 0x%X\n", i, rDataBuf[i]);
