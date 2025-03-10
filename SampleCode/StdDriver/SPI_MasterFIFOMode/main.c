@@ -21,8 +21,8 @@
 
 uint32_t g_au32SourceData[DATA_COUNT];
 uint32_t g_au32DestinationData[DATA_COUNT];
-uint32_t g_u32TxDataCount;
-uint32_t g_u32RxDataCount;
+volatile uint32_t g_u32TxDataCount;
+volatile uint32_t g_u32RxDataCount;
 
 /* Function prototype declaration */
 void SYS_Init(void);
@@ -189,11 +189,14 @@ void SPI_Init(void)
 
 void SPI0_IRQHandler(void)
 {
+    uint32_t rxData;
     /* Check RX EMPTY flag */
     while(SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0) == 0)
     {
         /* Read RX FIFO */
-        g_au32DestinationData[g_u32RxDataCount++] = SPI_READ_RX(SPI0);
+        rxData = SPI_READ_RX(SPI0);
+        g_au32DestinationData[g_u32RxDataCount] = rxData;
+        g_u32RxDataCount++;
     }
     /* Check TX FULL flag and TX data count */
     while((SPI_GET_TX_FIFO_FULL_FLAG(SPI0) == 0) && (g_u32TxDataCount < DATA_COUNT))
@@ -209,7 +212,11 @@ void SPI0_IRQHandler(void)
     {
         /* If RX FIFO is not empty, read RX FIFO. */
         while(SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0) == 0)
-            g_au32DestinationData[g_u32RxDataCount++] = SPI_READ_RX(SPI0);
+        {
+            rxData = SPI_READ_RX(SPI0);
+            g_au32DestinationData[g_u32RxDataCount] = rxData;
+            g_u32RxDataCount++;
+        }
     }
 }
 
