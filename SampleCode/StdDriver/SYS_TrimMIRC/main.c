@@ -62,6 +62,9 @@ void SYS_Init(void)
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
+    /* Enable MIRC clock & Set MIRC to 16MHz */
+    CLK_EnableMIRC(CLK_PWRCTL_MIRCFSEL_16M);
+
     /* Switch UART0 clock source to HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL2_UART0SEL_HIRC, CLK_CLKDIV_UART0(1));
 
