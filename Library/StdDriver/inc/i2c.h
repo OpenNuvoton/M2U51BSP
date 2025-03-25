@@ -27,8 +27,6 @@ extern "C"
   @{
 */
 
-#define I2C_TIMEOUT_ERR    (-1L)          /*!< I2C operation abort due to timeout error \hideinitializer */
-
 /*---------------------------------------------------------------------------------------------------------*/
 /*  I2C_CTL constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -62,6 +60,14 @@ extern "C"
 #define I2C_DATA_PHASE_BIT_6        (0x1UL << I2C_CTL1_DPBITSEL_Pos) /*!< Setting data phase bit count to 6 bit           \hideinitializer */
 #define I2C_DATA_PHASE_BIT_7        (0x2UL << I2C_CTL1_DPBITSEL_Pos) /*!< Setting data phase bit count to 7 bit           \hideinitializer */
 #define I2C_DATA_PHASE_BIT_8        (0x3UL << I2C_CTL1_DPBITSEL_Pos) /*!< Setting data phase bit count to 8 bit           \hideinitializer */
+
+/*---------------------------------------------------------------------------------------------------------*/
+/* I2C Define Error Code                                                                                   */
+/*---------------------------------------------------------------------------------------------------------*/
+#define I2C_TIMEOUT     SystemCoreClock  /*!< I2C time-out counter (1 second time-out)                                    \hideinitializer */
+#define I2C_OK          ( 0L)            /*!< I2C operation OK                                                            \hideinitializer */
+#define I2C_ERR_FAIL    (-1L)            /*!< I2C operation failed                                                        \hideinitializer */
+#define I2C_ERR_TIMEOUT (-2L)            /*!< I2C operation abort due to timeout error                                    \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  I2C AUTOMode constant definitions.                                                                   */
@@ -525,13 +531,12 @@ __STATIC_INLINE void I2C_STOP(I2C_T *i2c);
  */
 __STATIC_INLINE void I2C_STOP(I2C_T *i2c)
 {
-    uint32_t u32TimeOutCount = SystemCoreClock;
+    uint32_t u32TimeOutCount = I2C_TIMEOUT;
 
     (i2c)->CTL0 |= (I2C_CTL0_SI_Msk | I2C_CTL0_STO_Msk);
     while(i2c->CTL0 & I2C_CTL0_STO_Msk)
     {
-        u32TimeOutCount--;
-        if(u32TimeOutCount == 0) break;
+        if (--u32TimeOutCount == 0) break;
     }
 }
 
