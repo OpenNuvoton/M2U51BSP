@@ -65,6 +65,11 @@ project:
         - -g
         - --specs=nano.specs
         - -Wl,--gc-sections,-Map="$elf()$.map"
+  linker:
+    - script: ../../../../Library/Device/Nuvoton/M2U51/Source/ARM/APROM.sct
+      for-compiler: AC6
+    - script: ../../../../Library/Device/Nuvoton/M2U51/Source/GCC/gcc_arm.ld
+      for-compiler: GCC
   setups:
     - output:
         type:
@@ -78,6 +83,10 @@ project:
     - group: CMSIS
       files:
         - file: ../../../../Library/Device/Nuvoton/M2U51/Source/system_M2U51.c
+        - file: ../mystartup_M2U51_Keil.c
+          for-compiler: AC6
+        - file: ../mystartup_M2U51_GCC.S
+          for-compiler: GCC
     - group: Library
       files:
         - file: ../../../../Library/StdDriver/src/retarget.c
@@ -86,7 +95,6 @@ project:
         - file: ../../../../Library/StdDriver/src/clk.c
         - file: ../../../../Library/StdDriver/src/gpio.c
         - file: ../../../../Library/StdDriver/src/rtc.c
-        - file: ../mystartup_M2U51_Keil.s
     - group: User
       files:
         - file: ../main.c
