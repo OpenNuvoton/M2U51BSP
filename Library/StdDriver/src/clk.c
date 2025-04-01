@@ -291,61 +291,112 @@ uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
     uint32_t u32HIRCSTB;
     uint32_t u32MIRC;
     uint32_t u32ActuallyHclk;
-
-    /* Read HIRC clock source stable flag */
-    u32HIRCSTB = CLK->STATUS & CLK_STATUS_HIRCSTB_Msk;
+    uint32_t u32FmcCycle;
+    int32_t  i32TimeOutCnt = 2160000;
 
     /* The range of u32Hclk is running up to 40 MHz */
     if(u32Hclk >= FREQ_40MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_40M;
+        u32ActuallyHclk = FREQ_40MHZ;
+        u32FmcCycle = 3UL;
     }
     else if(u32Hclk >= FREQ_32MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_32M;
+        u32ActuallyHclk = FREQ_32MHZ;
+        u32FmcCycle = 3UL;
     }
     else if(u32Hclk >= FREQ_24MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_24M;
+        u32ActuallyHclk = FREQ_24MHZ;
+        u32FmcCycle = 2UL;
     }
     else if(u32Hclk >= FREQ_16MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_16M;
+        u32ActuallyHclk = FREQ_16MHZ;
+        u32FmcCycle = 1UL;
     }
     else if(u32Hclk >= FREQ_12MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_12M;
+        u32ActuallyHclk = FREQ_12MHZ;
+        u32FmcCycle = 1UL;
     }
     else if(u32Hclk >= FREQ_8MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_8M;
+        u32ActuallyHclk = FREQ_8MHZ;
+        u32FmcCycle = 1UL;
     }
     else if(u32Hclk >= FREQ_4MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_4M;
+        u32ActuallyHclk = FREQ_4MHZ;
+        u32FmcCycle = 1UL;
     }
     else if(u32Hclk >= FREQ_2MHZ)
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_2M;
+        u32ActuallyHclk = FREQ_2MHZ;
+        u32FmcCycle = 1UL;
     }
     else
     {
         u32MIRC = CLK_PWRCTL_MIRCFSEL_1M;
+        u32ActuallyHclk = FREQ_1MHZ;
+        u32FmcCycle = 1UL;
     }
 
-    /* Switch HCLK clock source to HIRC clock for safe */
-    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
-    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_HCLKDIV_HCLK(1UL));
-
-    /* Switch HCLK clock source to MIRC clock */
-    u32ActuallyHclk = CLK_EnableMIRC(u32MIRC);
-    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_MIRC, CLK_HCLKDIV_HCLK(1UL));
-
-    /* Disable HIRC if HIRC is disabled before setting core clock */
-    if(u32HIRCSTB == 0UL)
+    /* M2U51 series supports high-performance MIRC switching if HCLK is already set to MIRC. */
+    if ((CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk) == CLK_CLKSEL0_HCLKSEL_MIRC)
     {
-        CLK_DisableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
+        /* Switch FMC access cycle to maximum value for safe */
+        FMC->CYCCTL = 3UL;
+
+        /* Change MIRC frequency and then enable */
+        CLK->PWRCTL = (CLK->PWRCTL & ~(CLK_PWRCTL_MIRCFSEL_Msk)) | (u32MIRC);
+        CLK->PWRCTL |= CLK_PWRCTL_MIRCEN_Msk;
+
+        /* Wait MIRC stable */
+        while((CLK->STATUS & CLK_STATUS_MIRCSTB_Msk) != CLK_STATUS_MIRCSTB_Msk)
+        {
+            if(i32TimeOutCnt-- <= 0)
+            {
+                break;
+            }
+        }
+
+        /* Set HCLK divider to 1 */
+        CLK->HCLKDIV = (CLK->HCLKDIV & (~CLK_HCLKDIV_HCLKDIV_Msk)) | 0;
+
+        /* Switch FMC access cycle to suitable value for performance */
+        FMC->CYCCTL = u32FmcCycle;
+
+        /* Update System Core Clock */
+        SystemCoreClockUpdate();
+    }
+    else
+    {
+        /* Read HIRC clock source stable flag */
+        u32HIRCSTB = CLK->STATUS & CLK_STATUS_HIRCSTB_Msk;
+
+        /* Switch HCLK clock source to HIRC clock for safe */
+        CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
+        CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+        CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_HCLKDIV_HCLK(1UL));
+
+        /* Switch HCLK clock source to MIRC clock */
+        u32ActuallyHclk = CLK_EnableMIRC(u32MIRC);
+        CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_MIRC, CLK_HCLKDIV_HCLK(1UL));
+
+        /* Disable HIRC if HIRC is disabled before setting core clock */
+        if(u32HIRCSTB == 0UL)
+        {
+            CLK_DisableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
+        }
     }
 
     /* Return actually HCLK frequency */
@@ -1044,6 +1095,25 @@ void CLK_DisableMIRC(void)
     CLK->PWRCTL &= ~(CLK_PWRCTL_MIRCEN_Msk);
 }
 
+static void MIRC_delay(uint32_t mirc_hclk)
+{
+    uint32_t nop_count, i;
+    
+    nop_count = mirc_hclk / FREQ_1MHZ;
+    if (nop_count == 0)
+    {
+        __NOP();
+    }
+    else
+    {
+        nop_count = 5 * nop_count;
+        for(i=0; i<nop_count; i++)
+        {
+            __NOP();
+        }
+    }
+}
+
 /**
   * @brief      Set MIRC frequency
   *
@@ -1065,12 +1135,31 @@ void CLK_DisableMIRC(void)
   */
 uint32_t CLK_EnableMIRC(uint32_t u32MircFreq)
 {
-    /* Disable MIRC first to avoid unstable when setting MIRC */
-    CLK_DisableMIRC();
+    uint32_t mirc_status, mirc_hclk;
+    
+    mirc_status = (CLK->PWRCTL & CLK_PWRCTL_MIRCEN_Msk);
+    mirc_hclk   = CLK_GetCPUFreq();
+    
+    /* M2U51 series supports MIRC switching without needing to disable MIRC first. */
+    /* Other series could need disable MIRC first to avoid unstable when setting MIRC. */
+    /* CLK_DisableMIRC(); */
 
-    /* Enable and apply new MIRC setting. */
-    CLK->PWRCTL = (CLK->PWRCTL & ~(CLK_PWRCTL_MIRCFSEL_Msk)) | (u32MircFreq | CLK_PWRCTL_MIRCEN_Msk);
+    /* Change MIRC frequency and then enable */
+    CLK->PWRCTL = (CLK->PWRCTL & ~(CLK_PWRCTL_MIRCFSEL_Msk)) | (u32MircFreq);
+    CLK->PWRCTL |= CLK_PWRCTL_MIRCEN_Msk;
 
+    /* M2U51 series requires a delay before checking the MIRC stable flag. */
+    if (mirc_status == CLK_PWRCTL_MIRCEN_Msk)
+    {
+        MIRC_delay(mirc_hclk);
+    }
+    else
+    {
+        MIRC_delay(mirc_hclk);
+        CLK_WaitClockReady(CLK_STATUS_MIRCSTB_Msk);
+        MIRC_delay(mirc_hclk);
+    }
+    
     /* Wait for MIRC clock stable */
     CLK_WaitClockReady(CLK_STATUS_MIRCSTB_Msk);
 
