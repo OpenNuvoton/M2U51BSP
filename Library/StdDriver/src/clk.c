@@ -464,6 +464,25 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
     }
 }
 
+/* Convert mask bit number to mask */
+static uint32_t num_to_mask(uint32_t num)
+{
+    uint32_t u32mask;
+    switch(num)
+    {
+        case 1:     u32mask = 0x01UL;   break;
+        case 2:     u32mask = 0x03UL;   break;
+        case 3:     u32mask = 0x07UL;   break;
+        case 4:     u32mask = 0x0FUL;   break;
+        case 5:     u32mask = 0x1FUL;   break;
+        case 6:     u32mask = 0x3FUL;   break;
+        case 7:     u32mask = 0x7FUL;   break;
+        case 8:     u32mask = 0xFFUL;   break;
+        default:    u32mask = 0x00UL;   break;
+    }
+    return u32mask;
+}
+
 /**
   * @brief      This function set selected module clock source and module clock divider
   *
@@ -560,15 +579,7 @@ void CLK_SetModuleClock(uint32_t u32ModuleIdx, uint32_t u32ClkSrc, uint32_t u32C
         u32div = (uint32_t)&CLK->HCLKDIV + (u32DivTbl[MODULE_CLKDIV(u32ModuleIdx)]);
 
         /* Convert mask bit number to mask */
-        switch(MODULE_CLKDIV_Msk(u32ModuleIdx))
-        {
-            case 1:     u32mask = 0x01UL;   break;
-            case 2:     u32mask = 0x03UL;   break;
-            case 3:     u32mask = 0x07UL;   break;
-            case 4:     u32mask = 0x0FUL;   break;
-            case 8:     u32mask = 0xFFUL;   break;
-            default:    u32mask = 0x00UL;   break;
-        }
+        u32mask = num_to_mask(MODULE_CLKDIV_Msk(u32ModuleIdx));
 
         /* Apply new divider */
         M32(u32div) = (M32(u32div) & (~(u32mask << MODULE_CLKDIV_Pos(u32ModuleIdx)))) | u32ClkDiv;
@@ -580,15 +591,7 @@ void CLK_SetModuleClock(uint32_t u32ModuleIdx, uint32_t u32ClkSrc, uint32_t u32C
         u32sel = (uint32_t)&CLK->CLKSEL0 + (u32SelTbl[MODULE_CLKSEL(u32ModuleIdx)]);
 
         /* Convert mask bit number to mask */
-        switch(MODULE_CLKSEL_Msk(u32ModuleIdx))
-        {
-            case 1:     u32mask = 0x01UL;   break;
-            case 2:     u32mask = 0x03UL;   break;
-            case 3:     u32mask = 0x07UL;   break;
-            case 4:     u32mask = 0x0FUL;   break;
-            case 8:     u32mask = 0xFFUL;   break;
-            default:    u32mask = 0x00UL;   break;
-        }
+        u32mask = num_to_mask(MODULE_CLKSEL_Msk(u32ModuleIdx));
 
         /* Set new clock selection setting */
         M32(u32sel) = (M32(u32sel) & (~(u32mask << MODULE_CLKSEL_Pos(u32ModuleIdx)))) | u32ClkSrc;
@@ -974,15 +977,7 @@ uint32_t CLK_GetModuleClockSource(uint32_t u32ModuleIdx)
         u32sel = (uint32_t)&CLK->CLKSEL0 + (u32SelTbl[MODULE_CLKSEL(u32ModuleIdx)]);
 
         /* Convert mask bit number to mask */
-        switch(MODULE_CLKSEL_Msk(u32ModuleIdx))
-        {
-            case 1:     u32mask = 0x01UL;   break;
-            case 2:     u32mask = 0x03UL;   break;
-            case 3:     u32mask = 0x07UL;   break;
-            case 4:     u32mask = 0x0FUL;   break;
-            case 8:     u32mask = 0xFFUL;   break;
-            default:    u32mask = 0x00UL;   break;
-        }
+        u32mask = num_to_mask(MODULE_CLKSEL_Msk(u32ModuleIdx));
 
         /* Get clock source selection setting */
         return ((M32(u32sel) & (u32mask << MODULE_CLKSEL_Pos(u32ModuleIdx))) >> MODULE_CLKSEL_Pos(u32ModuleIdx));
@@ -1016,15 +1011,7 @@ uint32_t CLK_GetModuleClockDivider(uint32_t u32ModuleIdx)
         u32div = (uint32_t)&CLK->HCLKDIV + (u32DivTbl[MODULE_CLKDIV(u32ModuleIdx)]);
 
         /* Convert mask bit number to mask */
-        switch(MODULE_CLKDIV_Msk(u32ModuleIdx))
-        {
-            case 1:     u32mask = 0x01UL;   break;
-            case 2:     u32mask = 0x03UL;   break;
-            case 3:     u32mask = 0x07UL;   break;
-            case 4:     u32mask = 0x0FUL;   break;
-            case 8:     u32mask = 0xFFUL;   break;
-            default:    u32mask = 0x00UL;   break;
-        }
+        u32mask = num_to_mask(MODULE_CLKDIV_Msk(u32ModuleIdx));
 
         /* Get clock divider number setting */
         return ((M32(u32div) & (u32mask << MODULE_CLKDIV_Pos(u32ModuleIdx))) >> MODULE_CLKDIV_Pos(u32ModuleIdx));
