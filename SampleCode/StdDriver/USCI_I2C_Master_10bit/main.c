@@ -15,7 +15,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
-uint8_t g_au8MstTxData[3];
+volatile uint8_t g_au8MstTxData[3];
 volatile uint8_t g_u8DeviceHAddr;
 volatile uint8_t g_u8DeviceLAddr;
 volatile uint8_t g_u8MstRxData;
@@ -289,6 +289,7 @@ void UI2C0_Init(uint32_t u32ClkSpeed)
 int32_t Read_Write_SLAVE(uint16_t slvaddr)
 {
     uint32_t i;
+    uint8_t u8Data;
 
     /* Init Send 10-bit Addr */
     g_u8DeviceHAddr = (slvaddr>>8)| SLV_10BIT_ADDR;
@@ -327,7 +328,8 @@ int32_t Read_Write_SLAVE(uint16_t slvaddr)
         g_u8MstEndFlag = 0;
 
         /* Compare data */
-        if (g_u8MstRxData != g_au8MstTxData[2])
+        u8Data = g_au8MstTxData[2];
+        if (g_u8MstRxData != u8Data)
         {
             printf("USCI_I2C Byte Write/Read Failed, Data 0x%x\n", g_u8MstRxData);
             return -1;
