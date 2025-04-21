@@ -75,6 +75,9 @@ void SystemInit(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
+    /* Disable LDO adaptive bias feature */
+    outp32(0x40000168, inp32(0x40000168) | BIT28);
+
     /* Set the Band-gap to LP mode to save power consumption. */
     CLK->PMUCTL = (CLK->PMUCTL & ~(CLK_PMUCTL_NRBGLPEL_Msk)) | CLK_PMUCTL_NRBGLPEL_LP;
 
