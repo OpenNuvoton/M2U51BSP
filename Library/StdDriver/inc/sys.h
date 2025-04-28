@@ -248,7 +248,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PA.10 MFP */
 #define SYS_GPA_MFPH_PA10MFP_GPIO           (0x0UL<<SYS_GPA_MFPH_PA10MFP_Pos)   /*!< GPA_MFPH PA10 setting for GPIO             */
 #define SYS_GPA_MFPH_PA10MFP_ACMP1_P0       (0x1UL<<SYS_GPA_MFPH_PA10MFP_Pos)   /*!< GPA_MFPH PA10 setting for ACMP1_P0         */
-#define SYS_GPA_MFPH_PA10MFP_LCD_DH2        (0x1UL<<SYS_GPA_MFPH_PA10MFP_Pos)   /*!< GPA_MFPH PA10 setting for LCD_DH2          */
 #define SYS_GPA_MFPH_PA10MFP_PINV           (0x2UL<<SYS_GPA_MFPH_PA10MFP_Pos)   /*!< GPA_MFPH PA10 setting for PINV             */
 #define SYS_GPA_MFPH_PA10MFP_SPI2_CLK       (0x4UL<<SYS_GPA_MFPH_PA10MFP_Pos)   /*!< GPA_MFPH PA10 setting for SPI2_CLK         */
 #define SYS_GPA_MFPH_PA10MFP_USCI0_DAT0     (0x6UL<<SYS_GPA_MFPH_PA10MFP_Pos)   /*!< GPA_MFPH PA10 setting for USCI0_DAT0       */
@@ -261,7 +260,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PA.11 MFP */
 #define SYS_GPA_MFPH_PA11MFP_GPIO           (0x0UL<<SYS_GPA_MFPH_PA11MFP_Pos)   /*!< GPA_MFPH PA11 setting for GPIO             */
 #define SYS_GPA_MFPH_PA11MFP_ACMP0_P0       (0x1UL<<SYS_GPA_MFPH_PA11MFP_Pos)   /*!< GPA_MFPH PA11 setting for ACMP0_P0         */
-#define SYS_GPA_MFPH_PA11MFP_LCD_V3         (0x1UL<<SYS_GPA_MFPH_PA11MFP_Pos)   /*!< GPA_MFPH PA11 setting for LCD_V3           */
 #define SYS_GPA_MFPH_PA11MFP_PINV           (0x2UL<<SYS_GPA_MFPH_PA11MFP_Pos)   /*!< GPA_MFPH PA11 setting for PINV             */
 #define SYS_GPA_MFPH_PA11MFP_SPI2_SS        (0x4UL<<SYS_GPA_MFPH_PA11MFP_Pos)   /*!< GPA_MFPH PA11 setting for SPI2_SS          */
 #define SYS_GPA_MFPH_PA11MFP_USCI0_CLK      (0x6UL<<SYS_GPA_MFPH_PA11MFP_Pos)   /*!< GPA_MFPH PA11 setting for USCI0_CLK        */
@@ -308,7 +306,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.0 MFP */
 #define SYS_GPB_MFPL_PB0MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB0MFP_Pos)    /*!< GPB_MFPL PB0 setting for GPIO              */
 #define SYS_GPB_MFPL_PB0MFP_ADC0_CH0        (0x1UL<<SYS_GPB_MFPL_PB0MFP_Pos)    /*!< GPB_MFPL PB0 setting for ADC0_CH0          */
-#define SYS_GPB_MFPL_PB0MFP_LCD_V2          (0x1UL<<SYS_GPB_MFPL_PB0MFP_Pos)    /*!< GPB_MFPL PB0 setting for LCD_V2            */
 #define SYS_GPB_MFPL_PB0MFP_USCI0_CTL0      (0x6UL<<SYS_GPB_MFPL_PB0MFP_Pos)    /*!< GPB_MFPL PB0 setting for USCI0_CTL0        */
 #define SYS_GPB_MFPL_PB0MFP_UART2_RXD       (0x7UL<<SYS_GPB_MFPL_PB0MFP_Pos)    /*!< GPB_MFPL PB0 setting for UART2_RXD         */
 #define SYS_GPB_MFPL_PB0MFP_LCD_POWER       (0x8UL<<SYS_GPB_MFPL_PB0MFP_Pos)    /*!< GPB_MFPL PB0 setting for LCD_POWER         */
@@ -319,7 +316,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.1 MFP */
 #define SYS_GPB_MFPL_PB1MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB1MFP_Pos)    /*!< GPB_MFPL PB1 setting for GPIO              */
 #define SYS_GPB_MFPL_PB1MFP_ADC0_CH1        (0x1UL<<SYS_GPB_MFPL_PB1MFP_Pos)    /*!< GPB_MFPL PB1 setting for ADC0_CH1          */
-#define SYS_GPB_MFPL_PB1MFP_LCD_V1          (0x1UL<<SYS_GPB_MFPL_PB1MFP_Pos)    /*!< GPB_MFPL PB1 setting for LCD_V1            */
 #define SYS_GPB_MFPL_PB1MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB1MFP_Pos)    /*!< GPB_MFPL PB1 setting for PINV              */
 #define SYS_GPB_MFPL_PB1MFP_UART2_TXD       (0x7UL<<SYS_GPB_MFPL_PB1MFP_Pos)    /*!< GPB_MFPL PB1 setting for UART2_TXD         */
 #define SYS_GPB_MFPL_PB1MFP_LCD_POWER       (0x8UL<<SYS_GPB_MFPL_PB1MFP_Pos)    /*!< GPB_MFPL PB1 setting for LCD_POWER         */
@@ -332,7 +328,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 #define SYS_GPB_MFPL_PB2MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for GPIO              */
 #define SYS_GPB_MFPL_PB2MFP_ADC0_CH2        (0x1UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for ADC0_CH2          */
 #define SYS_GPB_MFPL_PB2MFP_ACMP0_P1        (0x1UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for ACMP0_P1          */
-#define SYS_GPB_MFPL_PB2MFP_LCD_COM3        (0x1UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for LCD_COM3          */
 #define SYS_GPB_MFPL_PB2MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for PINV              */
 #define SYS_GPB_MFPL_PB2MFP_SPI1_SS         (0x5UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for SPI1_SS           */
 #define SYS_GPB_MFPL_PB2MFP_UART1_RXD       (0x6UL<<SYS_GPB_MFPL_PB2MFP_Pos)    /*!< GPB_MFPL PB2 setting for UART1_RXD         */
@@ -347,7 +342,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 #define SYS_GPB_MFPL_PB3MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for GPIO              */
 #define SYS_GPB_MFPL_PB3MFP_ADC0_CH3        (0x1UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for ADC0_CH3          */
 #define SYS_GPB_MFPL_PB3MFP_ACMP0_N         (0x1UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for ACMP0_N           */
-#define SYS_GPB_MFPL_PB3MFP_LCD_COM2        (0x1UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for LCD_COM2          */
 #define SYS_GPB_MFPL_PB3MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for PINV              */
 #define SYS_GPB_MFPL_PB3MFP_SPI1_CLK        (0x5UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for SPI1_CLK          */
 #define SYS_GPB_MFPL_PB3MFP_UART1_TXD       (0x6UL<<SYS_GPB_MFPL_PB3MFP_Pos)    /*!< GPB_MFPL PB3 setting for UART1_TXD         */
@@ -362,7 +356,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 #define SYS_GPB_MFPL_PB4MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for GPIO              */
 #define SYS_GPB_MFPL_PB4MFP_ADC0_CH4        (0x1UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for ADC0_CH4          */
 #define SYS_GPB_MFPL_PB4MFP_ACMP1_P1        (0x1UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for ACMP1_P1          */
-#define SYS_GPB_MFPL_PB4MFP_LCD_COM1        (0x1UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for LCD_COM1          */
 #define SYS_GPB_MFPL_PB4MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for PINV              */
 #define SYS_GPB_MFPL_PB4MFP_SPI1_MOSI       (0x5UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for SPI1_MOSI         */
 #define SYS_GPB_MFPL_PB4MFP_I2C0_SDA        (0x6UL<<SYS_GPB_MFPL_PB4MFP_Pos)    /*!< GPB_MFPL PB4 setting for I2C0_SDA          */
@@ -377,7 +370,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 #define SYS_GPB_MFPL_PB5MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for GPIO              */
 #define SYS_GPB_MFPL_PB5MFP_ADC0_CH5        (0x1UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for ADC0_CH5          */
 #define SYS_GPB_MFPL_PB5MFP_ACMP1_N         (0x1UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for ACMP1_N           */
-#define SYS_GPB_MFPL_PB5MFP_LCD_COM0        (0x1UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for LCD_COM0          */
 #define SYS_GPB_MFPL_PB5MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for PINV              */
 #define SYS_GPB_MFPL_PB5MFP_SPI1_MISO       (0x5UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for SPI1_MISO         */
 #define SYS_GPB_MFPL_PB5MFP_I2C0_SCL        (0x6UL<<SYS_GPB_MFPL_PB5MFP_Pos)    /*!< GPB_MFPL PB5 setting for I2C0_SCL          */
@@ -391,7 +383,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.6 MFP */
 #define SYS_GPB_MFPL_PB6MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB6MFP_Pos)    /*!< GPB_MFPL PB6 setting for GPIO              */
 #define SYS_GPB_MFPL_PB6MFP_ADC0_CH6        (0x1UL<<SYS_GPB_MFPL_PB6MFP_Pos)    /*!< GPB_MFPL PB6 setting for ADC0_CH6          */
-#define SYS_GPB_MFPL_PB6MFP_LCD_SEG4        (0x1UL<<SYS_GPB_MFPL_PB6MFP_Pos)    /*!< GPB_MFPL PB6 setting for LCD_SEG4          */
 #define SYS_GPB_MFPL_PB6MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB6MFP_Pos)    /*!< GPB_MFPL PB6 setting for PINV              */
 #define SYS_GPB_MFPL_PB6MFP_UART1_RXD       (0x6UL<<SYS_GPB_MFPL_PB6MFP_Pos)    /*!< GPB_MFPL PB6 setting for UART1_RXD         */
 #define SYS_GPB_MFPL_PB6MFP_LCD_PIN49       (0x8UL<<SYS_GPB_MFPL_PB6MFP_Pos)    /*!< GPB_MFPL PB6 setting for LCD_PIN49         */
@@ -403,7 +394,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.7 MFP */
 #define SYS_GPB_MFPL_PB7MFP_GPIO            (0x0UL<<SYS_GPB_MFPL_PB7MFP_Pos)    /*!< GPB_MFPL PB7 setting for GPIO              */
 #define SYS_GPB_MFPL_PB7MFP_ADC0_CH7        (0x1UL<<SYS_GPB_MFPL_PB7MFP_Pos)    /*!< GPB_MFPL PB7 setting for ADC0_CH7          */
-#define SYS_GPB_MFPL_PB7MFP_LCD_SEG5        (0x1UL<<SYS_GPB_MFPL_PB7MFP_Pos)    /*!< GPB_MFPL PB7 setting for LCD_SEG5          */
 #define SYS_GPB_MFPL_PB7MFP_PINV            (0x2UL<<SYS_GPB_MFPL_PB7MFP_Pos)    /*!< GPB_MFPL PB7 setting for PINV              */
 #define SYS_GPB_MFPL_PB7MFP_UART1_TXD       (0x6UL<<SYS_GPB_MFPL_PB7MFP_Pos)    /*!< GPB_MFPL PB7 setting for UART1_TXD         */
 #define SYS_GPB_MFPL_PB7MFP_LCD_PIN48       (0x8UL<<SYS_GPB_MFPL_PB7MFP_Pos)    /*!< GPB_MFPL PB7 setting for LCD_PIN48         */
@@ -415,7 +405,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.8 MFP */
 #define SYS_GPB_MFPH_PB8MFP_GPIO            (0x0UL<<SYS_GPB_MFPH_PB8MFP_Pos)    /*!< GPB_MFPH PB8 setting for GPIO              */
 #define SYS_GPB_MFPH_PB8MFP_ADC0_CH8        (0x1UL<<SYS_GPB_MFPH_PB8MFP_Pos)    /*!< GPB_MFPH PB8 setting for ADC0_CH8          */
-#define SYS_GPB_MFPH_PB8MFP_LCD_SEG6        (0x1UL<<SYS_GPB_MFPH_PB8MFP_Pos)    /*!< GPB_MFPH PB8 setting for LCD_SEG6          */
 #define SYS_GPB_MFPH_PB8MFP_PINV            (0x2UL<<SYS_GPB_MFPH_PB8MFP_Pos)    /*!< GPB_MFPH PB8 setting for PINV              */
 #define SYS_GPB_MFPH_PB8MFP_UART0_RXD       (0x5UL<<SYS_GPB_MFPH_PB8MFP_Pos)    /*!< GPB_MFPH PB8 setting for UART0_RXD         */
 #define SYS_GPB_MFPH_PB8MFP_UART1_nRTS      (0x6UL<<SYS_GPB_MFPH_PB8MFP_Pos)    /*!< GPB_MFPH PB8 setting for UART1_nRTS        */
@@ -428,7 +417,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.9 MFP */
 #define SYS_GPB_MFPH_PB9MFP_GPIO            (0x0UL<<SYS_GPB_MFPH_PB9MFP_Pos)    /*!< GPB_MFPH PB9 setting for GPIO              */
 #define SYS_GPB_MFPH_PB9MFP_ADC0_CH9        (0x1UL<<SYS_GPB_MFPH_PB9MFP_Pos)    /*!< GPB_MFPH PB9 setting for ADC0_CH9          */
-#define SYS_GPB_MFPH_PB9MFP_LCD_SEG7        (0x1UL<<SYS_GPB_MFPH_PB9MFP_Pos)    /*!< GPB_MFPH PB9 setting for LCD_SEG7          */
 #define SYS_GPB_MFPH_PB9MFP_PINV            (0x2UL<<SYS_GPB_MFPH_PB9MFP_Pos)    /*!< GPB_MFPH PB9 setting for PINV              */
 #define SYS_GPB_MFPH_PB9MFP_UART0_TXD       (0x5UL<<SYS_GPB_MFPH_PB9MFP_Pos)    /*!< GPB_MFPH PB9 setting for UART0_TXD         */
 #define SYS_GPB_MFPH_PB9MFP_UART1_nCTS      (0x6UL<<SYS_GPB_MFPH_PB9MFP_Pos)    /*!< GPB_MFPH PB9 setting for UART1_nCTS        */
@@ -441,7 +429,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.10 MFP */
 #define SYS_GPB_MFPH_PB10MFP_GPIO           (0x0UL<<SYS_GPB_MFPH_PB10MFP_Pos)   /*!< GPB_MFPH PB10 setting for GPIO             */
 #define SYS_GPB_MFPH_PB10MFP_ADC0_CH10      (0x1UL<<SYS_GPB_MFPH_PB10MFP_Pos)   /*!< GPB_MFPH PB10 setting for ADC0_CH10        */
-#define SYS_GPB_MFPH_PB10MFP_LCD_SEG8       (0x1UL<<SYS_GPB_MFPH_PB10MFP_Pos)   /*!< GPB_MFPH PB10 setting for LCD_SEG8         */
 #define SYS_GPB_MFPH_PB10MFP_PINV           (0x2UL<<SYS_GPB_MFPH_PB10MFP_Pos)   /*!< GPB_MFPH PB10 setting for PINV             */
 #define SYS_GPB_MFPH_PB10MFP_UART0_nRTS     (0x5UL<<SYS_GPB_MFPH_PB10MFP_Pos)   /*!< GPB_MFPH PB10 setting for UART0_nRTS       */
 #define SYS_GPB_MFPH_PB10MFP_I2C1_SDA       (0x7UL<<SYS_GPB_MFPH_PB10MFP_Pos)   /*!< GPB_MFPH PB10 setting for I2C1_SDA         */
@@ -451,7 +438,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.11 MFP */
 #define SYS_GPB_MFPH_PB11MFP_GPIO           (0x0UL<<SYS_GPB_MFPH_PB11MFP_Pos)   /*!< GPB_MFPH PB11 setting for GPIO             */
 #define SYS_GPB_MFPH_PB11MFP_ADC0_CH11      (0x1UL<<SYS_GPB_MFPH_PB11MFP_Pos)   /*!< GPB_MFPH PB11 setting for ADC0_CH11        */
-#define SYS_GPB_MFPH_PB11MFP_LCD_SEG9       (0x1UL<<SYS_GPB_MFPH_PB11MFP_Pos)   /*!< GPB_MFPH PB11 setting for LCD_SEG9         */
 #define SYS_GPB_MFPH_PB11MFP_PINV           (0x2UL<<SYS_GPB_MFPH_PB11MFP_Pos)   /*!< GPB_MFPH PB11 setting for PINV             */
 #define SYS_GPB_MFPH_PB11MFP_UART0_nCTS     (0x5UL<<SYS_GPB_MFPH_PB11MFP_Pos)   /*!< GPB_MFPH PB11 setting for UART0_nCTS       */
 #define SYS_GPB_MFPH_PB11MFP_I2C1_SCL       (0x7UL<<SYS_GPB_MFPH_PB11MFP_Pos)   /*!< GPB_MFPH PB11 setting for I2C1_SCL         */
@@ -463,7 +449,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 #define SYS_GPB_MFPH_PB12MFP_ADC0_CH12      (0x1UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for ADC0_CH12        */
 #define SYS_GPB_MFPH_PB12MFP_ACMP0_P2       (0x1UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for ACMP0_P2         */
 #define SYS_GPB_MFPH_PB12MFP_ACMP1_P2       (0x1UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for ACMP1_P2         */
-#define SYS_GPB_MFPH_PB12MFP_LCD_SEG10      (0x1UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for LCD_SEG10        */
 #define SYS_GPB_MFPH_PB12MFP_PINV           (0x2UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for PINV             */
 #define SYS_GPB_MFPH_PB12MFP_SPI0_MOSI      (0x4UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for SPI0_MOSI        */
 #define SYS_GPB_MFPH_PB12MFP_USCI0_CLK      (0x5UL<<SYS_GPB_MFPH_PB12MFP_Pos)   /*!< GPB_MFPH PB12 setting for USCI0_CLK        */
@@ -478,7 +463,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 #define SYS_GPB_MFPH_PB13MFP_ADC0_CH13      (0x1UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for ADC0_CH13        */
 #define SYS_GPB_MFPH_PB13MFP_ACMP0_P3       (0x1UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for ACMP0_P3         */
 #define SYS_GPB_MFPH_PB13MFP_ACMP1_P3       (0x1UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for ACMP1_P3         */
-#define SYS_GPB_MFPH_PB13MFP_LCD_SEG11      (0x1UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for LCD_SEG11        */
 #define SYS_GPB_MFPH_PB13MFP_PINV           (0x2UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for PINV             */
 #define SYS_GPB_MFPH_PB13MFP_SPI0_MISO      (0x4UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for SPI0_MISO        */
 #define SYS_GPB_MFPH_PB13MFP_USCI0_DAT0     (0x5UL<<SYS_GPB_MFPH_PB13MFP_Pos)   /*!< GPB_MFPH PB13 setting for USCI0_DAT0       */
@@ -492,7 +476,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.14 MFP */
 #define SYS_GPB_MFPH_PB14MFP_GPIO           (0x0UL<<SYS_GPB_MFPH_PB14MFP_Pos)   /*!< GPB_MFPH PB14 setting for GPIO             */
 #define SYS_GPB_MFPH_PB14MFP_ADC0_CH14      (0x1UL<<SYS_GPB_MFPH_PB14MFP_Pos)   /*!< GPB_MFPH PB14 setting for ADC0_CH14        */
-#define SYS_GPB_MFPH_PB14MFP_LCD_SEG12      (0x1UL<<SYS_GPB_MFPH_PB14MFP_Pos)   /*!< GPB_MFPH PB14 setting for LCD_SEG12        */
 #define SYS_GPB_MFPH_PB14MFP_PINV           (0x2UL<<SYS_GPB_MFPH_PB14MFP_Pos)   /*!< GPB_MFPH PB14 setting for PINV             */
 #define SYS_GPB_MFPH_PB14MFP_SPI0_CLK       (0x4UL<<SYS_GPB_MFPH_PB14MFP_Pos)   /*!< GPB_MFPH PB14 setting for SPI0_CLK         */
 #define SYS_GPB_MFPH_PB14MFP_USCI0_DAT1     (0x5UL<<SYS_GPB_MFPH_PB14MFP_Pos)   /*!< GPB_MFPH PB14 setting for USCI0_DAT1       */
@@ -506,8 +489,6 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 /* PB.15 MFP */
 #define SYS_GPB_MFPH_PB15MFP_GPIO           (0x0UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for GPIO             */
 #define SYS_GPB_MFPH_PB15MFP_ADC0_CH15      (0x1UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for ADC0_CH15        */
-#define SYS_GPB_MFPH_PB15MFP_LCD_SEG13      (0x1UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for LCD_SEG13        */
-#define SYS_GPB_MFPH_PB15MFP_LCD_COM1       (0x1UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for LCD_COM1         */
 #define SYS_GPB_MFPH_PB15MFP_PINV           (0x2UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for PINV             */
 #define SYS_GPB_MFPH_PB15MFP_SPI0_SS        (0x4UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for SPI0_SS          */
 #define SYS_GPB_MFPH_PB15MFP_USCI0_CTL1     (0x5UL<<SYS_GPB_MFPH_PB15MFP_Pos)   /*!< GPB_MFPH PB15 setting for USCI0_CTL1       */
