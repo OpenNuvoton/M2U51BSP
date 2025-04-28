@@ -70,25 +70,25 @@ extern "C"
 #define I2C_ERR_TIMEOUT (-2L)            /*!< I2C operation abort due to timeout error                                    \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
-/*  I2C AUTOMode constant definitions.                                                                   */
+/*  I2C AUTOMode constant definitions.                                                                     */
 /*---------------------------------------------------------------------------------------------------------*/
-#define I2C_AUTO_TXPDMA           (1UL << I2C_AUTOCTL_AUTOMODE_Pos)    /*!< I2C working in auto TXPDMA mode                                         \hideinitializer */
-#define I2C_AUTO_RXPDMA           (2UL << I2C_AUTOCTL_AUTOMODE_Pos)    /*!< I2C working in auto RXPDMA mode                                         \hideinitializer */
-#define I2C_RANDOM_REPEAT_STA     (3UL << I2C_AUTOCTL_AUTOMODE_Pos)    /*!< I2C working in random read mode, repeat start between TX/RX             \hideinitializer */
-#define I2C_RANDOM_STO_STA        (4UL << I2C_AUTOCTL_AUTOMODE_Pos)    /*!< I2C working in random read mode, stop and start between TX/RX           \hideinitializer */
+#define I2C_AUTO_TXPDMA           (1UL << I2C_AUTOCTL_AUTOMODE_Pos) /*!< I2C working in auto TXPDMA mode                                  \hideinitializer */
+#define I2C_AUTO_RXPDMA           (2UL << I2C_AUTOCTL_AUTOMODE_Pos) /*!< I2C working in auto RXPDMA mode                                  \hideinitializer */
+#define I2C_RANDOM_REPEAT_STA     (3UL << I2C_AUTOCTL_AUTOMODE_Pos) /*!< I2C working in random read mode, repeat start between TX/RX      \hideinitializer */
+#define I2C_RANDOM_STO_STA        (4UL << I2C_AUTOCTL_AUTOMODE_Pos) /*!< I2C working in random read mode, stop and start between TX/RX    \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
-/*  I2C trigger source constant definitions.                                                             */
+/* I2C AUTOCTL constants definitions                                                                       */
 /*---------------------------------------------------------------------------------------------------------*/
-#define I2C_TRGSRC_TIMER0         0UL    /*!< I2C Auto-operation trigger source from TIMER0                               \hideinitializer */
-#define I2C_TRGSRC_TIMER1         1UL    /*!< I2C Auto-operation trigger source from TIMER1                               \hideinitializer */
-#define I2C_TRGSRC_TIMER2         2UL    /*!< I2C Auto-operation trigger source from TIMER2                               \hideinitializer */
-#define I2C_TRGSRC_TIMER3         3UL    /*!< I2C Auto-operation trigger source from TIMER3                               \hideinitializer */
-#define I2C_TRGSRC_WKIOA0         4UL    /*!< I2C Auto-operation trigger source from WKIOA0                               \hideinitializer */
-#define I2C_TRGSRC_WKIOB0         5UL    /*!< I2C Auto-operation trigger source from WKIOB0                               \hideinitializer */
-#define I2C_TRGSRC_WKIOC0         6UL    /*!< I2C Auto-operation trigger source from WKIOC0                               \hideinitializer */
-#define I2C_TRGSRC_WKIOD0         7UL    /*!< I2C Auto-operation trigger source from WKIOD0                               \hideinitializer */
-#define I2C_TRGSRC_SWTRG          8UL    /*!< I2C Auto-operation trigger source from SWTRG                                \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_TMR0      (0x0UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is TMR0      \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_TMR1      (0x1UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is TMR1      \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_TMR2      (0x2UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is TMR2      \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_TMR3      (0x3UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is TMR3      \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_WKIOA0    (0x4UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is WKIOA0    \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_WKIOB0    (0x5UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is WKIOB0    \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_WKIOC0    (0x6UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is WKIOC0    \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_WKIOD0    (0x7UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is WKIOD0    \hideinitializer */
+#define I2C_AUTOCTL_TRIGSEL_SOFTWARE  (0x8UL << I2C_AUTOCTL_TGSRCSEL_Pos) /*!< I2C Automatic Operation Trigger Source Select is SOFTWARE  \hideinitializer */
 
 /*@}*/ /* end of group I2C_EXPORTED_CONSTANTS */
 

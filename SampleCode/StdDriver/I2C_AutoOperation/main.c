@@ -385,7 +385,7 @@ void AutoOperation_FunctionTest(void)
     PDMA_TX_Init(I2C0_PDMA_TX_CH, SG_TX_TAB_NUM, SG_TX_LENGTH);
 
     /* Auto operation TXPDMA transfer mode */
-    I2C_Trigger_Init(I2C_AUTO_TXPDMA, I2C_TRGSRC_TIMER0, 0, SG_TX_LENGTH);
+    I2C_Trigger_Init(I2C_AUTO_TXPDMA, I2C_AUTOCTL_TRIGSEL_TMR0, 0, SG_TX_LENGTH);
 
     /* Enable Channel Transfer done interrupt */
     PDMA_EnableInt(PDMA0, I2C0_PDMA_TX_CH, PDMA_INT_TRANS_DONE );
@@ -433,7 +433,7 @@ void AutoOperation_FunctionTest(void)
     PDMA_RX_Init(I2C0_PDMA_RX_CH, SG_RX_LENGTH * SG_RX_TAB_NUM);
 
     /* Auto operation random read mode with repeat start */
-    I2C_Trigger_Init(I2C_RANDOM_REPEAT_STA, I2C_TRGSRC_TIMER0, SG_RX_LENGTH, SG_TX_LENGTH);
+    I2C_Trigger_Init(I2C_RANDOM_REPEAT_STA, I2C_AUTOCTL_TRIGSEL_TMR0, SG_RX_LENGTH, SG_TX_LENGTH);
 
     /* Enable Channel Transfer done interrupt */
     PDMA_EnableInt(PDMA0, I2C0_PDMA_RX_CH, PDMA_INT_TRANS_DONE );

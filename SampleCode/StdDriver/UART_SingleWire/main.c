@@ -5,7 +5,7 @@
  *           Two Single-Wire Loopback data test.
  *
  * SPDX-License-Identifier: Apache-2.0
- * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
+ * @copyright (C) 2025 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
 #include "stdio.h"
@@ -42,14 +42,14 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable HIRC clock (Internal RC 48MHz) */
+    /* Enable HIRC clock (Internal RC 16MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
     /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Set core clock as 48MHz from MIRC */
-    CLK_SetCoreClock(FREQ_48MHZ);
+    /* Set core clock as 40MHz from MIRC */
+    CLK_SetCoreClock(FREQ_40MHZ);
 
     /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
@@ -319,7 +319,7 @@ void UART_FunctionTest()
     /*
         Using a RS232 cable to connect UART0 and PC.UART0 is set to debug port.
           UART1 and UART2 is enable RDA and RLS interrupt.
-          The user can use URT0 to control the transmission or reception of UART1(Single Wire mode)
+          The user can use UART0 to control the transmission or reception of UART1(Single Wire mode)
         When UART1(Single Wire 1)transfers data to UART2(Single Wire 2), if data is valid,
           it will enter the interrupt and receive the data.And then check the received data.
         When UART2(Single Wire 2)transfers data to UART1(Single Wire 1), if data is valid,
@@ -404,6 +404,6 @@ void UART_FunctionTest()
 
 }
 
-/*** (C) COPYRIGHT 2017 Nuvoton Technology Corp. ***/
+/*** (C) COPYRIGHT 2025 Nuvoton Technology Corp. ***/
 
 
