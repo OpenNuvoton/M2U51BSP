@@ -535,9 +535,6 @@ static uint32_t num_to_mask(uint32_t num)
   * |\ref ADC0_MODULE   |\ref CLK_CLKSEL1_ADC0SEL_HIRC          |\ref CLK_CLKDIV_ADC0(x)    |
   * |\ref LCD_MODULE    |\ref CLK_CLKSEL1_LCDSEL_LIRC           | x                         |
   * |\ref LCD_MODULE    |\ref CLK_CLKSEL1_LCDSEL_LXT            | x                         |
-  * |\ref LCD_MODULE    |\ref CLK_CLKSEL1_LCDCPSEL_DIV32        | x                         |
-  * |\ref LCD_MODULE    |\ref CLK_CLKSEL1_LCDCPSEL_DIV16        | x                         |
-  * |\ref LCD_MODULE    |\ref CLK_CLKSEL1_LCDCPSEL_DIV8         | x                         |
   * |\ref LCDCP_MODULE  |\ref CLK_CLKSEL1_LCDCPSEL_DIV32        | x                         |
   * |\ref LCDCP_MODULE  |\ref CLK_CLKSEL1_LCDCPSEL_DIV16        | x                         |
   * |\ref LCDCP_MODULE  |\ref CLK_CLKSEL1_LCDCPSEL_DIV8         | x                         |
