@@ -7,7 +7,7 @@
  * @note
  *
  * SPDX-License-Identifier: Apache-2.0
- * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
+ * @copyright (C) 2025 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
 #include <stdio.h>
@@ -62,8 +62,8 @@ void SYS_Init(void)
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
     CLK_WaitClockReady(CLK_STATUS_LXTSTB_Msk);
 
-    /* Set core clock as 48MHz from MIRC */
-    CLK_SetCoreClock(FREQ_48MHZ);
+    /* Set core clock as 40MHz from MIRC */
+    CLK_SetCoreClock(FREQ_40MHZ);
 
     /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
@@ -209,10 +209,10 @@ void UART_DataWakeUp(void)
     /* Set UART data wake-up start bit compensation value.
        It indicates how many clock cycle selected by UART_CLK does the UART controller can get the first bit (start bit)
        when the device is wake-up from power-down mode.
-       If UART_CLK is selected as HIRC(12MHz) and the HIRC stable time is about 52.03us,
-       the data wake-up start bit compensation value can be set as 0x270. */
+       If UART_CLK is selected as HIRC(16MHz) and the HIRC stable time is about 86.05us,
+       the data wake-up start bit compensation value can be set as 0x560. */
     UART_Open(UART1, 9600);
-    UART1->DWKCOMP = 0x270;
+    UART1->DWKCOMP = 0x560;
 
     printf("System enter to Power-down mode NPD%d.\n", (int)(CLK->PMUCTL & CLK_PMUCTL_PDMSEL_Msk));
     printf("Send data with baud rate 9600bps to UART1 to wake-up system.\n\n");
@@ -227,6 +227,9 @@ void UART_RxThresholdWakeUp(void)
     while((UART0->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0);
     while((UART0->FIFOSTS & UART_FIFOSTS_RXIDLE_Msk) == 0);
     CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL2_UART1SEL_LXT, CLK_CLKDIV_UART1(1));
+
+    /* UART1 clock enabled when entering NPD0~2 mode */
+    CLK->KEEP |= CLK_KEEP_UART1KEEP_Msk;
 
     /* Set UART baud rate and baud rate compensation */
     UART_Open(UART1, 9600);
@@ -254,6 +257,9 @@ void UART_RS485WakeUp(void)
     while((UART0->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0);
     while((UART0->FIFOSTS & UART_FIFOSTS_RXIDLE_Msk) == 0);
     CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL2_UART1SEL_LXT, CLK_CLKDIV_UART1(1));
+
+    /* UART1 clock enabled when entering NPD0~2 mode */
+    CLK->KEEP |= CLK_KEEP_UART1KEEP_Msk;
 
     /* Set UART baud rate and baud rate compensation */
     UART_Open(UART1, 9600);

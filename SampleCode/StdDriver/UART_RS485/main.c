@@ -4,7 +4,7 @@
  * @brief    Transmit and receive data in UART RS485 mode.
  *
  * SPDX-License-Identifier: Apache-2.0
- * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
+ * @copyright (C) 2025 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
 #include <stdio.h>
@@ -41,14 +41,14 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable HIRC clock (Internal RC 48MHz) */
+    /* Enable HIRC clock (Internal RC 16MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
     /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Set core clock as 48MHz from MIRC */
-    CLK_SetCoreClock(FREQ_48MHZ);
+    /* Set core clock as 40MHz from MIRC */
+    CLK_SetCoreClock(FREQ_40MHZ);
 
     /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
@@ -209,14 +209,14 @@ void RS485_9bitModeMaster()
     uint8_t g_u8SendDataGroup4[10] = {0};
 
     printf("\n\n");
-    printf("+-----------------------------------------------------------+\n");
-    printf("|               RS485 9-bit Master Test                     |\n");
-    printf("+-----------------------------------------------------------+\n");
-    printf("| The function will send different address with 10 data bytes|\n");
-    printf("| to test RS485 9-bit mode. Please connect TX/RX to another |\n");
-    printf("| board and wait its ready to receive.                      |\n");
-    printf("| Press any key to start...                                 |\n");
-    printf("+-----------------------------------------------------------+\n\n");
+    printf("+-------------------------------------------------------------+\n");
+    printf("|               RS485 9-bit Master Test                       |\n");
+    printf("+-------------------------------------------------------------+\n");
+    printf("| The function will send different address with 10 data bytes |\n");
+    printf("| to test RS485 9-bit mode. Please connect TX/RX to another   |\n");
+    printf("| board and wait its ready to receive.                        |\n");
+    printf("| Press any key to start...                                   |\n");
+    printf("+-------------------------------------------------------------+\n\n");
     getchar();
 
     /* Set RS485-Master as AUD mode*/
@@ -277,7 +277,7 @@ void RS485_9bitModeSlave()
     printf("|    Normal Multidrop Operation Mode                        |\n");
     printf("+-----------------------------------------------------------+\n");
     printf("| The function is used to test 9-bit slave mode.            |\n");
-    printf("| Only Address %2x and %2x,data can receive                  |\n", MATCH_ADDRSS1, MATCH_ADDRSS2);
+    printf("| Only Address %2x and %2x,data can receive                   |\n", MATCH_ADDRSS1, MATCH_ADDRSS2);
     printf("+-----------------------------------------------------------+\n");
 
     /* Set RX_DIS enable before set RS485-NMM mode */
@@ -378,5 +378,5 @@ void RS485_FunctionTest()
         RS485_9bitModeSlave();
 }
 
-/*** (C) COPYRIGHT 2017 Nuvoton Technology Corp. ***/
+/*** (C) COPYRIGHT 2025 Nuvoton Technology Corp. ***/
 

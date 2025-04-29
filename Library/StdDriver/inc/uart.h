@@ -100,6 +100,19 @@ extern "C"
 #define UART_BAUD_MODE2     (UART_BAUD_BAUDM1_Msk | UART_BAUD_BAUDM0_Msk) /*!< Set UART Baudrate Mode is Mode2 \hideinitializer */
 
 
+/*---------------------------------------------------------------------------------------------------------*/
+/* UART AUTOCTL constants definitions                                                                      */
+/*---------------------------------------------------------------------------------------------------------*/
+#define UART_AUTOCTL_TRIGSEL_TMR0     (0x0UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is TMR0 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_TMR1     (0x1UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is TMR1 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_TMR2     (0x2UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is TMR2 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_TMR3     (0x3UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is TMR3 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_WKIOA0   (0x4UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is WKIOA0 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_WKIOB0   (0x5UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is WKIOB0 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_WKIOC0   (0x6UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is WKIOC0 \hideinitializer */
+#define UART_AUTOCTL_TRIGSEL_WKIOD0   (0x7UL << UART_AUTOCTL_TRIGSEL_Pos) /*!< UART Automatic Operation Trigger Source Select is WKIOD0 \hideinitializer */
+
+
 /*@}*/ /* end of group UART_EXPORTED_CONSTANTS */
 
 
