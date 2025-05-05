@@ -25,7 +25,7 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Unlock protected registers */
     SYS_UnlockReg();
-    /* Enable HIRC clock (Internal RC 24MHz) */
+    /* Enable HIRC clock (Internal RC 16MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
@@ -42,7 +42,7 @@ void SYS_Init(void)
     CLK->AHBCLK0 |= CLK_AHBCLK0_GPBCKEN_Msk;    
     
     /* Select UART module clock source as HIRC and UART module clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL2 & (~CLK_CLKSEL2_UART0SEL_Msk)) | CLK_CLKSEL2_UART0SEL_HIRC;
+    CLK->CLKSEL1 = (CLK->CLKSEL2 & (~CLK_CLKSEL2_UART1SEL_Msk)) | CLK_CLKSEL2_UART1SEL_HIRC;
     CLK->CLKDIV = (CLK->CLKDIV & (~CLK_CLKDIV_UART1DIV_Msk)) | CLK_CLKDIV_UART1(1);
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */

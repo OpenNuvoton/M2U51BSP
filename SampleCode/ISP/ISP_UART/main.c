@@ -21,7 +21,7 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Unlock protected registers */
     SYS_UnlockReg();
-    /* Enable HIRC clock (Internal RC 24MHz) */
+    /* Enable HIRC clock (Internal RC 16MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */

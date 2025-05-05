@@ -5,7 +5,7 @@ project:
     - output:
         # bin, elf, hex, lib
         type: bin
-    - setup: Options for ISPUART
+    - setup: Options for ISP_I2C
       add-path:
         - ../../../../Library/CMSIS/Core/Include
         - ../../../../Library/StdDriver/inc
