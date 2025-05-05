@@ -112,11 +112,11 @@ void CalPeriodTime(BPWM_T *BPWM, uint32_t u32Ch)
 
     u16TotalPeriod = 0x10000 - u16Count[2];
 
-    printf("\nPWM generate: \nHigh Period=11999 ~ 12001, Low Period=11999 ~ 12001, Total Period=23999 ~ 24001\n");
+    printf("\nPWM generate: \nHigh Period=9999 ~ 10001, Low Period=9999 ~ 10001, Total Period=19998 ~ 20002\n");
     printf("\nCapture Result: Rising Time = %d, Falling Time = %d \nHigh Period = %d, Low Period = %d, Total Period = %d.\n\n",
            u16RisingTime, u16FallingTime, u16HighPeriod, u16LowPeriod, u16TotalPeriod);
 
-    if ((u16HighPeriod < 11999) || (u16HighPeriod > 12001) || (u16LowPeriod < 11999) || (u16LowPeriod > 12001) || (u16TotalPeriod < 23999) || (u16TotalPeriod > 24001))
+	if ((u16HighPeriod < 9999) || (u16HighPeriod > 10001) || (u16LowPeriod < 9999) || (u16LowPeriod > 10001) || (u16TotalPeriod < 19999) || (u16TotalPeriod > 20001))
         printf("Capture Test Fail!!\n");
     else
         printf("Capture Test Pass!!\n");
@@ -133,7 +133,7 @@ void SYS_Init(void)
     /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch the core clock to 40MHz from the MIRC */
+    /* Switch the core clock to 40 MHz from the MIRC */
     CLK_SetCoreClock(FREQ_40MHZ);
 
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
@@ -220,7 +220,7 @@ int32_t main(void)
         /* Set the TM0 as BPWM output function.                                       */
         /*--------------------------------------------------------------------------------------*/
 
-        /* To generate 500HZ toggle output, timer frequency must set to 1000Hz.
+        /* To generate 500 HZ toggle output, timer frequency must set to 1000 Hz.
            Because toggle output state change on every timer timeout event */
         if (TIMER_Open(TIMER0, TIMER_TOGGLE_MODE, 1000) != 1000)
         {
@@ -234,10 +234,10 @@ int32_t main(void)
         /* Set the BPWM0 channel 0 for capture function                                          */
         /*--------------------------------------------------------------------------------------*/
 
-        /* If input minimum frequency is 250Hz, user can calculate capture settings by follows.
-           Capture clock source frequency = PCLK = 48000000 in the sample code.
+        /* If input minimum frequency is 500 Hz, user can calculate capture settings by follows.
+           Capture clock source frequency = PCLK = 40000000 in the sample code.
            (CNR+1) = Capture clock source frequency/prescaler/minimum input frequency
-                   = 48000000/4/250 = 48000
+                   = 40000000/4/500 = 20000
            (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
            CNR = 0xFFFF
            (Note: In capture mode, user should set CNR to 0xFFFF to increase capture frequency range.)

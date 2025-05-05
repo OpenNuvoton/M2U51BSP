@@ -131,7 +131,7 @@ void SYS_Init(void)
     /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch the core clock to 40MHz from the MIRC */
+    /* Switch the core clock to 40 MHz from the MIRC */
     CLK_SetCoreClock(FREQ_40MHZ);
 
     /* Set both PCLK0 and PCLK1 as HCLK/2 */

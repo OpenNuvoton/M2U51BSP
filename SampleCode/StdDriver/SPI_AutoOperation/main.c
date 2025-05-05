@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Demonstrate how to do LPSPI loopback test in Auto-operation mode
+ * @brief    Demonstrate how to do SPI loopback test in Auto-operation mode
  *           when chip enters power-down mode.
  *
  * SPDX-License-Identifier: Apache-2.0
@@ -14,26 +14,20 @@
 /* Define global variables and constants                                    */
 /*--------------------------------------------------------------------------*/
 volatile uint32_t g_u32WakeupCount = 0;
-volatile uint32_t g_u32LPPdmaIntFlag;
+volatile uint32_t g_u32PdmaIntFlag;
 volatile uint32_t g_u32Ifr = 0;
 
 #define DATA_COUNT                  32
 #define RX_PHASE_TCNT               1
 #define TIMER0_FREQ                 1
-#define SPI_MASTER_TX_DMA_CH      0
-#define SPI_MASTER_RX_DMA_CH      1
-#define SPI_OPENED_CH             ((1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH))
-
+#define SPI_MASTER_TX_DMA_CH        0
+#define SPI_MASTER_RX_DMA_CH        1
+#define SPI_OPENED_CH               ((1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH))
 #define TEST_PATTERN                0x55000000
-#define SPI_CLK_FREQ              2000000
+#define SPI_CLK_FREQ                2000000
 
-#if (defined(__GNUC__) && !defined(__ARMCC_VERSION))
-uint32_t g_au32MasterToSlaveTestPattern[DATA_COUNT] __attribute__ ((section(".lpSram")));
-uint32_t g_au32MasterRxBuffer[DATA_COUNT] __attribute__ ((section(".lpSram")));
-#else
-uint32_t g_au32MasterToSlaveTestPattern[DATA_COUNT] __attribute__ ((section(".ARM.__at_0x28000000")));
-uint32_t g_au32MasterRxBuffer[DATA_COUNT] __attribute__ ((section(".ARM.__at_0x28000100")));
-#endif
+uint32_t g_au32MasterToSlaveTestPattern[DATA_COUNT];
+uint32_t g_au32MasterRxBuffer[DATA_COUNT];
 
 
 void SPI0_IRQHandler(void)
@@ -76,6 +70,9 @@ void SYS_Init(void)
     /* Enable TIMER0 module clock */
     CLK_EnableModuleClock(TMR0_MODULE);
 
+    /* Enable PDMA0 module clock */
+    CLK_EnableModuleClock(PDMA0_MODULE);
+
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
@@ -95,9 +92,9 @@ void SYS_Init(void)
                      SYS_GPA_MFPL_PA0MFP_SPI0_MOSI);
 
     /* Clock output HCLK to PB14 */
-//    SYS->GPB_MFP3 = (SYS->GPB_MFP3 & ~(SYS_GPB_MFP3_PB14MFP_Msk)) |
-//                    (SYS_GPB_MFP3_PB14MFP_CLKO);
-//    CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 0, 1);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB14MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB14MFP_CLKO);
+    CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 0, 1);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -126,8 +123,8 @@ void TIMER0_Init(void)
     /* Enable TIMER clock in power-down mode */
     TIMER0->CTL |= TIMER_CTL_PDCLKEN_Msk;
 
-    /* Begin TIMER trigger function */
-    TIMER0->TRGCTL &= ~TIMER_TRGCTL_TRGSSEL_Msk;
+    /* Enable TIMER time-out trigger function in Auto Operation Mode */
+    TIMER0->ATRGCTL = TIMER_ATRGCTL_ATRGEN_Msk;
 }
 
 void PDMA_Init(void)
@@ -154,7 +151,7 @@ void PDMA_Init(void)
     /* Set source/destination address and attributes */
     PDMA_SetTransferAddr(PDMA0, SPI_MASTER_TX_DMA_CH, (uint32_t)g_au32MasterToSlaveTestPattern, PDMA_SAR_INC, (uint32_t)&SPI0->TX, PDMA_DAR_FIX);
     /* Set request source; set basic mode. */
-    PDMA_SetTransferMode(PDMA0, SPI_MASTER_TX_DMA_CH, PDMA_SPI0_TX, FALSE, 0);
+    PDMA_SetTransferMode(PDMA0, SPI_MASTER_TX_DMA_CH, PDMA_SPI0_TX , FALSE, 0);
     /* Single request type. SPI only support PDMA single request type. */
     PDMA_SetBurstType(PDMA0, SPI_MASTER_TX_DMA_CH, PDMA_REQ_SINGLE, 0);
     /* Disable table interrupt */
@@ -196,7 +193,7 @@ void SPI_Init(void)
     /* Enable the automatic hardware slave select function. Select the SS pin and configure as low-active. */
     SPI_EnableAutoSS(SPI0, SPI_SS, SPI_SS_ACTIVE_LOW);
 
-    /* Select LPSPI Auto Trigger source from TIMER0 */
+    /* Select SPI Auto Trigger source from TIMER0 */
     SPI_SET_AUTO_TRIG_SOURCE(SPI0, SPI_AUTOCTL_TRIGSEL_TMR0);
 
     /* Enable Auto Trigger mode */
@@ -234,7 +231,7 @@ void AutoOperation_FunctionTest()
 
     g_u32WakeupCount = 0;
 
-    /* Init LPSPI runs in Auto Operation Mode */
+    /* Init SPI runs in Auto Operation Mode */
     SPI_Init();
 
     /* Init TIMER */
@@ -252,15 +249,16 @@ void AutoOperation_FunctionTest()
 
         PDMA_Init();
 
-        printf("\nPower down and wait LPPDMA to wake up CPU ...\n\n");
+        printf("\nPower down and wait PDMA to wake up CPU ...\n\n");
         UART_WAIT_TX_EMPTY(UART0);
 
         /* Clear all wake-up status flags */
         CLK->PMUSTS = CLK_PMUSTS_CLRWK_Msk;
-        g_u32LPPdmaIntFlag = 0;
+        g_u32PdmaIntFlag = 0;
 
         SYS_UnlockReg();
         CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD2);
+//        CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD1);
         CLK_PowerDown();
         SYS_LockReg();
 
@@ -272,7 +270,7 @@ void AutoOperation_FunctionTest()
         if ((g_u32Ifr&(SPI_AUTOSTS_CNTIF_Msk | SPI_AUTOSTS_CNTWKF_Msk))
                 != (SPI_AUTOSTS_CNTIF_Msk | SPI_AUTOSTS_CNTWKF_Msk))
         {
-            printf("Some errors happened, LPSPI->AUTOSTS=0x%x \n", g_u32Ifr);
+            printf("Some errors happened, SPI->AUTOSTS=0x%x \n", g_u32Ifr);
             while(1);
         }
 
@@ -287,7 +285,7 @@ void AutoOperation_FunctionTest()
         if((u32PdmaDoneFlag & (1<<SPI_MASTER_RX_DMA_CH))==0) while(1);
         PDMA_CLR_TD_FLAG(PDMA0, (1<<SPI_MASTER_RX_DMA_CH));
 
-        printf("*** Since LPSPI TX doesn't send data in RX phase, RX pin cannot get last one sample in this example code. ***\n\n");
+        printf("*** Since SPI TX doesn't send data in RX phase, RX pin cannot get last one sample in this example code. ***\n\n");
 
         /* u32TotalRxCount is the total received data number in both TX phase (by FULLRX enabled) and RX phase */
         u32TotalRxCount = DATA_COUNT + RX_PHASE_TCNT;
@@ -312,12 +310,12 @@ int32_t main(void)
     printf("\n\n");
     printf("\nSystem clock rate: %d Hz\n", SystemCoreClock);
     printf("+--------------------------------------------------------------------+\n");
-    printf("|         M2U51 LPSPI Auto Operation Mode Sample Code                |\n");
+    printf("|         M2U51 SPI Auto Operation Mode Sample Code                |\n");
     printf("+--------------------------------------------------------------------+\n");
     printf("\n");
     printf("\nThis sample code demonstrates SPI0 self loop back data transfer in Auto Operation Mode,\n");
     printf("  and its procedure is listed below. \n");
-    printf(" 1. Initialize TIMER0, LPPDMA and SPI0. \n");
+    printf(" 1. Initialize TIMER0, PDMA and SPI0. \n");
     printf("    SPI0 is configured to Master mode with data width is 32 bits.\n");
     printf("    For loop back test, its I/O connection: SPI0_MOSI(PA.0) <--> SPI0_MISO(PA.1) \n");
     printf(" 2. Let system enter Powerr Mode. \n");
@@ -329,7 +327,7 @@ int32_t main(void)
 
     AutoOperation_FunctionTest();
 
-    printf("Exit LPSPI Auto-operation sample code\n");
+    printf("Exit SPI Auto-operation sample code\n");
 
     while(1);
 

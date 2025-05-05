@@ -49,17 +49,14 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable HIRC clock (Internal RC 48MHz) */
+    /* Enable HIRC */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Wait for HIRC clock ready */
+    /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Set core clock as 48MHz from MIRC */
-    CLK_SetCoreClock(FREQ_48MHZ);
+    /* Switch the core clock to 40 MHz from the MIRC */
+    CLK_SetCoreClock(FREQ_40MHZ);
 
     /* Set PCLK0/PCLK1 to HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);

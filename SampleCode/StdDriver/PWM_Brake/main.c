@@ -78,6 +78,9 @@ void SYS_Init(void)
     /* Enable TIMER0 module clock */
     CLK_EnableModuleClock(TMR0_MODULE);
 
+	/* Enable GPIO module clock */
+    CLK_EnableModuleClock(GPD_MODULE);
+
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/

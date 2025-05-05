@@ -133,7 +133,7 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
     if(u32Src == 0U)
     {
         /* clock source is from PLL clock */
-//        u32PWMClockSrc = CLK_GetPLLClockFreq();
+        // u32PWMClockSrc = CLK_GetPLLClockFreq();
     }
     else
     {
@@ -143,7 +143,7 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
         {
             u32PWMClockSrc = CLK_GetPCLK0Freq();
         }
-        else     /* (bpwm == BPWM1) */
+        else /* (bpwm == BPWM1) */
         {
             u32PWMClockSrc = CLK_GetPCLK1Freq();
         }

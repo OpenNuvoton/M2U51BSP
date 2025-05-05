@@ -50,14 +50,24 @@ void PDMA0_IRQHandler(void)
 
 void SYS_Init(void)
 {
-    /*---------------------------------------------------------------------------------------------------------*/
-    /* Init System Clock                                                                                       */
-    /*---------------------------------------------------------------------------------------------------------*/
-    /* Set PCLK0 and PCLK1 to HCLK/2 */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable HIRC */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
+
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+
+    /* Switch the core clock to 40 MHz from the MIRC */
+    CLK_SetCoreClock(FREQ_40MHZ);
+
+    /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Set core clock as 48MHz from MIRC */
-    CLK_SetCoreClock(FREQ_48MHZ);
+    /* Update System Core Clock */
+    /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
+    SystemCoreClockUpdate();
 
     /* Enable all GPIO clock */
     CLK->AHBCLK0 |= CLK_AHBCLK0_GPACKEN_Msk | CLK_AHBCLK0_GPBCKEN_Msk | CLK_AHBCLK0_GPCCKEN_Msk | CLK_AHBCLK0_GPDCKEN_Msk |

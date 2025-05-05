@@ -52,31 +52,41 @@ static uint32_t g_LCDFrameRate;
   *                                 - \ref LCD_COM_DUTY_1_7
   *                                 - \ref LCD_COM_DUTY_1_8
   *                     u32BiasLevel: LCD Bias level selection. Valid values are:
-  *                                     - \ref LCD_BIAS_LV_1_2
-  *                                     - \ref LCD_BIAS_LV_1_3
-  *                                     - \ref LCD_BIAS_LV_1_4
+  *                                 - \ref LCD_BIAS_LV_1_2
+  *                                 - \ref LCD_BIAS_LV_1_3
+  *                                 - \ref LCD_BIAS_LV_1_4
   *                     u32Framerate: Specify the target LCD operating frame rate (Hz).
   *                     u32WaveformType: Specify the LCD waveform type. Valid values are:
-  *                                         - \ref LCD_WAVEFORM_TYPE_A_NORMAL
-  *                                         - \ref LCD_WAVEFORM_TYPE_B_NORMAL
-  *                                         - \ref LCD_WAVEFORM_TYPE_A_INVERSE
-  *                                         - \ref LCD_WAVEFORM_TYPE_B_INVERSE
+  *                                 - \ref LCD_WAVEFORM_TYPE_A_NORMAL
+  *                                 - \ref LCD_WAVEFORM_TYPE_B_NORMAL
+  *                                 - \ref LCD_WAVEFORM_TYPE_A_INVERSE
+  *                                 - \ref LCD_WAVEFORM_TYPE_B_INVERSE
   *                     u32IntSrc: Interrupt source selection. Valid values are:
   *                                 - \ref LCD_DISABLE_ALL_INT
   *                                 - \ref LCD_FRAME_COUNTING_END_INT
   *                                 - \ref LCD_FRAME_END_INT
-  *                                 - \ref LCD_CPTOUT_INT
   *                                 - \ref LCD_ENABLE_ALL_INT
-  *                     u32DrivingMode: LCD operation driving mode selection. Valid values are:
-  *                                 - \ref LCD_LOW_DRIVING_AND_BUF_OFF
-  *                                 - \ref LCD_HIGH_DRIVING_AND_BUF_OFF
-  *                                 - \ref LCD_HIGH_DRIVING_AND_BUF_OFF_AND_PWR_SAVING
-  *                                 - \ref LCD_HIGH_DRIVING_AND_BUF_OFF_AND_PWR_SAVING
-  *                                 - \ref LCD_LOW_DRIVING_AND_BUF_ON_AND_PWR_SAVING
+  *                     u32VL1Select: VL1 voltage select in charge pump mode. Valid values are:
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_100, VL1 = 1.00 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_105, VL1 = 1.05 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_110, VL1 = 1.10 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_115, VL1 = 1.15 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_120, VL1 = 1.20 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_125, VL1 = 1.25 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_130, VL1 = 1.30 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_135, VL1 = 1.35 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_140, VL1 = 1.40 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_145, VL1 = 1.45 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_150, VL1 = 1.50 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_155, VL1 = 1.55 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_160, VL1 = 1.60 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_165, VL1 = 1.65 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_170, VL1 = 1.70 V
+  *                                 - \ref LCD_CP_VOLTAGE_VL1_175, VL1 = 1.75 V
   *                     u32VSrc: Voltage source selection. Valid values are:
-  *                                 - \ref LCD_VOLTAGE_SOURCE_VLCD
-  *                                 - \ref LCD_VOLTAGE_SOURCE_AVDD
   *                                 - \ref LCD_VOLTAGE_SOURCE_CP
+  *                                 - \ref LCD_VOLTAGE_SOURCE_VLCD_R_MODE
+  *                                 - \ref LCD_VOLTAGE_SOURCE_VLCD_C_MODE
   *
   * @return     The real LCD operating frame rate. Or 0 means LCD_Open failed.
   *
@@ -97,16 +107,10 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
     LCD->PSET = (LCD->PSET & ~(LCD_PSET_DUTY_Msk | LCD_PSET_BIAS_Msk)) | (pLCDSET->u32ComDuty | pLCDSET->u32BiasLevel);
 
     /* Set waveform type */
-//    LCD_WAVEFORM_TYPE(pLCDSET->u32WaveformType);
+    LCD_WAVEFORM_TYPE(pLCDSET->u32WaveformType);
 
     /* Configure interrupt source */
     LCD->INTEN = pLCDSET->u32IntSrc;
-
-    /* Set driving mode */
-//    LCD_DRIVING_MODE(pLCDSET->u32DrivingMode);
-
-    /* Select voltage source */
-//    LCD_VOLTAGE_SOURCE(pLCDSET->u32VSrc);
 
     /*
         An example for specify frame rate.
@@ -172,7 +176,42 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
             g_LCDFrameRate = (pLCDSET->u32SrcFreq  / (u32ComNum * u32FreqDiv)) / 2;
         }
     }
+    /* If VLCD source is from Charge Pump, then select VL1 voltage level */
+    if (pLCDSET->u32VSrc == LCD_VOLTAGE_SOURCE_CP)
+        LCD_SET_CP_VOLTAGE(pLCDSET->u32VL1Select);
+    
+    /* Select voltage source */
+    LCD_VOLTAGE_SOURCE(pLCDSET->u32VSrc);
+    
+    /* If VLCD source is not from VLCD R_mode, bandgap must be set in active mode at least short time */
+    if (pLCDSET->u32VSrc ==LCD_VOLTAGE_SOURCE_VLCD_C_MODE)
+    {
+        /* Unlock protected registers */
+        SYS_UnlockReg();
+        
+        /* Set bandgap in active mode */
+        CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
+        
+        /* Set delay 50 ms (VL1/VL2/VL3 connected to 0.47uF) */
+        CLK_SysTickLongDelay(50000);
 
+        /* Set bandgap in idle mode mode */
+//        CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
+    }
+    else if (pLCDSET->u32VSrc ==LCD_VOLTAGE_SOURCE_CP)
+    {
+        /* Unlock protected registers */
+        SYS_UnlockReg();
+
+        /* Set bandgap in active mode */
+        CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
+        
+        /* Set delay 500 ms (VL1/VL2/VL3 connected to 0.47uF) */
+        CLK_SysTickLongDelay(500000);
+
+        /* Set bandgap in idle mode mode */
+//        CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
+    }
     return g_LCDFrameRate;
 }
 
@@ -243,7 +282,7 @@ void LCD_SetAllPixels(uint32_t u32OnOff)
         u32Value = 0x00000000ul;
     }
 
-    for (i = 0; i < 11; i++)
+    for (i = 0; i < 12; i++)
         LCD->SEGDAT[i] = u32Value;
 }
 

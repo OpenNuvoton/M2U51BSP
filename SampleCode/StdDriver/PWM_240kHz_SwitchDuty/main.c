@@ -110,10 +110,7 @@ int32_t main(void)
     printf("  This sample code will use PWM0 channel 0 to output 240 kHz waveform,               \n");
     printf("  and user can change its duty.                                                      \n");
     printf("  I/O configuration:\n");
-    printf("    waveform output pin: PWM0 channel 0(PA.0)\n");
-
-    /* PWM0 channel 0 frequency prescaler to 1 */
-    PWM_SET_PRESCALER(PWM0, 0, 1-1);
+    printf("    waveform output pin: PWM0 channel 0(PA.5)\n");
 
     /* Set PWM0 channel 0 output configuration to be 240 kHz and 50% duty */
     PWM_ConfigOutputChannel(PWM0, 0, 240000, 50);

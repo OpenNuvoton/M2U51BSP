@@ -56,86 +56,87 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Charge Pump Voltage Selection Constant Definitions                                                 */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_CP_VOLTAGE_LV_0             (0ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 3.0 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_1             (1ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 3.2 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_2             (2ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 3.4 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_3             (3ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 3.6 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_4             (4ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 3.8 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_5             (5ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 4.0 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_6             (6ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 4.2 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_7             (7ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 4.4 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_8             (8ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 4.6 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_9             (9ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 4.8 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_10            (10ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 5.0 V \hideinitializer */
-#define LCD_CP_VOLTAGE_LV_11            (11ul << LCD_PSET_VSEL_Pos) /*!< Select LCD charge pump voltage 5.2 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_100          (0ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.00 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_105          (1ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.05 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_110          (2ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.10 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_115          (3ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.15 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_120          (4ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.20 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_125          (5ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.25 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_130          (6ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.30 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_135          (7ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.35 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_140          (8ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.40 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_145          (9ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.45 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_150          (10ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.50 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_155          (11ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.55 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_160          (12ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.60 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_165          (13ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.65 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_170          (14ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.70 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_175          (15ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.75 V \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Interrupt Source Constant Definitions                                                              */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_DISABLE_ALL_INT             (0ul << LCD_INTEN_FCEND_Pos) /*!< Disable all LCD interrupt sources \hideinitializer */
-#define LCD_FRAME_COUNTING_END_INT      (1ul << LCD_INTEN_FCEND_Pos) /*!< Indicate frame count end interrupt \hideinitializer */
-#define LCD_FRAME_END_INT               (1ul << LCD_INTEN_FEND_Pos)  /*!< Indicate frame end interrupt \hideinitializer */
-#define LCD_CPTOUT_INT                  (1ul << LCD_INTEN_CTOUT_Pos) /*!< Indicate charge pump charging timeout interrupt \hideinitializer */
-#define LCD_ENABLE_ALL_INT              (7ul << LCD_INTEN_FCEND_Pos) /*!< Enable all LCD interrupt sources \hideinitializer */
+#define LCD_DISABLE_ALL_INT             (0ul << LCD_INTEN_FIECEND_Pos) /*!< Disable all LCD interrupt sources \hideinitializer */
+#define LCD_FRAME_COUNTING_END_INT      (1ul << LCD_INTEN_FIECEND_Pos) /*!< Indicate frame count end interrupt \hideinitializer */
+#define LCD_FRAME_END_INT               (1ul << LCD_INTEN_FIEEND_Pos)  /*!< Indicate frame end interrupt \hideinitializer */
+//#define LCD_CPTOUT_INT                  (1ul << LCD_INTEN_CTOUT_Pos) /*!< Indicate charge pump charging timeout interrupt \hideinitializer */
+#define LCD_ENABLE_ALL_INT              (3ul << LCD_INTEN_FIECEND_Pos) /*!< Enable all LCD interrupt sources \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Operation Voltage Source Constant Definitions                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_VOLTAGE_SOURCE_VLCD         (0ul << LCD_DSET_VSRC_Pos) /*!< LCD voltage source from external VLCD power \hideinitializer */
-#define LCD_VOLTAGE_SOURCE_AVDD         (1ul << LCD_DSET_VSRC_Pos) /*!< LCD voltage source from internal VDD \hideinitializer */
-#define LCD_VOLTAGE_SOURCE_CP           (2ul << LCD_DSET_VSRC_Pos) /*!< LCD voltage source from built-in charge pump \hideinitializer */
-
-/*---------------------------------------------------------------------------------------------------------*/
-/*  LCD Driving Mode Selection Constant Definitions                                                        */
-/*---------------------------------------------------------------------------------------------------------*/
-#define LCD_LOW_DRIVING_AND_BUF_OFF                     (0ul << LCD_DSET_RESMODE_Pos) /*!< LCD operates with low-drive and voltage buffer disabled \hideinitializer */
-#define LCD_HIGH_DRIVING_AND_BUF_OFF                    (1ul << LCD_DSET_RESMODE_Pos) /*!< LCD operates with high-drive and voltage buffer disabled \hideinitializer */
-#define LCD_LOW_DRIVING_AND_BUF_ON                      (2ul << LCD_DSET_RESMODE_Pos) /*!< LCD operates with low-drive and voltage buffer enabled \hideinitializer */
-#define LCD_HIGH_DRIVING_AND_BUF_OFF_AND_PWR_SAVING     (5ul << LCD_DSET_RESMODE_Pos) /*!< LCD operates with high-drive, voltage buffer disabled and power saving \hideinitializer */
-#define LCD_LOW_DRIVING_AND_BUF_ON_AND_PWR_SAVING       (6ul << LCD_DSET_RESMODE_Pos) /*!< LCD operates with low-drive, voltage buffer enabled and power saving \hideinitializer */
-
-/*---------------------------------------------------------------------------------------------------------*/
-/*  LCD Power Saving Mode Constant Definitions                                                             */
-/*---------------------------------------------------------------------------------------------------------*/
-#define LCD_PWR_SAVING_NORMAL_MODE              (0ul << LCD_DSET_PSVREV_Pos) /*!< The timing of LCD power saving is normal \hideinitializer */
-#define LCD_PWR_SAVING_REVERSE_MODE             (1ul << LCD_DSET_PSVREV_Pos) /*!< The timing of LCD power saving is reverse \hideinitializer */
+#define LCD_VOLTAGE_SOURCE_CP           (0ul << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from built-in charge pump \hideinitializer */
+#define LCD_VOLTAGE_SOURCE_VLCD_R_MODE  (1ul << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from external VLCD power with external resistor divider \hideinitializer */
+#define LCD_VOLTAGE_SOURCE_VLCD_C_MODE  (2ul << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from external VLCD with capacitor split \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Output Control Constant Definitions                                                                */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_OUTPUT_SEL8_SEG43_TO_COM4           (1ul << LCD_OSET_SEL8_Pos)  /*!< The output SEL8  is COM4 \hideinitializer */
-#define LCD_OUTPUT_SEL9_SEG42_TO_COM5           (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is COM5 \hideinitializer */
-#define LCD_OUTPUT_SEL10_SEG20_TO_COM0          (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is COM0 \hideinitializer */
-#define LCD_OUTPUT_SEL11_SEG19_TO_COM1          (1ul << LCD_OSET_SEL11_Pos) /*!< The output SEL11 is COM1 \hideinitializer */
-#define LCD_OUTPUT_SEL12_SEG18_TO_COM2          (1ul << LCD_OSET_SEL12_Pos) /*!< The output SEL12 is COM2 \hideinitializer */
-#define LCD_OUTPUT_SEL13_SEG17_TO_COM3          (1ul << LCD_OSET_SEL13_Pos) /*!< The output SEL13 is COM3 \hideinitializer */
-#define LCD_OUTPUT_SEL14_SEG41_TO_COM6          (1ul << LCD_OSET_SEL14_Pos) /*!< The output SEL14 is COM6 \hideinitializer */
-#define LCD_OUTPUT_SEL15_SEG40_TO_COM7          (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is COM7 \hideinitializer */
+#define LCD_OUTPUT_SEL9_COM4_TO_SEG43           (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is SEG43 \hideinitializer */
+#define LCD_OUTPUT_SEL10_COM5_TO_SEG42          (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is SEG42 \hideinitializer */
+#define LCD_OUTPUT_SEL11_SEG20_TO_COM0          (1ul << LCD_OSET_SEL11_Pos) /*!< The output SEL11 is COM0 \hideinitializer */
+#define LCD_OUTPUT_SEL12_SEG19_TO_COM1          (1ul << LCD_OSET_SEL12_Pos) /*!< The output SEL12 is COM1 \hideinitializer */
+#define LCD_OUTPUT_SEL13_SEG18_TO_COM2          (1ul << LCD_OSET_SEL13_Pos) /*!< The output SEL13 is COM2 \hideinitializer */
+#define LCD_OUTPUT_SEL14_SEG17_TO_COM3          (1ul << LCD_OSET_SEL14_Pos) /*!< The output SEL14 is COM3 \hideinitializer */
+#define LCD_OUTPUT_SEL15_COM6_TO_SEG41          (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is SEG41 \hideinitializer */
+#define LCD_OUTPUT_SEL16_COM7_TO_SEG40          (1ul << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM40 \hideinitializer */
+
+////#define LCD_OUTPUT_SEL9_SEG43_TO_COM4           (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is COM4 \hideinitializer */
+////#define LCD_OUTPUT_SEL10_SEG42_TO_COM5          (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is COM5 \hideinitializer */
+////#define LCD_OUTPUT_SEL15_SEG41_TO_COM6          (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is COM6 \hideinitializer */
+////#define LCD_OUTPUT_SEL16_SEG40_TO_COM7          (1ul << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM7 \hideinitializer */
+
 #define LCD_OUTPUT_SEL24_SEG31_TO_COM4          (1ul << LCD_OSET_SEL24_Pos) /*!< The output SEL24 is COM4 \hideinitializer */
 #define LCD_OUTPUT_SEL25_SEG30_TO_COM5          (1ul << LCD_OSET_SEL25_Pos) /*!< The output SEL25 is COM5 \hideinitializer */
 #define LCD_OUTPUT_SEL26_SEG29_TO_COM6          (1ul << LCD_OSET_SEL26_Pos) /*!< The output SEL26 is COM6 \hideinitializer */
 #define LCD_OUTPUT_SEL27_SEG28_TO_COM7          (1ul << LCD_OSET_SEL27_Pos) /*!< The output SEL27 is COM7 \hideinitializer */
 #define LCD_OUTPUT_SEL28_SEG27_TO_COM2          (1ul << LCD_OSET_SEL28_Pos) /*!< The output SEL28 is COM2 \hideinitializer */
-#define LCD_OUTPUT_SEL29_SEG16_TO_COM3          (1ul << LCD_OSET_SEL29_Pos) /*!< The output SEL29 is COM3 \hideinitializer */
-#define LCD_OUTPUT_SEL35_COM4_TO_SEG20          (1ul << LCD_OSET_SEL35_Pos) /*!< The output SEL35 is SEG20 \hideinitializer */
-#define LCD_OUTPUT_SEL35_COM4_TO_SEG47          (2ul << LCD_OSET_SEL35_Pos) /*!< The output SEL35 is SEG47 \hideinitializer */
-#define LCD_OUTPUT_SEL36_COM5_TO_SEG19          (1ul << LCD_OSET_SEL36_Pos) /*!< The output SEL36 is SEG19 \hideinitializer */
-#define LCD_OUTPUT_SEL36_COM5_TO_SEG46          (2ul << LCD_OSET_SEL36_Pos) /*!< The output SEL36 is SEG46 \hideinitializer */
-#define LCD_OUTPUT_SEL37_COM6_TO_SEG18          (1ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG18 \hideinitializer */
-#define LCD_OUTPUT_SEL37_COM6_TO_SEG45          (2ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG45 \hideinitializer */
-#define LCD_OUTPUT_SEL38_COM7_TO_SEG17          (1ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG17 \hideinitializer */
-#define LCD_OUTPUT_SEL38_COM7_TO_SEG44          (2ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG44 \hideinitializer */
-#define LCD_OUTPUT_SEL41_SEG14_TO_COM0          (1ul << LCD_OSET_SEL41_Pos) /*!< The output SEL41 is COM0 \hideinitializer */
-#define LCD_OUTPUT_SEL42_SEG13_TO_COM1          (1ul << LCD_OSET_SEL42_Pos) /*!< The output SEL42 is COM1 \hideinitializer */
-#define LCD_OUTPUT_SEL47_SEG8_TO_LCD_V1         (1ul << LCD_OSET_SEL47_Pos) /*!< The output SEL47 is LCD_V1 \hideinitializer */
-#define LCD_OUTPUT_SEL48_SEG7_TO_LCD_V2         (1ul << LCD_OSET_SEL48_Pos) /*!< The output SEL48 is LCD_V2 \hideinitializer */
-#define LCD_OUTPUT_SEL49_SEG6_TO_LCD_V3         (1ul << LCD_OSET_SEL49_Pos) /*!< The output SEL49 is LCD_V3 \hideinitializer */
+#define LCD_OUTPUT_SEL29_SEG26_TO_COM3          (1ul << LCD_OSET_SEL29_Pos) /*!< The output SEL29 is COM3 \hideinitializer */
+#define LCD_OUTPUT_SEL37_SEG18_TO_COM6          (1ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is COM6 \hideinitializer */
+#define LCD_OUTPUT_SEL37_SEG18_TO_SEG45         (2ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG45 \hideinitializer */
+#define LCD_OUTPUT_SEL38_SEG17_TO_COM7          (1ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is COM7 \hideinitializer */
+#define LCD_OUTPUT_SEL38_SEG17_TO_SEG44         (2ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG44 \hideinitializer */
+
+
+#define LCD_OUTPUT_SEL39_SEG14_TO_COM0          (1ul << LCD_OSET_SEL39_Pos) /*!< The output SEL39 is COM0 \hideinitializer */
+#define LCD_OUTPUT_SEL40_SEG13_TO_COM1          (1ul << LCD_OSET_SEL40_Pos) /*!< The output SEL42 is COM1 \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Pause Type Constant Definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
 #define LCD_FRAME_PAUSE                 (0ul << LCD_FSET_PTYPE_Pos)  /*!< Select frame pause type \hideinitializer */
 #define LCD_DUTY_PAUSE                  (1ul << LCD_FSET_PTYPE_Pos)  /*!< Select duty pause type \hideinitializer */
+
+/*---------------------------------------------------------------------------------------------------------*/
+/*  LCD Power Saving Level Constant Definitions                                                            */
+/*---------------------------------------------------------------------------------------------------------*/
+enum
+{
+    LCD_PWR_SAVING_LEVEL0 = 0,
+    LCD_PWR_SAVING_LEVEL1,
+    LCD_PWR_SAVING_LEVEL2,
+    LCD_PWR_SAVING_LEVEL3
+};
 
 /*@}*/ /* end of group LCD_EXPORTED_CONSTANTS */
 
@@ -154,7 +155,8 @@ typedef struct
     uint32_t u32Framerate;      /*!< Operation frame rate */
     uint32_t u32WaveformType;   /*!< Waveform type */
     uint32_t u32IntSrc;         /*!< Interrupt source */
-    uint32_t u32DrivingMode;    /*!< Driving mode */
+//    uint32_t u32DrivingMode;    /*!< Driving mode */
+    uint32_t u32VL1Select;      /*!< VL1 voltage select */
     uint32_t u32VSrc;           /*!< Voltage source */
 } S_LCD_CFG_T;
 
@@ -200,6 +202,7 @@ typedef struct
   * @details    This macro is used to set the attribute of LCD output waveform.
   */
 //#define LCD_WAVEFORM_TYPE(type)     (LCD->PSET = (LCD->PSET & ~(LCD_PSET_TYPE_Msk|LCD_PSET_INV_Msk)) | (type))
+#define LCD_WAVEFORM_TYPE(type)     (LCD->PSET = (LCD->PSET & ~(LCD_PSET_TYPE_Msk)) | (type))
 
 /**
   * @brief      Set LCD Source Clock Divider
@@ -216,24 +219,28 @@ typedef struct
   * @brief      Set Charge Pump Voltage
   *
   * @param[in]  voltage     The target charge pump voltage. It could be one of the following voltage level
-  *                             - \ref LCD_CP_VOLTAGE_LV_0, 3.0 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_1, 3.2 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_2, 3.4 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_3, 3.6 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_4, 3.8 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_5, 4.0 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_6, 4.2 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_7, 4.4 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_8, 4.6 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_9, 4.8 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_10, 5.0 V
-  *                             - \ref LCD_CP_VOLTAGE_LV_11, 5.2 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_100, VL1 = 1.00 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_105, VL1 = 1.05 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_110, VL1 = 1.10 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_115, VL1 = 1.15 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_120, VL1 = 1.20 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_125, VL1 = 1.25 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_130, VL1 = 1.30 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_135, VL1 = 1.35 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_140, VL1 = 1.40 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_145, VL1 = 1.45 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_150, VL1 = 1.50 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_155, VL1 = 1.55 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_160, VL1 = 1.60 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_165, VL1 = 1.65 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_170, VL1 = 1.70 V
+  *                             - \ref LCD_CP_VOLTAGE_VL1_175, VL1 = 1.75 V
   *
   * @return     None
   *
   * @details    This macro is used to set charge pump voltage for VLCD.
   */
-#define LCD_SET_CP_VOLTAGE(voltage) (LCD->PSET = (LCD->PSET & ~LCD_PSET_VSEL_Msk) | (voltage))
+#define LCD_SET_CP_VOLTAGE(voltage) (LCD->ASET1 = (LCD->ASET1 & ~LCD_ASET1_VL1SEL_Msk) | (voltage))
 
 /**
   * @brief      Decrease Charge Pump Voltage
@@ -321,82 +328,15 @@ typedef struct
   * @brief      Select LCD Voltage Source
   *
   * @param[in]  source      The LCD operation voltage source. It could be one of the following source
-  *                             - \ref LCD_VOLTAGE_SOURCE_VLCD
-  *                             - \ref LCD_VOLTAGE_SOURCE_AVDD
   *                             - \ref LCD_VOLTAGE_SOURCE_CP
+  *                             - \ref LCD_VOLTAGE_SOURCE_VLCD_R_MODE
+  *                             - \ref LCD_VOLTAGE_SOURCE_VLCD_C_MODE
   *
   * @return     None
   *
   * @details    This macro is used to select LCD operation voltage source.
   */
-//#define LCD_VOLTAGE_SOURCE(source)          (LCD->DSET = (LCD->DSET & ~LCD_DSET_VSRC_Msk) | (source))
-
-/**
-  * @brief      Set LCD Driving Mode
-  *
-  * @param[in]  mode        The LCD operation driving mode. It could be one of the following mode
-  *                             - \ref LCD_LOW_DRIVING_AND_BUF_OFF
-  *                             - \ref LCD_HIGH_DRIVING_AND_BUF_OFF
-  *                             - \ref LCD_LOW_DRIVING_AND_BUF_ON
-  *                             - \ref LCD_HIGH_DRIVING_AND_BUF_OFF_AND_PWR_SAVING
-  *                             - \ref LCD_LOW_DRIVING_AND_BUF_ON_AND_PWR_SAVING
-  *
-  * @return     None
-  *
-  * @details    This macro is used to set LCD operation driving mode.
-  */
-//#define LCD_DRIVING_MODE(mode)              (LCD->DSET = (LCD->DSET & ~(LCD_DSET_RESMODE_Msk | LCD_DSET_BUFEN_Msk | LCD_DSET_PSVEN_Msk)) | (mode))
-
-/**
-  * @brief      Select Power Saving Mode
-  *
-  * @param[in]  mode        The LCD power saving mode selection. It could be one of the following constant definition
-  *                             - \ref LCD_PWR_SAVING_NORMAL_MODE
-  *                             - \ref LCD_PWR_SAVING_REVERSE_MODE
-  *
-  * @return     None
-  *
-  * @details    This macro is used to set the LCD power saving mode.
-  *             When the timing of power saving mode is reversed, the original power saving period becomes no power saving,
-  *             and the original no power saving period becomes power saving.
-  */
-#define LCD_PWR_SAVING_MODE(mode)       (LCD->DSET = (LCD->DSET & ~LCD_DSET_PSVREV_Msk) | (mode))
-
-/**
-  * @brief      Set Power Saving T1 Period
-  *
-  * @param[in]  t1      The number of t1 to determine T1 period, valid value is between 1 to 16.
-  *                     And one unit of t1 period is half of LCD operation clock period.
-  *
-  * @return     None
-  *
-  * @details    This macro is used to configure the T1 (Enable Time) period of power saving.
-  */
-#define LCD_PWR_SAVING_T1_PERIOD(t1)    (LCD->DSET = (LCD->DSET & ~LCD_DSET_PSVT1_Msk) | (((t1)-1) << LCD_DSET_PSVT1_Pos))
-
-/**
-  * @brief      Set Power Saving T2 Period
-  *
-  * @param[in]  t2      The number of t2 to determine T2 period, valid value is between 1 to 16.
-  *                     And one unit of t1 period is half of LCD operation clock period.
-  *
-  * @return     None
-  *
-  * @details    This macro is used to configure the T2 (On Time) period of power saving.
-  */
-#define LCD_PWR_SAVING_T2_PERIOD(t2)    (LCD->DSET = (LCD->DSET & ~LCD_DSET_PSVT2_Msk) | (((t2)-1) << LCD_DSET_PSVT2_Pos))
-
-/**
-  * @brief      Set Charging Timeout Time
-  *
-  * @param[in]  value   The maximum timeout value, valid value is between 1 to 8192.
-  *                     And one unit of timeout value is one LCD operation clock period.
-  *
-  * @return     None
-  *
-  * @details    This macro is used to set maximum timeout time of charge pump charging timer.
-  */
-#define LCD_SET_CHARGE_TIMEOUT_TIME(value)  (LCD->DSET = (LCD->DSET & ~LCD_DSET_CTOUT_Msk) | (((value)-1) << LCD_DSET_CTOUT_Pos))
+#define LCD_VOLTAGE_SOURCE(source)          (LCD->ASET1 = (LCD->ASET1 & ~LCD_ASET1_PSTRUC_Msk) | (source) | LCD_ASET1_LCDPEN_Msk)
 
 /**
   * @brief      Enable LCD Frame Counting End Interrupt
@@ -443,28 +383,6 @@ typedef struct
 #define LCD_DISABLE_FRAME_END_INT()         (LCD->INTENN &= ~LCD_INTEN_FEND_Msk)
 
 /**
-  * @brief      Enable Charging Timeout Interrupt
-  *
-  * @param      None
-  *
-  * @return     None
-  *
-  * @details    This macro is used to enable charge pump charging timeout interrupt function.
-  */
-#define LCD_ENABLE_CHARGE_TIMEOUT_INT()     (LCD->INTENN |= LCD_INTEN_CTOUT_Msk)
-
-/**
-  * @brief      Disable Charging Timeout Interrupt
-  *
-  * @param      None
-  *
-  * @return     None
-  *
-  * @details    This macro is used to disable charge pump charging timeout interrupt function.
-  */
-#define LCD_DISABLE_CHARGE_TIMEOUT_INT()        (LCD->INTENN &= ~LCD_INTEN_CTOUT_Msk)
-
-/**
   * @brief      Get LCD Frame Counting End Flag
   *
   * @param      None
@@ -509,40 +427,6 @@ typedef struct
   * @details    This macro clears frame end flag.
   */
 #define LCD_CLEAR_FRAME_END_FLAG()              (LCD->STS = LCD_STS_FSCEND_Msk)
-
-/**
-  * @brief      Get Charging Timeout Flag
-  *
-  * @param      None
-  *
-  * @retval     0   Charge pump timer timeout flag did not occur
-  * @retval     1   Charge pump timer timeout flag occurred
-  *
-  * @details    This macro gets charge pump charging timeout flag.
-  */
-#define LCD_GET_CHARGE_TIMEOUT_FLAG()           ((LCD->STS & LCD_STS_CTOUT_Msk)? 1UL : 0UL)
-
-/**
-  * @brief      Clear Charging Timeout Flag
-  *
-  * @param      None
-  *
-  * @return     None
-  *
-  * @details    This macro clears charge pump charging timeout flag.
-  */
-#define LCD_CLEAR_CHARGE_TIMEOUT_FLAG()         (LCD->STS = LCD_STS_CTOUT_Msk)
-
-/**
-  * @brief      Get Charging Time
-  *
-  * @param      None
-  *
-  * @return     Current 13-bit charging timer value
-  *
-  * @details    This macro gets charging timer value while stops charge pump charging.
-  */
-#define LCD_GET_CHARGE_TIME()              ((LCD->STS & LCD_STS_CTIME_Msk) >> 16)
 
 /**
   * @brief      Set Output select
