@@ -54,11 +54,11 @@ void SYS_Init(void)
     /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch the core clock to 40MHz from the MIRC */
+    /* Switch the core clock to 40 MHz from the MIRC */
     CLK_SetCoreClock(FREQ_40MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+    /* Set both PCLK0 and PCLK1 as HCLK */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
@@ -134,20 +134,20 @@ int32_t main(void)
       Configure BPWM0 channel 0 init period and duty.
       Period is PCLK / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
+      Period = 40 MHz / (1 * (199 + 1)) = 200000 Hz
       Duty ratio = (100) / (199 + 1) = 50%
     */
-    // BPWM0 channel 0 frequency is 240000Hz, duty 50%,
-    BPWM_ConfigOutputChannel(BPWM0, 0, 240000, 50);
+    /* BPWM0 channel 0 frequency is 200000 Hz, duty 50% */
+    BPWM_ConfigOutputChannel(BPWM0, 0, 200000, 50);
 
-    // Enable output of BPWM0 channel 0
+    /* Enable output of BPWM0 channel 0 */
     BPWM_EnableOutput(BPWM0, BPWM_CH_0_MASK);
 
-    // Enable BPWM0 channel 0 period interrupt, use channel 0 to measure time.
+    /* Enable BPWM0 channel 0 period interrupt, use channel 0 to measure time. */
     BPWM_EnablePeriodInt(BPWM0, 0, 0);
     NVIC_EnableIRQ(BPWM0_IRQn);
 
-    // Start
+    /* Start */
     BPWM_Start(BPWM0, BPWM_CH_0_MASK);
 
     while (1);

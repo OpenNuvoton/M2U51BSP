@@ -15,7 +15,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Macro, type and constant definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#define PLL_CLOCK       72000000
+
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -42,8 +42,8 @@ void PWM0P0_IRQHandler(void)
     }
     else
     {
-        PWM_SET_CNR(PWM0, 0, 299);
-        PWM_SET_CMR(PWM0, 0, 150);
+        PWM_SET_CNR(PWM0, 0, 199);
+        PWM_SET_CMR(PWM0, 0, 100);
     }
     toggle ^= 1;
     /* Clear channel 0 period interrupt flag */
@@ -64,8 +64,8 @@ void SYS_Init(void)
     /* Switch the core clock to 40MHz from the MIRC */
     CLK_SetCoreClock(FREQ_40MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+    /* Set both PCLK0 and PCLK1 as HCLK */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
@@ -141,13 +141,13 @@ int32_t main(void)
     /*
         PWM0 channel 0 waveform of this sample shown below (down counter type):
 
-        |<-        CNR + 1  clk     ->|  CNR + 1 = 399 + 1 CLKs
-                       |<-  CMR clk ->|  CMR = 200 CLKs
+        |<-        CNR + 1  clk     ->|  CNR + 1 = 199 + 1 CLKs
+                       |<-  CMR clk ->|  CMR = 100 CLKs
                                       |<-   CNR + 1  ->|  CNR + 1 = 99 + 1 CLKs
                                                |<-CMR->|  CMR = 60 CLKs
 
          ______________                _______          ____
-        |      150     |_____150______|   40  |____60__|     PWM waveform
+        |      100     |_____100______|   40  |____60__|     PWM waveform
 
     */
 
@@ -155,11 +155,12 @@ int32_t main(void)
       Configure PWM0 channel 0 init period and duty(up counter type).
       Period is PCLK / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
-      Frequency = 36 MHz / (1 * (299 + 1)) = 120,000 Hz
-      Duty ratio = (150) / (299 + 1) = 50%
+      Frequency = 40 MHz / (1 * (199 + 1)) = 200,000 Hz
+      Duty ratio = (100) / (199 + 1) = 50%
     */
-    /* PWM0 channel 0 frequency is 120,000 Hz, duty 50%, */
-    PWM_ConfigOutputChannel(PWM0, 0, 120000, 50);
+
+    /* PWM0 channel 0 frequency is 200,000 Hz, duty 50%, */
+    PWM_ConfigOutputChannel(PWM0, 0, 200000, 50);
 
     /* Enable output of PWM0 channel 0 */
     PWM_EnableOutput(PWM0, PWM_CH_0_MASK);

@@ -74,10 +74,10 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Synchronous Start Function Control Constant Definitions                                                */
 /*---------------------------------------------------------------------------------------------------------*/
-#define BPWM_SSCTL_SSRC_BPWM0                     (0UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM0 */
+#define BPWM_SSCTL_SSRC_PWM0                      (0UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM0 */
+#define BPWM_SSCTL_SSRC_PWM1                      (1UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM1 */
+#define BPWM_SSCTL_SSRC_BPWM0                     (2UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM0 */
 #define BPWM_SSCTL_SSRC_BPWM1                     (1UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM1 */
-#define BPWM_SSCTL_SSRC_PWM0                      (2UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM0 */
-#define BPWM_SSCTL_SSRC_PWM1                      (3UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM1 */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Trigger Source Select Constant Definitions                                                             */

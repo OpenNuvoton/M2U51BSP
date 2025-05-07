@@ -15,7 +15,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Macro, type and constant definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#define PLL_CLOCK       96000000
+
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -144,19 +144,19 @@ int32_t main(void)
     printf("+-----------------------------------------------------------------------------------+\n");
     printf("  This sample code will use PWM0 channel 0 to output waveform, and switch duty cycle.\n");
     printf("  I/O configuration:\n");
-    printf("    waveform output pin: PWM0 channel 0(PA.0)\n");
-    printf("\nOutput waveform is 1200 Hz and it's duty is 50%%. \n");
+    printf("    waveform output pin: PWM0 channel 0(PA.5)\n");
+    printf("\nOutput waveform is 1000 Hz and it's duty is 50%%. \n");
 
     /*
       Configure PWM0 channel 0 init period and duty(up counter type).
-      Period is PLL/2/(prescaler * (CNR + 1))
+      Period is MIRC/2/(prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
-      Period = 36 MHz / (1 * (29,999 + 1)) = 1200 Hz
-      Duty ratio = (15,000) / (29,999 + 1) = 50%
+      Period = 20 MHz / (1 * (19,999 + 1)) = 1000 Hz
+      Duty ratio = (10,000) / (19,999 + 1) = 50%
     */
 
-    /* PWM0 channel 0 frequency is 1200 Hz, duty 50%, */
-    PWM_ConfigOutputChannel(PWM0, 0, 1200, 50);
+    /* PWM0 channel 0 frequency is 1000 Hz, duty 50%, */
+    PWM_ConfigOutputChannel(PWM0, 0, 1000, 50);
 
     /* Enable output of PWM0 channel 0 */
     PWM_EnableOutput(PWM0, PWM_CH_0_MASK);

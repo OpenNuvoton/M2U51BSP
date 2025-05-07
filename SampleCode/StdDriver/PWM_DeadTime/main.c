@@ -14,7 +14,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Macro, type and constant definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#define PLL_CLOCK       72000000
+
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -38,9 +38,9 @@ void PWM0P0_IRQHandler(void)
     if(++cnt == 6000)
     {
         if(out)
-            PWM_EnableOutput(PWM0, PWM_CH_0_MASK | PWM_CH_1_MASK | PWM_CH_2_MASK | PWM_CH_3_MASK);
+            PWM_EnableOutput(PWM0, 0x3F);
         else
-            PWM_DisableOutput(PWM0, PWM_CH_0_MASK | PWM_CH_1_MASK | PWM_CH_2_MASK | PWM_CH_3_MASK);
+            PWM_DisableOutput(PWM0, 0x3F);
 
         out ^= 1;
         cnt = 0;
@@ -137,10 +137,9 @@ int32_t main(void)
     printf("|                          PWM Driver Sample Code                        |\n");
     printf("|                                                                        |\n");
     printf("+------------------------------------------------------------------------+\n");
-    printf("  This sample code will output PWM0 channel 0~3 with different \n");
+    printf("  This sample code will output PWM0 channel 0~5 with different \n");
     printf("  frequency and duty, enable dead time function of all PWM0 pairs.\n");
     printf("  And also enable/disable PWM output every 1 second.\n");
-    printf("  I/O configuration:\n");
     printf("  I/O configuration:\n");
     printf("    waveform output pin: PWM0_CH0(PA.5), PWM0_CH1(PA.4), PWM0_CH2(PA.3), PWM0_CH3(PA.2), PWM0_CH4(PA.1), PWM0_CH5(PA.0)\n");
 
@@ -149,7 +148,6 @@ int32_t main(void)
 
     /* PWM0 channel 0 frequency is 6,000 Hz, duty 30% */
     PWM_ConfigOutputChannel(PWM0, 0, 6000, 30);
-
     SYS_UnlockReg();
     PWM_EnableDeadZone(PWM0, 0, 100);
     SYS_LockReg();
@@ -160,15 +158,21 @@ int32_t main(void)
     PWM_EnableDeadZone(PWM0, 2, 200);
     SYS_LockReg();
 
-    /* Enable output of PWM0 channel 0~3 */
-    PWM_EnableOutput(PWM0, 0xF);
+    /* PWM0 channel 4 frequency is 1,000 Hz, duty 50% */
+    PWM_ConfigOutputChannel(PWM0, 4, 1000, 50);
+    SYS_UnlockReg();
+    PWM_EnableDeadZone(PWM0, 4, 400);
+    SYS_LockReg();
+
+    /* Enable output of PWM0 channel 0~5 */
+    PWM_EnableOutput(PWM0, 0x3F);
 
     /* Enable PWM0 channel 0 period interrupt, use channel 0 to measure time. */
     PWM_EnablePeriodInt(PWM0, 0, 0);
     NVIC_EnableIRQ(PWM0_P0_IRQn);
 
     /* Start */
-    PWM_Start(PWM0, 0xF);
+    PWM_Start(PWM0, 0x3F);
 
     while(1);
 }

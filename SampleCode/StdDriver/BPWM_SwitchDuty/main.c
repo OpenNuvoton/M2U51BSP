@@ -34,8 +34,8 @@ void SYS_Init(void)
     /* Switch the core clock to 40MHz from the MIRC */
     CLK_SetCoreClock(FREQ_40MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+    /* Set both PCLK0 and PCLK1 as HCLK */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
@@ -91,7 +91,10 @@ void UART0_Init()
  */
 uint32_t CalNewDutyCMR(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32DutyCycle, uint32_t u32CycleResolution)
 {
-    return (u32DutyCycle * (BPWM_GET_CNR(bpwm, u32ChannelNum) + 1) / u32CycleResolution);
+    if (u32DutyCycle)
+        return (u32DutyCycle * (BPWM_GET_CNR(bpwm, u32ChannelNum)) / u32CycleResolution);
+    else
+        return (BPWM_GET_CNR(bpwm, u32ChannelNum) + 1);
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -128,11 +131,11 @@ int32_t main(void)
     printf("\nOutput waveform is 1250Hz and it's duty is 50%%.\n");
 
     /*
-      Configure BPWM0 channel 0 init period and duty(up counter type).
+      Configure BPWM0 channel 0 init period and duty(down counting type).
       Period is HIRC_Freq / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (38399 + 1)) = 1250 Hz
-      Duty ratio = (19200) / (38399 + 1) = 50%
+      Period = 40 MHz / (1 * (31999 + 1)) = 1250 Hz
+      Duty ratio = (16000) / (31399 + 1) = 50%
     */
 
     /* BPWM0 channel 0 frequency is 1250Hz, duty 50%, */

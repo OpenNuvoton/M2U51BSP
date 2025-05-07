@@ -16,7 +16,13 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Macro, type and constant definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-
+#define PWM_CLK             40000000
+#define PWM_OUTPUT_FREQ     1000000
+#define PWM_OUTPUT_DUTY     50
+#define PWM_HIGH            (PWM_CLK/PWM_OUTPUT_FREQ)*PWM_OUTPUT_DUTY/100/1
+#define PWM_LOW             (PWM_CLK/PWM_OUTPUT_FREQ)*(100-PWM_OUTPUT_DUTY)/100/1
+#define PWM_PERIOD          PWM_HIGH+PWM_LOW
+#define DEVIATION           2
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -93,7 +99,7 @@ void CalPeriodTime(PWM_T *PWM, uint32_t u32Ch)
     u16TotalPeriod = 0xFFFF - g_au16Count[2] + 1;
 
     printf("\nHigh Period = %d ns, Low Period = %d ns , Total Period = %d ns.\n",
-           u16HighPeriod*1000/48, u16LowPeriod*1000/48, u16TotalPeriod*1000/48);
+           u16HighPeriod*1000/40, u16LowPeriod*1000/40, u16TotalPeriod*1000/40);
     printf("Frequency = %d Hz, Duty = %d %%.\n\n",
            48000000/u16TotalPeriod, u16HighPeriod*100/u16TotalPeriod );
 }
@@ -112,8 +118,8 @@ void SYS_Init(void)
     /* Switch the core clock to 40MHz from the MIRC */
     CLK_SetCoreClock(FREQ_40MHZ);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+    /* Set both PCLK0 and PCLK1 as HCLK */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
@@ -130,6 +136,9 @@ void SYS_Init(void)
 
     /* Enable TIMER0 module clock */
     CLK_EnableModuleClock(TMR0_MODULE);
+
+    /* Enable PDMA0 module clock */
+    CLK_EnableModuleClock(PDMA0_MODULE);
 
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
@@ -199,24 +208,18 @@ int32_t main(void)
          duty ratio = CMR+/(CNR+1)
          cycle time = CNR+1
          High level = CMR
-         PWM clock source frequency from PLL/2 is 36,000,000
+         PWM clock source frequency from MIRC is 40,000,000
          (CNR+1) = PWM clock source frequency/prescaler/PWM output frequency
-                         = 36,000,000/1/1,000,000 = 36
+                         = 40,000,000/1/1,000,000 = 40
          (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
-         CNR = 35
+         CNR = 39
          duty ratio = 50% ==> CMR/(CNR+1) = 50%
-         CMR = 18
+         CMR = 20
          Prescale value is 0 : prescaler = 1
     */
 
-    /* PWM0 channel 0 frequency prescaler to 1 */
-    PWM_SET_PRESCALER(PWM0, 0, 1-1);
-
-    /* PWM0 channel 0 frequency period to 35 */
-    PWM_SET_CNR(PWM0, 0, 35);
-
-    /* PWM0 channel 0 frequency comparator to 18 */
-    PWM_SET_CMR(PWM0, 0, 18);
+    /* set PWM0 channel 0 output configuration */
+    PWM_ConfigOutputChannel(PWM0, 0, PWM_OUTPUT_FREQ, PWM_OUTPUT_DUTY);
 
     /* PWM0 channel 0 is edge-aligned and down counter type */
     PWM_SET_ALIGNED_TYPE(PWM0, BIT0, PWM_EDGE_ALIGNED);
@@ -248,16 +251,14 @@ int32_t main(void)
     /*--------------------------------------------------------------------------------------*/
     /* Set the PWM0 channel 2 for capture function                                          */
     /*--------------------------------------------------------------------------------------*/
-    /* (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
-         CNR = 0xFFFF
-         (Note: In capture mode, user should set CNR to 0xFFFF to increase capture frequency range.)
-
-         Capture unit time = 1/Capture clock source frequency/prescaler
-         27.8ns = 1/36,000,000/1
+    /* If input frequency is 1MHz, user can calculate capture settings by follows.
+       Capture clock source frequency = MIRC = 40,000,000 in the sample code.
+       Capture unit time = 1/Capture clock source frequency/prescaler
+       25.0ns = 1/40,000,000/1
     */
 
     /* Set PWM0 channel 2 capture configuration */
-    PWM_ConfigCaptureChannel(PWM0, 2, 27, 0);
+    PWM_ConfigCaptureChannel(PWM0, 2, 25, 0);
 
     /* Enable falling capture reload */
     PWM0->CAPCTL |= PWM_CAPCTL_FCRLDEN2_Msk;
