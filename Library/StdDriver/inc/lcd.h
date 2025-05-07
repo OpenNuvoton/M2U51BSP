@@ -79,7 +79,6 @@ extern "C"
 #define LCD_DISABLE_ALL_INT             (0ul << LCD_INTEN_FIECEND_Pos) /*!< Disable all LCD interrupt sources \hideinitializer */
 #define LCD_FRAME_COUNTING_END_INT      (1ul << LCD_INTEN_FIECEND_Pos) /*!< Indicate frame count end interrupt \hideinitializer */
 #define LCD_FRAME_END_INT               (1ul << LCD_INTEN_FIEEND_Pos)  /*!< Indicate frame end interrupt \hideinitializer */
-//#define LCD_CPTOUT_INT                  (1ul << LCD_INTEN_CTOUT_Pos) /*!< Indicate charge pump charging timeout interrupt \hideinitializer */
 #define LCD_ENABLE_ALL_INT              (3ul << LCD_INTEN_FIECEND_Pos) /*!< Enable all LCD interrupt sources \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -92,34 +91,26 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Output Control Constant Definitions                                                                */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_OUTPUT_SEL9_COM4_TO_SEG43           (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is SEG43 \hideinitializer */
-#define LCD_OUTPUT_SEL10_COM5_TO_SEG42          (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is SEG42 \hideinitializer */
-#define LCD_OUTPUT_SEL11_SEG20_TO_COM0          (1ul << LCD_OSET_SEL11_Pos) /*!< The output SEL11 is COM0 \hideinitializer */
-#define LCD_OUTPUT_SEL12_SEG19_TO_COM1          (1ul << LCD_OSET_SEL12_Pos) /*!< The output SEL12 is COM1 \hideinitializer */
-#define LCD_OUTPUT_SEL13_SEG18_TO_COM2          (1ul << LCD_OSET_SEL13_Pos) /*!< The output SEL13 is COM2 \hideinitializer */
-#define LCD_OUTPUT_SEL14_SEG17_TO_COM3          (1ul << LCD_OSET_SEL14_Pos) /*!< The output SEL14 is COM3 \hideinitializer */
-#define LCD_OUTPUT_SEL15_COM6_TO_SEG41          (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is SEG41 \hideinitializer */
-#define LCD_OUTPUT_SEL16_COM7_TO_SEG40          (1ul << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM40 \hideinitializer */
-
-////#define LCD_OUTPUT_SEL9_SEG43_TO_COM4           (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is COM4 \hideinitializer */
-////#define LCD_OUTPUT_SEL10_SEG42_TO_COM5          (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is COM5 \hideinitializer */
-////#define LCD_OUTPUT_SEL15_SEG41_TO_COM6          (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is COM6 \hideinitializer */
-////#define LCD_OUTPUT_SEL16_SEG40_TO_COM7          (1ul << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM7 \hideinitializer */
-
-#define LCD_OUTPUT_SEL24_SEG31_TO_COM4          (1ul << LCD_OSET_SEL24_Pos) /*!< The output SEL24 is COM4 \hideinitializer */
-#define LCD_OUTPUT_SEL25_SEG30_TO_COM5          (1ul << LCD_OSET_SEL25_Pos) /*!< The output SEL25 is COM5 \hideinitializer */
-#define LCD_OUTPUT_SEL26_SEG29_TO_COM6          (1ul << LCD_OSET_SEL26_Pos) /*!< The output SEL26 is COM6 \hideinitializer */
-#define LCD_OUTPUT_SEL27_SEG28_TO_COM7          (1ul << LCD_OSET_SEL27_Pos) /*!< The output SEL27 is COM7 \hideinitializer */
-#define LCD_OUTPUT_SEL28_SEG27_TO_COM2          (1ul << LCD_OSET_SEL28_Pos) /*!< The output SEL28 is COM2 \hideinitializer */
-#define LCD_OUTPUT_SEL29_SEG26_TO_COM3          (1ul << LCD_OSET_SEL29_Pos) /*!< The output SEL29 is COM3 \hideinitializer */
-#define LCD_OUTPUT_SEL37_SEG18_TO_COM6          (1ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is COM6 \hideinitializer */
-#define LCD_OUTPUT_SEL37_SEG18_TO_SEG45         (2ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG45 \hideinitializer */
-#define LCD_OUTPUT_SEL38_SEG17_TO_COM7          (1ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is COM7 \hideinitializer */
-#define LCD_OUTPUT_SEL38_SEG17_TO_SEG44         (2ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG44 \hideinitializer */
-
-
-#define LCD_OUTPUT_SEL39_SEG14_TO_COM0          (1ul << LCD_OSET_SEL39_Pos) /*!< The output SEL39 is COM0 \hideinitializer */
-#define LCD_OUTPUT_SEL40_SEG13_TO_COM1          (1ul << LCD_OSET_SEL40_Pos) /*!< The output SEL42 is COM1 \hideinitializer */
+#define LCD_OUTPUT_SEL9_COM4_TO_SEG43   (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is SEG43 \hideinitializer */
+#define LCD_OUTPUT_SEL10_COM5_TO_SEG42  (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is SEG42 \hideinitializer */
+#define LCD_OUTPUT_SEL11_SEG20_TO_COM0  (1ul << LCD_OSET_SEL11_Pos) /*!< The output SEL11 is COM0 \hideinitializer */
+#define LCD_OUTPUT_SEL12_SEG19_TO_COM1  (1ul << LCD_OSET_SEL12_Pos) /*!< The output SEL12 is COM1 \hideinitializer */
+#define LCD_OUTPUT_SEL13_SEG18_TO_COM2  (1ul << LCD_OSET_SEL13_Pos) /*!< The output SEL13 is COM2 \hideinitializer */
+#define LCD_OUTPUT_SEL14_SEG17_TO_COM3  (1ul << LCD_OSET_SEL14_Pos) /*!< The output SEL14 is COM3 \hideinitializer */
+#define LCD_OUTPUT_SEL15_COM6_TO_SEG41  (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is SEG41 \hideinitializer */
+#define LCD_OUTPUT_SEL16_COM7_TO_SEG40  (1ul << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM40 \hideinitializer */
+#define LCD_OUTPUT_SEL24_SEG31_TO_COM4  (1ul << LCD_OSET_SEL24_Pos) /*!< The output SEL24 is COM4 \hideinitializer */
+#define LCD_OUTPUT_SEL25_SEG30_TO_COM5  (1ul << LCD_OSET_SEL25_Pos) /*!< The output SEL25 is COM5 \hideinitializer */
+#define LCD_OUTPUT_SEL26_SEG29_TO_COM6  (1ul << LCD_OSET_SEL26_Pos) /*!< The output SEL26 is COM6 \hideinitializer */
+#define LCD_OUTPUT_SEL27_SEG28_TO_COM7  (1ul << LCD_OSET_SEL27_Pos) /*!< The output SEL27 is COM7 \hideinitializer */
+#define LCD_OUTPUT_SEL28_SEG27_TO_COM2  (1ul << LCD_OSET_SEL28_Pos) /*!< The output SEL28 is COM2 \hideinitializer */
+#define LCD_OUTPUT_SEL29_SEG26_TO_COM3  (1ul << LCD_OSET_SEL29_Pos) /*!< The output SEL29 is COM3 \hideinitializer */
+#define LCD_OUTPUT_SEL37_SEG18_TO_COM6  (1ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is COM6 \hideinitializer */
+#define LCD_OUTPUT_SEL37_SEG18_TO_SEG45 (2ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG45 \hideinitializer */
+#define LCD_OUTPUT_SEL38_SEG17_TO_COM7  (1ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is COM7 \hideinitializer */
+#define LCD_OUTPUT_SEL38_SEG17_TO_SEG44 (2ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG44 \hideinitializer */
+#define LCD_OUTPUT_SEL39_SEG14_TO_COM0  (1ul << LCD_OSET_SEL39_Pos) /*!< The output SEL39 is COM0 \hideinitializer */
+#define LCD_OUTPUT_SEL40_SEG13_TO_COM1  (1ul << LCD_OSET_SEL40_Pos) /*!< The output SEL42 is COM1 \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Pause Type Constant Definitions                                                                    */
@@ -155,7 +146,6 @@ typedef struct
     uint32_t u32Framerate;      /*!< Operation frame rate */
     uint32_t u32WaveformType;   /*!< Waveform type */
     uint32_t u32IntSrc;         /*!< Interrupt source */
-//    uint32_t u32DrivingMode;    /*!< Driving mode */
     uint32_t u32VL1Select;      /*!< VL1 voltage select */
     uint32_t u32VSrc;           /*!< Voltage source */
 } S_LCD_CFG_T;
@@ -201,8 +191,7 @@ typedef struct
   *
   * @details    This macro is used to set the attribute of LCD output waveform.
   */
-//#define LCD_WAVEFORM_TYPE(type)     (LCD->PSET = (LCD->PSET & ~(LCD_PSET_TYPE_Msk|LCD_PSET_INV_Msk)) | (type))
-#define LCD_WAVEFORM_TYPE(type)     (LCD->PSET = (LCD->PSET & ~(LCD_PSET_TYPE_Msk)) | (type))
+#define LCD_WAVEFORM_TYPE(type)     (LCD->PSET = (LCD->PSET & ~(LCD_PSET_TYPE_Msk|LCD_PSET_INV_Msk)) | (type))
 
 /**
   * @brief      Set LCD Source Clock Divider

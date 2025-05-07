@@ -14,7 +14,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Constants and Struct declaration                                                                     */
 /*---------------------------------------------------------------------------------------------------------*/
-#define OPT_SEG45_LCD   1
+#define OPT_SEG45_LCD   0
 
 typedef enum
 {
@@ -63,16 +63,16 @@ const MFP_LCD LCD_COM_PIN[]=
     G_B4,   0x08,       //COM1
     G_B3,   0x08,       //COM2
     G_B2,   0x08,       //COM3
-//    G_D11,	0x08,       //COM5, SEG43
-//    G_D10,	0x08,       //COM4, SEG42
-//    G_E13,	0x08,       //COM6, SEG41
-//    G_C8,	0x08,       //COM7, SEG40
+    G_D11,	0x08,       //COM5, SEG43
+    G_D10,	0x08,       //COM4, SEG42
+    G_E13,	0x08,       //COM6, SEG41
+    G_C8,	0x08,       //COM7, SEG40
 };
 
 /* SEG0 ~ 45 */
 const MFP_LCD_SEG LCD_SEG_PIN[]=	
 {
-    G_A8,   0x08,   0,  //SEG00
+   G_A8,   0x08,   0,  //SEG00
     G_C12,  0x08,   1,  //SEG01
     G_C9,   0x08,   2,  //SEG02
     G_C10,  0x08,   3,  //SEG03
@@ -82,36 +82,36 @@ const MFP_LCD_SEG LCD_SEG_PIN[]=
     G_B9,   0x08,   7,  //SEG07
     G_B10,  0x08,   8,  //SEG08
     G_B11,  0x08,   9,  //SEG09
-//    G_B12,  0x08,   10, //SEG10
-//    G_B13,  0x08,   11, //SEG11
-//    G_B14,  0x08,   12, //SEG12
-//    G_B15,  0x08,   13, //SEG13, COM1
-//    G_C14,  0x08,   14, //SEG14, COM0
-//    G_E6,   0x08,   15, //SEG15     
-//    G_E7,   0x08,   16, //SEG16     
-//    G_E11,  0x08,   17, //SEG17, COM3
-//    G_E10,  0x08,   18, //SEG18, COM2
-//    G_E9,   0x08,   19, //SEG19, COM1
-//    G_E8,   0x08,   20, //SEG20, COM0
-//    G_D13,  0x08,   21, //SEG21
-//    G_D0,   0x08,   22, //SEG22
-//    G_D1,   0x08,   23, //SEG23
-//    G_D2,   0x08,   24, //SEG24
-//    G_D3,   0x08,   25, //SEG25
-//    G_C0,   0x08,   26, //SEG26, COM3
-//    G_C1,   0x08,   27, //SEG27, COM2
-//    G_C2,   0x08,   28, //SEG28, COM7
-//    G_C3,   0x08,   29, //SEG29, COM6
-//    G_C4,   0x08,   30, //SEG30, COM5
-//    G_C5,   0x08,   31, //SEG31, COM4
-//    G_D8,   0x08,   32, //SEG32
-//    G_D9,   0x08,   33, //SEG33
-//    G_E14,  0x08,   34, //SEG34
-//    G_C11,  0x08,   35, //SEG35
-//    G_A6,   0x08,   36, //SEG36
-//    G_A7,   0x08,   37, //SEG37
-//    G_C6,   0x08,   38, //SEG38
-//    G_C7,   0x08,   39, //SEG39
+    G_B12,  0x08,   10, //SEG10
+    G_B13,  0x08,   11, //SEG11
+    G_B14,  0x08,   12, //SEG12
+    G_B15,  0x08,   13, //SEG13, COM1
+    G_C14,  0x08,   14, //SEG14, COM0
+    G_E6,   0x08,   15, //SEG15     
+    G_E7,   0x08,   16, //SEG16     
+    G_E11,  0x08,   17, //SEG17, COM3
+    G_E10,  0x08,   18, //SEG18, COM2
+    G_E9,   0x08,   19, //SEG19, COM1
+    G_E8,   0x08,   20, //SEG20, COM0
+    G_D13,  0x08,   21, //SEG21
+    G_D0,   0x08,   22, //SEG22
+    G_D1,   0x08,   23, //SEG23
+    G_D2,   0x08,   24, //SEG24
+    G_D3,   0x08,   25, //SEG25
+    G_C0,   0x08,   26, //SEG26, COM3
+    G_C1,   0x08,   27, //SEG27, COM2
+    G_C2,   0x08,   28, //SEG28, COM7
+    G_C3,   0x08,   29, //SEG29, COM6
+    G_C4,   0x08,   30, //SEG30, COM5
+    G_C5,   0x08,   31, //SEG31, COM4
+    G_D8,   0x08,   32, //SEG32
+    G_D9,   0x08,   33, //SEG33
+    G_E14,  0x08,   34, //SEG34
+    G_C11,  0x08,   35, //SEG35
+    G_A6,   0x08,   36, //SEG36
+    G_A7,   0x08,   37, //SEG37
+    G_C6,   0x08,   38, //SEG38
+    G_C7,   0x08,   39, //SEG39
 
 #if OPT_SEG45_LCD
     G_C8,   0x08,   40, //SEG40, COM7
@@ -137,12 +137,11 @@ static S_LCD_CFG_T g_LCDCfg =
 {
     __LIRC,                             /*!< LCD clock source frequency */
     LCD_COM_DUTY_1_8,                   /*!< COM duty */
-    LCD_BIAS_LV_1_4,                    /*!< Bias level */
+    LCD_BIAS_LV_1_3,                    /*!< 1/3 Bias level */
     64,                                 /*!< Operation frame rate */
     LCD_WAVEFORM_TYPE_A_NORMAL,         /*!< Waveform type */
     LCD_DISABLE_ALL_INT,                /*!< Interrupt source */
-//    LCD_CP_VOLTAGE_VL1_130,             /*!< VL1 voltage selected to 1.30V */
-    LCD_CP_VOLTAGE_VL1_100,             /*!< VL1 voltage selected to 1.00V */
+    LCD_CP_VOLTAGE_VL1_100,             /*!< VL1 voltage selected to 1.00 V */
     LCD_VOLTAGE_SOURCE_CP               /*!< Voltage source */
 };
 
@@ -323,7 +322,7 @@ int main(void)
 
     printf("LCD configurations:\n");
     printf(" * Clock source is LIRC\n");
-    printf(" * 8 COM, 40 SEG and 1/4 Bias\n");
+    printf(" * 8 COM, 40 SEG and 1/3 Bias\n");
     printf(" * Driving waveform is Type-%c\n", (g_LCDCfg.u32WaveformType == LCD_PSET_TYPE_Msk) ? 'B' : 'A');
     printf(" * Target frame rate is %uHz, and blinking interval %ums\n", g_LCDCfg.u32Framerate, u32BlinkInterval);
     printf(" * Show text - ""%s"" on LCD\n\n", (char *)text);
@@ -335,14 +334,11 @@ int main(void)
     NVIC_EnableIRQ(LCD_IRQn);
 
     /* Enable blinking function */
-    u32BlinkInterval = LCD_EnableBlink(u32BlinkInterval);
+//    u32BlinkInterval = LCD_EnableBlink(u32BlinkInterval);
     printf("Working blink interval is %ums.\n\n", u32BlinkInterval);
 
     /* Set specified text on LCD */
-//    LCDLIB_Printf(ZONE_MAIN_DIGIT, text);
-
-    /* Set all pixels enabled */
-    LCD_SetAllPixels(0);
+    LCDLIB_Printf(ZONE_MAIN_DIGIT, text);
 
     /* Enable LCD display */
     LCD_ENABLE_DISPLAY();

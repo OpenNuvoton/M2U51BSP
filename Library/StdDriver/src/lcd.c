@@ -96,6 +96,7 @@ static uint32_t g_LCDFrameRate;
 uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
 {
     uint32_t u32ComNum, u32FreqLCD, u32FreqDiv;
+    uint32_t u32DelayCycle;
 
     /* Display LCD display first */
     LCD_DISABLE_DISPLAY();
@@ -193,10 +194,11 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
         CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
         
         /* Set delay 50 ms (VL1/VL2/VL3 connected to 0.47uF) */
-        CLK_SysTickLongDelay(50000);
+        for (u32DelayCycle=0; u32DelayCycle<50; u32DelayCycle++)
+            CLK_SysTickLongDelay(1000);
 
         /* Set bandgap in idle mode mode */
-//        CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
+        CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
     }
     else if (pLCDSET->u32VSrc ==LCD_VOLTAGE_SOURCE_CP)
     {
@@ -204,13 +206,14 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
         SYS_UnlockReg();
 
         /* Set bandgap in active mode */
-        CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
+        CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
         
         /* Set delay 500 ms (VL1/VL2/VL3 connected to 0.47uF) */
-        CLK_SysTickLongDelay(500000);
+        for (u32DelayCycle=0; u32DelayCycle<50; u32DelayCycle++)
+            CLK_SysTickLongDelay(1000);
 
         /* Set bandgap in idle mode mode */
-//        CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
+        CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
     }
     return g_LCDFrameRate;
 }

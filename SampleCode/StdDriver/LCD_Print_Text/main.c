@@ -15,7 +15,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Constants and Struct declaration                                                                     */
 /*---------------------------------------------------------------------------------------------------------*/
-#define OPT_SEG45_LCD   1
+#define OPT_SEG45_LCD       0
 #define LCD_ALPHABET_NUM    7
 
 typedef enum
@@ -139,11 +139,11 @@ static S_LCD_CFG_T g_LCDCfg =
 {
     __LIRC,                             /*!< LCD clock source frequency */
     LCD_COM_DUTY_1_8,                   /*!< COM duty */
-    LCD_BIAS_LV_1_4,                    /*!< Bias level */
+    LCD_BIAS_LV_1_3,                    /*!< 1/3 Bias level */
     64,                                 /*!< Operation frame rate */
     LCD_WAVEFORM_TYPE_A_NORMAL,         /*!< Waveform type */
     LCD_DISABLE_ALL_INT,                /*!< Interrupt source */
-    LCD_CP_VOLTAGE_VL1_130,             /*!< VL1 voltage selected to 1.50V */
+    LCD_CP_VOLTAGE_VL1_100,             /*!< VL1 voltage selected to 1.00 V */
     LCD_VOLTAGE_SOURCE_CP               /*!< Voltage source */
 };
 
@@ -310,10 +310,6 @@ int main(void)
     UART_Init();
 #endif
 
-#if defined (__GNUC__) && !defined(__ARMCC_VERSION) && defined(OS_USE_SEMIHOSTING)
-    initialise_monitor_handles();
-#endif
-
     /* Lock protected registers */
     SYS_LockReg();
 
@@ -324,7 +320,7 @@ int main(void)
 
     printf("LCD configurations:\n");
     printf(" * Clock source is LIRC\n");
-    printf(" * 8 COM, 40 SEG and 1/4 Bias\n");
+    printf(" * 8 COM, 40 SEG and 1/3 Bias\n");
     printf(" * Driving waveform is Type-%c\n", (g_LCDCfg.u32WaveformType == LCD_PSET_TYPE_Msk) ? 'B' : 'A');
     printf(" * Target frame rate is %uHz\n\n", g_LCDCfg.u32Framerate);
 
@@ -339,7 +335,6 @@ int main(void)
         uint32_t idx = 0;
 
         printf("Input text: \n");
-
         do
         {
             input = (char)getchar();
@@ -353,7 +348,6 @@ int main(void)
 
         text[idx] = 0x00;   // C string ended with 0x00
         printf("\n");
-
         LCDLIB_Printf(ZONE_MAIN_DIGIT, text);
     }
 }

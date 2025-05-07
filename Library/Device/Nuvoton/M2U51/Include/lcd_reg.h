@@ -66,6 +66,11 @@ typedef struct
  * |        |          |0 = LCD waveform type A.
  * |        |          |1 = LCD waveform type B.
  * |        |          |Note: The register canu2019t be changed after LCD enable.
+ * |[6]     |INV       |LCD Waveform Inverse Control
+ * |        |          |This bit is used to inverse LCD waveform.
+ * |        |          |0 = LCD waveform inverse function Disabled.
+ * |        |          |1 = LCD waveform inverse function Enabled.
+ * |        |          |Note: The register can¡¦t be changed after LCD enabled.
  * |[17:8]  |LCDDIV    |LCD Operating Clock Divide Number from LCDCLK Clock Source
  * |        |          |LCDOPCLK = LCDCLK / (LCDDIV + 1).
  * |        |          |Note: The register canu2019t be changed after LCD enable.
@@ -599,6 +604,9 @@ typedef struct
 
 #define LCD_PSET_TYPE_Pos                (5)                                               /*!< LCD_T::PSET: TYPE Position             */
 #define LCD_PSET_TYPE_Msk                (0x1ul << LCD_PSET_TYPE_Pos)                      /*!< LCD_T::PSET: TYPE Mask                 */
+
+#define LCD_PSET_INV_Pos                 (6)                                               /*!< LCD_T::PSET: INV Position             */
+#define LCD_PSET_INV_Msk                 (0x1ul << LCD_PSET_INV_Pos)                       /*!< LCD_T::PSET: INV Mask                 */
 
 #define LCD_PSET_LCDDIV_Pos              (8)                                               /*!< LCD_T::PSET: LCDDIV Position           */
 #define LCD_PSET_LCDDIV_Msk              (0x3fful << LCD_PSET_LCDDIV_Pos)                  /*!< LCD_T::PSET: LCDDIV Mask               */
