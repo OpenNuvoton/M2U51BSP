@@ -105,8 +105,8 @@ void ADC_FunctionTest()
     /* Enable ADC converter */
     ADC_POWER_ON(ADC);
 
-    /* Set ADC to Single mode, and select channel 17 (band-gap voltage) */
-    ADC_Open(ADC, (uint32_t)NULL, ADC_ADCR_ADMD_SINGLE, BIT17);
+    /* Set ADC to Single mode, and select channel 16 (band-gap voltage) */
+    ADC_Open(ADC, (uint32_t)NULL, ADC_ADCR_ADMD_SINGLE, BIT16);
 
     /* If the internal channel for band-gap voltage is active, 
        the maximum sampling rate will be 100 KSPS. */
@@ -133,8 +133,8 @@ void ADC_FunctionTest()
     /* Disable the A/D interrupt */
     ADC_DISABLE_INT(ADC, ADC_ADF_INT);
 
-    /* Get the conversion result of the channel 17 */
-    i32ConversionData = ADC_GET_CONVERSION_DATA(ADC, 17);
+    /* Get the conversion result of the channel 16 */
+    i32ConversionData = ADC_GET_CONVERSION_DATA(ADC, 16);
 
     /* Enable FMC ISP function to read built-in band-gap A/D conversion result*/
     SYS_UnlockReg();
