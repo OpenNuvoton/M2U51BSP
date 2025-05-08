@@ -114,8 +114,6 @@ void ADC_FunctionTest()
             g_u32AdcIntFlag = 0;
             ADC_START_CONV(ADC);
 
-           // __WFI();
-
             /* Wait conversion done */
             while(g_u32AdcIntFlag == 0);
 
