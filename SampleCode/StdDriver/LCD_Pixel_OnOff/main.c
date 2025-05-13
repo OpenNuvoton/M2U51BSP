@@ -145,11 +145,11 @@ static S_LCD_CFG_T g_LCDCfg =
 {
     __LIRC,                             /*!< LCD clock source frequency */
     LCD_COM_DUTY_1_8,                   /*!< COM duty */
-    LCD_BIAS_LV_1_3,                    /*!< Bias level */
+    LCD_BIAS_LV_1_4,                    /*!< 1/4 Bias level */
     64,                                 /*!< Operation frame rate */
     LCD_WAVEFORM_TYPE_A_NORMAL,         /*!< Waveform type */
     LCD_DISABLE_ALL_INT,                /*!< Interrupt source */
-    LCD_CP_VOLTAGE_VL1_100,             /*!< VL1 voltage selected to 1.00 V */
+    LCD_CP_VOLTAGE_VL1_120,             /*!< VL1 voltage selected to 1.20 V */
     LCD_VOLTAGE_SOURCE_CP               /*!< Voltage source */
 };
 
@@ -428,7 +428,7 @@ int main(void)
     printf("+------------------------------------+\n\n");
     printf("LCD configurations:\n");
     printf(" * Clock source is LIRC\n");
-    printf(" * 8 COM, 40 SEG and 1/3 Bias\n");
+    printf(" * 8 COM, 40 SEG and 1/4 Bias\n");
     printf(" * Driving waveform is Type-%c\n", (g_LCDCfg.u32WaveformType == LCD_PSET_TYPE_Msk) ? 'B' : 'A');
     printf(" * Target frame rate is %uHz\n\n", g_LCDCfg.u32Framerate);
 
