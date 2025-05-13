@@ -22,6 +22,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
+    CLK->AHBCLK0 |= CLK_AHBCLK0_GPBCKEN_Msk;
+
+    PB->DINOFF = 0UL;
+
+    /* Disable all GPIO clocks, returning them to their default value */
+    CLK->AHBCLK0 &= ~CLK_AHBCLK0_GPBCKEN_Msk;
+
     /* Enable HIRC clock */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
