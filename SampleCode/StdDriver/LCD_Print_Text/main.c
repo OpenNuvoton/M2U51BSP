@@ -323,6 +323,9 @@ int main(void)
     printf(" * 8 COM, 40 SEG and 1/4 Bias\n");
     printf(" * Driving waveform is Type-%c\n", (g_LCDCfg.u32WaveformType == LCD_PSET_TYPE_Msk) ? 'B' : 'A');
     printf(" * Target frame rate is %uHz\n\n", g_LCDCfg.u32Framerate);
+    printf("*** Notes:\n");
+    printf("   Since PB12 pin is used as SEG10, if this sample code is executed in the NuMaker Board, \n"); 
+    printf("   please do not enable the VCOM setting for PB12 in Nu-Link2-Me ICE. \n\n"); 
 
     /* Init LCD multi-function pins and settings */
     LCD_Init();
