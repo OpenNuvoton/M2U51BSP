@@ -5,7 +5,7 @@
             "target": "ARMCLANG",
             "config": {
                 "run": "Flash Device",
-                "debug": "Embedded Debug"
+                "debug": "Arm Debug"
             }
         },
         {
@@ -13,12 +13,8 @@
             "target": "GNUC",
             "config": {
                 "run": "Flash Device",
-                "debug": "Embedded Debug"
+                "debug": "Arm Debug"
             }
         }
-    ],
-    "cmake.ignoreCMakeListsMissing": true,
-    "clangd.arguments": [
-        "--compile-commands-dir=e:\\Working_zone\\M4\\M471\\BSP\\1_Build_Test\\1_bsp_CMSIS610_1122\\SampleCode\\Template\\VSCode\\out\\Template\\GNUC\\release"
     ]
 }

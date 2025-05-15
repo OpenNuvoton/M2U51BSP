@@ -1,7 +1,7 @@
 {
     "cmsis-csolution.actions": [
         {
-            "path": "Template.csolution.yml",
+            "path": "GPIO_INT.csolution.yml",
             "target": "ARMCLANG",
             "config": {
                 "run": "Flash Device",
@@ -9,16 +9,12 @@
             }
         },
         {
-            "path": "Template.csolution.yml",
+            "path": "GPIO_INT.csolution.yml",
             "target": "GNUC",
             "config": {
                 "run": "Flash Device",
                 "debug": "Embedded Debug"
             }
         }
-    ],
-    "cmake.ignoreCMakeListsMissing": true,
-    "clangd.arguments": [
-        "--compile-commands-dir=e:\\Working_zone\\M4\\M471\\BSP\\1_Build_Test\\1_bsp_CMSIS610_1122\\SampleCode\\Template\\VSCode\\out\\Template\\GNUC\\release"
     ]
 }

@@ -5,7 +5,7 @@
             "target": "ARMCLANG",
             "config": {
                 "run": "Flash Device",
-                "debug": "Embedded Debug"
+                "debug": "Arm Debug"
             }
         },
         {
@@ -13,11 +13,8 @@
             "target": "GNUC",
             "config": {
                 "run": "Flash Device",
-                "debug": "Embedded Debug"
+                "debug": "Arm Debug"
             }
         }
-    ],
-    "clangd.arguments": [
-        "--compile-commands-dir=e:\\Working_zone\\M23\\M2U51\\BSP_cooking\\bsp_20241230\\SampleCode\\StdDriver\\UART_AutoBaudRate\\VSCode\\out\\UART_AutoBaudRate\\ARMCLANG\\Release"
     ]
 }
