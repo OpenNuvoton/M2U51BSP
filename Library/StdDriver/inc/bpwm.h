@@ -102,14 +102,9 @@ extern "C"
 #define BPWM_DUTY_INT_DOWN_COUNT_MATCH_CMP        (BPWM_INTEN_CMPDIEN0_Msk)   /*!< BPWM duty interrupt triggered if down count match comparator */
 #define BPWM_DUTY_INT_UP_COUNT_MATCH_CMP          (BPWM_INTEN_CMPUIEN0_Msk)   /*!< BPWM duty interrupt triggered if up down match comparator */
 
-
-
-
-
 /*@}*/ /* end of group BPWM_EXPORTED_CONSTANTS */
 
-
-/** @addtogroup BPWM_EXPORTED_FUNCTIONS BPWM Exported Functions
+/** @addtogroup BPWM_EXPORTED_MACROS BPWM Exported Macros
   @{
 */
 
@@ -326,8 +321,12 @@ extern "C"
         } \
     }while(0)
 
+/*@}*/ /* end of group BPWM_EXPORTED_MACROS */
 
 
+/** @addtogroup BPWM_EXPORTED_FUNCTIONS BPWM Exported Functions
+  @{
+*/
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define BPWM functions prototype                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/

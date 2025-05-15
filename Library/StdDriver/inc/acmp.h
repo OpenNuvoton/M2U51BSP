@@ -71,17 +71,13 @@ extern "C"
 
 /*@}*/ /* end of group ACMP_EXPORTED_CONSTANTS */
 
-extern int32_t g_ACMP_i32ErrCode;
-
-/** @addtogroup ACMP_EXPORTED_FUNCTIONS ACMP Exported Functions
+/** @addtogroup ACMP_EXPORTED_MACROS ACMP Exported Macros
   @{
 */
 
 /*--------------------------------------------------------------------------*/
 /*  Define Macros and functions                                             */
 /*--------------------------------------------------------------------------*/
-
-
 /**
   * @brief This macro is used to enable output inverse function
   * @param[in] acmp The pointer of the specified ACMP module
@@ -417,6 +413,14 @@ extern int32_t g_ACMP_i32ErrCode;
   * \hideinitializer
   */
 #define ACMP_DISABLE_WINDOW_COMPARE(acmp, u32ChNum) ((acmp)->CTL[(u32ChNum)] &= ~ACMP_CTL_WCMPSEL_Msk)
+
+/*@}*/ /* end of group ACMP_EXPORTED_MACROS */
+
+extern int32_t g_ACMP_i32ErrCode;
+
+/** @addtogroup ACMP_EXPORTED_FUNCTIONS ACMP Exported Functions
+  @{
+*/
 
 /* Function prototype declaration */
 void ACMP_Open (ACMP_T *acmp, uint32_t u32ChNum, uint32_t u32NegSrc, uint32_t u32HysSel);

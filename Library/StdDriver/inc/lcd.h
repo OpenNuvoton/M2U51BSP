@@ -152,7 +152,7 @@ typedef struct
 
 /*@}*/ /* end of group LCD_EXPORTED_STRUCTS */
 
-/** @addtogroup LCD_EXPORTED_FUNCTIONS LCD Exported Functions
+/** @addtogroup LCD_EXPORTED_MACROS LCD Exported Macros
   @{
 */
 
@@ -439,6 +439,11 @@ typedef struct
   */
 #define LCD_OUTPUT_RST(sel)              (LCD->OSET &= (~(sel)))
 
+/*@}*/ /* end of group LCD_EXPORTED_MACROS */
+
+/** @addtogroup LCD_EXPORTED_FUNCTIONS LCD Exported Functions
+  @{
+*/
 uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET);
 void LCD_Close(void);
 void LCD_SetPixel(uint32_t u32Com, uint32_t u32Seg, uint32_t u32OnFlag);

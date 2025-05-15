@@ -61,11 +61,9 @@ extern "C"
 /*@}*/ /* end of group USCI_UART_EXPORTED_CONSTANTS */
 
 
-/** @addtogroup USCI_UART_EXPORTED_FUNCTIONS USCI_UART Exported Functions
+/** @addtogroup USCI_UART_EXPORTED_MACROS USCI_UART Exported Macros
   @{
 */
-
-
 /**
  *    @brief        Write USCI_UART data
  *
@@ -487,8 +485,11 @@ extern "C"
  */
 #define UUART_PDMA_DISABLE(uuart, u32FuncSel)   ((uuart)->PDMACTL &= ~(u32FuncSel))
 
+/*@}*/ /* end of group USCI_UART_EXPORTED_MACROS */
 
-
+/** @addtogroup USCI_UART_EXPORTED_FUNCTIONS USCI_UART Exported Functions
+  @{
+*/
 
 void UUART_ClearIntFlag(UUART_T* uuart, uint32_t u32Mask);
 uint32_t UUART_GetIntFlag(UUART_T* uuart, uint32_t u32Mask);

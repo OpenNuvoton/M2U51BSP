@@ -116,11 +116,9 @@ extern "C"
 /*@}*/ /* end of group UART_EXPORTED_CONSTANTS */
 
 
-/** @addtogroup UART_EXPORTED_FUNCTIONS UART Exported Functions
+/** @addtogroup UART_EXPORTED_MACROS UART Exported Macros
   @{
 */
-
-
 /**
  *    @brief        Calculate UART baudrate mode0 divider
  *
@@ -497,7 +495,12 @@ __STATIC_INLINE void UART_SET_RTS(UART_T* uart)
  */
 #define UART_PDMA_DISABLE(uart, u32FuncSel)    ((uart)->INTEN &= ~(u32FuncSel))
 
+/*@}*/ /* end of group UART_EXPORTED_MACROS */
 
+
+/** @addtogroup UART_EXPORTED_FUNCTIONS UART Exported Functions
+  @{
+*/
 void UART_ClearIntFlag(UART_T* uart, uint32_t u32InterruptFlag);
 void UART_Close(UART_T* uart);
 void UART_DisableFlowCtrl(UART_T* uart);

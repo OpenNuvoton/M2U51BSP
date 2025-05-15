@@ -96,9 +96,8 @@ enum UI2C_SLAVE_EVENT
 
 /*@}*/ /* end of group USCI_I2C_EXPORTED_CONSTANTS */
 
-extern int32_t g_UI2C_i32ErrCode;
 
-/** @addtogroup USCI_I2C_EXPORTED_FUNCTIONS USCI_I2C Exported Functions
+/** @addtogroup USCI_I2C_EXPORTED_MACROS USCI_I2C Exported Macros
   @{
 */
 
@@ -292,7 +291,13 @@ extern int32_t g_UI2C_i32ErrCode;
  */
 #define UI2C_DISABLE_PROT_INT(ui2c, u32IntSel)    ((ui2c)->PROTIEN &= ~ (u32IntSel))
 
+/*@}*/ /* end of group USCI_I2C_EXPORTED_MACROS */
 
+extern int32_t g_UI2C_i32ErrCode;
+
+/** @addtogroup USCI_I2C_EXPORTED_FUNCTIONS USCI_I2C Exported Functions
+  @{
+*/
 uint32_t UI2C_Open(UI2C_T *ui2c, uint32_t u32BusClock);
 void UI2C_Close(UI2C_T *ui2c);
 void UI2C_ClearTimeoutFlag(UI2C_T *ui2c);

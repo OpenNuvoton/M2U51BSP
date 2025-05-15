@@ -118,7 +118,7 @@ extern "C"
 
 /*@}*/ /* end of group PDMA_EXPORTED_CONSTANTS */
 
-/** @addtogroup PDMA_EXPORTED_FUNCTIONS PDMA Exported Functions
+/** @addtogroup PDMA_EXPORTED_MACROS PDMA Exported Macros
   @{
 */
 
@@ -335,6 +335,11 @@ extern "C"
  */
 #define PDMA_RESET(pdma, u32Ch) ((uint32_t)((pdma)->CHRST = (1UL << (u32Ch))))
 
+/*@}*/ /* end of group PDMA_EXPORTED_MACROS */
+
+/** @addtogroup PDMA_EXPORTED_FUNCTIONS PDMA Exported Functions
+  @{
+*/
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define PDMA functions prototype                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/

@@ -107,11 +107,9 @@ typedef struct
 
 /*@}*/ /* end of group RTC_EXPORTED_STRUCTS */
 
-
-/** @addtogroup RTC_EXPORTED_FUNCTIONS RTC Exported Functions
+/** @addtogroup RTC_EXPORTED_MACROS RTC Exported Macros
   @{
 */
-
 /**
   * @brief      Indicate is Leap Year or not
   *
@@ -189,6 +187,12 @@ typedef struct
   */
 #define RTC_DISABLE_TICK_WAKEUP()           (RTC->INTEN &= ~RTC_INTEN_TICKIEN_Msk);
 
+/*@}*/ /* end of group RTC_EXPORTED_MACROS */
+
+
+/** @addtogroup RTC_EXPORTED_FUNCTIONS RTC Exported Functions
+  @{
+*/
 int32_t RTC_Open(S_RTC_TIME_DATA_T *sPt);
 void RTC_Close(void);
 int32_t RTC_32KCalibration(int32_t i32FrequencyX10000);

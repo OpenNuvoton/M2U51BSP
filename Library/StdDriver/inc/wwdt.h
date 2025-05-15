@@ -53,8 +53,7 @@ extern "C"
 
 /*@}*/ /* end of group WWDT_EXPORTED_CONSTANTS */
 
-
-/** @addtogroup WWDT_EXPORTED_FUNCTIONS WWDT Exported Functions
+/** @addtogroup WWDT_EXPORTED_MACROS WWDT Exported Macros
   @{
 */
 
@@ -134,6 +133,13 @@ extern "C"
   * \hideinitializer
   */
 #define WWDT_RELOAD_COUNTER()       (WWDT->RLDCNT = WWDT_RELOAD_WORD)
+
+/*@}*/ /* end of group WWDT_EXPORTED_MACROS */
+
+
+/** @addtogroup WWDT_EXPORTED_FUNCTIONS WWDT Exported Functions
+  @{
+*/
 
 void WWDT_Open(uint32_t u32PreScale, uint32_t u32CmpValue, uint32_t u32EnableInt);
 

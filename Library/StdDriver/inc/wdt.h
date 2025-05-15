@@ -62,10 +62,9 @@ extern "C"
 
 /**@}*/ /* end of group WDT_EXPORTED_CONSTANTS */
 
-/** @addtogroup WDT_EXPORTED_FUNCTIONS WDT Exported Functions
+/** @addtogroup WDT_EXPORTED_MACROS WDT Exported Macros
   @{
 */
-
 /**
   * @brief      Clear WDT Reset System Flag
   *
@@ -215,6 +214,12 @@ __STATIC_INLINE void WDT_DisableInt(void)
     WDT->CTL &= ~(WDT_CTL_INTEN_Msk);   
     return;
 }
+
+/*@}*/ /* end of group WDT_EXPORTED_MACROS */
+
+/** @addtogroup WDT_EXPORTED_FUNCTIONS WDT Exported Functions
+  @{
+*/
 
 int32_t WDT_Open(uint32_t u32TimeoutInterval, uint32_t u32ResetDelay, uint32_t u32EnableReset, uint32_t u32EnableWakeup);
 

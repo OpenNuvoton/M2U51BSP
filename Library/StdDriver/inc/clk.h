@@ -368,12 +368,10 @@ extern "C"
 
 /*@}*/ /* end of group CLK_EXPORTED_CONSTANTS */
 
-extern int32_t g_CLK_i32ErrCode;
 
-/** @addtogroup CLK_EXPORTED_FUNCTIONS CLK Exported Functions
+/** @addtogroup CLK_EXPORTED_MACROS CLK Exported Macros
   @{
 */
-
 /**
  * @brief       Set Wake-up Timer Time-out Interval
  *
@@ -430,6 +428,13 @@ extern int32_t g_CLK_i32ErrCode;
  */
 #define CLK_SET_SPDDEBOUNCETIME(u32CycleSel)    (CLK->PWDBCTL = (u32CycleSel))
 
+/*@}*/ /* end of group CLK_EXPORTED_MACROS */
+
+extern int32_t g_CLK_i32ErrCode;
+
+/** @addtogroup CLK_EXPORTED_FUNCTIONS CLK Exported Functions
+  @{
+*/
 /*--------------------------------------------------------------------------*/
 /* static inline functions                                                  */
 /*--------------------------------------------------------------------------*/

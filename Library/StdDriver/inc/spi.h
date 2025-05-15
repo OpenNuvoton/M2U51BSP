@@ -73,8 +73,7 @@ extern "C"
 
 /*@}*/ /* end of group SPI_EXPORTED_CONSTANTS */
 
-
-/** @addtogroup SPI_EXPORTED_FUNCTIONS SPI Exported Functions
+/** @addtogroup SPI_EXPORTED_MACROS SPI Exported Macros
   @{
 */
 
@@ -537,6 +536,12 @@ extern "C"
   */
 #define SPI_CLR_AUTO_CNT_INT_FLAG(spi)   ((spi)->AUTOSTS = SPI_AUTOSTS_CNTIF_Msk)
 
+/*@}*/ /* end of group SPI_EXPORTED_MACROS */
+
+
+/** @addtogroup SPI_EXPORTED_FUNCTIONS SPI Exported Functions
+  @{
+*/
 /* Function prototype declaration */
 uint32_t SPI_Open(SPI_T *spi, uint32_t u32MasterSlave, uint32_t u32SPIMode, uint32_t u32DataWidth, uint32_t u32BusClock);
 void SPI_Close(SPI_T *spi);

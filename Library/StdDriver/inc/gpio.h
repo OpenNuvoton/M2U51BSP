@@ -223,8 +223,7 @@ extern "C"
 
 /*@}*/ /* end of group GPIO_EXPORTED_CONSTANTS */
 
-
-/** @addtogroup GPIO_EXPORTED_FUNCTIONS GPIO Exported Functions
+/** @addtogroup GPIO_EXPORTED_MACROS GPIO Exported Macros
   @{
 */
 
@@ -441,7 +440,11 @@ extern "C"
 
 #define GPIO_DisableEINT    GPIO_DisableInt
 
+/*@}*/ /* end of group GPIO_EXPORTED_MACROS */
 
+/** @addtogroup GPIO_EXPORTED_FUNCTIONS GPIO Exported Functions
+  @{
+*/
 void GPIO_SetMode    (GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode);
 void GPIO_EnableInt  (GPIO_T *port, uint32_t u32Pin, uint32_t u32IntAttribs);
 void GPIO_DisableInt (GPIO_T *port, uint32_t u32Pin);

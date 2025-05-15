@@ -102,10 +102,9 @@ extern "C"
 /*@}*/ /* end of group TIMER_EXPORTED_CONSTANTS */
 
 
-/** @addtogroup TIMER_EXPORTED_FUNCTIONS TIMER Exported Functions
+/** @addtogroup TIMER_EXPORTED_MACROS TIMER Exported Macros
   @{
 */
-
 /**
   * @brief      Set Timer Compared Value
   *
@@ -178,6 +177,12 @@ extern "C"
   * \hideinitializer
   */
 #define TIMER_SET_OPMODE(timer, u32OpMode)   ((timer)->CTL = ((timer)->CTL & ~TIMER_CTL_OPMODE_Msk) | (u32OpMode))
+
+/*@}*/ /* end of group TIMER_EXPORTED_MACROS */
+
+/** @addtogroup TIMER_EXPORTED_FUNCTIONS TIMER Exported Functions
+  @{
+*/
 
 /* Declare these inline functions here to avoid MISRA C 2004 rule 8.1 error */
 __STATIC_INLINE void     TIMER_Start(TIMER_T *timer);

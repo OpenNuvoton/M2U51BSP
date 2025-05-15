@@ -51,8 +51,7 @@ extern "C"
 
 /*@}*/ /* end of group CRC_EXPORTED_CONSTANTS */
 
-
-/** @addtogroup CRC_EXPORTED_FUNCTIONS CRC Exported Functions
+/** @addtogroup CRC_EXPORTED_MACROS CRC Exported Macros
   @{
 */
 
@@ -229,6 +228,12 @@ extern "C"
   */
 #define CRC_SET_POLYNOMIAL(u32Polynomial)   (CRC->POLYNOMIAL = (u32Polynomial))
 
+/*@}*/ /* end of group CRC_EXPORTED_MACROS */
+
+
+/** @addtogroup CRC_EXPORTED_FUNCTIONS CRC Exported Functions
+  @{
+*/
 void CRC_Open(uint32_t u32Mode, uint32_t u32Attribute, uint32_t u32Seed, uint32_t u32DataLen);
 
 uint32_t CRC_GetChecksum(void);

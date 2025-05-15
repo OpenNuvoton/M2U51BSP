@@ -190,10 +190,9 @@ extern "C"
 /*@}*/ /* end of group PWM_EXPORTED_CONSTANTS */
 
 
-/** @addtogroup PWM_EXPORTED_FUNCTIONS PWM Exported Functions
+/** @addtogroup PWM_EXPORTED_MACROS PWM Exported Macros
   @{
 */
-
 /**
  * @brief This macro enable complementary mode
  * @param[in] pwm The pointer of the specified PWM module
@@ -529,6 +528,11 @@ extern "C"
     (*(__IO uint32_t *) (&((pwm)->DTCTL0_1) + ((u32ChannelNum) >> 1)) = (*(__IO uint32_t *) (&((pwm)->DTCTL0_1) + ((u32ChannelNum) >> 1)) & ~PWM_DTCTL0_1_DTCKSEL_Msk) | \
     ((u32AfterPrescaler) << PWM_DTCTL0_1_DTCKSEL_Pos))
 
+/*@}*/ /* end of group PWM_EXPORTED_MACROS */
+
+/** @addtogroup PWM_EXPORTED_FUNCTIONS PWM Exported Functions
+  @{
+*/    
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define PWM functions prototype                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/

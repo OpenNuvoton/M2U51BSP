@@ -134,13 +134,9 @@ extern "C"
 
 /*@}*/ /* end of group ADC_EXPORTED_CONSTANTS */
 
-extern int32_t g_ADC_i32ErrCode;
-
-/** @addtogroup ADC_EXPORTED_FUNCTIONS ADC Exported Functions
+/** @addtogroup ADC_EXPORTED_MACROS ADC Exported Macros
   @{
 */
-
-
 /**
   * @brief Get conversion data of specified channel.
   * @param[in] adc The pointer of the specified ADC module.
@@ -451,7 +447,13 @@ extern int32_t g_ADC_i32ErrCode;
   */
 #define ADC_AUTO_CLR_WAKEUP_FLAG(adc, u32Mask) ((adc)->AUTOSTS = (u32Mask))
 
+/*@}*/ /* end of group ADC_EXPORTED_MACROS */
 
+extern int32_t g_ADC_i32ErrCode;
+
+/** @addtogroup ADC_EXPORTED_FUNCTIONS ADC Exported Functions
+  @{
+*/
 void ADC_Open (ADC_T *adc,
                uint32_t u32InputMode,
                uint32_t u32OpMode,

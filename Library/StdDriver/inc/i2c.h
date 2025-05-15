@@ -92,11 +92,11 @@ extern "C"
 
 /*@}*/ /* end of group I2C_EXPORTED_CONSTANTS */
 
-extern int32_t g_I2C_i32ErrCode;
-
-/** @addtogroup I2C_EXPORTED_FUNCTIONS I2C Exported Functions
+/** @addtogroup I2C_EXPORTED_MACROS I2C Exported Macros
   @{
 */
+
+
 /**
  *    @brief        The macro is used to set I2C bus condition at One Time
  *
@@ -539,7 +539,13 @@ __STATIC_INLINE void I2C_STOP(I2C_T *i2c)
         if (--u32TimeOutCount == 0) break;
     }
 }
+/*@}*/ /* end of group I2C_EXPORTED_MACROS */
 
+extern int32_t g_I2C_i32ErrCode;
+
+/** @addtogroup I2C_EXPORTED_FUNCTIONS I2C Exported Functions
+  @{
+*/
 void I2C_ClearTimeoutFlag(I2C_T *i2c);
 void I2C_Close(I2C_T *i2c);
 void I2C_Trigger(I2C_T *i2c, uint8_t u8Start, uint8_t u8Stop, uint8_t u8Si, uint8_t u8Ack);

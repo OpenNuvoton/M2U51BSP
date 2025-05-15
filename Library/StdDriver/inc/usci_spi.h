@@ -62,7 +62,7 @@ extern "C"
 /*@}*/ /* end of group USCI_SPI_EXPORTED_CONSTANTS */
 
 
-/** @addtogroup USCI_SPI_EXPORTED_FUNCTIONS USCI_SPI Exported Functions
+/** @addtogroup USCI_SPI_EXPORTED_MACROS USCI_SPI Exported Macros
   @{
 */
 
@@ -396,6 +396,11 @@ extern "C"
   */
 #define USPI_DISABLE_TX_RX_PDMA(uspi) ( (uspi)->PDMACTL &= ~(USPI_PDMACTL_TXPDMAEN_Msk | USPI_PDMACTL_RXPDMAEN_Msk))
 
+/*@}*/ /* end of group USCI_SPI_EXPORTED_MACROS */
+
+/** @addtogroup USCI_SPI_EXPORTED_FUNCTIONS USCI_SPI Exported Functions
+  @{
+*/
 uint32_t USPI_Open(USPI_T *uspi, uint32_t u32MasterSlave, uint32_t u32SPIMode,  uint32_t u32DataWidth, uint32_t u32BusClock);
 void USPI_Close(USPI_T *uspi);
 void USPI_ClearRxBuf(USPI_T *uspi);

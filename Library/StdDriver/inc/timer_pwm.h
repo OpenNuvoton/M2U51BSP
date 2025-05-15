@@ -58,8 +58,7 @@ extern "C"
 
 /*@}*/ /* end of group TIMER_PWM_EXPORTED_CONSTANTS */
 
-
-/** @addtogroup TIMER_PWM_EXPORTED_FUNCTIONS TIMER PWM Exported Functions
+/** @addtogroup TIMER_PWM_EXPORTED_MACROS TIMER_PWM Exported Macros
   @{
 */
 
@@ -549,6 +548,12 @@ __STATIC_INLINE void TPWM_ClearWakeupFlag(TIMER_T *timer)
     timer->PWMSTATUS = TIMER_PWMSTATUS_PWMINTWKF_Msk;
 }
 
+/*@}*/ /* end of group TIMER_PWM_EXPORTED_MACROS */
+
+
+/** @addtogroup TIMER_PWM_EXPORTED_FUNCTIONS TIMER_PWM Exported Functions
+  @{
+*/
 void TPWM_EnableAcc(TIMER_T *timer, uint32_t u32IntFlagCnt, uint32_t u32IntAccSrc);
 void TPWM_DisableAcc(TIMER_T *timer);
 void TPWM_EnableAccInt(TIMER_T *timer);

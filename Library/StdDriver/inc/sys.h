@@ -925,9 +925,8 @@ Example 1: If user want to set PA.0 as SC0_CLK in initial function,
 
 /*@}*/ /* end of group SYS_EXPORTED_CONSTANTS */
 
-extern int32_t g_SYS_i32ErrCode;
 
-/** @addtogroup SYS_EXPORTED_FUNCTIONS SYS Exported Functions
+/** @addtogroup SYS_EXPORTED_MACROS SYS Exported Macros
   @{
 */
 
@@ -1165,7 +1164,13 @@ extern int32_t g_SYS_i32ErrCode;
   */
 #define SYS_CLEAR_RST_SOURCE(u32RstSrc) ((SYS->RSTSTS) = (u32RstSrc) )
 
+/*@}*/ /* end of group SYS_EXPORTED_MACROS */
 
+extern int32_t g_SYS_i32ErrCode;
+
+/** @addtogroup SYS_EXPORTED_FUNCTIONS SYS Exported Functions
+  @{
+*/
 /*--------------------------------------------------------------------------*/
 /* static inline functions                                                                                 */
 /*--------------------------------------------------------------------------*/
