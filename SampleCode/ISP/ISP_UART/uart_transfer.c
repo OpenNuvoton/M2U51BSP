@@ -58,7 +58,7 @@ void UART0_IRQHandler(void)
 extern uint8_t response_buff[64];
 #else
 extern __attribute__((aligned(4))) uint8_t response_buff[64];
-#endif 
+#endif
 
 void PutString(void)
 {

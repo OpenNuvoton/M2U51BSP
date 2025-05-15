@@ -24,262 +24,262 @@
     @addtogroup CRPT Cryptographic Accelerator(CRPT)
     Memory Mapped Structure for CRPT Controller
 @{ */
- 
+
 typedef struct
 {
 
 
-/**
-     * @var CRPT_T::INTEN
- * Offset: 0x00  Crypto Interrupt Enable Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |AESIEN    |AES Interrupt Enable Bit
- * |        |          |0 = AES interrupt Disabled.
- * |        |          |1 = AES interrupt Enabled.
- * |        |          |Note: In DMA mode, an interrupt will be triggered when an amount of data set in AES_DMA_CNT is fed into the AES engine.
- * |        |          |In Non-DMA mode, an interrupt will be triggered when the AES engine finishes the operation.
- * |[1]     |AESEIEN   |AES Error Flag Enable Bit
- * |        |          |0 = AES error interrupt flag Disabled.
- * |        |          |1 = AES error interrupt flag Enabled.
- * @var CRPT_T::INTSTS
- * Offset: 0x04  Crypto Interrupt Flag
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |AESIF     |AES Finish Interrupt Flag
- * |        |          |0 = No AES interrupt.
- * |        |          |1 = AES done interrupt.
- * |        |          |Note: This bit is cleared by writing 1, and it has no effect by writing 0.
- * |[1]     |AESEIF    |AES Error Flag
- * |        |          |This register includes operating and setting error
- * |        |          |The detail flag is shown in CRPT_AES_STS register.
- * |        |          |0 = No AES error.
- * |        |          |1 = AES error interrupt.
- * |        |          |Note: This bit is cleared by writing 1, and it has no effect by writing 0.
- * @var CRPT_T::AES_FDBCK
-     * Offset: 0x50-0x5C  AES Engine Output Feedback Data After Cryptographic Operation
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |FDBCK     |AES Feedback Information
- * |        |          |The feedback value is 128 bits in size.
- * |        |          |The AES engine uses the data from CRPT_AES_FDBCKx as the data inputted to CRPT_AES_IVx for the next block in DMA cascade mode.
- * |        |          |The AES engine outputs feedback information for IV in the next block's operation
- * |        |          |Software can use this feedback information to implement more than four DMA channels
- * |        |          |Software can store that feedback value temporarily
- * |        |          |After switching back, fill the stored feedback value to CRPT_AES_IVx in the same channel operation, and then continue the operation with the original setting.
- * @var CRPT_T::AES_CTL
- * Offset: 0x100  AES Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |START     |AES Engine Start
- * |        |          |0 = No effect.
- * |        |          |1 = Start AES engine. BUSY flag will be set.
- * |        |          |Note: This bit is always 0 when it is read back.
- * |[1]     |STOP      |AES Engine Stop
- * |        |          |0 = No effect.
- * |        |          |1 = Stop AES engine.
- * |        |          |Note: This bit is always 0 when it is read back. 
- * |[3:2]   |KEYSZ     |AES Key Size
- * |        |          |This bit defines three different key size for AES operation.
- * |        |          |2'b00 = 128 bits key.
- * |        |          |2'b01 = 192 bits key.
- * |        |          |2'b10 = 256 bits key.
- * |        |          |2'b11 = Reserved.
- * |        |          |If the AES accelerator is operating and the corresponding flag BUSY is 1, updating this register has no effect.
- * |[5]     |DMALAST   |AES Last Block
- * |        |          |In DMA mode, this bit must be set as beginning the last DMA cascade round.
- * |        |          |In Non-DMA mode, this bit must be set when feeding in the last block of data in ECB, CBC, CTR, OFB, and CFB mode, and feeding in the (last-1) block of data at CBC-CS1, CBC-CS2, and CBC-CS3 mode.
- * |        |          |This bit is always 0 when it is read back, and must be written again once START is triggered.
- * |[6]     |DMACSCAD  |AES Engine DMA with Cascade Mode
- * |        |          |0 = DMA cascade function Disabled.
- * |        |          |1 = In DMA cascade mode, software can update DMA source address register, destination address register, and byte count register during a cascade operation, without finishing the accelerator operation.
- * |        |          |Note: The last two blocks of AES-CBC-CS1/2/3 must be in the last cascade operation.
- * |[7]     |DMAEN     |AES Engine DMA Enable Bit
- * |        |          |0 = AES DMA engine Disabled.
- * |        |          |The AES engine operates in Non-DMA mode. The data need to be written in CRPT_AES_DATIN.
- * |        |          |1 = AES_DMA engine Enabled.
- * |        |          |The AES engine operates in DMA mode, and data movement from/to the engine is done by DMA logic.
- * |[15:8]  |OPMODE    |AES Engine Operation Modes
- * |        |          |0x00 = ECB (Electronic Codebook Mode)  0x01 = CBC (Cipher Block Chaining Mode).
- * |        |          |0x02 = CFB (Cipher Feedback Mode).
- * |        |          |0x03 = OFB (Output Feedback Mode).
- * |        |          |0x04 = CTR (Counter Mode).
- * |        |          |0x10 = CBC-CS1 (CBC Ciphertext-Stealing 1 Mode).
- * |        |          |0x11 = CBC-CS2 (CBC Ciphertext-Stealing 2 Mode).
- * |        |          |0x12 = CBC-CS3 (CBC Ciphertext-Stealing 3 Mode).
- * |[16]    |ENCRYPTO  |AES Encryption/Decryption
- * |        |          |0 = AES engine executes decryption operation.
- * |        |          |1 = AES engine executes encryption operation. 
- * |[22]    |OUTSWAP   |AES Engine Output Data Swap
- * |        |          |0 = Keep the original order.
- * |        |          |1 = The order that CPU reads data from the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
- * |[23]    |INSWAP    |AES Engine Input Data Swap
- * |        |          |0 = Keep the original order.
- * |        |          |1 = The order that CPU feeds data to the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
- * |[24]    |KOUTSWAP  |AES Engine Output Key, Initial Vector and Feedback Swap
- * |        |          |0 = Keep the original order.
- * |        |          |1 = The order that CPU reads key, initial vector and feedback from the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
- * |[25]    |KINSWAP   |AES Engine Input Key and Initial Vector Swap
- * |        |          |0 = Keep the original order.
- * |        |          |1 = The order that CPU feeds key and initial vector to the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
- * |[30:26] |KEYUNPRT  |Unprotect Key
- * |        |          |Writing 0 to CRPT_AES_CTL[31] and u201C10110u201D to CRPT_AES_CTL[30:26] is to unprotect the AES key.
- * |        |          |The KEYUNPRT can be read and written
- * |        |          |When it is written as the AES engine is operating, BUSY flag is 1, there would be no effect on KEYUNPRT.
- * |[31]    |KEYPRT    |Protect Key
- * |        |          |Read as a flag to reflect KEYPRT.
- * |        |          |0 = No effect.
- * |        |          |1 = Protect the content of the AES key from reading
- * |        |          |The return value for reading CRPT_AES_KEYx is not the content of the registers CRPT_AES_KEYx
- * |        |          |Once it is set, it can be cleared by asserting KEYUNPRT
- * |        |          |The key content would be cleared as well.
- * @var CRPT_T::AES_STS
- * Offset: 0x104  AES Engine Flag
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |BUSY      |AES Engine Busy
- * |        |          |0 = The AES engine is idle or finished.
- * |        |          |1 = The AES engine is under processing.
- * |[8]     |INBUFEMPTY|AES Input Buffer Empty
- * |        |          |0 = There are some data in input buffer waiting for the AES engine to process.
- * |        |          |1 = AES input buffer is empty
- * |        |          |Software needs to feed data to the AES engine
- * |        |          |Otherwise, the AES engine will be pending to wait for input data.
- * |[9]     |INBUFFULL |AES Input Buffer Full Flag
- * |        |          |0 = AES input buffer is not full. Software can feed the data into the AES engine.
- * |        |          |1 = AES input buffer is full
- * |        |          |Software cannot feed data to the AES engine
- * |        |          |Otherwise, the flag INBUFERR will be set to 1.
- * |[10]    |INBUFERR  |AES Input Buffer Error Flag
- * |        |          |0 = No error.
- * |        |          |1 = Error happened during feeding data to the AES engine. 
- * |[12]    |CNTERR    |CRPT_AES_CNT Setting Error
- * |        |          |0 = No error in CRPT_AES_CNT setting.
- * |        |          |1 = CRPT_AES_CNT is 0 if DMAEN (CRPT_AES_CTL[7]) is enabled.
- * |[16]    |OUTBUFEMPTY|AES Out Buffer Empty
- * |        |          |0 = AES output buffer is not empty. There are some valid data kept in output buffer.
- * |        |          |1 = AES output buffer is empty
- * |        |          |Software cannot get data from CRPT_AES_DATOUT
- * |        |          |Otherwise, the flag OUTBUFERR will be set to 1 since the output buffer is empty.
- * |[17]    |OUTBUFFULL|AES Out Buffer Full Flag
- * |        |          |0 = AES output buffer is not full.
- * |        |          |1 = AES output buffer is full, and software needs to get data from CRPT_AES_DATOUT
- * |        |          |Otherwise, the AES engine will be pending since the output buffer is full.
- * |[18]    |OUTBUFERR |AES Out Buffer Error Flag
- * |        |          |0 = No error.
- * |        |          |1 = Error happened during getting the result from AES engine. 
- * |[20]    |BUSERR    |AES DMA Access Bus Error Flag
- * |        |          |0 = No error.
- * |        |          |1 = Bus error will stop DMA operation and AES engine.
- * @var CRPT_T::AES_DATIN
- * Offset: 0x108  AES Engine Data Input Port Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |DATIN     |AES Engine Input Port
- * |        |          |CPU feeds data to AES engine through this port by checking CRPT_AES_STS. Feed data as INBUFFULL is 0.
- * @var CRPT_T::AES_DATOUT
- * Offset: 0x10C  AES Engine Data Output Port Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |DATOUT    |AES Engine Output Port
- * |        |          |CPU gets results from the AES engine through this port by checking CRPT_AES_STS
- * |        |          |Get data as OUTBUFEMPTY is 0.
-     * @var CRPT_T::AES_KEY
-     * Offset: 0x110-0x12C  AES Key Word Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |KEY       |CRPT_AES_KEYx
- * |        |          |The KEY keeps the security key for AES operation.
- * |        |          |x = 0, 1..7.
- * |        |          |The security key for AES accelerator can be 128, 192, or 256 bits and four, six, or eight 32-bit registers are to store each security key.
- * |        |          |{CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 128-bit security key for AES operation.
- * |        |          |{CRPT_AES_KEY5, CRPT_AES_KEY4, CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 192-bit security key for AES operation.
- * |        |          |{CRPT_AES_KEY7, CRPT_AES_KEY6, CRPT_AES_KEY5, CRPT_AES_KEY4, CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 256-bit security key for AES operation.
-     * @var CRPT_T::AES_IV
-     * Offset: 0x130-0x13C  AES Initial Vector Word Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |IV        |AES Initial Vectors
- * |        |          |x = 0, 1..3.
- * |        |          |Four initial vectors (CRPT_AES_IV0, CRPT_AES_IV1, CRPT_AES_IV2, and CRPT_AES_IV3) are for AES operating in CBC, CFB, and OFB mode
- * |        |          |Four registers (CRPT_AES_IV0, CRPT_AES_IV1, CRPT_AES_IV2, and CRPT_AES_IV3) act as Nonce counter when the AES engine is operating in CTR mode.
- * @var CRPT_T::AES_SADDR
- * Offset: 0x140  AES DMA Source Address Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |SADDR     |AES DMA Source Address
- * |        |          |The AES accelerator supports DMA function to transfer the plain text between SRAM memory space and embedded FIFO
- * |        |          |The SADDR keeps the source address of the data buffer where the source text is stored
- * |        |          |Based on the source address, the AES accelerator can read the plain text (encryption) / cipher text (decryption) from SRAM memory space and do AES operation
- * |        |          |The start of source address should be located at word boundary
- * |        |          |In other words, bit 1 and 0 of SADDR are ignored.
- * |        |          |SADDR can be read and written
- * |        |          |Writing to SADDR while the AES accelerator is operating doesn't affect the current AES operation
- * |        |          |But the value of SADDR will be updated later on
- * |        |          |Consequently, software can prepare the DMA source address for the next AES operation.
- * |        |          |In DMA mode, software can update the next CRPT_AES_SADDR before triggering START.
- * |        |          |The value of CRPT_AES_SADDR and CRPT_AES_DADDR can be the same.
- * @var CRPT_T::AES_DADDR
- * Offset: 0x144  AES DMA Destination Address Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |DADDR     |AES DMA Destination Address
- * |        |          |The AES accelerator supports DMA function to transfer the cipher text between SRAM memory space and embedded FIFO
- * |        |          |The DADDR keeps the destination address of the data buffer where the engine output's text will be stored
- * |        |          |Based on the destination address, the AES accelerator can write the cipher text (encryption) / plain text (decryption) back to SRAM memory space after the AES operation is finished
- * |        |          |The start of destination address should be located at word boundary
- * |        |          |In other words, bit 1 and 0 of DADDR are ignored.
- * |        |          |DADDR can be read and written
- * |        |          |Writing to DADDR while the AES accelerator is operating doesn't affect the current AES operation
- * |        |          |But the value of DADDR will be updated later on
- * |        |          |Consequently, software can prepare the destination address for the next AES operation.
- * |        |          |In DMA mode, software can update the next CRPT_AES_DADDR before triggering START.
- * |        |          |The value of CRPT_AES_SADDR and CRPT_AES_DADDR can be the same.
- * @var CRPT_T::AES_CNT
- * Offset: 0x148  AES Byte Count Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[31:0]  |CNT       |AES Byte   Count
- * |        |          |The   CRPT_AES_CNT keeps the byte count of source text that is for the AES engine   operating in DMA mode
- * |        |          |The CRPT_AES_CNT is 32-bit and the maximum of byte   count is 4G bytes.
- * |        |          |CRPT_AES_CNT   can be read and written
- * |        |          |Writing to CRPT_AES_CNT while the AES accelerator   is operating doesn't affect the current AES operation
- * |        |          |But the value of   CRPT_AES_CNT will be updated later on
- * |        |          |Consequently, software can prepare   the byte count of data for the next AES operation.
- * |        |          |According   to CBC-CS1, CBC-CS2, and CBC-CS3 standard, the count of operation data must   be more than 16 bytes
- * |        |          |Operations that are qual to or less than one block   will output unexpected result.
- * |        |          |In   Non-DMA ECB, CBC, CFB, OFB, and CTR mode, CRPT_AES_CNT must be set as byte   count for the last block of data before feeding in the last block of data
- * |        |          |In   Non-DMA CBC-CS1, CBC-CS2, and CBC-CS3 mode, CRPT_AES_CNT must be set as   byte count for the last two blocks of data before feeding in the last two   blocks of data.
- * @var CRPT_T::AHB_STS
- * Offset: 0xF90  CRPT AHB Master Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |BUSY      |AHB Master Busy
- * |        |          |0 = AHB Master is idle or finished.
- * |        |          |1 = AHB Master is busy.
- * |[3:1]   |SERVICE   |AHB Master Service
- * |        |          |000 = Reserved.
- * |        |          |001 = AHB master is servicing AES engine when BUSY is 1.
- * |        |          |010 = AHB master is servicing SHA/HMAC engine when BUSY is 1.
- * |        |          |011 = Reserved.
- * |        |          |100 = AHB master is servicing ECC engine when BUSY is 1.
- * |        |          |101 = AHB master is servicing RSA engine when BUSY is 1.
- * |        |          |110 = Reserved.
- * |        |          |111 = Reserved.
- */
+    /**
+         * @var CRPT_T::INTEN
+     * Offset: 0x00  Crypto Interrupt Enable Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |AESIEN    |AES Interrupt Enable Bit
+     * |        |          |0 = AES interrupt Disabled.
+     * |        |          |1 = AES interrupt Enabled.
+     * |        |          |Note: In DMA mode, an interrupt will be triggered when an amount of data set in AES_DMA_CNT is fed into the AES engine.
+     * |        |          |In Non-DMA mode, an interrupt will be triggered when the AES engine finishes the operation.
+     * |[1]     |AESEIEN   |AES Error Flag Enable Bit
+     * |        |          |0 = AES error interrupt flag Disabled.
+     * |        |          |1 = AES error interrupt flag Enabled.
+     * @var CRPT_T::INTSTS
+     * Offset: 0x04  Crypto Interrupt Flag
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |AESIF     |AES Finish Interrupt Flag
+     * |        |          |0 = No AES interrupt.
+     * |        |          |1 = AES done interrupt.
+     * |        |          |Note: This bit is cleared by writing 1, and it has no effect by writing 0.
+     * |[1]     |AESEIF    |AES Error Flag
+     * |        |          |This register includes operating and setting error
+     * |        |          |The detail flag is shown in CRPT_AES_STS register.
+     * |        |          |0 = No AES error.
+     * |        |          |1 = AES error interrupt.
+     * |        |          |Note: This bit is cleared by writing 1, and it has no effect by writing 0.
+     * @var CRPT_T::AES_FDBCK
+         * Offset: 0x50-0x5C  AES Engine Output Feedback Data After Cryptographic Operation
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |FDBCK     |AES Feedback Information
+     * |        |          |The feedback value is 128 bits in size.
+     * |        |          |The AES engine uses the data from CRPT_AES_FDBCKx as the data inputted to CRPT_AES_IVx for the next block in DMA cascade mode.
+     * |        |          |The AES engine outputs feedback information for IV in the next block's operation
+     * |        |          |Software can use this feedback information to implement more than four DMA channels
+     * |        |          |Software can store that feedback value temporarily
+     * |        |          |After switching back, fill the stored feedback value to CRPT_AES_IVx in the same channel operation, and then continue the operation with the original setting.
+     * @var CRPT_T::AES_CTL
+     * Offset: 0x100  AES Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |START     |AES Engine Start
+     * |        |          |0 = No effect.
+     * |        |          |1 = Start AES engine. BUSY flag will be set.
+     * |        |          |Note: This bit is always 0 when it is read back.
+     * |[1]     |STOP      |AES Engine Stop
+     * |        |          |0 = No effect.
+     * |        |          |1 = Stop AES engine.
+     * |        |          |Note: This bit is always 0 when it is read back.
+     * |[3:2]   |KEYSZ     |AES Key Size
+     * |        |          |This bit defines three different key size for AES operation.
+     * |        |          |2'b00 = 128 bits key.
+     * |        |          |2'b01 = 192 bits key.
+     * |        |          |2'b10 = 256 bits key.
+     * |        |          |2'b11 = Reserved.
+     * |        |          |If the AES accelerator is operating and the corresponding flag BUSY is 1, updating this register has no effect.
+     * |[5]     |DMALAST   |AES Last Block
+     * |        |          |In DMA mode, this bit must be set as beginning the last DMA cascade round.
+     * |        |          |In Non-DMA mode, this bit must be set when feeding in the last block of data in ECB, CBC, CTR, OFB, and CFB mode, and feeding in the (last-1) block of data at CBC-CS1, CBC-CS2, and CBC-CS3 mode.
+     * |        |          |This bit is always 0 when it is read back, and must be written again once START is triggered.
+     * |[6]     |DMACSCAD  |AES Engine DMA with Cascade Mode
+     * |        |          |0 = DMA cascade function Disabled.
+     * |        |          |1 = In DMA cascade mode, software can update DMA source address register, destination address register, and byte count register during a cascade operation, without finishing the accelerator operation.
+     * |        |          |Note: The last two blocks of AES-CBC-CS1/2/3 must be in the last cascade operation.
+     * |[7]     |DMAEN     |AES Engine DMA Enable Bit
+     * |        |          |0 = AES DMA engine Disabled.
+     * |        |          |The AES engine operates in Non-DMA mode. The data need to be written in CRPT_AES_DATIN.
+     * |        |          |1 = AES_DMA engine Enabled.
+     * |        |          |The AES engine operates in DMA mode, and data movement from/to the engine is done by DMA logic.
+     * |[15:8]  |OPMODE    |AES Engine Operation Modes
+     * |        |          |0x00 = ECB (Electronic Codebook Mode)  0x01 = CBC (Cipher Block Chaining Mode).
+     * |        |          |0x02 = CFB (Cipher Feedback Mode).
+     * |        |          |0x03 = OFB (Output Feedback Mode).
+     * |        |          |0x04 = CTR (Counter Mode).
+     * |        |          |0x10 = CBC-CS1 (CBC Ciphertext-Stealing 1 Mode).
+     * |        |          |0x11 = CBC-CS2 (CBC Ciphertext-Stealing 2 Mode).
+     * |        |          |0x12 = CBC-CS3 (CBC Ciphertext-Stealing 3 Mode).
+     * |[16]    |ENCRYPTO  |AES Encryption/Decryption
+     * |        |          |0 = AES engine executes decryption operation.
+     * |        |          |1 = AES engine executes encryption operation.
+     * |[22]    |OUTSWAP   |AES Engine Output Data Swap
+     * |        |          |0 = Keep the original order.
+     * |        |          |1 = The order that CPU reads data from the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
+     * |[23]    |INSWAP    |AES Engine Input Data Swap
+     * |        |          |0 = Keep the original order.
+     * |        |          |1 = The order that CPU feeds data to the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
+     * |[24]    |KOUTSWAP  |AES Engine Output Key, Initial Vector and Feedback Swap
+     * |        |          |0 = Keep the original order.
+     * |        |          |1 = The order that CPU reads key, initial vector and feedback from the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
+     * |[25]    |KINSWAP   |AES Engine Input Key and Initial Vector Swap
+     * |        |          |0 = Keep the original order.
+     * |        |          |1 = The order that CPU feeds key and initial vector to the accelerator will be changed from {byte3, byte2, byte1, byte0} to {byte0, byte1, byte2, byte3}.
+     * |[30:26] |KEYUNPRT  |Unprotect Key
+     * |        |          |Writing 0 to CRPT_AES_CTL[31] and "10110" to CRPT_AES_CTL[30:26] is to unprotect the AES key.
+     * |        |          |The KEYUNPRT can be read and written
+     * |        |          |When it is written as the AES engine is operating, BUSY flag is 1, there would be no effect on KEYUNPRT.
+     * |[31]    |KEYPRT    |Protect Key
+     * |        |          |Read as a flag to reflect KEYPRT.
+     * |        |          |0 = No effect.
+     * |        |          |1 = Protect the content of the AES key from reading
+     * |        |          |The return value for reading CRPT_AES_KEYx is not the content of the registers CRPT_AES_KEYx
+     * |        |          |Once it is set, it can be cleared by asserting KEYUNPRT
+     * |        |          |The key content would be cleared as well.
+     * @var CRPT_T::AES_STS
+     * Offset: 0x104  AES Engine Flag
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |BUSY      |AES Engine Busy
+     * |        |          |0 = The AES engine is idle or finished.
+     * |        |          |1 = The AES engine is under processing.
+     * |[8]     |INBUFEMPTY|AES Input Buffer Empty
+     * |        |          |0 = There are some data in input buffer waiting for the AES engine to process.
+     * |        |          |1 = AES input buffer is empty
+     * |        |          |Software needs to feed data to the AES engine
+     * |        |          |Otherwise, the AES engine will be pending to wait for input data.
+     * |[9]     |INBUFFULL |AES Input Buffer Full Flag
+     * |        |          |0 = AES input buffer is not full. Software can feed the data into the AES engine.
+     * |        |          |1 = AES input buffer is full
+     * |        |          |Software cannot feed data to the AES engine
+     * |        |          |Otherwise, the flag INBUFERR will be set to 1.
+     * |[10]    |INBUFERR  |AES Input Buffer Error Flag
+     * |        |          |0 = No error.
+     * |        |          |1 = Error happened during feeding data to the AES engine.
+     * |[12]    |CNTERR    |CRPT_AES_CNT Setting Error
+     * |        |          |0 = No error in CRPT_AES_CNT setting.
+     * |        |          |1 = CRPT_AES_CNT is 0 if DMAEN (CRPT_AES_CTL[7]) is enabled.
+     * |[16]    |OUTBUFEMPTY|AES Out Buffer Empty
+     * |        |          |0 = AES output buffer is not empty. There are some valid data kept in output buffer.
+     * |        |          |1 = AES output buffer is empty
+     * |        |          |Software cannot get data from CRPT_AES_DATOUT
+     * |        |          |Otherwise, the flag OUTBUFERR will be set to 1 since the output buffer is empty.
+     * |[17]    |OUTBUFFULL|AES Out Buffer Full Flag
+     * |        |          |0 = AES output buffer is not full.
+     * |        |          |1 = AES output buffer is full, and software needs to get data from CRPT_AES_DATOUT
+     * |        |          |Otherwise, the AES engine will be pending since the output buffer is full.
+     * |[18]    |OUTBUFERR |AES Out Buffer Error Flag
+     * |        |          |0 = No error.
+     * |        |          |1 = Error happened during getting the result from AES engine.
+     * |[20]    |BUSERR    |AES DMA Access Bus Error Flag
+     * |        |          |0 = No error.
+     * |        |          |1 = Bus error will stop DMA operation and AES engine.
+     * @var CRPT_T::AES_DATIN
+     * Offset: 0x108  AES Engine Data Input Port Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |DATIN     |AES Engine Input Port
+     * |        |          |CPU feeds data to AES engine through this port by checking CRPT_AES_STS. Feed data as INBUFFULL is 0.
+     * @var CRPT_T::AES_DATOUT
+     * Offset: 0x10C  AES Engine Data Output Port Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |DATOUT    |AES Engine Output Port
+     * |        |          |CPU gets results from the AES engine through this port by checking CRPT_AES_STS
+     * |        |          |Get data as OUTBUFEMPTY is 0.
+         * @var CRPT_T::AES_KEY
+         * Offset: 0x110-0x12C  AES Key Word Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |KEY       |CRPT_AES_KEYx
+     * |        |          |The KEY keeps the security key for AES operation.
+     * |        |          |x = 0, 1..7.
+     * |        |          |The security key for AES accelerator can be 128, 192, or 256 bits and four, six, or eight 32-bit registers are to store each security key.
+     * |        |          |{CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 128-bit security key for AES operation.
+     * |        |          |{CRPT_AES_KEY5, CRPT_AES_KEY4, CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 192-bit security key for AES operation.
+     * |        |          |{CRPT_AES_KEY7, CRPT_AES_KEY6, CRPT_AES_KEY5, CRPT_AES_KEY4, CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 256-bit security key for AES operation.
+         * @var CRPT_T::AES_IV
+         * Offset: 0x130-0x13C  AES Initial Vector Word Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |IV        |AES Initial Vectors
+     * |        |          |x = 0, 1..3.
+     * |        |          |Four initial vectors (CRPT_AES_IV0, CRPT_AES_IV1, CRPT_AES_IV2, and CRPT_AES_IV3) are for AES operating in CBC, CFB, and OFB mode
+     * |        |          |Four registers (CRPT_AES_IV0, CRPT_AES_IV1, CRPT_AES_IV2, and CRPT_AES_IV3) act as Nonce counter when the AES engine is operating in CTR mode.
+     * @var CRPT_T::AES_SADDR
+     * Offset: 0x140  AES DMA Source Address Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |SADDR     |AES DMA Source Address
+     * |        |          |The AES accelerator supports DMA function to transfer the plain text between SRAM memory space and embedded FIFO
+     * |        |          |The SADDR keeps the source address of the data buffer where the source text is stored
+     * |        |          |Based on the source address, the AES accelerator can read the plain text (encryption) / cipher text (decryption) from SRAM memory space and do AES operation
+     * |        |          |The start of source address should be located at word boundary
+     * |        |          |In other words, bit 1 and 0 of SADDR are ignored.
+     * |        |          |SADDR can be read and written
+     * |        |          |Writing to SADDR while the AES accelerator is operating doesn't affect the current AES operation
+     * |        |          |But the value of SADDR will be updated later on
+     * |        |          |Consequently, software can prepare the DMA source address for the next AES operation.
+     * |        |          |In DMA mode, software can update the next CRPT_AES_SADDR before triggering START.
+     * |        |          |The value of CRPT_AES_SADDR and CRPT_AES_DADDR can be the same.
+     * @var CRPT_T::AES_DADDR
+     * Offset: 0x144  AES DMA Destination Address Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |DADDR     |AES DMA Destination Address
+     * |        |          |The AES accelerator supports DMA function to transfer the cipher text between SRAM memory space and embedded FIFO
+     * |        |          |The DADDR keeps the destination address of the data buffer where the engine output's text will be stored
+     * |        |          |Based on the destination address, the AES accelerator can write the cipher text (encryption) / plain text (decryption) back to SRAM memory space after the AES operation is finished
+     * |        |          |The start of destination address should be located at word boundary
+     * |        |          |In other words, bit 1 and 0 of DADDR are ignored.
+     * |        |          |DADDR can be read and written
+     * |        |          |Writing to DADDR while the AES accelerator is operating doesn't affect the current AES operation
+     * |        |          |But the value of DADDR will be updated later on
+     * |        |          |Consequently, software can prepare the destination address for the next AES operation.
+     * |        |          |In DMA mode, software can update the next CRPT_AES_DADDR before triggering START.
+     * |        |          |The value of CRPT_AES_SADDR and CRPT_AES_DADDR can be the same.
+     * @var CRPT_T::AES_CNT
+     * Offset: 0x148  AES Byte Count Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |CNT       |AES Byte   Count
+     * |        |          |The   CRPT_AES_CNT keeps the byte count of source text that is for the AES engine   operating in DMA mode
+     * |        |          |The CRPT_AES_CNT is 32-bit and the maximum of byte   count is 4G bytes.
+     * |        |          |CRPT_AES_CNT   can be read and written
+     * |        |          |Writing to CRPT_AES_CNT while the AES accelerator   is operating doesn't affect the current AES operation
+     * |        |          |But the value of   CRPT_AES_CNT will be updated later on
+     * |        |          |Consequently, software can prepare   the byte count of data for the next AES operation.
+     * |        |          |According   to CBC-CS1, CBC-CS2, and CBC-CS3 standard, the count of operation data must   be more than 16 bytes
+     * |        |          |Operations that are qual to or less than one block   will output unexpected result.
+     * |        |          |In   Non-DMA ECB, CBC, CFB, OFB, and CTR mode, CRPT_AES_CNT must be set as byte   count for the last block of data before feeding in the last block of data
+     * |        |          |In   Non-DMA CBC-CS1, CBC-CS2, and CBC-CS3 mode, CRPT_AES_CNT must be set as   byte count for the last two blocks of data before feeding in the last two   blocks of data.
+     * @var CRPT_T::AHB_STS
+     * Offset: 0xF90  CRPT AHB Master Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |BUSY      |AHB Master Busy
+     * |        |          |0 = AHB Master is idle or finished.
+     * |        |          |1 = AHB Master is busy.
+     * |[3:1]   |SERVICE   |AHB Master Service
+     * |        |          |000 = Reserved.
+     * |        |          |001 = AHB master is servicing AES engine when BUSY is 1.
+     * |        |          |010 = AHB master is servicing SHA/HMAC engine when BUSY is 1.
+     * |        |          |011 = Reserved.
+     * |        |          |100 = AHB master is servicing ECC engine when BUSY is 1.
+     * |        |          |101 = AHB master is servicing RSA engine when BUSY is 1.
+     * |        |          |110 = Reserved.
+     * |        |          |111 = Reserved.
+     */
     __IO uint32_t INTEN;                 /*!< [0x0000] Crypto Interrupt Enable Control Register                         */
     __IO uint32_t INTSTS;                /*!< [0x0004] Crypto Interrupt Flag                                            */
     __I  uint32_t RESERVE0[18];

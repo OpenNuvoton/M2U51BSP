@@ -155,8 +155,8 @@ void PDMA_Callback_1(void)
     /* Show UART Rx data */
     for(i = 0; i < UART_TEST_LENGTH; i++)
     {
-      data = inpb(((uint32_t)DestArray + i));
-      printf(" 0x%x(%c),", data, data);   
+        data = inpb(((uint32_t)DestArray + i));
+        printf(" 0x%x(%c),", data, data);
     }
     printf("\n");
 

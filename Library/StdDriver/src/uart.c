@@ -213,7 +213,7 @@ void UART_Open(UART_T* uart, uint32_t u32baudrate)
         u32UartClkSrcSel = (CLK->CLKSEL2 & CLK_CLKSEL2_UART2SEL_Msk) >> CLK_CLKSEL2_UART2SEL_Pos;
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV & CLK_CLKDIV_UART2DIV_Msk) >> CLK_CLKDIV_UART2DIV_Pos;
-    }    
+    }
 
     /* Select UART function */
     uart->FUNCSEL = UART_FUNCSEL_UART;
@@ -360,7 +360,7 @@ void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_wi
         u32UartClkSrcSel = (CLK->CLKSEL2 & CLK_CLKSEL2_UART2SEL_Msk) >> CLK_CLKSEL2_UART2SEL_Pos;
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV & CLK_CLKDIV_UART2DIV_Msk) >> CLK_CLKDIV_UART2DIV_Pos;
-    }    
+    }
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
     if (u32UartClkSrcSel == 0ul)
@@ -377,8 +377,8 @@ void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_wi
     else if (u32UartClkSrcSel == 1ul)
     {
         u32ClkTbl[u32UartClkSrcSel] = CLK_GetMIRCFreq();
-    }    
-    
+    }
+
     /* Set UART baud rate */
     if(u32baudrate != 0ul)
     {
@@ -462,7 +462,7 @@ void UART_SelectIrDAMode(UART_T* uart, uint32_t u32Buadrate, uint32_t u32Directi
         u32UartClkSrcSel = (CLK->CLKSEL2 & CLK_CLKSEL2_UART2SEL_Msk) >> CLK_CLKSEL2_UART2SEL_Pos;
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV & CLK_CLKDIV_UART2DIV_Msk) >> CLK_CLKDIV_UART2DIV_Pos;
-    }    
+    }
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
     if (u32UartClkSrcSel == 0ul)
@@ -479,7 +479,7 @@ void UART_SelectIrDAMode(UART_T* uart, uint32_t u32Buadrate, uint32_t u32Directi
     else if (u32UartClkSrcSel == 1ul)
     {
         u32ClkTbl[u32UartClkSrcSel] = CLK_GetMIRCFreq();
-    }    
+    }
 
     /* Set UART IrDA baud rate in mode 0 */
     if(u32Buadrate != 0ul)

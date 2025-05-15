@@ -40,7 +40,7 @@ uint32_t PWM_ConfigCaptureChannel(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u
     uint16_t u16Prescale = 1, u16CNR = 0xFFFF;
 
     u32Src = 1;
-    
+
     if(u32Src == 0)
     {
         //clock source is from PLL clock
@@ -601,7 +601,7 @@ void PWM_ClearCaptureIntFlag(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32Edg
 uint32_t PWM_GetCaptureIntFlag(PWM_T *pwm, uint32_t u32ChannelNum)
 {
     uint32_t u32CapFFlag, u32CapRFlag ;
-    
+
     u32CapFFlag = (((pwm)->CAPIF & (PWM_CAPIF_CFLIF0_Msk << u32ChannelNum)) ? 1UL : 0UL) ;
     u32CapRFlag = (((pwm)->CAPIF & (PWM_CAPIF_CRLIF0_Msk << u32ChannelNum)) ? 1UL : 0UL) ;
     return ((u32CapFFlag << 1UL) | u32CapRFlag);
@@ -904,7 +904,7 @@ void PWM_DisableLoadMode(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32LoadMod
 void PWM_SetClockSource(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32ClkSrcSel)
 {
     (pwm)->CLKSRC = (pwm)->CLKSRC & (~(PWM_CLKSRC_ECLKSRC0_Msk << ((u32ChannelNum >> 1) << 3)) | \
-                    (u32ClkSrcSel << ((u32ChannelNum >> 1) << 3)));
+                                     (u32ClkSrcSel << ((u32ChannelNum >> 1) << 3)));
 }
 
 /**
@@ -974,7 +974,7 @@ void PWM_EnableBrakePinInverse(PWM_T *pwm, uint32_t u32BrakePinNum)
 void PWM_DisableBrakePinInverse(PWM_T *pwm, uint32_t u32BrakePinNum)
 {
 //    (pwm)->BNF &= ~(PWM_BNF_BRK0PINV_Msk << (u32BrakePinNum * PWM_BNF_BRK1NFEN_Pos));
-    (pwm)->BNF &= ~(PWM_BNF_BRK0PINV_Msk << (u32BrakePinNum * PWM_BNF_BRK1NFEN_Pos));	
+    (pwm)->BNF &= ~(PWM_BNF_BRK0PINV_Msk << (u32BrakePinNum * PWM_BNF_BRK1NFEN_Pos));
 }
 
 /**
@@ -1041,7 +1041,7 @@ void PWM_SetLeadingEdgeBlanking(PWM_T *pwm, uint32_t u32TrigSrcSel, uint32_t u32
 uint32_t PWM_GetWrapAroundFlag(PWM_T *pwm, uint32_t u32ChannelNum)
 {
 //    return (((pwm)->STATUS & (PWM_STATUS_CNTMAXF0_Msk << u32ChannelNum)) ? 1 : 0);
-    return (((pwm)->STATUS & (PWM_STATUS_CNTMAX0_Msk << u32ChannelNum)) ? 1 : 0);	
+    return (((pwm)->STATUS & (PWM_STATUS_CNTMAX0_Msk << u32ChannelNum)) ? 1 : 0);
 }
 
 /**
@@ -1057,7 +1057,7 @@ void PWM_ClearWrapAroundFlag(PWM_T *pwm, uint32_t u32ChannelNum)
 {
 //    (pwm)->STATUS = (PWM_STATUS_CNTMAXF0_Msk << u32ChannelNum);
     (pwm)->STATUS = (PWM_STATUS_CNTMAX0_Msk << u32ChannelNum);
-	
+
 }
 
 
@@ -1083,7 +1083,7 @@ void PWM_EnableAcc(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32IntFlagCnt, u
 
     (pwm)->IFA[(u32ChannelNum>>1)<<1] &= ~(PWM_IFA0_IFAEN_Msk | PWM_IFA0_IFACNT_Msk | PWM_IFA0_IFASEL_Msk);
     (pwm)->IFA[(u32ChannelNum>>1)<<1] |= (PWM_IFA0_IFAEN_Msk | u32IntFlagCnt | (u32IntAccSrc << PWM_IFA0_IFASEL_Pos));
-    
+
 }
 
 /**
@@ -1127,7 +1127,7 @@ void PWM_EnableAccInt(PWM_T *pwm, uint32_t u32ChannelNum)
  */
 void PWM_DisableAccInt(PWM_T *pwm, uint32_t u32ChannelNum)
 {
- //   (pwm)->AINTEN &= ~(1UL << (u32ChannelNum));
+//   (pwm)->AINTEN &= ~(1UL << (u32ChannelNum));
     (pwm)->AINTEN &= ~(1UL << ((u32ChannelNum>>1)<<1));
 }
 

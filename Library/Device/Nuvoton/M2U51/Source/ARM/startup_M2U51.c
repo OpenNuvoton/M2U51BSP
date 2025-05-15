@@ -93,8 +93,8 @@ void CRC0_IRQHandler(void)          __attribute__((weak, alias("Default_Handler"
   Exception / Interrupt Vector table
  *----------------------------------------------------------------------------*/
 #if defined ( __GNUC__ )
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
 #endif
 
 
@@ -185,7 +185,7 @@ const VECTOR_TABLE_Type __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE =
 #endif
 
 #if defined ( __GNUC__ )
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 __WEAK void Reset_Handler_PreInit(void)
@@ -220,8 +220,8 @@ __NO_RETURN void Reset_Handler(void)
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-noreturn"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 #endif
 
 /*---------------------------------------------------------------------------
@@ -248,5 +248,5 @@ void Default_Handler(void)
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
+#pragma clang diagnostic pop
 #endif

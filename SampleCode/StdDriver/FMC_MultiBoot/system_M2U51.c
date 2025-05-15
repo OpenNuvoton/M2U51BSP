@@ -33,7 +33,7 @@ const uint32_t gau32ClkSrcTbl[8] = {__MIRC, __HIRC, __LIRC, __LXT, 0UL, 0UL, 0UL
  */
 void SystemCoreClockUpdate(void)
 {
-  
+
 }
 
 
@@ -85,9 +85,9 @@ void AssertError(uint8_t *file, uint32_t line)
  */
 #if 1
 #if defined( __ICCARM__ )
-    __WEAK
+__WEAK
 #else
-    __attribute__((weak))
+__attribute__((weak))
 #endif
 void Uart0DefaultMPF(void)
 {

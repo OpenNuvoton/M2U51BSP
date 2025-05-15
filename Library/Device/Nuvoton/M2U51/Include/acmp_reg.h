@@ -10,7 +10,7 @@
 #define __ACMP_REG_H__
 
 #if defined ( __CC_ARM   )
-    #pragma anon_unions
+#pragma anon_unions
 #endif
 
 /**
@@ -25,189 +25,189 @@
 
 typedef struct
 {
-/**
- * @var ACMP_T::CTL[2]
- * Offset: 0x00/0x04  Analog Comparator Control Register 0
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |ACMPEN    |ACMP Enable Bit
- * |        |          |0 = ACMP0 Disabled.
- * |        |          |1 = ACMP0 Enabled.
- * |[1]     |ACMPIE    |ACMP Interrupt Enable Bit
- * |        |          |0 = ACMP0 interrupt Disabled.
- * |        |          |1 = ACMP0 interrupt Enabled.
- * |        |          |Note: If WKEN (ACMP_CTL0[16]) is set to 1, the wake-up interrupt function will be enabled as well.
- * |[3]     |ACMPOINV  |ACMP Output Inverse
- * |        |          |0 = ACMP0 output inverse Disabled.
- * |        |          |1 = ACMP0 output inverse Enabled.
- * |[6:4]   |NEGSEL    |ACMP Negative Input Selection
- * |        |          |000 = ACMP0_N pin.
- * |        |          |001 = Internal comparator reference voltage (CRV0).
- * |        |          |010 = Band-gap voltage.
- * |        |          |Note: NEGSEL must select 0x1 in calibration mode.
- * |[10:8]  |POSSEL    |ACMP Positive Input Selection
- * |        |          |000 = ACMP0_P0 pin.
- * |        |          |001 = ACMP0_P1 pin.
- * |        |          |010 = ACMP0_P2 pin.
- * |        |          |011 = ACMP0_P3 pin.
- * |[12]    |OUTSEL    |ACMP Output Select
- * |        |          |0 = ACMP0 output to ACMP0_O pin is unfiltered ACMP output.
- * |        |          |1 = ACMP0 output to ACMP0_O pin is from filter output.
- * |[15:13] |FILTSEL   |ACMP Output Filter Count Selection
- * |        |          |000 = Filter function is Disabled.
- * |        |          |001 = ACMP0 output is sampled 1 consecutive PCLK.
- * |        |          |010 = ACMP0 output is sampled 2 consecutive PCLKs.
- * |        |          |011 = ACMP0 output is sampled 4 consecutive PCLKs.
- * |        |          |100 = ACMP0 output is sampled 8 consecutive PCLKs.
- * |        |          |101 = ACMP0 output is sampled 16 consecutive PCLKs.
- * |        |          |110 = ACMP0 output is sampled 32 consecutive PCLKs.
- * |        |          |111 = ACMP0 output is sampled 64 consecutive PCLKs.
- * |[16]    |WKEN      |Power-down Wake-up Enable Bit
- * |        |          |0 = Wake-up function Disabled.
- * |        |          |1 = Wake-up function Enabled.
- * |[17]    |WLATEN    |Window Latch Mode Enable Bit
- * |        |          |0 = Window Latch Mode Disabled.
- * |        |          |1 = Window Latch Mode Enabled.
- * |[18]    |WCMPSEL   |Window Compare Mode Selection
- * |        |          |0 = Window Compare Mode Disabled.
- * |        |          |1 = Window Compare Mode Selected.
- * |[21:20] |FCLKDIV   |ACMP Output Filter Clock Divider
- * |        |          |00 = ACMP0 output filter clock = PCLK.
- * |        |          |01 = ACMP0 output filter clock = PCLK/2.
- * |        |          |10 = ACMP0 output filter clock = PCLK/4.
- * |        |          |11 = Reserved.
- * |        |          |Note: Use FCLKDIV under the condition of FILTSEL = 3'h7, then set FCLKDIV to get the effect of filtering 128,256 consecutive PCLKs.
- * |[26:24] |HYSSEL    |Hysteresis Mode Selection
- * |        |          |000 = Hysteresis is 0mV.
- * |        |          |001 = Hysteresis is 10mV.
- * |        |          |010 = Hysteresis is 20mV.
- * |        |          |011 = Hysteresis is 30mV.
- * |        |          |Others = Reserved.
- * |[29:28] |MODESEL   |ACMP Operating Mode Selection
- * |        |          |The bit affects analog characteristics such as operating current, input offset voltage, setup time, and propagation delay.
- * |        |          |00 = ACMP0 operating mode0.
- * |        |          |01 = ACMP0 operating mode1.
- * |        |          |10 = ACMP0 operating mode2.
- * |        |          |11 = ACMP0 operating mode3.
- * |        |          |Note: Please refer to Analog Comparator Controller (ACMP) of Analog Characteristics in the Datasheet.
- * |[31:30] |INTPOL    |Interrupt Condition Polarity Selection
- * |        |          |ACMPIF0 will be set to 1 when ACMP output edge condition is detected.
- * |        |          |00 = Rising edge or falling edge.
- * |        |          |01 = Rising edge.
- * |        |          |10 = Falling edge.
- * |        |          |11 = Reserved.
- * @var ACMP_T::STATUS
- * Offset: 0x08  Analog Comparator Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |ACMPIF0   |ACMP Interrupt Flag 0
- * |        |          |This bit is set by hardware when the edge condition defined by INTPOL (ACMP_CTL0[31:30]) is detected on ACMP0 output
- * |        |          |This will generate an interrupt if ACMPIE (ACMP_CTL0[1]) is set to 1.
- * |        |          |Note: Write 1 to clear this bit to 0.
- * |[1]     |ACMPIF1   |ACMP Interrupt Flag 1
- * |        |          |This bit is set by hardware when the edge condition defined by INTPOL (ACMP_CTL1[31:30]) is detected on ACMP1 output
- * |        |          |This will cause an interrupt if ACMPIE (ACMP_CTL1[1]) is set to 1.
- * |        |          |Note: Write 1 to clear this bit to 0.
- * |[4]     |ACMPO0    |ACMP Output 0
- * |        |          |Synchronized to the PCLK to allow reading by software
- * |        |          |Cleared when the ACMP0 is disabled, i.e
- * |        |          |ACMPEN (ACMP_CTL0[0]) is cleared to 0.
- * |[5]     |ACMPO1    |ACMP Output 1
- * |        |          |Synchronized to the PCLK to allow reading by software
- * |        |          |Cleared when the ACMP1 is disabled, i.e
- * |        |          |ACMPEN (ACMP_CTL1[0]) is cleared to 0.
- * |[8]     |WKIF0     |ACMP Power-down Wake-up Interrupt Flag 0
- * |        |          |This bit will be set to 1 when ACMP0 wake-up interrupt event occurs.
- * |        |          |0 = No power-down wake-up occurred.
- * |        |          |1 = Power-down wake-up occurred.
- * |        |          |Note: Write 1 to clear this bit to 0.
- * |[9]     |WKIF1     |ACMP Power-down Wake-up Interrupt Flag 1
- * |        |          |This bit will be set to 1 when ACMP1 wake-up interrupt event occurs.
- * |        |          |0 = No power-down wake-up occurred.
- * |        |          |1 = Power-down wake-up occurred.
- * |        |          |Note: Write 1 to clear this bit to 0.
- * |[12]    |ACMPS0    |ACMP Status 0
- * |        |          |Synchronized to the PCLK to allow reading by software
- * |        |          |Cleared when the ACMP0 is disabled, i.e
- * |        |          |ACMPEN (ACMP_CTL0[0]) is cleared to 0.
- * |        |          |Note: ACMP0 output be as ADC auto-operation mode trigger source.
- * |[13]    |ACMPS1    |ACMP Status 1
- * |        |          |Synchronized to the PCLK to allow reading by software
- * |        |          |Cleared when the ACMP1 is disabled, i.e
- * |        |          |ACMPEN (ACMP_CTL1[0]) is cleared to 0.
- * |        |          |Note: ACMP1 output be as ADC auto-operation mode trigger source.
- * |[16]    |ACMPWO    |ACMP Window Output
- * |        |          |This bit shows the output status of window compare mode
- * |        |          |0 = The positive input voltage is outside the window.
- * |        |          |1 = The positive input voltage is in the window.
- * @var ACMP_T::VREF
- * Offset: 0x0C  Analog Comparator Reference Voltage Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[5:0]   |CRV0SEL   |ACMP Reference Voltage Setting 0
- * |        |          |Set CRV output voltage for ACMP0 negtive input.
- * |        |          |CRV0 = CRV0 source voltage * (CRV0SEL)/ 63.
- * |[6]     |CRV0SSEL  |CRV0 Source Voltage Selection
- * |        |          |0 = AVDD is selected as CRV0 source voltage.
- * |        |          |1 = The reference voltage defined by VREFSEL (SYS_VREFCTL[3:1]) register is selected as CRV0 source voltage.
- * |[8]     |CRV0EN    |CRV0 Enable Bit
- * |        |          |0 = CRV0 Disabled.
- * |        |          |1 = CRV0 Enabled.
- * |[21:16] |CRV1SEL   |ACMP Reference Voltage Setting 1
- * |        |          |Set CRV output voltage for ACMP1 negtive input.
- * |        |          |CRV1 = CRV1 source voltage * (CRV1SEL)/ 63.
- * |[22]    |CRV1SSEL  |CRV1 Source Voltage Selection
- * |        |          |0 = AVDD is selected as CRV1 source voltage.
- * |        |          |1 = The reference voltage defined by VREFSEL (SYS_VREFCTL[3:1]) register is selected as CRV1 source voltage.
- * |[24]    |CRV1EN    |CRV1 Enable Bit
- * |        |          |0 = CRV1 Disabled.
- * |        |          |1 = CRV1 Enabled.
- * @var ACMP_T::CALCTL
- * Offset: 0x10  Analog Comparator Calibration Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |CALTRG0   |ACMP Calibration Trigger 0
- * |        |          |Set ACMP0 calibration trigger.
- * |        |          |0 = Calibration is stopped.
- * |        |          |1 = Calibration is triggered.
- * |        |          |Note 1: Before this bit is enabled, ACMPEN(ACMP_CTL0[0]) should be set and the internal high speed RC oscillator (HIRC) should be enabled in advance.
- * |        |          |Note 2: Hardware will auto clear this bit when the next calibration is triggered by software.
- * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger has to wait at least 300us after the previous calibration is done.
- * |        |          |Note 4: NEGSEL (ACMP_CTL0[6:4]) must select 0x1
- * |        |          |CRV0EN (ACMP_VREF[8]) is enable
- * |        |          |CRV0SSEL (ACMP_VREF[6]) must select AVDD as source voltage
- * |        |          |CRV0SEL (ACMP_VREF[5:0]) can be any voltage setting.
- * |[1]     |CALTRG1   |ACMP Calibration Trigger 1
- * |        |          |Set ACMP1 calibration trigger.
- * |        |          |0 = Calibration is stopped.
- * |        |          |1 = Calibration is triggered.
- * |        |          |Note 1: Before this bit is enabled, ACMPEN(ACMP_CTL1[0]) should be set and the internal high speed RC oscillator (HIRC) should be enabled in advance.
- * |        |          |Note 2: Hardware will auto clear this bit when the next calibration is triggered by software.
- * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger has to wait at least 300us after the previous calibration is done.
- * |        |          |Note 4: NEGSEL (ACMP_CTL1[6:4]) must select 0x1
- * |        |          |CRV1EN (ACMP_VREF[24]) is enable
- * |        |          |CRV1SSEL (ACMP_VREF[22]) must select AVDD as source voltage
- * |        |          |CRV1SEL (ACMP_VREF[21:16]) can be any voltage setting.
- * @var ACMP_T::CALSR
- * Offset: 0x14  Analog Comparator Calibration Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |DONE0     |ACMP0 Calibration Done Status
- * |        |          |This bit will be set when ACMP0 calibration is done.
- * |        |          |0 = Calibrating.
- * |        |          |1 = Calibration done.
- * |        |          |Note: This bit is is cleared by writing 1 into it.
- * |[4]     |DONE1     |ACMP1 Calibration Done Status
- * |        |          |This bit will be set when ACMP1 calibration is done.
- * |        |          |0 = Calibrating.
- * |        |          |1 = Calibration done.
- * |        |          |Note: This bit is is cleared by writing 1 into it.
- */
+    /**
+     * @var ACMP_T::CTL[2]
+     * Offset: 0x00/0x04  Analog Comparator Control Register 0
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |ACMPEN    |ACMP Enable Bit
+     * |        |          |0 = ACMP0 Disabled.
+     * |        |          |1 = ACMP0 Enabled.
+     * |[1]     |ACMPIE    |ACMP Interrupt Enable Bit
+     * |        |          |0 = ACMP0 interrupt Disabled.
+     * |        |          |1 = ACMP0 interrupt Enabled.
+     * |        |          |Note: If WKEN (ACMP_CTL0[16]) is set to 1, the wake-up interrupt function will be enabled as well.
+     * |[3]     |ACMPOINV  |ACMP Output Inverse
+     * |        |          |0 = ACMP0 output inverse Disabled.
+     * |        |          |1 = ACMP0 output inverse Enabled.
+     * |[6:4]   |NEGSEL    |ACMP Negative Input Selection
+     * |        |          |000 = ACMP0_N pin.
+     * |        |          |001 = Internal comparator reference voltage (CRV0).
+     * |        |          |010 = Band-gap voltage.
+     * |        |          |Note: NEGSEL must select 0x1 in calibration mode.
+     * |[10:8]  |POSSEL    |ACMP Positive Input Selection
+     * |        |          |000 = ACMP0_P0 pin.
+     * |        |          |001 = ACMP0_P1 pin.
+     * |        |          |010 = ACMP0_P2 pin.
+     * |        |          |011 = ACMP0_P3 pin.
+     * |[12]    |OUTSEL    |ACMP Output Select
+     * |        |          |0 = ACMP0 output to ACMP0_O pin is unfiltered ACMP output.
+     * |        |          |1 = ACMP0 output to ACMP0_O pin is from filter output.
+     * |[15:13] |FILTSEL   |ACMP Output Filter Count Selection
+     * |        |          |000 = Filter function is Disabled.
+     * |        |          |001 = ACMP0 output is sampled 1 consecutive PCLK.
+     * |        |          |010 = ACMP0 output is sampled 2 consecutive PCLKs.
+     * |        |          |011 = ACMP0 output is sampled 4 consecutive PCLKs.
+     * |        |          |100 = ACMP0 output is sampled 8 consecutive PCLKs.
+     * |        |          |101 = ACMP0 output is sampled 16 consecutive PCLKs.
+     * |        |          |110 = ACMP0 output is sampled 32 consecutive PCLKs.
+     * |        |          |111 = ACMP0 output is sampled 64 consecutive PCLKs.
+     * |[16]    |WKEN      |Power-down Wake-up Enable Bit
+     * |        |          |0 = Wake-up function Disabled.
+     * |        |          |1 = Wake-up function Enabled.
+     * |[17]    |WLATEN    |Window Latch Mode Enable Bit
+     * |        |          |0 = Window Latch Mode Disabled.
+     * |        |          |1 = Window Latch Mode Enabled.
+     * |[18]    |WCMPSEL   |Window Compare Mode Selection
+     * |        |          |0 = Window Compare Mode Disabled.
+     * |        |          |1 = Window Compare Mode Selected.
+     * |[21:20] |FCLKDIV   |ACMP Output Filter Clock Divider
+     * |        |          |00 = ACMP0 output filter clock = PCLK.
+     * |        |          |01 = ACMP0 output filter clock = PCLK/2.
+     * |        |          |10 = ACMP0 output filter clock = PCLK/4.
+     * |        |          |11 = Reserved.
+     * |        |          |Note: Use FCLKDIV under the condition of FILTSEL = 3'h7, then set FCLKDIV to get the effect of filtering 128,256 consecutive PCLKs.
+     * |[26:24] |HYSSEL    |Hysteresis Mode Selection
+     * |        |          |000 = Hysteresis is 0mV.
+     * |        |          |001 = Hysteresis is 10mV.
+     * |        |          |010 = Hysteresis is 20mV.
+     * |        |          |011 = Hysteresis is 30mV.
+     * |        |          |Others = Reserved.
+     * |[29:28] |MODESEL   |ACMP Operating Mode Selection
+     * |        |          |The bit affects analog characteristics such as operating current, input offset voltage, setup time, and propagation delay.
+     * |        |          |00 = ACMP0 operating mode0.
+     * |        |          |01 = ACMP0 operating mode1.
+     * |        |          |10 = ACMP0 operating mode2.
+     * |        |          |11 = ACMP0 operating mode3.
+     * |        |          |Note: Please refer to Analog Comparator Controller (ACMP) of Analog Characteristics in the Datasheet.
+     * |[31:30] |INTPOL    |Interrupt Condition Polarity Selection
+     * |        |          |ACMPIF0 will be set to 1 when ACMP output edge condition is detected.
+     * |        |          |00 = Rising edge or falling edge.
+     * |        |          |01 = Rising edge.
+     * |        |          |10 = Falling edge.
+     * |        |          |11 = Reserved.
+     * @var ACMP_T::STATUS
+     * Offset: 0x08  Analog Comparator Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |ACMPIF0   |ACMP Interrupt Flag 0
+     * |        |          |This bit is set by hardware when the edge condition defined by INTPOL (ACMP_CTL0[31:30]) is detected on ACMP0 output
+     * |        |          |This will generate an interrupt if ACMPIE (ACMP_CTL0[1]) is set to 1.
+     * |        |          |Note: Write 1 to clear this bit to 0.
+     * |[1]     |ACMPIF1   |ACMP Interrupt Flag 1
+     * |        |          |This bit is set by hardware when the edge condition defined by INTPOL (ACMP_CTL1[31:30]) is detected on ACMP1 output
+     * |        |          |This will cause an interrupt if ACMPIE (ACMP_CTL1[1]) is set to 1.
+     * |        |          |Note: Write 1 to clear this bit to 0.
+     * |[4]     |ACMPO0    |ACMP Output 0
+     * |        |          |Synchronized to the PCLK to allow reading by software
+     * |        |          |Cleared when the ACMP0 is disabled, i.e
+     * |        |          |ACMPEN (ACMP_CTL0[0]) is cleared to 0.
+     * |[5]     |ACMPO1    |ACMP Output 1
+     * |        |          |Synchronized to the PCLK to allow reading by software
+     * |        |          |Cleared when the ACMP1 is disabled, i.e
+     * |        |          |ACMPEN (ACMP_CTL1[0]) is cleared to 0.
+     * |[8]     |WKIF0     |ACMP Power-down Wake-up Interrupt Flag 0
+     * |        |          |This bit will be set to 1 when ACMP0 wake-up interrupt event occurs.
+     * |        |          |0 = No power-down wake-up occurred.
+     * |        |          |1 = Power-down wake-up occurred.
+     * |        |          |Note: Write 1 to clear this bit to 0.
+     * |[9]     |WKIF1     |ACMP Power-down Wake-up Interrupt Flag 1
+     * |        |          |This bit will be set to 1 when ACMP1 wake-up interrupt event occurs.
+     * |        |          |0 = No power-down wake-up occurred.
+     * |        |          |1 = Power-down wake-up occurred.
+     * |        |          |Note: Write 1 to clear this bit to 0.
+     * |[12]    |ACMPS0    |ACMP Status 0
+     * |        |          |Synchronized to the PCLK to allow reading by software
+     * |        |          |Cleared when the ACMP0 is disabled, i.e
+     * |        |          |ACMPEN (ACMP_CTL0[0]) is cleared to 0.
+     * |        |          |Note: ACMP0 output be as ADC auto-operation mode trigger source.
+     * |[13]    |ACMPS1    |ACMP Status 1
+     * |        |          |Synchronized to the PCLK to allow reading by software
+     * |        |          |Cleared when the ACMP1 is disabled, i.e
+     * |        |          |ACMPEN (ACMP_CTL1[0]) is cleared to 0.
+     * |        |          |Note: ACMP1 output be as ADC auto-operation mode trigger source.
+     * |[16]    |ACMPWO    |ACMP Window Output
+     * |        |          |This bit shows the output status of window compare mode
+     * |        |          |0 = The positive input voltage is outside the window.
+     * |        |          |1 = The positive input voltage is in the window.
+     * @var ACMP_T::VREF
+     * Offset: 0x0C  Analog Comparator Reference Voltage Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[5:0]   |CRV0SEL   |ACMP Reference Voltage Setting 0
+     * |        |          |Set CRV output voltage for ACMP0 negtive input.
+     * |        |          |CRV0 = CRV0 source voltage * (CRV0SEL)/ 63.
+     * |[6]     |CRV0SSEL  |CRV0 Source Voltage Selection
+     * |        |          |0 = AVDD is selected as CRV0 source voltage.
+     * |        |          |1 = The reference voltage defined by VREFSEL (SYS_VREFCTL[3:1]) register is selected as CRV0 source voltage.
+     * |[8]     |CRV0EN    |CRV0 Enable Bit
+     * |        |          |0 = CRV0 Disabled.
+     * |        |          |1 = CRV0 Enabled.
+     * |[21:16] |CRV1SEL   |ACMP Reference Voltage Setting 1
+     * |        |          |Set CRV output voltage for ACMP1 negtive input.
+     * |        |          |CRV1 = CRV1 source voltage * (CRV1SEL)/ 63.
+     * |[22]    |CRV1SSEL  |CRV1 Source Voltage Selection
+     * |        |          |0 = AVDD is selected as CRV1 source voltage.
+     * |        |          |1 = The reference voltage defined by VREFSEL (SYS_VREFCTL[3:1]) register is selected as CRV1 source voltage.
+     * |[24]    |CRV1EN    |CRV1 Enable Bit
+     * |        |          |0 = CRV1 Disabled.
+     * |        |          |1 = CRV1 Enabled.
+     * @var ACMP_T::CALCTL
+     * Offset: 0x10  Analog Comparator Calibration Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |CALTRG0   |ACMP Calibration Trigger 0
+     * |        |          |Set ACMP0 calibration trigger.
+     * |        |          |0 = Calibration is stopped.
+     * |        |          |1 = Calibration is triggered.
+     * |        |          |Note 1: Before this bit is enabled, ACMPEN(ACMP_CTL0[0]) should be set and the internal high speed RC oscillator (HIRC) should be enabled in advance.
+     * |        |          |Note 2: Hardware will auto clear this bit when the next calibration is triggered by software.
+     * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger has to wait at least 300us after the previous calibration is done.
+     * |        |          |Note 4: NEGSEL (ACMP_CTL0[6:4]) must select 0x1
+     * |        |          |CRV0EN (ACMP_VREF[8]) is enable
+     * |        |          |CRV0SSEL (ACMP_VREF[6]) must select AVDD as source voltage
+     * |        |          |CRV0SEL (ACMP_VREF[5:0]) can be any voltage setting.
+     * |[1]     |CALTRG1   |ACMP Calibration Trigger 1
+     * |        |          |Set ACMP1 calibration trigger.
+     * |        |          |0 = Calibration is stopped.
+     * |        |          |1 = Calibration is triggered.
+     * |        |          |Note 1: Before this bit is enabled, ACMPEN(ACMP_CTL1[0]) should be set and the internal high speed RC oscillator (HIRC) should be enabled in advance.
+     * |        |          |Note 2: Hardware will auto clear this bit when the next calibration is triggered by software.
+     * |        |          |Note 3: If user must trigger calibration twice or more times, the second trigger has to wait at least 300us after the previous calibration is done.
+     * |        |          |Note 4: NEGSEL (ACMP_CTL1[6:4]) must select 0x1
+     * |        |          |CRV1EN (ACMP_VREF[24]) is enable
+     * |        |          |CRV1SSEL (ACMP_VREF[22]) must select AVDD as source voltage
+     * |        |          |CRV1SEL (ACMP_VREF[21:16]) can be any voltage setting.
+     * @var ACMP_T::CALSR
+     * Offset: 0x14  Analog Comparator Calibration Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |DONE0     |ACMP0 Calibration Done Status
+     * |        |          |This bit will be set when ACMP0 calibration is done.
+     * |        |          |0 = Calibrating.
+     * |        |          |1 = Calibration done.
+     * |        |          |Note: This bit is is cleared by writing 1 into it.
+     * |[4]     |DONE1     |ACMP1 Calibration Done Status
+     * |        |          |This bit will be set when ACMP1 calibration is done.
+     * |        |          |0 = Calibrating.
+     * |        |          |1 = Calibration done.
+     * |        |          |Note: This bit is is cleared by writing 1 into it.
+     */
     __IO uint32_t CTL[2];           /*!< [0x0000-0004] Analog Comparator Control Register               */
     __IO uint32_t STATUS;           /*!< [0x0008] Analog Comparator Status Register                     */
     __IO uint32_t VREF;             /*!< [0x000c] Analog Comparator Reference Voltage Control Register  */
@@ -324,7 +324,7 @@ typedef struct
 /**@}*/ /* end of REGISTER group */
 
 #if defined ( __CC_ARM   )
-    #pragma no_anon_unions
+#pragma no_anon_unions
 #endif
 
 #endif /* __ACMP_REG_H__ */

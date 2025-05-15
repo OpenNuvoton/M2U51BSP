@@ -190,7 +190,7 @@ int main(void)
            sReadRTC.u32Year, sReadRTC.u32Month, sReadRTC.u32Day, sReadRTC.u32Hour, sReadRTC.u32Minute, sReadRTC.u32Second);
 
     printf("\n RTC Alarm Wake-up Test End !!\n");
-    
+
     while(1)
     {
         ;

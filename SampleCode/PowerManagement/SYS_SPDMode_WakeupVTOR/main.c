@@ -45,7 +45,7 @@ void PowerDownFunction(void)
         GPIO_SetMode(PA, BIT10, GPIO_MODE_OUTPUT);  /* Set PA.10 as output mode */
         SYS_UnlockReg();                            /* Unlock protected registers */
         CLK->IOPDCTL = 1;                           /* Release I/O hold status */
-        RTC_Init();                        
+        RTC_Init();
     }
 }
 

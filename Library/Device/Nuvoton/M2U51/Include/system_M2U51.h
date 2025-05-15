@@ -11,7 +11,7 @@
 #define __SYSTEM_M2U51_H__
 
 #ifdef __cplusplus
-    extern "C" {
+extern "C" {
 #endif
 
 #include <stdint.h>
@@ -20,7 +20,7 @@
 /* Macro Definition                                                             */
 /*------------------------------------------------------------------------------*/
 #ifndef DEBUG_PORT
-    #define DEBUG_PORT  UART0       /*!< Select Debug Port which is used for retarget.c to output debug message to UART */
+#define DEBUG_PORT  UART0       /*!< Select Debug Port which is used for retarget.c to output debug message to UART */
 #endif
 
 /*------------------------------------------------------------------------------*/

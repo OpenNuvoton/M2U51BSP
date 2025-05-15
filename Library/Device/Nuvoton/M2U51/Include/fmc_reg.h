@@ -88,7 +88,7 @@ typedef struct
      * |[31:0]  |ISPADDR   |ISP Address
      * |        |          |The M2U51 series is equipped with embedded Flash. ISPADDR[1:0] must be kept 00 for ISP 32-bit operation. I
      * |        |          |For CRC32 Checksum Calculation command, this field is the Flash starting address for checksum calculation, 0.5 Kbytes alignment is necessary for CRC32 checksum calculation.
-     * |        |          |For Flash32-bit Program, ISP address needs word alignment (4-byte). 
+     * |        |          |For Flash32-bit Program, ISP address needs word alignment (4-byte).
      * @var FMC_T::ISPDAT
      * Offset: 0x08  ISP Data Register
      * ---------------------------------------------------------------------------------------------------
@@ -533,7 +533,7 @@ typedef struct
     __IO uint32_t ISPTRG;                /*!< [0x0010] ISP Trigger Control Register                                     */
     __I  uint32_t DFBA;                  /*!< [0x0014] Data Flash Base Address                                          */
     __I  uint32_t RESERVE1[10];
-    __IO uint32_t ISPSTS;                /*!< [0x0040] ISP Status Register                                              */ 
+    __IO uint32_t ISPSTS;                /*!< [0x0040] ISP Status Register                                              */
     __I  uint32_t RESERVE2[2];
     __IO uint32_t CYCCTL;                /*!< [0x004c] Flash Access Cycle Control Register                              */
     __I  uint32_t RESERVE3[12];
@@ -614,7 +614,7 @@ typedef struct
 
 #define FMC_ISPSTS_VECMAP_Pos            (9)                                               /*!< FMC_T::ISPSTS: VECMAP Position         */
 #define FMC_ISPSTS_VECMAP_Msk            (0x7ffful << FMC_ISPSTS_VECMAP_Pos)               /*!< FMC_T::ISPSTS: VECMAP Mask             */
- 
+
 #define FMC_ISPSTS_INTFLAG_Pos           (24)                                              /*!< FMC_T::ISPSTS: INTFLAG Position        */
 #define FMC_ISPSTS_INTFLAG_Msk           (0x1ul << FMC_ISPSTS_INTFLAG_Pos)                 /*!< FMC_T::ISPSTS: INTFLAG Mask            */
 

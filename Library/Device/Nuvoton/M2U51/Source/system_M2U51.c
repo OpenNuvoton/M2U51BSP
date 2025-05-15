@@ -135,9 +135,9 @@ void AssertError(uint8_t *file, uint32_t line)
  */
 #if 1
 #if defined( __ICCARM__ )
-    __WEAK
+__WEAK
 #else
-    __attribute__((weak))
+__attribute__((weak))
 #endif
 void Uart0DefaultMPF(void)
 {

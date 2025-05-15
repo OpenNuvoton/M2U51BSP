@@ -78,7 +78,7 @@ void SYS_Init(void)
     /* Enable TIMER0 module clock */
     CLK_EnableModuleClock(TMR0_MODULE);
 
-	/* Enable GPIO module clock */
+    /* Enable GPIO module clock */
     CLK_EnableModuleClock(GPD_MODULE);
 
     /*----------------------------------------------------------------------*/
@@ -142,8 +142,8 @@ int main(void)
 
     /* Enable brake function when input Brake0 pin is in High state, and braked state is High */
     PWM_EnableFaultBrake(PWM0, PWM_CH_0_MASK, 1, PWM_FB_EDGE_BKP0);
-    
-    /* Enable brake interrupt */    
+
+    /* Enable brake interrupt */
     PWM_EnableFaultBrakeInt(PWM0, 0);
 
     /* Enable brake noise filter : brake pin 0, filter count = 7, filter clock = HCLK/128 */

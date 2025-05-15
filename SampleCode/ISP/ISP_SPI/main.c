@@ -127,7 +127,7 @@ _ISP:
 _APROM:
     FMC_SetVectorAddr(FMC_APROM_BASE);
     FMC_SET_APROM_BOOT();
-    NVIC_SystemReset(); 
+    NVIC_SystemReset();
 
     /* Trap the CPU */
     while (1);

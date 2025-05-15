@@ -116,7 +116,7 @@ void CalPeriodTime(BPWM_T *BPWM, uint32_t u32Ch)
     printf("\nCapture Result: Rising Time = %d, Falling Time = %d \nHigh Period = %d, Low Period = %d, Total Period = %d.\n\n",
            u16RisingTime, u16FallingTime, u16HighPeriod, u16LowPeriod, u16TotalPeriod);
 
-	if ((u16HighPeriod < 9999) || (u16HighPeriod > 10001) || (u16LowPeriod < 9999) || (u16LowPeriod > 10001) || (u16TotalPeriod < 19999) || (u16TotalPeriod > 20001))
+    if ((u16HighPeriod < 9999) || (u16HighPeriod > 10001) || (u16LowPeriod < 9999) || (u16LowPeriod > 10001) || (u16TotalPeriod < 19999) || (u16TotalPeriod > 20001))
         printf("Capture Test Fail!!\n");
     else
         printf("Capture Test Pass!!\n");

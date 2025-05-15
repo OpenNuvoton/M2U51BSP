@@ -37,10 +37,10 @@ void SYS_Init(void)
 
     /* Enable UART module clock */
     CLK->APBCLK0 |= CLK_APBCLK0_UART1CKEN_Msk;
-    
+
     /* Enable GPB clock */
-    CLK->AHBCLK0 |= CLK_AHBCLK0_GPBCKEN_Msk;    
-    
+    CLK->AHBCLK0 |= CLK_AHBCLK0_GPBCKEN_Msk;
+
     /* Select UART module clock source as HIRC and UART module clock divider as 1 */
     CLK->CLKSEL1 = (CLK->CLKSEL2 & (~CLK_CLKSEL2_UART1SEL_Msk)) | CLK_CLKSEL2_UART1SEL_HIRC;
     CLK->CLKDIV = (CLK->CLKDIV & (~CLK_CLKDIV_UART1DIV_Msk)) | CLK_CLKDIV_UART1(1);
@@ -117,7 +117,7 @@ _ISP:
 _APROM:
     FMC_SetVectorAddr(FMC_APROM_BASE);
     FMC_SET_APROM_BOOT();
-    NVIC_SystemReset(); 
+    NVIC_SystemReset();
 
     /* Trap the CPU */
     while (1);

@@ -339,22 +339,22 @@ void FMC_Open(void)
   *          Return 0xFFFFFFFF if read failed.
   *
   * @note     Global error code g_FMC_i32ErrCode
-  *           -1  Read time-out 
+  *           -1  Read time-out
   */
 uint32_t FMC_Read(uint32_t u32Addr)
 {
     uint32_t  tout;
 
     g_FMC_i32ErrCode = 0;
-    
+
     FMC->ISPCMD = FMC_ISPCMD_READ;
     FMC->ISPADDR = u32Addr;
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
 
     tout = FMC_TIMEOUT_READ;
-    
+
     while ((--tout > 0) && (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk)) {}
-    
+
     if (tout == 0)
     {
         g_FMC_i32ErrCode = -1;
@@ -417,11 +417,11 @@ int32_t FMC_Write(uint32_t u32Addr, uint32_t u32Data)
     FMC->ISPADDR = u32Addr;
     FMC->ISPDAT = u32Data;
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
-    
+
     tout = FMC_TIMEOUT_WRITE;
-    
+
     while ((--tout > 0) && (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk)) {}
-    
+
     if (tout == 0)
     {
         g_FMC_i32ErrCode = -2;
@@ -434,7 +434,7 @@ int32_t FMC_Write(uint32_t u32Addr, uint32_t u32Data)
         g_FMC_i32ErrCode = -1;
         return -1;
     }
-    
+
     return 0;
 }
 
@@ -453,7 +453,7 @@ int32_t FMC_Write(uint32_t u32Addr, uint32_t u32Data)
  * @detail     Program Multi-Word data into specified address of flash.
  * @note     Global error code g_FMC_i32ErrCode
  *           -1  Program failed or time-out
- *           -2  Invalid address 
+ *           -2  Invalid address
  */
 
 int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
@@ -551,16 +551,16 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
         if (err == 0)
         {
             u32OnProg = 0u;
-            
+
             tout = FMC_TIMEOUT_MUL_WRITE;
-            
+
             while ((--tout > 0) && (FMC->ISPSTS & FMC_ISPSTS_ISPBUSY_Msk)) { }
 
             if (tout == 0)
             {
                 g_FMC_i32ErrCode = -1;
                 return -1;
-            }            
+            }
         }
     }
     while (u32OnProg);
@@ -600,17 +600,17 @@ int32_t FMC_ReadConfig(uint32_t u32Config[], uint32_t u32Count)
         if(u32Count > 1UL)
         {
             u32Config[1] = FMC_Read(FMC_CONFIG_BASE+4UL);
-            
+
             if (g_FMC_i32ErrCode != 0)
                 return g_FMC_i32ErrCode;
-            
+
         }
         if(u32Count > 2UL)
         {
             u32Config[2] = FMC_Read(FMC_CONFIG_BASE+8UL);
             if (g_FMC_i32ErrCode != 0)
                 return g_FMC_i32ErrCode;
-            
+
         }
     }
     return ret;

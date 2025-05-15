@@ -41,7 +41,7 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
     uint16_t u16Prescale = 1U, u16CNR = 0xFFFFU;
 
     u32Src = 1U;
-    
+
     if(u32Src == 0U)
     {
         /* clock source is from PLL clock */
@@ -161,11 +161,11 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
     }
     /* Store return value here 'cos we're gonna change u16Prescale & u16CNR to the real value to fill into register */
     i = u32PWMClockSrc / (u32Prescale * u32CNR);
-	/* BPWM clock source is 96MHz = 192MHz/PCLK_DIV(2). BPWM prescale = 2 due to over CNR spec */ 
-	/* CNR --> Period */
-	
-	
-	
+    /* BPWM clock source is 96MHz = 192MHz/PCLK_DIV(2). BPWM prescale = 2 due to over CNR spec */
+    /* CNR --> Period */
+
+
+
     /* convert to real register value */
     /* all channels share a prescaler */
     u32Prescale -= 1U;
@@ -450,7 +450,7 @@ void BPWM_ClearCaptureIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32
 uint32_t BPWM_GetCaptureIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
     uint32_t u32CapFFlag, u32CapRFlag ;
-    
+
     u32CapFFlag = (((bpwm)->CAPIF & (BPWM_CAPIF_CAPFIF0_Msk << u32ChannelNum)) ? 1UL : 0UL) ;
     u32CapRFlag = (((bpwm)->CAPIF & (BPWM_CAPIF_CAPRIF0_Msk << u32ChannelNum)) ? 1UL : 0UL) ;
     return ((u32CapFFlag << 1UL) | u32CapRFlag);

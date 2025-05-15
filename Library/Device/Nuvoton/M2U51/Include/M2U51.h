@@ -52,7 +52,7 @@
 #define __M2U51_H__
 
 #ifdef __cplusplus
-    extern "C" {
+extern "C" {
 #endif
 
 
@@ -141,24 +141,24 @@ typedef enum IRQn
 
 /* -------  Start of section using anonymous unions and disabling warnings  ------- */
 #if   defined (__CC_ARM)
-    #pragma push
-    #pragma anon_unions
+#pragma push
+#pragma anon_unions
 #elif defined (__ICCARM__)
-    #pragma language=extended
+#pragma language=extended
 #elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wc11-extensions"
-    #pragma clang diagnostic ignored "-Wreserved-id-macro"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc11-extensions"
+#pragma clang diagnostic ignored "-Wreserved-id-macro"
 #elif defined (__GNUC__)
-    /* anonymous unions are enabled by default */
+/* anonymous unions are enabled by default */
 #elif defined (__TMS470__)
-    /* anonymous unions are enabled by default */
+/* anonymous unions are enabled by default */
 #elif defined (__TASKING__)
-    #pragma warning 586
+#pragma warning 586
 #elif defined (__CSMC__)
-    /* anonymous unions are enabled by default */
+/* anonymous unions are enabled by default */
 #else
-    #warning Not supported compiler type
+#warning Not supported compiler type
 #endif
 
 /* --------  Configuration of the Cortex-ARMv8MBL Processor and Core Peripherals  ----- */
@@ -352,21 +352,21 @@ extern void SystemInit(void);
 
 /* --------------------  End of section using anonymous unions  ------------------- */
 #if   defined (__CC_ARM)
-    #pragma pop
+#pragma pop
 #elif defined (__ICCARM__)
-    /* leave anonymous unions enabled */
+/* leave anonymous unions enabled */
 #elif (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
+#pragma clang diagnostic pop
 #elif defined (__GNUC__)
-    /* anonymous unions are enabled by default */
+/* anonymous unions are enabled by default */
 #elif defined (__TMS470__)
-    /* anonymous unions are enabled by default */
+/* anonymous unions are enabled by default */
 #elif defined (__TASKING__)
-    #pragma warning restore
+#pragma warning restore
 #elif defined (__CSMC__)
-    /* anonymous unions are enabled by default */
+/* anonymous unions are enabled by default */
 #else
-    #warning Not supported compiler type
+#warning Not supported compiler type
 #endif
 
 #ifdef __cplusplus
@@ -521,7 +521,7 @@ typedef volatile unsigned short vu16;
 #define E_SUCCESS   (0UL)
 
 #ifndef NULL
-    #define NULL    (0UL)               /* < NULL pointer */
+#define NULL    (0UL)               /* < NULL pointer */
 #endif
 
 #define TRUE        (1UL)               /* < Boolean true, define to use in API parameters or return value */

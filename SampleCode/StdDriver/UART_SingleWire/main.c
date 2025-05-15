@@ -179,15 +179,15 @@ void UART1_IRQHandler(void)
 void UART1_TEST_HANDLE()
 {
     uint8_t data;
-  
+
     if (UART_GET_INT_FLAG(UART1,UART_INTSTS_RDAIF_Msk))
     {
         /* Get all the input characters */
         while (UART_IS_RX_READY(UART1))
         {
             /* Get the character from UART Buffer */
-              data = UART_READ(UART1);
-              g_u8RecData[g_u32RecLen] = data;
+            data = UART_READ(UART1);
+            g_u8RecData[g_u32RecLen] = data;
 
             if (g_u32RecLen == BUFSIZE - 1)
             {
@@ -223,14 +223,14 @@ void UART2_IRQHandler(void)
 void UART2_TEST_HANDLE()
 {
     uint8_t data;
-    
+
     if (UART_GET_INT_FLAG(UART2,UART_INTSTS_RDAIF_Msk))
     {
         /* Get all the input characters */
         while (UART_IS_RX_READY(UART2))
         {
             /* Get the character from UART Buffer */
-           data = UART_READ(UART2);
+            data = UART_READ(UART2);
             g_u8RecData[g_u32RecLen] = data;
 
             if (g_u32RecLen == BUFSIZE - 1)

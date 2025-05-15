@@ -28,242 +28,242 @@ typedef struct
 {
 
 
-/**
- * @var RTC_T::INIT
- * Offset: 0x00  RTC Initiation Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |ACTIVE    |RTC Active Status (Read Only)
- * |        |          |0 = RTC is at reset state.
- * |        |          |1 = RTC is at normal active state.
- * |[31:1]  |INIT      |RTC Initiation (Write Only)
- * |        |          |When RTC block is powered on, RTC is at reset state
- * |        |          |User has to write a number (0x a5eb1357) to INIT to make RTC leave reset state
- * |        |          |Once the INIT is written as 0xa5eb1357, the RTC will be in un-reset state permanently.
- * |        |          |The INIT is a write-only field and read value will be always 0.
- * @var RTC_T::FREQADJ
- * Offset: 0x08  RTC Frequency Compensation Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[5:0]   |FRACTION  |Fraction Part
- * |        |          |Formula: FRACTION = (fraction part of detected value) X 64.
- * |        |          |Note: Digit in FCR must be expressed as hexadecimal number.
- * |[12:8]  |INTEGER   |Integer Part
- * |        |          |00000 = Integer part of detected value is 32752.
- * |        |          |00001 = Integer part of detected value is 32753.
- * |        |          |00010 = Integer part of detected value is 32754.
- * |        |          |00011 = Integer part of detected value is 32755.
- * |        |          |00100 = Integer part of detected value is 32756.
- * |        |          |00101 = Integer part of detected value is 32757.
- * |        |          |00110 = Integer part of detected value is 32758.
- * |        |          |00111 = Integer part of detected value is 32759.
- * |        |          |01000 = Integer part of detected value is 32760.
- * |        |          |01001 = Integer part of detected value is 32761.
- * |        |          |01010 = Integer part of detected value is 32762.
- * |        |          |01011 = Integer part of detected value is 32763.
- * |        |          |01100 = Integer part of detected value is 32764.
- * |        |          |01101 = Integer part of detected value is 32765.
- * |        |          |01110 = Integer part of detected value is 32766.
- * |        |          |01111 = Integer part of detected value is 32767.
- * |        |          |10000 = Integer part of detected value is 32768.
- * |        |          |10001 = Integer part of detected value is 32769.
- * |        |          |10010 = Integer part of detected value is 32770.
- * |        |          |10011 = Integer part of detected value is 32771.
- * |        |          |10100 = Integer part of detected value is 32772.
- * |        |          |10101 = Integer part of detected value is 32773.
- * |        |          |10110 = Integer part of detected value is 32774.
- * |        |          |10111 = Integer part of detected value is 32775.
- * |        |          |11000 = Integer part of detected value is 32776.
- * |        |          |11001 = Integer part of detected value is 32777.
- * |        |          |11010 = Integer part of detected value is 32778.
- * |        |          |11011 = Integer part of detected value is 32779.
- * |        |          |11100 = Integer part of detected value is 32780.
- * |        |          |11101 = Integer part of detected value is 32781.
- * |        |          |11110 = Integer part of detected value is 32782.
- * |        |          |11111 = Integer part of detected value is 32783.
- * |[31]    |FCRBUSY   |Frequency Compensation Register Write Operation Busy (Read Only)
- * |        |          |0 = The new register write operation is acceptable.
- * |        |          |1 = The last write operation is in progress and new register write operation prohibited.
- * |        |          |Note: This bit is only used when DCOMPEN (RTC_CLKFMT[16]) enabled.
- * @var RTC_T::TIME
- * Offset: 0x0C  RTC Time Loading Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[3:0]   |SEC       |1-Sec Time Digit (0~9)
- * |[6:4]   |TENSEC    |10-Sec Time Digit (0~5)
- * |[11:8]  |MIN       |1-Min Time Digit (0~9)
- * |[14:12] |TENMIN    |10-Min Time Digit (0~5)
- * |[19:16] |HR        |1-Hour Time Digit (0~9)
- * |[21:20] |TENHR     |10-Hour Time Digit (0~2) When RTC runs as 12-hour time scale mode, RTC_TIME[21] (the high bit of TENHR[1:0]) means AM/PM indication (If RTC_TIME[21] is 1, it indicates PM time message.)
- * @var RTC_T::CAL
- * Offset: 0x10  RTC Calendar Loading Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[3:0]   |DAY       |1-Day Calendar Digit (0~9)
- * |[5:4]   |TENDAY    |10-Day Calendar Digit (0~3)
- * |[11:8]  |MON       |1-Month Calendar Digit (0~9)
- * |[12]    |TENMON    |10-Month Calendar Digit (0~1)
- * |[19:16] |YEAR      |1-Year Calendar Digit (0~9)
- * |[23:20] |TENYEAR   |10-Year Calendar Digit (0~9)
- * @var RTC_T::CLKFMT
- * Offset: 0x14  RTC Time Scale Selection Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |24HEN     |24-hour / 12-hour Time Scale Selection
- * |        |          |Indicates that RTC_TIME and RTC_TALM are in 24-hour time scale or 12-hour time scale
- * |        |          |0 = 12-hour time scale with AM and PM indication selected.
- * |        |          |1 = 24-hour time scale selected.
- * |[16]    |DCOMPEN   |Dynamic Compensation Enable Bit
- * |        |          |0 = Dynamic Compensation Disabled.
- * |        |          |1 = Dynamic Compensation Enabled.
- * @var RTC_T::WEEKDAY
- * Offset: 0x18  RTC Day of the Week Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[2:0]   |WEEKDAY   |Day of the Week Register
- * |        |          |000 = Sunday.
- * |        |          |001 = Monday.
- * |        |          |010 = Tuesday.
- * |        |          |011 = Wednesday.
- * |        |          |100 = Thursday.
- * |        |          |101 = Friday.
- * |        |          |110 = Saturday.
- * |        |          |111 = Reserved.
- * @var RTC_T::TALM
- * Offset: 0x1C  RTC Time Alarm Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[3:0]   |SEC       |1-Sec Time Digit of Alarm Setting (0~9)
- * |[6:4]   |TENSEC    |10-Sec Time Digit of Alarm Setting (0~5)
- * |[11:8]  |MIN       |1-Min Time Digit of Alarm Setting (0~9)
- * |[14:12] |TENMIN    |10-Min Time Digit of Alarm Setting (0~5)
- * |[19:16] |HR        |1-Hour Time Digit of Alarm Setting (0~9)
- * |[21:20] |TENHR     |10-Hour Time Digit of Alarm Setting (0~2) When RTC runs as 12-hour time scale mode, RTC_TIME[21] (the high bit of TENHR[1:0]) means AM/PM indication (If RTC_TIME[21] is 1, it indicates PM time message.)
- * @var RTC_T::CALM
- * Offset: 0x20  RTC Calendar Alarm Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[3:0]   |DAY       |1-Day Calendar Digit of Alarm Setting (0~9)
- * |[5:4]   |TENDAY    |10-Day Calendar Digit of Alarm Setting (0~3)
- * |[11:8]  |MON       |1-Month Calendar Digit of Alarm Setting (0~9)
- * |[12]    |TENMON    |10-Month Calendar Digit of Alarm Setting (0~1)
- * |[19:16] |YEAR      |1-Year Calendar Digit of Alarm Setting (0~9)
- * |[23:20] |TENYEAR   |10-Year Calendar Digit of Alarm Setting (0~9)
- * @var RTC_T::LEAPYEAR
- * Offset: 0x24  RTC Leap Year Indicator Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |LEAPYEAR  |Leap Year Indication (Read Only)
- * |        |          |0 = This year is not a leap year.
- * |        |          |1 = This year is leap year.
- * @var RTC_T::INTEN
- * Offset: 0x28  RTC Interrupt Enable Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |ALMIEN    |Alarm Interrupt Enable Bit
- * |        |          |Set ALMIEN to 1 can also enable chip wake-up function when RTC alarm interrupt event is generated.
- * |        |          |0 = RTC Alarm interrupt Disabled.
- * |        |          |1 = RTC Alarm interrupt Enabled.
- * |[1]     |TICKIEN   |Time Tick Interrupt Enable Bit
- * |        |          |Set TICKIEN to 1 can also enable chip wake-up function when RTC tick interrupt event is generated.
- * |        |          |0 = RTC Time Tick interrupt Disabled.
- * |        |          |1 = RTC Time Tick interrupt Enabled.
- * @var RTC_T::INTSTS
- * Offset: 0x2C  RTC Interrupt Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |ALMIF     |RTC Alarm Interrupt Flag
- * |        |          |0 = Alarm condition is not matched.
- * |        |          |1 = Alarm condition is matched.
- * |        |          |Note: Write 1 to clear this bit.
- * |[1]     |TICKIF    |RTC Time Tick Interrupt Flag
- * |        |          |0 = Tick condition did not occur.
- * |        |          |1 = Tick condition occurred.
- * |        |          |Note: Write 1 to clear this bit.
- * @var RTC_T::TICK
- * Offset: 0x30  RTC Time Tick Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[2:0]   |TICK      |Time Tick Register
- * |        |          |These bits are used to select RTC time tick period for Periodic Time Tick Interrupt request.
- * |        |          |000 = Time tick is 1 second.
- * |        |          |001 = Time tick is 1/2 second.
- * |        |          |010 = Time tick is 1/4 second.
- * |        |          |011 = Time tick is 1/8 second.
- * |        |          |100 = Time tick is 1/16 second.
- * |        |          |101 = Time tick is 1/32 second.
- * |        |          |110 = Time tick is 1/64 second.
- * |        |          |111 = Time tick is 1/128 second.
- * @var RTC_T::TAMSK
- * Offset: 0x34  RTC Time Alarm Mask Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |MSEC      |Mask 1-Sec Time Digit of Alarm Setting (0~9)
- * |[1]     |MTENSEC   |Mask 10-Sec Time Digit of Alarm Setting (0~5)
- * |[2]     |MMIN      |Mask 1-Min Time Digit of Alarm Setting (0~9)
- * |[3]     |MTENMIN   |Mask 10-Min Time Digit of Alarm Setting (0~5)
- * |[4]     |MHR       |Mask 1-Hour Time Digit of Alarm Setting (0~9)
- * |[5]     |MTENHR    |Mask 10-Hour Time Digit of Alarm Setting (0~2)
- * @var RTC_T::CAMSK
- * Offset: 0x38  RTC Calendar Alarm Mask Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |MDAY      |Mask 1-Day Calendar Digit of Alarm Setting (0~9)
- * |[1]     |MTENDAY   |Mask 10-Day Calendar Digit of Alarm Setting (0~3)
- * |[2]     |MMON      |Mask 1-Month Calendar Digit of Alarm Setting (0~9)
- * |[3]     |MTENMON   |Mask 10-Month Calendar Digit of Alarm Setting (0~1)
- * |[4]     |MYEAR     |Mask 1-Year Calendar Digit of Alarm Setting (0~9)
- * |[5]     |MTENYEAR  |Mask 10-Year Calendar Digit of Alarm Setting (0~9)
- * @var RTC_T::LXTCTL
- * Offset: 0x100  RTC 32.768 kHz Oscillator Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[4:1]   |GAIN      |Oscillator Gain Option
- * |        |          |User can select oscillator gain according to crystal external loading and operating temperature range
- * |        |          |The larger gain value corresponding to stronger driving capability and higher power consumption.
- * |        |          |0000 = L0 mode.
- * |        |          |0001 = L1 mode.
- * |        |          |0010 = L2 mode.
- * |        |          |0011 = L3 mode. (Default)
- * |        |          |0100 = L4 mode.
- * |        |          |0101 = L5 mode.
- * |        |          |0110 = L6 mode.
- * |        |          |0111 = L7 mode.
- * |        |          |1000 = L8 mode.
- * |        |          |Others = Reserved.
- * |[7]     |RTCCKSEL  |RTC Clock Source Selection
- * |        |          |0 = Clock source from external low speed crystal oscillator (LXT)
- * |        |          |1 = Clock source from internal low speed RC oscillator (LIRC).
- * @var RTC_T::DSTCTL
- * Offset: 0x110  RTC Daylight Saving Time Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |ADDHR     |Add 1 Hour
- * |        |          |0 = No effect.
- * |        |          |1 = Indicates RTC hour digit has been added one hour for summer time change.
- * |[1]     |SUBHR     |Subtract 1 Hour
- * |        |          |0 = No effect.
- * |        |          |1 = Indicates RTC hour digit has been subtracted one hour for winter time change.
- * |[2]     |DSBAK     |Daylight Saving Back
- * |        |          |0 = Daylight Saving Change is not performed.
- * |        |          |1 = Daylight Saving Change is performed.
- */
+    /**
+     * @var RTC_T::INIT
+     * Offset: 0x00  RTC Initiation Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |ACTIVE    |RTC Active Status (Read Only)
+     * |        |          |0 = RTC is at reset state.
+     * |        |          |1 = RTC is at normal active state.
+     * |[31:1]  |INIT      |RTC Initiation (Write Only)
+     * |        |          |When RTC block is powered on, RTC is at reset state
+     * |        |          |User has to write a number (0x a5eb1357) to INIT to make RTC leave reset state
+     * |        |          |Once the INIT is written as 0xa5eb1357, the RTC will be in un-reset state permanently.
+     * |        |          |The INIT is a write-only field and read value will be always 0.
+     * @var RTC_T::FREQADJ
+     * Offset: 0x08  RTC Frequency Compensation Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[5:0]   |FRACTION  |Fraction Part
+     * |        |          |Formula: FRACTION = (fraction part of detected value) X 64.
+     * |        |          |Note: Digit in FCR must be expressed as hexadecimal number.
+     * |[12:8]  |INTEGER   |Integer Part
+     * |        |          |00000 = Integer part of detected value is 32752.
+     * |        |          |00001 = Integer part of detected value is 32753.
+     * |        |          |00010 = Integer part of detected value is 32754.
+     * |        |          |00011 = Integer part of detected value is 32755.
+     * |        |          |00100 = Integer part of detected value is 32756.
+     * |        |          |00101 = Integer part of detected value is 32757.
+     * |        |          |00110 = Integer part of detected value is 32758.
+     * |        |          |00111 = Integer part of detected value is 32759.
+     * |        |          |01000 = Integer part of detected value is 32760.
+     * |        |          |01001 = Integer part of detected value is 32761.
+     * |        |          |01010 = Integer part of detected value is 32762.
+     * |        |          |01011 = Integer part of detected value is 32763.
+     * |        |          |01100 = Integer part of detected value is 32764.
+     * |        |          |01101 = Integer part of detected value is 32765.
+     * |        |          |01110 = Integer part of detected value is 32766.
+     * |        |          |01111 = Integer part of detected value is 32767.
+     * |        |          |10000 = Integer part of detected value is 32768.
+     * |        |          |10001 = Integer part of detected value is 32769.
+     * |        |          |10010 = Integer part of detected value is 32770.
+     * |        |          |10011 = Integer part of detected value is 32771.
+     * |        |          |10100 = Integer part of detected value is 32772.
+     * |        |          |10101 = Integer part of detected value is 32773.
+     * |        |          |10110 = Integer part of detected value is 32774.
+     * |        |          |10111 = Integer part of detected value is 32775.
+     * |        |          |11000 = Integer part of detected value is 32776.
+     * |        |          |11001 = Integer part of detected value is 32777.
+     * |        |          |11010 = Integer part of detected value is 32778.
+     * |        |          |11011 = Integer part of detected value is 32779.
+     * |        |          |11100 = Integer part of detected value is 32780.
+     * |        |          |11101 = Integer part of detected value is 32781.
+     * |        |          |11110 = Integer part of detected value is 32782.
+     * |        |          |11111 = Integer part of detected value is 32783.
+     * |[31]    |FCRBUSY   |Frequency Compensation Register Write Operation Busy (Read Only)
+     * |        |          |0 = The new register write operation is acceptable.
+     * |        |          |1 = The last write operation is in progress and new register write operation prohibited.
+     * |        |          |Note: This bit is only used when DCOMPEN (RTC_CLKFMT[16]) enabled.
+     * @var RTC_T::TIME
+     * Offset: 0x0C  RTC Time Loading Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[3:0]   |SEC       |1-Sec Time Digit (0~9)
+     * |[6:4]   |TENSEC    |10-Sec Time Digit (0~5)
+     * |[11:8]  |MIN       |1-Min Time Digit (0~9)
+     * |[14:12] |TENMIN    |10-Min Time Digit (0~5)
+     * |[19:16] |HR        |1-Hour Time Digit (0~9)
+     * |[21:20] |TENHR     |10-Hour Time Digit (0~2) When RTC runs as 12-hour time scale mode, RTC_TIME[21] (the high bit of TENHR[1:0]) means AM/PM indication (If RTC_TIME[21] is 1, it indicates PM time message.)
+     * @var RTC_T::CAL
+     * Offset: 0x10  RTC Calendar Loading Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[3:0]   |DAY       |1-Day Calendar Digit (0~9)
+     * |[5:4]   |TENDAY    |10-Day Calendar Digit (0~3)
+     * |[11:8]  |MON       |1-Month Calendar Digit (0~9)
+     * |[12]    |TENMON    |10-Month Calendar Digit (0~1)
+     * |[19:16] |YEAR      |1-Year Calendar Digit (0~9)
+     * |[23:20] |TENYEAR   |10-Year Calendar Digit (0~9)
+     * @var RTC_T::CLKFMT
+     * Offset: 0x14  RTC Time Scale Selection Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |24HEN     |24-hour / 12-hour Time Scale Selection
+     * |        |          |Indicates that RTC_TIME and RTC_TALM are in 24-hour time scale or 12-hour time scale
+     * |        |          |0 = 12-hour time scale with AM and PM indication selected.
+     * |        |          |1 = 24-hour time scale selected.
+     * |[16]    |DCOMPEN   |Dynamic Compensation Enable Bit
+     * |        |          |0 = Dynamic Compensation Disabled.
+     * |        |          |1 = Dynamic Compensation Enabled.
+     * @var RTC_T::WEEKDAY
+     * Offset: 0x18  RTC Day of the Week Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[2:0]   |WEEKDAY   |Day of the Week Register
+     * |        |          |000 = Sunday.
+     * |        |          |001 = Monday.
+     * |        |          |010 = Tuesday.
+     * |        |          |011 = Wednesday.
+     * |        |          |100 = Thursday.
+     * |        |          |101 = Friday.
+     * |        |          |110 = Saturday.
+     * |        |          |111 = Reserved.
+     * @var RTC_T::TALM
+     * Offset: 0x1C  RTC Time Alarm Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[3:0]   |SEC       |1-Sec Time Digit of Alarm Setting (0~9)
+     * |[6:4]   |TENSEC    |10-Sec Time Digit of Alarm Setting (0~5)
+     * |[11:8]  |MIN       |1-Min Time Digit of Alarm Setting (0~9)
+     * |[14:12] |TENMIN    |10-Min Time Digit of Alarm Setting (0~5)
+     * |[19:16] |HR        |1-Hour Time Digit of Alarm Setting (0~9)
+     * |[21:20] |TENHR     |10-Hour Time Digit of Alarm Setting (0~2) When RTC runs as 12-hour time scale mode, RTC_TIME[21] (the high bit of TENHR[1:0]) means AM/PM indication (If RTC_TIME[21] is 1, it indicates PM time message.)
+     * @var RTC_T::CALM
+     * Offset: 0x20  RTC Calendar Alarm Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[3:0]   |DAY       |1-Day Calendar Digit of Alarm Setting (0~9)
+     * |[5:4]   |TENDAY    |10-Day Calendar Digit of Alarm Setting (0~3)
+     * |[11:8]  |MON       |1-Month Calendar Digit of Alarm Setting (0~9)
+     * |[12]    |TENMON    |10-Month Calendar Digit of Alarm Setting (0~1)
+     * |[19:16] |YEAR      |1-Year Calendar Digit of Alarm Setting (0~9)
+     * |[23:20] |TENYEAR   |10-Year Calendar Digit of Alarm Setting (0~9)
+     * @var RTC_T::LEAPYEAR
+     * Offset: 0x24  RTC Leap Year Indicator Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |LEAPYEAR  |Leap Year Indication (Read Only)
+     * |        |          |0 = This year is not a leap year.
+     * |        |          |1 = This year is leap year.
+     * @var RTC_T::INTEN
+     * Offset: 0x28  RTC Interrupt Enable Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |ALMIEN    |Alarm Interrupt Enable Bit
+     * |        |          |Set ALMIEN to 1 can also enable chip wake-up function when RTC alarm interrupt event is generated.
+     * |        |          |0 = RTC Alarm interrupt Disabled.
+     * |        |          |1 = RTC Alarm interrupt Enabled.
+     * |[1]     |TICKIEN   |Time Tick Interrupt Enable Bit
+     * |        |          |Set TICKIEN to 1 can also enable chip wake-up function when RTC tick interrupt event is generated.
+     * |        |          |0 = RTC Time Tick interrupt Disabled.
+     * |        |          |1 = RTC Time Tick interrupt Enabled.
+     * @var RTC_T::INTSTS
+     * Offset: 0x2C  RTC Interrupt Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |ALMIF     |RTC Alarm Interrupt Flag
+     * |        |          |0 = Alarm condition is not matched.
+     * |        |          |1 = Alarm condition is matched.
+     * |        |          |Note: Write 1 to clear this bit.
+     * |[1]     |TICKIF    |RTC Time Tick Interrupt Flag
+     * |        |          |0 = Tick condition did not occur.
+     * |        |          |1 = Tick condition occurred.
+     * |        |          |Note: Write 1 to clear this bit.
+     * @var RTC_T::TICK
+     * Offset: 0x30  RTC Time Tick Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[2:0]   |TICK      |Time Tick Register
+     * |        |          |These bits are used to select RTC time tick period for Periodic Time Tick Interrupt request.
+     * |        |          |000 = Time tick is 1 second.
+     * |        |          |001 = Time tick is 1/2 second.
+     * |        |          |010 = Time tick is 1/4 second.
+     * |        |          |011 = Time tick is 1/8 second.
+     * |        |          |100 = Time tick is 1/16 second.
+     * |        |          |101 = Time tick is 1/32 second.
+     * |        |          |110 = Time tick is 1/64 second.
+     * |        |          |111 = Time tick is 1/128 second.
+     * @var RTC_T::TAMSK
+     * Offset: 0x34  RTC Time Alarm Mask Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |MSEC      |Mask 1-Sec Time Digit of Alarm Setting (0~9)
+     * |[1]     |MTENSEC   |Mask 10-Sec Time Digit of Alarm Setting (0~5)
+     * |[2]     |MMIN      |Mask 1-Min Time Digit of Alarm Setting (0~9)
+     * |[3]     |MTENMIN   |Mask 10-Min Time Digit of Alarm Setting (0~5)
+     * |[4]     |MHR       |Mask 1-Hour Time Digit of Alarm Setting (0~9)
+     * |[5]     |MTENHR    |Mask 10-Hour Time Digit of Alarm Setting (0~2)
+     * @var RTC_T::CAMSK
+     * Offset: 0x38  RTC Calendar Alarm Mask Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |MDAY      |Mask 1-Day Calendar Digit of Alarm Setting (0~9)
+     * |[1]     |MTENDAY   |Mask 10-Day Calendar Digit of Alarm Setting (0~3)
+     * |[2]     |MMON      |Mask 1-Month Calendar Digit of Alarm Setting (0~9)
+     * |[3]     |MTENMON   |Mask 10-Month Calendar Digit of Alarm Setting (0~1)
+     * |[4]     |MYEAR     |Mask 1-Year Calendar Digit of Alarm Setting (0~9)
+     * |[5]     |MTENYEAR  |Mask 10-Year Calendar Digit of Alarm Setting (0~9)
+     * @var RTC_T::LXTCTL
+     * Offset: 0x100  RTC 32.768 kHz Oscillator Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[4:1]   |GAIN      |Oscillator Gain Option
+     * |        |          |User can select oscillator gain according to crystal external loading and operating temperature range
+     * |        |          |The larger gain value corresponding to stronger driving capability and higher power consumption.
+     * |        |          |0000 = L0 mode.
+     * |        |          |0001 = L1 mode.
+     * |        |          |0010 = L2 mode.
+     * |        |          |0011 = L3 mode. (Default)
+     * |        |          |0100 = L4 mode.
+     * |        |          |0101 = L5 mode.
+     * |        |          |0110 = L6 mode.
+     * |        |          |0111 = L7 mode.
+     * |        |          |1000 = L8 mode.
+     * |        |          |Others = Reserved.
+     * |[7]     |RTCCKSEL  |RTC Clock Source Selection
+     * |        |          |0 = Clock source from external low speed crystal oscillator (LXT)
+     * |        |          |1 = Clock source from internal low speed RC oscillator (LIRC).
+     * @var RTC_T::DSTCTL
+     * Offset: 0x110  RTC Daylight Saving Time Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |ADDHR     |Add 1 Hour
+     * |        |          |0 = No effect.
+     * |        |          |1 = Indicates RTC hour digit has been added one hour for summer time change.
+     * |[1]     |SUBHR     |Subtract 1 Hour
+     * |        |          |0 = No effect.
+     * |        |          |1 = Indicates RTC hour digit has been subtracted one hour for winter time change.
+     * |[2]     |DSBAK     |Daylight Saving Back
+     * |        |          |0 = Daylight Saving Change is not performed.
+     * |        |          |1 = Daylight Saving Change is performed.
+     */
     __IO uint32_t INIT;                  /*!< [0x0000] RTC Initiation Register                                          */
     __I  uint32_t RESERVE0[1];
     __IO uint32_t FREQADJ;               /*!< [0x0008] RTC Frequency Compensation Register                              */

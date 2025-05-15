@@ -39,7 +39,7 @@ void PWM0_IRQHandler(void)
 
 void SYS_Init(void)
 {
-   /* Unlock protected registers */
+    /* Unlock protected registers */
     SYS_UnlockReg();
 
     /* Enable HIRC */

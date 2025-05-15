@@ -88,7 +88,7 @@ void ADC_FunctionTest()
     /* Set ADC to Single mode, and select channel 16 (band-gap voltage) */
     ADC_Open(ADC, (uint32_t)NULL, ADC_ADCR_ADMD_SINGLE, BIT16);
 
-    /* If the internal channel for band-gap voltage is active, 
+    /* If the internal channel for band-gap voltage is active,
        the maximum sampling rate will be 100 KSPS. */
     /* Set sample module external sampling time to 144 */
     ADC_SetExtendSampleTime(ADC, 0, 144);

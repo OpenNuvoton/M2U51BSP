@@ -470,15 +470,33 @@ static uint32_t num_to_mask(uint32_t num)
     uint32_t u32mask;
     switch(num)
     {
-        case 1:     u32mask = 0x01UL;   break;
-        case 2:     u32mask = 0x03UL;   break;
-        case 3:     u32mask = 0x07UL;   break;
-        case 4:     u32mask = 0x0FUL;   break;
-        case 5:     u32mask = 0x1FUL;   break;
-        case 6:     u32mask = 0x3FUL;   break;
-        case 7:     u32mask = 0x7FUL;   break;
-        case 8:     u32mask = 0xFFUL;   break;
-        default:    u32mask = 0x00UL;   break;
+    case 1:
+        u32mask = 0x01UL;
+        break;
+    case 2:
+        u32mask = 0x03UL;
+        break;
+    case 3:
+        u32mask = 0x07UL;
+        break;
+    case 4:
+        u32mask = 0x0FUL;
+        break;
+    case 5:
+        u32mask = 0x1FUL;
+        break;
+    case 6:
+        u32mask = 0x3FUL;
+        break;
+    case 7:
+        u32mask = 0x7FUL;
+        break;
+    case 8:
+        u32mask = 0xFFUL;
+        break;
+    default:
+        u32mask = 0x00UL;
+        break;
     }
     return u32mask;
 }
@@ -1034,26 +1052,36 @@ uint32_t CLK_GetMIRCFreq(void)
     {
         switch (CLK->PWRCTL & CLK_PWRCTL_MIRCFSEL_Msk)
         {
-            case CLK_PWRCTL_MIRCFSEL_1M:
-                u32Freq = FREQ_1MHZ;    break;
-            case CLK_PWRCTL_MIRCFSEL_2M:
-                u32Freq = FREQ_2MHZ;    break;
-            case CLK_PWRCTL_MIRCFSEL_4M:
-                u32Freq = FREQ_4MHZ;    break;
-            case CLK_PWRCTL_MIRCFSEL_8M:
-                u32Freq = FREQ_8MHZ;    break;
-            case CLK_PWRCTL_MIRCFSEL_12M:
-                u32Freq = FREQ_12MHZ;   break;
-            case CLK_PWRCTL_MIRCFSEL_16M:
-                u32Freq = FREQ_16MHZ;   break;
-            case CLK_PWRCTL_MIRCFSEL_24M:
-                u32Freq = FREQ_24MHZ;   break;
-            case CLK_PWRCTL_MIRCFSEL_32M:
-                u32Freq = FREQ_32MHZ;   break;
-            case CLK_PWRCTL_MIRCFSEL_40M:
-                u32Freq = FREQ_40MHZ;   break;
-            default:
-                u32Freq = __MIRC;       break;
+        case CLK_PWRCTL_MIRCFSEL_1M:
+            u32Freq = FREQ_1MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_2M:
+            u32Freq = FREQ_2MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_4M:
+            u32Freq = FREQ_4MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_8M:
+            u32Freq = FREQ_8MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_12M:
+            u32Freq = FREQ_12MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_16M:
+            u32Freq = FREQ_16MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_24M:
+            u32Freq = FREQ_24MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_32M:
+            u32Freq = FREQ_32MHZ;
+            break;
+        case CLK_PWRCTL_MIRCFSEL_40M:
+            u32Freq = FREQ_40MHZ;
+            break;
+        default:
+            u32Freq = __MIRC;
+            break;
         }
     }
     else
@@ -1082,7 +1110,7 @@ void CLK_DisableMIRC(void)
 static void MIRC_delay(uint32_t mirc_hclk)
 {
     uint32_t nop_count, i;
-    
+
     nop_count = mirc_hclk / FREQ_1MHZ;
     if (nop_count == 0)
     {
@@ -1120,10 +1148,10 @@ static void MIRC_delay(uint32_t mirc_hclk)
 uint32_t CLK_EnableMIRC(uint32_t u32MircFreq)
 {
     uint32_t mirc_status, mirc_hclk;
-    
+
     mirc_status = (CLK->PWRCTL & CLK_PWRCTL_MIRCEN_Msk);
     mirc_hclk   = CLK_GetCPUFreq();
-    
+
     /* M2U51 series supports MIRC switching without needing to disable MIRC first. */
     /* Other series could need disable MIRC first to avoid unstable when setting MIRC. */
     /* CLK_DisableMIRC(); */
@@ -1143,7 +1171,7 @@ uint32_t CLK_EnableMIRC(uint32_t u32MircFreq)
         CLK_WaitClockReady(CLK_STATUS_MIRCSTB_Msk);
         MIRC_delay(mirc_hclk);
     }
-    
+
     /* Wait for MIRC clock stable */
     CLK_WaitClockReady(CLK_STATUS_MIRCSTB_Msk);
 

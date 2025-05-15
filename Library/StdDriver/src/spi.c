@@ -324,7 +324,7 @@ uint32_t SPI_SetBusClock(SPI_T *spi, uint32_t u32BusClock)
         else
             CLK->CLKSEL2 = (CLK->CLKSEL2 & (~CLK_CLKSEL2_SPI2SEL_Msk)) | CLK_CLKSEL2_SPI2SEL_PCLK1;
     }
-    
+
     /* Check clock source of SPI */
     if(spi == SPI0)
     {

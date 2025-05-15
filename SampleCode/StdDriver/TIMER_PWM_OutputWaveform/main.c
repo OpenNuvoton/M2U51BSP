@@ -54,7 +54,7 @@ void SYS_Init(void)
 
     /* Set Timer0~4 PWM output pins */
     SYS->GPB_MFPL =  (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB3MFP_Msk | SYS_GPB_MFPL_PB2MFP_Msk |
-                      SYS_GPB_MFPL_PB5MFP_Msk | SYS_GPB_MFPL_PB4MFP_Msk)) | \
+                                        SYS_GPB_MFPL_PB5MFP_Msk | SYS_GPB_MFPL_PB4MFP_Msk)) | \
                      (SYS_GPB_MFPL_PB3MFP_TM2 | SYS_GPB_MFPL_PB2MFP_TM3 | \
                       SYS_GPB_MFPL_PB5MFP_TM0 | SYS_GPB_MFPL_PB4MFP_TM1);
 

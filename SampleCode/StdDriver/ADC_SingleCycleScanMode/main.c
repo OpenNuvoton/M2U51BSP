@@ -54,7 +54,7 @@ void SYS_Init(void)
     /* Set multi-function pins for UART0 RXD(PB.12) and TXD(PB.13) */
     Uart0DefaultMPF();
 
-/* Set PB.0 - PB.3 to input mode */
+    /* Set PB.0 - PB.3 to input mode */
     GPIO_SetMode(PB, BIT0|BIT1|BIT2|BIT3, GPIO_MODE_INPUT);
     /* Configure the PB.0 - PB.3 ADC analog input pins.  */
     SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB0MFP_Msk | SYS_GPB_MFPL_PB1MFP_Msk | SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk)) |

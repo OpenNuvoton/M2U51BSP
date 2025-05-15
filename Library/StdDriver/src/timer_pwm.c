@@ -38,7 +38,7 @@ uint32_t TPWM_ConfigOutputFreqAndDuty(TIMER_T *timer, uint32_t u32Frequency, uin
     uint32_t u32PWMClockFreq, u32TargetFreq;
     uint32_t u32Prescaler = 0x100UL, u32Period, u32CMP;
     uint32_t u32Src;
-    const uint32_t au32Clk[] = {0UL, __MIRC, __HIRC, __LIRC, __LXT, 0UL};    
+    const uint32_t au32Clk[] = {0UL, __MIRC, __HIRC, __LIRC, __LXT, 0UL};
 
     if(timer == TIMER0)
     {
@@ -56,9 +56,9 @@ uint32_t TPWM_ConfigOutputFreqAndDuty(TIMER_T *timer, uint32_t u32Frequency, uin
     {
         u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR3SEL_Msk) >> CLK_CLKSEL1_TMR3SEL_Pos;
     }
-    
+
     if(u32Src == 0UL)
-    {    
+    {
         if ((timer == TIMER0) || (timer == TIMER1))
         {
             u32PWMClockFreq = CLK_GetPCLK0Freq();

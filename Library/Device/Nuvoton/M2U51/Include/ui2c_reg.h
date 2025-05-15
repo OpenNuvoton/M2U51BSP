@@ -25,346 +25,346 @@
     @addtogroup UI2C I2C Mode of USCI Controller (UI2C)
     Memory Mapped Structure for UI2C Controller
 @{ */
- 
+
 typedef struct
 {
 
 
-/**
- * @var UI2C_T::CTL
- * Offset: 0x00  USCI Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[2:0]   |FUNMODE   |Function Mode
- * |        |          |This bit field selects the protocol for this USCI controller
- * |        |          |Selecting a protocol that is not available or a reserved combination disables the USCI
- * |        |          |When switching between two protocols, the USCI has to be disabled before selecting a new protocol
- * |        |          |Simultaneously, the USCI will be reset when user write 000 to FUNMODE.
- * |        |          |000 = The USCI is disabled. All protocol related state machines are set to idle state.
- * |        |          |001 = The SPI protocol is selected.
- * |        |          |010 = The UART protocol is selected.
- * |        |          |100 = The I2C protocol is selected.
- * |        |          |Note: Other bit combinations are reserved.
- * @var UI2C_T::BRGEN
- * Offset: 0x08  USCI Baud Rate Generator Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |RCLKSEL   |Reference Clock Source Selection
- * |        |          |This bit selects the source signal of reference clock (fREF_CLK).
- * |        |          |0 = Peripheral device clock fPCLK.
- * |        |          |1 = Reserved.
- * |[1]     |PTCLKSEL  |Protocol Clock Source Selection
- * |        |          |This bit selects the source signal of protocol clock (fPROT_CLK).
- * |        |          |0 = Reference clock fREF_CLK.
- * |        |          |1 = fREF_CLK2 (its frequency is half of fREF_CLK).
- * |[3:2]   |SPCLKSEL  |Sample Clock Source Selection
- * |        |          |This bit field used for the clock source selection of a sample clock (fSAMP_CLK) for the protocol processor.
- * |        |          |00 = fSAMP_CLK = fDIV_CLK.
- * |        |          |01 = fSAMP_CLK = fPROT_CLK.
- * |        |          |10 = fSAMP_CLK = fSCLK.
- * |        |          |11 = fSAMP_CLK = fREF_CLK.
- * |[4]     |TMCNTEN   |Time Measurement Counter Enable Bit
- * |        |          |This bit enables the 10-bit timing measurement counter.
- * |        |          |0 = Time measurement counter is Disabled.
- * |        |          |1 = Time measurement counter is Enabled.
- * |[5]     |TMCNTSRC  |Time Measurement Counter Clock Source Selection
- * |        |          |0 = Time measurement counter with fPROT_CLK.
- * |        |          |1 = Time measurement counter with fDIV_CLK.
- * |[9:8]   |PDSCNT    |Pre-divider for Sample Counter
- * |        |          |This bit field defines the divide ratio of the clock division from sample clock fSAMP_CLK
- * |        |          |The divided frequency fPDS_CNT = fSAMP_CLK / (PDSCNT+1).
- * |[14:10] |DSCNT     |Denominator for Sample Counter
- * |        |          |This bit field defines the divide ratio of the sample clock fSAMP_CLK.
- * |        |          |The divided frequency fDS_CNT = fPDS_CNT / (DSCNT+1).
- * |[25:16] |CLKDIV    |Clock Divider
- * |        |          |This bit field defines the ratio between the protocol clock frequency fPROT_CLK and the clock divider frequency fDIV_CLK (fDIV_CLK = fPROT_CLK / (CLKDIV+1)).
- * |        |          |Note: The minimum value of DIVIDER is 9 for USCI_I2C.
- * |[31:28] |NFCNT     |Noise Filter Count
- * |        |          |The register bits control the input filter width.
- * |        |          |0 = Filter width 3*PCLK.
- * |        |          |1 = Filter width 4*PCLK.
- * |        |          |N = filter width (3+N)*PCKL.
- * |        |          |Note: Filter width Min = 3*PCLK, Max = 18*PCLK.
- * @var UI2C_T::LINECTL
- * Offset: 0x2C  USCI Line Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |LSB       |LSB First Transmission Selection
- * |        |          |0 = The MSB, which bit of transmit/receive data buffer depends on the setting of DWIDTH, is transmitted/received first.
- * |        |          |1 = The LSB, the bit 0 of data buffer, will be transmitted/received first.
- * |[11:8]  |DWIDTH    |Word Length of Transmission
- * |        |          |This bit field defines the data word length (amount of bits) for reception and transmission
- * |        |          |The data word is always right-aligned in the data buffer
- * |        |          |USCI supports word length from 4 to 16 bits.
- * |        |          |0x0 = The data word contains 16 bits located at bit positions [15:0].
- * |        |          |0x1 = Reserved.
- * |        |          |0x2 = Reserved.
- * |        |          |0x3 = Reserved.
- * |        |          |0x4 = The data word contains 4 bits located at bit positions [3:0].
- * |        |          |0x5 = The data word contains 5 bits located at bit positions [4:0].
- * |        |          |...
- * |        |          |0xf = The data word contains 15 bits located at bit positions [14:0].
- * @var UI2C_T::TXDAT
- * Offset: 0x30  USCI Transmit Data Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[15:0]  |TXDAT     |Transmit Data
- * |        |          |Software can use this bit field to write 16-bit transmit data for transmission.
- * @var UI2C_T::RXDAT
- * Offset: 0x34  USCI Receive Data Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[15:0]  |RXDAT     |Received Data
- * |        |          |This bit field monitors the received data which stored in receive data buffer.
- * |        |          |Note: In I2C protocol, RXDAT[12:8] indicate the different transmission conditions which defined in I2C.
- * @var UI2C_T::DEVADDR0
- * Offset: 0x44  USCI Device Address Register 0
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[9:0]   |DEVADDR   |Device Address
- * |        |          |In I2C protocol, this bit field contains the programmed slave address
- * |        |          |If the first received address byte are 1111 0AAXB, the AA bits are compared to the bits DEVADDR [9:8] to check for address match, where the X is R/W bit
- * |        |          |Then the second address byte is also compared to DEVADDR [7:0].
- * |        |          |Note 1: The DEVADDR [9:7] must be set 3'b000 when I2C is operating in 7-bit address mode.
- * |        |          |Note 2: When software sets 10'h000, the address cannot be used.
- * @var UI2C_T::DEVADDR1
- * Offset: 0x48  USCI Device Address Register 1
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[9:0]   |DEVADDR   |Device Address
- * |        |          |In I2C protocol, this bit field contains the programmed slave address
- * |        |          |If the first received address byte are 1111 0AAXB, the AA bits are compared to the bits DEVADDR [9:8] to check for address match, where the X is R/W bit
- * |        |          |Then the second address byte is also compared to DEVADDR [7:0].
- * |        |          |Note 1: The DEVADDR [9:7] must be set 3'b000 when I2C is operating in 7-bit address mode.
- * |        |          |Note 2: When software sets 10'h000, the address cannot be used.
- * @var UI2C_T::ADDRMSK0
- * Offset: 0x4C  USCI Device Address Mask Register 0
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[9:0]   |ADDRMSK   |USCI Device Address Mask
- * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register.).
- * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
- * |        |          |USCI supports multiple address recognition with two address mask register
- * |        |          |When the bit in the address mask register is set to 1, it means the received corresponding address bit is don't-care
- * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
- * |        |          |Note: The wake-up function cannot use address mask in 10-bit mode
- * @var UI2C_T::ADDRMSK1
- * Offset: 0x50  USCI Device Address Mask Register 1
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[9:0]   |ADDRMSK   |USCI Device Address Mask
- * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register.).
- * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
- * |        |          |USCI supports multiple address recognition with two address mask register
- * |        |          |When the bit in the address mask register is set to 1, it means the received corresponding address bit is don't-care
- * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
- * |        |          |Note: The wake-up function cannot use address mask in 10-bit mode
- * @var UI2C_T::WKCTL
- * Offset: 0x54  USCI Wake-up Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |WKEN      |Wake-up Enable Bit
- * |        |          |0 = Wake-up function Disabled.
- * |        |          |1 = Wake-up function Enabled.
- * |[1]     |WKADDREN  |Wake-up Address Match Enable Bit
- * |        |          |0 = The chip is woken up according to START signal.
- * |        |          |1 = The chip is woken up according to address match.
- * @var UI2C_T::WKSTS
- * Offset: 0x58  USCI Wake-up Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |WKF       |Wake-up Flag
- * |        |          |When chip is woken up from Power-down mode, this bit is set to 1
- * |        |          |Software can write 1 to clear this bit.
- * @var UI2C_T::PROTCTL
- * Offset: 0x5C  USCI Protocol Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |GCFUNC    |General Call Function
- * |        |          |0 = General Call Function Disabled.
- * |        |          |1 = General Call Function Enabled.
- * |        |          |Note: When ADDR10EN (UI2C_PROTCTL [4]) is set, don't set this bit.
- * |[1]     |AA        |Assert Acknowledge Control
- * |        |          |When AA =1 prior to address or data received, an acknowledged (low level to SDA) will be returned during the acknowledge clock pulse on the SCL line when 1.) A slave is acknowledging the address sent from master, 2.) The receiver devices are acknowledging the data sent by transmitter
- * |        |          |When AA=0 prior to address or data received, a Not acknowledged (high level to SDA) will be returned during the acknowledge clock pulse on the SCL line.
- * |[2]     |STO       |I2C STOP Control
- * |        |          |In Master mode, setting STO to transmit a STOP condition to bus then I2C hardware will check the bus condition if a STOP condition is detected this bit will be cleared by hardware automatically
- * |        |          |In a slave mode, setting STO resets I2C hardware to the defined "not addressed" slave mode when bus error ERRIF (UI2C_PROTSTS[12] = 1).
- * |[3]     |STA       |I2C START Control
- * |        |          |Setting STA to logic 1 to enter Master mode, the I2C hardware sends a START or repeat START condition to bus when the bus is free
- * |        |          |This bit will be cleared by hardware automatically.
- * |[4]     |ADDR10EN  |Address 10-bit Function Enable Bit
- * |        |          |0 = Address match 10 bit function Disabled.
- * |        |          |1 = Address match 10 bit function Enabled.
- * |[5]     |PTRG      |I2C Protocol Trigger (Write Only)
- * |        |          |When a new state is present in the UI2C_PROTSTS register, if the related interrupt enable bits are set, the I2C interrupt is requested
- * |        |          |It must write one by software to this bit after the related interrupt flags are set to 1 and the I2C protocol function will go ahead until the STOP is active or the PROTEN is disabled.
- * |        |          |0 = I2C's stretch disabled and the I2C protocol function will go ahead.
- * |        |          |1 = I2C's stretch is active.
- * |[8]     |SCLOUTEN  |SCL Output Enable Bit
- * |        |          |This bit enables monitor pulling SCL to low
- * |        |          |This monitor will pull SCL to low until it has had time to respond to an I2C interrupt.
- * |        |          |0 = SCL output will be forced high due to open drain mechanism.
- * |        |          |1 = I2C module may act as a slave peripheral just like in normal operation, the I2C holds the clock line low until it has had time to clear I2C interrupt.
- * |[9]     |MONEN     |Monitor Mode Enable Bit
- * |        |          |This bit enables monitor mode
- * |        |          |In monitor mode the SDA output will be put in high impedance mode
- * |        |          |This prevents the I2C module from outputting data of any kind (including ACK) onto the I2C data bus.
- * |        |          |0 = The monitor mode Disabled.
- * |        |          |1 = The monitor mode Enabled.
- * |        |          |Note: Depending on the state of the SCLOUTEN bit, the SCL output may be also forced high, preventing the module from having control over the I2C clock line.
- * |[25:16] |TOCNT     |Time-out Clock Cycle
- * |        |          |This bit field indicates how many clock cycle selected by TMCNTSRC (UI2C_BRGEN [5]) when each interrupt flags are clear
- * |        |          |The time-out is enable when TOCNT bigger than 0.
- * |        |          |Note: The TMCNTSRC (UI2C_BRGEN [5]) must be set zero on I2C mode.
- * |[31]    |PROTEN    |I2C Protocol Enable Bit
- * |        |          |0 = I2C Protocol Disabled.
- * |        |          |1 = I2C Protocol Enabled.
- * @var UI2C_T::PROTIEN
- * Offset: 0x60  USCI Protocol Interrupt Enable Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |TOIEN     |Time-out Interrupt Enable Bit
- * |        |          |In I2C protocol, this bit enables the interrupt generation in case of a time-out event.
- * |        |          |0 = The time-out interrupt Disabled.
- * |        |          |1 = The time-out interrupt Enabled.
- * |[1]     |STARIEN   |START Condition Received Interrupt Enable Bit
- * |        |          |This bit enables the generation of a protocol interrupt if a START condition is detected.
- * |        |          |0 = The start condition interrupt Disabled.
- * |        |          |1 = The start condition interrupt Enabled.
- * |[2]     |STORIEN   |STOP Condition Received Interrupt Enable Bit
- * |        |          |This bit enables the generation of a protocol interrupt if a STOP condition is detected.
- * |        |          |0 = The stop condition interrupt Disabled.
- * |        |          |1 = The stop condition interrupt Enabled.
- * |[3]     |NACKIEN   |Non - Acknowledge Interrupt Enable Bit
- * |        |          |This bit enables the generation of a protocol interrupt if a Non - acknowledge is detected by a master.
- * |        |          |0 = The non-acknowledge interrupt Disabled.
- * |        |          |1 = The non-acknowledge interrupt Enabled.
- * |[4]     |ARBLOIEN  |Arbitration Lost Interrupt Enable Bit
- * |        |          |This bit enables the generation of a protocol interrupt if an arbitration lost event is detected.
- * |        |          |0 = The arbitration lost interrupt Disabled.
- * |        |          |1 = The arbitration lost interrupt Enabled.
- * |[5]     |ERRIEN    |Error Interrupt Enable Bit
- * |        |          |This bit enables the generation of a protocol interrupt if an I2C error condition is detected (indicated by ERRIF (UI2C_PROTSTS [12])).
- * |        |          |0 = The error interrupt Disabled.
- * |        |          |1 = The error interrupt Enabled.
- * |[6]     |ACKIEN    |Acknowledge Interrupt Enable Bit
- * |        |          |This bit enables the generation of a protocol interrupt if an acknowledge is detected by a master.
- * |        |          |0 = The acknowledge interrupt Disabled.
- * |        |          |1 = The acknowledge interrupt Enabled.
- * @var UI2C_T::PROTSTS
- * Offset: 0x64  USCI Protocol Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[5]     |TOIF      |Time-out Interrupt Flag
- * |        |          |0 = A time-out interrupt status has not occurred.
- * |        |          |1 = A time-out interrupt status has occurred.
- * |        |          |Note: This bit is cleared by software writing 1 into this bit.
- * |[6]     |ONBUSY    |On Bus Busy (Read Only)
- * |        |          |Indicates that a communication is in progress on the bus
- * |        |          |It is set by hardware when a START condition is detected
- * |        |          |It is cleared by hardware when a STOP condition is detected
- * |        |          |0 = The bus is IDLE (both SCLK and SDA High).
- * |        |          |1 = The bus is busy.
- * |        |          |Note: This bit is read only.
- * |[8]     |STARIF    |Start Condition Received Interrupt Flag
- * |        |          |This bit indicates that a start condition or repeated start condition has been detected on master mode
- * |        |          |However, this bit also indicates that a repeated start condition has been detected on slave mode.
- * |        |          |A protocol interrupt can be generated if STARIEN(UI2C_PROTIEN[1]) = 1.
- * |        |          |0 = A start condition has not yet been detected.
- * |        |          |1 = A start condition has been detected.
- * |        |          |Note: This bit is cleared by software writing 1 into this bit.
- * |[9]     |STORIF    |Stop Condition Received Interrupt Flag
- * |        |          |This bit indicates that a stop condition has been detected on the I2C bus lines
- * |        |          |A protocol interrupt can be generated if STORIEN(UI2C_PROTIEN[2]) = 1.
- * |        |          |0 = A stop condition has not yet been detected.
- * |        |          |1 = A stop condition has been detected.
- * |        |          |Note: This bit is cleared by software writing 1 into this bit.
- * |[10]    |NACKIF    |Non - Acknowledge Received Interrupt Flag
- * |        |          |This bit indicates that a non - acknowledge has been received in master mode
- * |        |          |A protocol interrupt can be generated if NACKIEN(UI2C_PROTIEN[3]) = 1.
- * |        |          |0 = A non-acknowledge has not been received.
- * |        |          |1 = A non-acknowledge has been received.
- * |        |          |Note: This bit is cleared by software writing 1 into this bit.
- * |[11]    |ARBLOIF   |Arbitration Lost Interrupt Flag
- * |        |          |This bit indicates that an arbitration has been lost
- * |        |          |A protocol interrupt can be generated if ARBLOIEN(UI2C_PROTIEN[4]) = 1.
- * |        |          |0 = An arbitration has not been lost.
- * |        |          |1 = An arbitration has been lost.
- * |        |          |Note: This bit is cleared by software writing 1 into this bit.
- * |[12]    |ERRIF     |Error Interrupt Flag
- * |        |          |This bit indicates that a Bus Error occurs when a START or STOP condition is present at an illegal position in the formation frame
- * |        |          |Example of illegal position are during the serial transfer of an address byte, a data byte or an acknowledge bit
- * |        |          |A protocol interrupt can be generated if ERRIEN(UI2C_PROTIEN[5]) = 1.
- * |        |          |0 = An I2C error has not been detected.
- * |        |          |1 = An I2C error has been detected.
- * |        |          |Note 1: This bit is cleared by software writing 1 into this bit.
- * |        |          |Note 2: This bit is set for slave mode, and user must write 1 into STO register to the defined "not addressed" slave mode.
- * |[13]    |ACKIF     |Acknowledge Received Interrupt Flag
- * |        |          |This bit indicates that an acknowledge has been received in master mode
- * |        |          |A protocol interrupt can be generated if ACKIEN(UI2C_PROTIEN[6]) = 1.
- * |        |          |0 = An acknowledge has not been received.
- * |        |          |1 = An acknowledge has been received.
- * |        |          |Note: This bit is cleared by software writing 1 into this bit
- * |[14]    |SLASEL    |Slave Select Status (Read Only)
- * |        |          |This bit indicates that this device has been selected as slave.
- * |        |          |0 = The device is not selected as slave.
- * |        |          |1 = The device is selected as slave.
- * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware.
- * |[15]    |SLAREAD   |Slave Read Request Status (Read Only)
- * |        |          |This bit indicates that a slave read request has been detected.
- * |        |          |0 = A slave R/W bit is 1 has not been detected.
- * |        |          |1 = A slave R/W bit is 1 has been detected.
- * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware.
- * |[16]    |WKAKDONE  |Wake-up Address Frame Acknowledge Bit Done (Read Only)
- * |        |          |0 = The ACK bit cycle of address match frame isn't done.
- * |        |          |1 = The ACK bit cycle of address match frame is done in power-down.
- * |        |          |Note: This bit cannot be released when WKF is set.
- * |[17]    |WRSTSWK   |Read/Write Status Bit in Address Wake-up Frame (Read Only)
- * |        |          |0 = Write command be record on the address match wake-up frame.
- * |        |          |1 = Read command be record on the address match wake-up frame. 
- * |[18]    |BUSHANG   |Bus Hang-up (Read Only)
- * |        |          |This bit indicates bus hang-up status
- * |        |          |There is 4-bit counter count when SCL hold high and refer fSAMP_CLK
- * |        |          |The hang-up counter will count to overflow and set this bit when SDA is low
- * |        |          |The counter will be reset by falling edge of SCL signal.
- * |        |          |0 = The bus is normal status for transmission.
- * |        |          |1 = The bus is hang-up status for transmission.
- * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware when a START condition is present.
- * |[19]    |ERRARBLO  |Error Arbitration Lost (Read Only)
- * |        |          |This bit indicates bus arbitration lost due to bigger noise which is can't be filtered by input processor
- * |        |          |The I2C can send start condition when ERRARBLO is set
- * |        |          |Thus this bit doesn't be cared on slave mode.
- * |        |          |0 = The bus is normal status for transmission.
- * |        |          |1 = The bus is error arbitration lost status for transmission.
- * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware when a START condition is present.
- * @var UI2C_T::TMCTL
- * Offset: 0x8C  I2C Timing Configure Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[8:0]   |STCTL     |Setup Time Configure Control
- * |        |          |This field is used to generate a delay timing between SDA edge and SCL rising edge in transmission mode..
- * |        |          |The delay setup time is numbers of peripheral clock = STCTL x fPCLK. 
- * |[24:16] |HTCTL     |Hold Time Configure Control
- * |        |          |This field is used to generate the delay timing between SCL falling edge SDA edge in
- * |        |          |transmission mode.
- * |        |          |The delay hold time is numbers of peripheral clock = HTCTL x fPCLK.
- */
+    /**
+     * @var UI2C_T::CTL
+     * Offset: 0x00  USCI Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[2:0]   |FUNMODE   |Function Mode
+     * |        |          |This bit field selects the protocol for this USCI controller
+     * |        |          |Selecting a protocol that is not available or a reserved combination disables the USCI
+     * |        |          |When switching between two protocols, the USCI has to be disabled before selecting a new protocol
+     * |        |          |Simultaneously, the USCI will be reset when user write 000 to FUNMODE.
+     * |        |          |000 = The USCI is disabled. All protocol related state machines are set to idle state.
+     * |        |          |001 = The SPI protocol is selected.
+     * |        |          |010 = The UART protocol is selected.
+     * |        |          |100 = The I2C protocol is selected.
+     * |        |          |Note: Other bit combinations are reserved.
+     * @var UI2C_T::BRGEN
+     * Offset: 0x08  USCI Baud Rate Generator Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |RCLKSEL   |Reference Clock Source Selection
+     * |        |          |This bit selects the source signal of reference clock (fREF_CLK).
+     * |        |          |0 = Peripheral device clock fPCLK.
+     * |        |          |1 = Reserved.
+     * |[1]     |PTCLKSEL  |Protocol Clock Source Selection
+     * |        |          |This bit selects the source signal of protocol clock (fPROT_CLK).
+     * |        |          |0 = Reference clock fREF_CLK.
+     * |        |          |1 = fREF_CLK2 (its frequency is half of fREF_CLK).
+     * |[3:2]   |SPCLKSEL  |Sample Clock Source Selection
+     * |        |          |This bit field used for the clock source selection of a sample clock (fSAMP_CLK) for the protocol processor.
+     * |        |          |00 = fSAMP_CLK = fDIV_CLK.
+     * |        |          |01 = fSAMP_CLK = fPROT_CLK.
+     * |        |          |10 = fSAMP_CLK = fSCLK.
+     * |        |          |11 = fSAMP_CLK = fREF_CLK.
+     * |[4]     |TMCNTEN   |Time Measurement Counter Enable Bit
+     * |        |          |This bit enables the 10-bit timing measurement counter.
+     * |        |          |0 = Time measurement counter is Disabled.
+     * |        |          |1 = Time measurement counter is Enabled.
+     * |[5]     |TMCNTSRC  |Time Measurement Counter Clock Source Selection
+     * |        |          |0 = Time measurement counter with fPROT_CLK.
+     * |        |          |1 = Time measurement counter with fDIV_CLK.
+     * |[9:8]   |PDSCNT    |Pre-divider for Sample Counter
+     * |        |          |This bit field defines the divide ratio of the clock division from sample clock fSAMP_CLK
+     * |        |          |The divided frequency fPDS_CNT = fSAMP_CLK / (PDSCNT+1).
+     * |[14:10] |DSCNT     |Denominator for Sample Counter
+     * |        |          |This bit field defines the divide ratio of the sample clock fSAMP_CLK.
+     * |        |          |The divided frequency fDS_CNT = fPDS_CNT / (DSCNT+1).
+     * |[25:16] |CLKDIV    |Clock Divider
+     * |        |          |This bit field defines the ratio between the protocol clock frequency fPROT_CLK and the clock divider frequency fDIV_CLK (fDIV_CLK = fPROT_CLK / (CLKDIV+1)).
+     * |        |          |Note: The minimum value of DIVIDER is 9 for USCI_I2C.
+     * |[31:28] |NFCNT     |Noise Filter Count
+     * |        |          |The register bits control the input filter width.
+     * |        |          |0 = Filter width 3*PCLK.
+     * |        |          |1 = Filter width 4*PCLK.
+     * |        |          |N = filter width (3+N)*PCKL.
+     * |        |          |Note: Filter width Min = 3*PCLK, Max = 18*PCLK.
+     * @var UI2C_T::LINECTL
+     * Offset: 0x2C  USCI Line Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |LSB       |LSB First Transmission Selection
+     * |        |          |0 = The MSB, which bit of transmit/receive data buffer depends on the setting of DWIDTH, is transmitted/received first.
+     * |        |          |1 = The LSB, the bit 0 of data buffer, will be transmitted/received first.
+     * |[11:8]  |DWIDTH    |Word Length of Transmission
+     * |        |          |This bit field defines the data word length (amount of bits) for reception and transmission
+     * |        |          |The data word is always right-aligned in the data buffer
+     * |        |          |USCI supports word length from 4 to 16 bits.
+     * |        |          |0x0 = The data word contains 16 bits located at bit positions [15:0].
+     * |        |          |0x1 = Reserved.
+     * |        |          |0x2 = Reserved.
+     * |        |          |0x3 = Reserved.
+     * |        |          |0x4 = The data word contains 4 bits located at bit positions [3:0].
+     * |        |          |0x5 = The data word contains 5 bits located at bit positions [4:0].
+     * |        |          |...
+     * |        |          |0xf = The data word contains 15 bits located at bit positions [14:0].
+     * @var UI2C_T::TXDAT
+     * Offset: 0x30  USCI Transmit Data Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[15:0]  |TXDAT     |Transmit Data
+     * |        |          |Software can use this bit field to write 16-bit transmit data for transmission.
+     * @var UI2C_T::RXDAT
+     * Offset: 0x34  USCI Receive Data Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[15:0]  |RXDAT     |Received Data
+     * |        |          |This bit field monitors the received data which stored in receive data buffer.
+     * |        |          |Note: In I2C protocol, RXDAT[12:8] indicate the different transmission conditions which defined in I2C.
+     * @var UI2C_T::DEVADDR0
+     * Offset: 0x44  USCI Device Address Register 0
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[9:0]   |DEVADDR   |Device Address
+     * |        |          |In I2C protocol, this bit field contains the programmed slave address
+     * |        |          |If the first received address byte are 1111 0AAXB, the AA bits are compared to the bits DEVADDR [9:8] to check for address match, where the X is R/W bit
+     * |        |          |Then the second address byte is also compared to DEVADDR [7:0].
+     * |        |          |Note 1: The DEVADDR [9:7] must be set 3'b000 when I2C is operating in 7-bit address mode.
+     * |        |          |Note 2: When software sets 10'h000, the address cannot be used.
+     * @var UI2C_T::DEVADDR1
+     * Offset: 0x48  USCI Device Address Register 1
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[9:0]   |DEVADDR   |Device Address
+     * |        |          |In I2C protocol, this bit field contains the programmed slave address
+     * |        |          |If the first received address byte are 1111 0AAXB, the AA bits are compared to the bits DEVADDR [9:8] to check for address match, where the X is R/W bit
+     * |        |          |Then the second address byte is also compared to DEVADDR [7:0].
+     * |        |          |Note 1: The DEVADDR [9:7] must be set 3'b000 when I2C is operating in 7-bit address mode.
+     * |        |          |Note 2: When software sets 10'h000, the address cannot be used.
+     * @var UI2C_T::ADDRMSK0
+     * Offset: 0x4C  USCI Device Address Mask Register 0
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[9:0]   |ADDRMSK   |USCI Device Address Mask
+     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register.).
+     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
+     * |        |          |USCI supports multiple address recognition with two address mask register
+     * |        |          |When the bit in the address mask register is set to 1, it means the received corresponding address bit is don't-care
+     * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
+     * |        |          |Note: The wake-up function cannot use address mask in 10-bit mode
+     * @var UI2C_T::ADDRMSK1
+     * Offset: 0x50  USCI Device Address Mask Register 1
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[9:0]   |ADDRMSK   |USCI Device Address Mask
+     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register.).
+     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
+     * |        |          |USCI supports multiple address recognition with two address mask register
+     * |        |          |When the bit in the address mask register is set to 1, it means the received corresponding address bit is don't-care
+     * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
+     * |        |          |Note: The wake-up function cannot use address mask in 10-bit mode
+     * @var UI2C_T::WKCTL
+     * Offset: 0x54  USCI Wake-up Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |WKEN      |Wake-up Enable Bit
+     * |        |          |0 = Wake-up function Disabled.
+     * |        |          |1 = Wake-up function Enabled.
+     * |[1]     |WKADDREN  |Wake-up Address Match Enable Bit
+     * |        |          |0 = The chip is woken up according to START signal.
+     * |        |          |1 = The chip is woken up according to address match.
+     * @var UI2C_T::WKSTS
+     * Offset: 0x58  USCI Wake-up Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |WKF       |Wake-up Flag
+     * |        |          |When chip is woken up from Power-down mode, this bit is set to 1
+     * |        |          |Software can write 1 to clear this bit.
+     * @var UI2C_T::PROTCTL
+     * Offset: 0x5C  USCI Protocol Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |GCFUNC    |General Call Function
+     * |        |          |0 = General Call Function Disabled.
+     * |        |          |1 = General Call Function Enabled.
+     * |        |          |Note: When ADDR10EN (UI2C_PROTCTL [4]) is set, don't set this bit.
+     * |[1]     |AA        |Assert Acknowledge Control
+     * |        |          |When AA =1 prior to address or data received, an acknowledged (low level to SDA) will be returned during the acknowledge clock pulse on the SCL line when 1.) A slave is acknowledging the address sent from master, 2.) The receiver devices are acknowledging the data sent by transmitter
+     * |        |          |When AA=0 prior to address or data received, a Not acknowledged (high level to SDA) will be returned during the acknowledge clock pulse on the SCL line.
+     * |[2]     |STO       |I2C STOP Control
+     * |        |          |In Master mode, setting STO to transmit a STOP condition to bus then I2C hardware will check the bus condition if a STOP condition is detected this bit will be cleared by hardware automatically
+     * |        |          |In a slave mode, setting STO resets I2C hardware to the defined "not addressed" slave mode when bus error ERRIF (UI2C_PROTSTS[12] = 1).
+     * |[3]     |STA       |I2C START Control
+     * |        |          |Setting STA to logic 1 to enter Master mode, the I2C hardware sends a START or repeat START condition to bus when the bus is free
+     * |        |          |This bit will be cleared by hardware automatically.
+     * |[4]     |ADDR10EN  |Address 10-bit Function Enable Bit
+     * |        |          |0 = Address match 10 bit function Disabled.
+     * |        |          |1 = Address match 10 bit function Enabled.
+     * |[5]     |PTRG      |I2C Protocol Trigger (Write Only)
+     * |        |          |When a new state is present in the UI2C_PROTSTS register, if the related interrupt enable bits are set, the I2C interrupt is requested
+     * |        |          |It must write one by software to this bit after the related interrupt flags are set to 1 and the I2C protocol function will go ahead until the STOP is active or the PROTEN is disabled.
+     * |        |          |0 = I2C's stretch disabled and the I2C protocol function will go ahead.
+     * |        |          |1 = I2C's stretch is active.
+     * |[8]     |SCLOUTEN  |SCL Output Enable Bit
+     * |        |          |This bit enables monitor pulling SCL to low
+     * |        |          |This monitor will pull SCL to low until it has had time to respond to an I2C interrupt.
+     * |        |          |0 = SCL output will be forced high due to open drain mechanism.
+     * |        |          |1 = I2C module may act as a slave peripheral just like in normal operation, the I2C holds the clock line low until it has had time to clear I2C interrupt.
+     * |[9]     |MONEN     |Monitor Mode Enable Bit
+     * |        |          |This bit enables monitor mode
+     * |        |          |In monitor mode the SDA output will be put in high impedance mode
+     * |        |          |This prevents the I2C module from outputting data of any kind (including ACK) onto the I2C data bus.
+     * |        |          |0 = The monitor mode Disabled.
+     * |        |          |1 = The monitor mode Enabled.
+     * |        |          |Note: Depending on the state of the SCLOUTEN bit, the SCL output may be also forced high, preventing the module from having control over the I2C clock line.
+     * |[25:16] |TOCNT     |Time-out Clock Cycle
+     * |        |          |This bit field indicates how many clock cycle selected by TMCNTSRC (UI2C_BRGEN [5]) when each interrupt flags are clear
+     * |        |          |The time-out is enable when TOCNT bigger than 0.
+     * |        |          |Note: The TMCNTSRC (UI2C_BRGEN [5]) must be set zero on I2C mode.
+     * |[31]    |PROTEN    |I2C Protocol Enable Bit
+     * |        |          |0 = I2C Protocol Disabled.
+     * |        |          |1 = I2C Protocol Enabled.
+     * @var UI2C_T::PROTIEN
+     * Offset: 0x60  USCI Protocol Interrupt Enable Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |TOIEN     |Time-out Interrupt Enable Bit
+     * |        |          |In I2C protocol, this bit enables the interrupt generation in case of a time-out event.
+     * |        |          |0 = The time-out interrupt Disabled.
+     * |        |          |1 = The time-out interrupt Enabled.
+     * |[1]     |STARIEN   |START Condition Received Interrupt Enable Bit
+     * |        |          |This bit enables the generation of a protocol interrupt if a START condition is detected.
+     * |        |          |0 = The start condition interrupt Disabled.
+     * |        |          |1 = The start condition interrupt Enabled.
+     * |[2]     |STORIEN   |STOP Condition Received Interrupt Enable Bit
+     * |        |          |This bit enables the generation of a protocol interrupt if a STOP condition is detected.
+     * |        |          |0 = The stop condition interrupt Disabled.
+     * |        |          |1 = The stop condition interrupt Enabled.
+     * |[3]     |NACKIEN   |Non - Acknowledge Interrupt Enable Bit
+     * |        |          |This bit enables the generation of a protocol interrupt if a Non - acknowledge is detected by a master.
+     * |        |          |0 = The non-acknowledge interrupt Disabled.
+     * |        |          |1 = The non-acknowledge interrupt Enabled.
+     * |[4]     |ARBLOIEN  |Arbitration Lost Interrupt Enable Bit
+     * |        |          |This bit enables the generation of a protocol interrupt if an arbitration lost event is detected.
+     * |        |          |0 = The arbitration lost interrupt Disabled.
+     * |        |          |1 = The arbitration lost interrupt Enabled.
+     * |[5]     |ERRIEN    |Error Interrupt Enable Bit
+     * |        |          |This bit enables the generation of a protocol interrupt if an I2C error condition is detected (indicated by ERRIF (UI2C_PROTSTS [12])).
+     * |        |          |0 = The error interrupt Disabled.
+     * |        |          |1 = The error interrupt Enabled.
+     * |[6]     |ACKIEN    |Acknowledge Interrupt Enable Bit
+     * |        |          |This bit enables the generation of a protocol interrupt if an acknowledge is detected by a master.
+     * |        |          |0 = The acknowledge interrupt Disabled.
+     * |        |          |1 = The acknowledge interrupt Enabled.
+     * @var UI2C_T::PROTSTS
+     * Offset: 0x64  USCI Protocol Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[5]     |TOIF      |Time-out Interrupt Flag
+     * |        |          |0 = A time-out interrupt status has not occurred.
+     * |        |          |1 = A time-out interrupt status has occurred.
+     * |        |          |Note: This bit is cleared by software writing 1 into this bit.
+     * |[6]     |ONBUSY    |On Bus Busy (Read Only)
+     * |        |          |Indicates that a communication is in progress on the bus
+     * |        |          |It is set by hardware when a START condition is detected
+     * |        |          |It is cleared by hardware when a STOP condition is detected
+     * |        |          |0 = The bus is IDLE (both SCLK and SDA High).
+     * |        |          |1 = The bus is busy.
+     * |        |          |Note: This bit is read only.
+     * |[8]     |STARIF    |Start Condition Received Interrupt Flag
+     * |        |          |This bit indicates that a start condition or repeated start condition has been detected on master mode
+     * |        |          |However, this bit also indicates that a repeated start condition has been detected on slave mode.
+     * |        |          |A protocol interrupt can be generated if STARIEN(UI2C_PROTIEN[1]) = 1.
+     * |        |          |0 = A start condition has not yet been detected.
+     * |        |          |1 = A start condition has been detected.
+     * |        |          |Note: This bit is cleared by software writing 1 into this bit.
+     * |[9]     |STORIF    |Stop Condition Received Interrupt Flag
+     * |        |          |This bit indicates that a stop condition has been detected on the I2C bus lines
+     * |        |          |A protocol interrupt can be generated if STORIEN(UI2C_PROTIEN[2]) = 1.
+     * |        |          |0 = A stop condition has not yet been detected.
+     * |        |          |1 = A stop condition has been detected.
+     * |        |          |Note: This bit is cleared by software writing 1 into this bit.
+     * |[10]    |NACKIF    |Non - Acknowledge Received Interrupt Flag
+     * |        |          |This bit indicates that a non - acknowledge has been received in master mode
+     * |        |          |A protocol interrupt can be generated if NACKIEN(UI2C_PROTIEN[3]) = 1.
+     * |        |          |0 = A non-acknowledge has not been received.
+     * |        |          |1 = A non-acknowledge has been received.
+     * |        |          |Note: This bit is cleared by software writing 1 into this bit.
+     * |[11]    |ARBLOIF   |Arbitration Lost Interrupt Flag
+     * |        |          |This bit indicates that an arbitration has been lost
+     * |        |          |A protocol interrupt can be generated if ARBLOIEN(UI2C_PROTIEN[4]) = 1.
+     * |        |          |0 = An arbitration has not been lost.
+     * |        |          |1 = An arbitration has been lost.
+     * |        |          |Note: This bit is cleared by software writing 1 into this bit.
+     * |[12]    |ERRIF     |Error Interrupt Flag
+     * |        |          |This bit indicates that a Bus Error occurs when a START or STOP condition is present at an illegal position in the formation frame
+     * |        |          |Example of illegal position are during the serial transfer of an address byte, a data byte or an acknowledge bit
+     * |        |          |A protocol interrupt can be generated if ERRIEN(UI2C_PROTIEN[5]) = 1.
+     * |        |          |0 = An I2C error has not been detected.
+     * |        |          |1 = An I2C error has been detected.
+     * |        |          |Note 1: This bit is cleared by software writing 1 into this bit.
+     * |        |          |Note 2: This bit is set for slave mode, and user must write 1 into STO register to the defined "not addressed" slave mode.
+     * |[13]    |ACKIF     |Acknowledge Received Interrupt Flag
+     * |        |          |This bit indicates that an acknowledge has been received in master mode
+     * |        |          |A protocol interrupt can be generated if ACKIEN(UI2C_PROTIEN[6]) = 1.
+     * |        |          |0 = An acknowledge has not been received.
+     * |        |          |1 = An acknowledge has been received.
+     * |        |          |Note: This bit is cleared by software writing 1 into this bit
+     * |[14]    |SLASEL    |Slave Select Status (Read Only)
+     * |        |          |This bit indicates that this device has been selected as slave.
+     * |        |          |0 = The device is not selected as slave.
+     * |        |          |1 = The device is selected as slave.
+     * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware.
+     * |[15]    |SLAREAD   |Slave Read Request Status (Read Only)
+     * |        |          |This bit indicates that a slave read request has been detected.
+     * |        |          |0 = A slave R/W bit is 1 has not been detected.
+     * |        |          |1 = A slave R/W bit is 1 has been detected.
+     * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware.
+     * |[16]    |WKAKDONE  |Wake-up Address Frame Acknowledge Bit Done (Read Only)
+     * |        |          |0 = The ACK bit cycle of address match frame isn't done.
+     * |        |          |1 = The ACK bit cycle of address match frame is done in power-down.
+     * |        |          |Note: This bit cannot be released when WKF is set.
+     * |[17]    |WRSTSWK   |Read/Write Status Bit in Address Wake-up Frame (Read Only)
+     * |        |          |0 = Write command be record on the address match wake-up frame.
+     * |        |          |1 = Read command be record on the address match wake-up frame.
+     * |[18]    |BUSHANG   |Bus Hang-up (Read Only)
+     * |        |          |This bit indicates bus hang-up status
+     * |        |          |There is 4-bit counter count when SCL hold high and refer fSAMP_CLK
+     * |        |          |The hang-up counter will count to overflow and set this bit when SDA is low
+     * |        |          |The counter will be reset by falling edge of SCL signal.
+     * |        |          |0 = The bus is normal status for transmission.
+     * |        |          |1 = The bus is hang-up status for transmission.
+     * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware when a START condition is present.
+     * |[19]    |ERRARBLO  |Error Arbitration Lost (Read Only)
+     * |        |          |This bit indicates bus arbitration lost due to bigger noise which is can't be filtered by input processor
+     * |        |          |The I2C can send start condition when ERRARBLO is set
+     * |        |          |Thus this bit doesn't be cared on slave mode.
+     * |        |          |0 = The bus is normal status for transmission.
+     * |        |          |1 = The bus is error arbitration lost status for transmission.
+     * |        |          |Note: This bit has no interrupt signal, and it will be cleared automatically by hardware when a START condition is present.
+     * @var UI2C_T::TMCTL
+     * Offset: 0x8C  I2C Timing Configure Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[8:0]   |STCTL     |Setup Time Configure Control
+     * |        |          |This field is used to generate a delay timing between SDA edge and SCL rising edge in transmission mode..
+     * |        |          |The delay setup time is numbers of peripheral clock = STCTL x fPCLK.
+     * |[24:16] |HTCTL     |Hold Time Configure Control
+     * |        |          |This field is used to generate the delay timing between SCL falling edge SDA edge in
+     * |        |          |transmission mode.
+     * |        |          |The delay hold time is numbers of peripheral clock = HTCTL x fPCLK.
+     */
     __IO uint32_t CTL;                   /*!< [0x0000] USCI Control Register                                            */
     __I  uint32_t RESERVE0[1];
     __IO uint32_t BRGEN;                 /*!< [0x0008] USCI Baud Rate Generator Register                                */

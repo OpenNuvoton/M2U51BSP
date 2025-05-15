@@ -98,8 +98,8 @@ void CRC0_IRQHandler(void)          __attribute__((weak, alias("Default_Handler"
   Exception / Interrupt Vector table
  *----------------------------------------------------------------------------*/
 #if defined ( __GNUC__ )
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic"
 #endif
 
 
@@ -190,7 +190,7 @@ const VECTOR_TABLE_Type __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE =
 #endif
 
 #if defined ( __GNUC__ )
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 __WEAK void Reset_Handler_PreInit(void)
@@ -225,8 +225,8 @@ __NO_RETURN void Reset_Handler(void)
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-noreturn"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 #endif
 
 /*---------------------------------------------------------------------------
@@ -266,42 +266,43 @@ volatile uint32_t new_vtor1 __attribute__((section(".ARM.__at_0x20000004")));
 #define SPD_MEM_ADDR    ((volatile uint32_t *)0x20000000)
 #define INIVTOR_ADDR    ((volatile uint32_t *)0xE000ED08)
 
-void __Enter_SPD(void) {
+void __Enter_SPD(void)
+{
 #if 0
     __asm volatile (
 
-				"PUSH    {r0-r1}                            \n"
+        "PUSH    {r0-r1}                            \n"
 
-                "MOVS    r0, #1                             \n"
-                "MSR     PRIMASK, r0                        \n"
+        "MOVS    r0, #1                             \n"
+        "MSR     PRIMASK, r0                        \n"
 
-                "LDR     r0, =0x40000310                       \n"
-                "LDR     r1, =0x20000000                    \n"
-                "STR     r1, [r0]                           \n"
+        "LDR     r0, =0x40000310                       \n"
+        "LDR     r1, =0x20000000                    \n"
+        "STR     r1, [r0]                           \n"
 
-                "LDR     r0, =__SPD_Wakeup                  \n"
-                "LDR     r1, =0x20000000                       \n"
-                "STR     r0, [r1, #4]                       \n"
+        "LDR     r0, =__SPD_Wakeup                  \n"
+        "LDR     r1, =0x20000000                       \n"
+        "STR     r0, [r1, #4]                       \n"
 
-                "POP     {r0-r1}                            \n"
+        "POP     {r0-r1}                            \n"
 
-                "PUSH    {r0-r7,lr}                         \n"
+        "PUSH    {r0-r7,lr}                         \n"
 
-                "LDR     R1, =0x20000000                       \n"
-                "MOV     R0, sp                             \n"
-                "STR     R0, [R1]                           \n"
+        "LDR     R1, =0x20000000                       \n"
+        "MOV     R0, sp                             \n"
+        "STR     R0, [R1]                           \n"
 
-                "WFI                                        \n"
+        "WFI                                        \n"
 
-                "PUSH    {r0}                               \n"
-                "MOVS    r0, #0                             \n"
-                "MSR     PRIMASK, r0                        \n"
-                "POP     {r0}                               \n"
+        "PUSH    {r0}                               \n"
+        "MOVS    r0, #0                             \n"
+        "MSR     PRIMASK, r0                        \n"
+        "POP     {r0}                               \n"
     );
 
 #elif 0
 
-  register uint32_t sp_save;
+    register uint32_t sp_save;
 
     // Disable interrupt
     __disable_irq();
@@ -328,9 +329,9 @@ void __Enter_SPD(void) {
     __enable_irq();
 
 #else
- 	//uint32_t *psp_backup;
- 	//uint32_t *wakeup_address;
- 	uint32_t ii;
+    //uint32_t *psp_backup;
+    //uint32_t *wakeup_address;
+    uint32_t ii;
 
     __asm volatile (
         "PUSH   {r0-r1} \n"
@@ -340,7 +341,7 @@ void __Enter_SPD(void) {
     __disable_irq();
 
     /* Set the initial vector table address (INIVTOR) */
-	SYS->INIVTOR = SPD_Mem;
+    SYS->INIVTOR = SPD_Mem;
 
     /* Set __SPD_Wakeup at 0x20000004 */
     new_vtor1 = (uint32_t)__SPD_Wakeup;
@@ -348,7 +349,7 @@ void __Enter_SPD(void) {
     //*wakeup_address = (uint32_t)__SPD_Wakeup-1;
 
     /* Save stack pointer at 0x20000000 */
-	//psp_backup = (uint32_t*) SPD_Mem;
+    //psp_backup = (uint32_t*) SPD_Mem;
     //*psp_backup = __get_MSP();
     new_vtor0 = (uint32_t)__get_MSP();
 
@@ -365,12 +366,12 @@ void __Enter_SPD(void) {
         "PUSH   {r0-r7,lr} \n"
     );
 
-	for(ii=0; ii<3; ii++){};
+    for(ii=0; ii<3; ii++) {};
 
     // Wait for interrupt (WFI)
     __WFI();
-__enable_irq();
-	//__SPD_Wakeup();
+    __enable_irq();
+    //__SPD_Wakeup();
 
     __asm volatile (
         "POP    {r0} \n"
@@ -383,7 +384,7 @@ __attribute__((naked)) void __SPD_Wakeup(void)
 //void __SPD_Wakeup(void)
 //__attribute__((aligned(4))) void __SPD_Wakeup(void)
 {
-	//uint32_t* psp_backup;
+    //uint32_t* psp_backup;
 
     /* Restore all registers and return */
     __asm volatile (
@@ -391,13 +392,13 @@ __attribute__((naked)) void __SPD_Wakeup(void)
     );
 
     // Restore the stack pointer
-	//psp_backup = (uint32_t*) SPD_Mem;
-	//__set_MSP(*psp_backup);
+    //psp_backup = (uint32_t*) SPD_Mem;
+    //__set_MSP(*psp_backup);
 
     // Re-enable interrupts by clearing PRIMASK
 //    __enable_irq();
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-    #pragma clang diagnostic pop
+#pragma clang diagnostic pop
 #endif

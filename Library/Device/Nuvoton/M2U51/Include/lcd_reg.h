@@ -20,557 +20,557 @@
     @addtogroup LCD Liquid-Crystal Display(LCD)
     Memory Mapped Structure for LCD Controller
 @{ */
- 
+
 typedef struct
 {
 
-/**
- * @var LCD_T::CTL
- * Offset: 0x00  LCD Control Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |LCDEN     |LCD Operation Enable Bit
- * |        |          |0 = LCD operation Disabled.
- * |        |          |1 = LCD operation Enabled.
- * |[31]    |LCDENIND  |LCD Operation Enable Indicator (Read Only)
- * |        |          |This bit is LCD operation enable and disable indicator.
- * |        |          |0 = When LCDEN changed, LCD operation Enable/Disable is completed.
- * |        |          |1 = When LCDEN changed, LCD operation Enable/Disable is processing.
- * |        |          |Note: This bit is read only.
- * @var LCD_T::PSET
- * Offset: 0x04  LCD Panel Setting Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[1:0]   |BIAS      |LCD Bias Level Selection
- * |        |          |This field is used to select the LCD bias level.
- * |        |          |00 = Reserved.
- * |        |          |01 = 1/2 Bias.
- * |        |          |10 = 1/3 Bias.
- * |        |          |11 = 1/4 Bias.
- * |        |          |Note: The register canu2019t be changed after LCD enable.
- * |[4:2]   |DUTY      |LCD Duty Ratio Selection
- * |        |          |This field is used to select the LCD duty ratio.
- * |        |          |000 = 1/1 Duty.
- * |        |          |001 = 1/2 Duty.
- * |        |          |010 = 1/3 Duty.
- * |        |          |011 = 1/4 Duty.
- * |        |          |100 = 1/5 Duty.
- * |        |          |101 = 1/6 Duty.
- * |        |          |110 = 1/7 Duty.
- * |        |          |111 = 1/8 Duty.
- * |        |          |Note: The register canu2019t be changed after LCD enable.
- * |[5]     |TYPE      |LCD Waveform Type Selection
- * |        |          |This bit is used to select the LCD waveform type.
- * |        |          |0 = LCD waveform type A.
- * |        |          |1 = LCD waveform type B.
- * |        |          |Note: The register canu2019t be changed after LCD enable.
- * |[6]     |INV       |LCD Waveform Inverse Control
- * |        |          |This bit is used to inverse LCD waveform.
- * |        |          |0 = LCD waveform inverse function Disabled.
- * |        |          |1 = LCD waveform inverse function Enabled.
- * |        |          |Note: The register can¡¦t be changed after LCD enabled.
- * |[17:8]  |LCDDIV    |LCD Operating Clock Divide Number from LCDCLK Clock Source
- * |        |          |LCDOPCLK = LCDCLK / (LCDDIV + 1).
- * |        |          |Note: The register canu2019t be changed after LCD enable.
- * @var LCD_T::FSET
- * Offset: 0x08  LCD Frame Setting Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |BLINK     |LCD Blinking Function Enable Bit
- * |        |          |0 = LCD blinking function Disabled.
- * |        |          |1 = LCD blinking function Enabled.
- * |[17:8]  |FCV       |Frame Counter Comparison Value
- * |        |          |This field indicates the frame counter comparison value.
- * @var LCD_T::OSET
- * Offset: 0x10  LCD Output Setting Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |SEL9      |LCD_PIN9 Output Selection
- * |        |          |0 = LCD_COM4 is shown on LCD_PIN9.
- * |        |          |1 = LCD_SEG43 is shown on LCD_PIN9.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[1]     |SEL10     |LCD_PIN10 Output Selection
- * |        |          |0 = LCD_COM5 is shown on LCD_PIN10.
- * |        |          |1 = LCD_SEG42 is shown on LCD_PIN10.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[2]     |SEL11     |LCD_PIN11 Output Selection
- * |        |          |0 = LCD_SEG20 is shown on LCD_PIN11.
- * |        |          |1 = LCD_COM0 is shown on LCD_PIN11.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[3]     |SEL12     |LCD_PIN12 Output Selection
- * |        |          |0 = LCD_SEG19 is shown on LCD_PIN12.
- * |        |          |1 = LCD_COM1 is shown on LCD_PIN12.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[4]     |SEL13     |LCD_PIN13 Output Selection
- * |        |          |0 = LCD_SEG18 is shown on LCD_PIN13.
- * |        |          |1 = LCD_COM2 is shown on LCD_PIN13.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[5]     |SEL14     |LCD_PIN14 Output Selection
- * |        |          |0 = LCD_SEG17 is shown on LCD_PIN14.
- * |        |          |1 = LCD_COM3 is shown on LCD_PIN14.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[6]     |SEL15     |LCD_PIN15 Output Selection
- * |        |          |0 = LCD_COM6 is shown on LCD_PIN15.
- * |        |          |1 = LCD_SEG41 is shown on LCD_PIN15.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[7]     |SEL16     |LCD_PIN16 Output Selection
- * |        |          |0 = LCD_COM7 is shown on LCD_PIN16.
- * |        |          |1 = LCD_SEG40 is shown on LCD_PIN16.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[8]     |SEL24     |LCD_PIN24 Output Selection
- * |        |          |0 = LCD_SEG31 is shown on LCD_PIN24.
- * |        |          |1 = LCD_COM4 is shown on LCD_PIN24.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[9]     |SEL25     |LCD_PIN25 Output Selection
- * |        |          |0 = LCD_SEG30 is shown on LCD_PIN25.
- * |        |          |1 = LCD_COM5 is shown on LCD_PIN25.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[10]    |SEL26     |LCD_PIN26 Output Selection
- * |        |          |0 = LCD_SEG29 is shown on LCD_PIN26.
- * |        |          |1 = LCD_COM6 is shown on LCD_PIN26.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[11]    |SEL27     |LCD_PIN27 Output Selection
- * |        |          |0 = LCD_SEG28 is shown on LCD_PIN27.
- * |        |          |1 = LCD_COM7 is shown on LCD_PIN27.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[12]    |SEL28     |LCD_PIN28 Output Selection
- * |        |          |0 = LCD_SEG27 is shown on LCD_PIN28.
- * |        |          |1 = LCD_COM2 is shown on LCD_PIN28.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[13]    |SEL29     |LCD_PIN29 Output Selection
- * |        |          |0 = LCD_SEG26 is shown on LCD_PIN29.
- * |        |          |1 = LCD_COM3 is shown on LCD_PIN29.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[15:14] |SEL37     |LCD_PIN37 Output Selection
- * |        |          |00 = LCD_SEG18 is shown on LCD_PIN37.
- * |        |          |01 = LCD_COM6 is shown on LCD_PIN37.
- * |        |          |10 = LCD_SEG45 is shown on LCD_PIN37.
- * |        |          |11 = Reserved.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[17:16] |SEL38     |LCD_PIN38 Output Selection
- * |        |          |00 = LCD_SEG17 is shown on LCD_PIN38.
- * |        |          |01 = LCD_COM7 is shown on LCD_PIN38.
- * |        |          |10 = LCD_SEG44 is shown on LCD_PIN38.
- * |        |          |11 = Reserved.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[18]    |SEL39     |LCD_PIN39 Output Selection
- * |        |          |0 = LCD_SEG14 is shown on LCD_PIN39 .
- * |        |          |1 = LCD_COM0 is shown on LCD_PIN39.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * |[19]    |SEL40     |LCD_PIN40 Output Selection
- * |        |          |0 = LCD_SEG13 is shown on LCD_PIN40.
- * |        |          |1 = LCD_COM1 is shown on LCD_PIN40.
- * |        |          |Note 1: The register canu2019t be changed after LCD enable.
- * |        |          |Note 2: Please refer to Error! Reference source not found..
- * @var LCD_T::STS
- * Offset: 0x14  LCD Status Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |FSCEND    |Frame Counter Interrupt Flag
- * |        |          |0 = No frame counter interrupt event.
- * |        |          |1 = Frame counter interrupt event occurred.
- * |        |          |Note: This bit can be written 1 to clear.
- * |[1]     |FSEND     |Frame End Interrupt Flag
- * |        |          |0 = No frame end interrupt event.
- * |        |          |1 = Frame end interrupt event occurred.
- * |        |          |Note: This bit can be written 1 to clear.
- * @var LCD_T::INTEN
- * Offset: 0x18  LCD Interrupt Enable Register
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |FIECEND   |Frame Counter Interrupt Enable Bit
- * |        |          |This bit is used to enable the LCD interrupt when frame counter interrupt event occurred.
- * |        |          |0 = Frame counter interrupt Disabled.
- * |        |          |1 = Frame counter interrupt Enabled.
- * |[1]     |FIEEND    |Frame End Interrupt Enable Bit
- * |        |          |This bit is used to enable the LCD interrupt when frame end interrupt event occurred.
- * |        |          |0 = Frame end interrupt Disabled.
- * |        |          |1 = Frame end interrupt Enabled.
+    /**
+     * @var LCD_T::CTL
+     * Offset: 0x00  LCD Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |LCDEN     |LCD Operation Enable Bit
+     * |        |          |0 = LCD operation Disabled.
+     * |        |          |1 = LCD operation Enabled.
+     * |[31]    |LCDENIND  |LCD Operation Enable Indicator (Read Only)
+     * |        |          |This bit is LCD operation enable and disable indicator.
+     * |        |          |0 = When LCDEN changed, LCD operation Enable/Disable is completed.
+     * |        |          |1 = When LCDEN changed, LCD operation Enable/Disable is processing.
+     * |        |          |Note: This bit is read only.
+     * @var LCD_T::PSET
+     * Offset: 0x04  LCD Panel Setting Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[1:0]   |BIAS      |LCD Bias Level Selection
+     * |        |          |This field is used to select the LCD bias level.
+     * |        |          |00 = Reserved.
+     * |        |          |01 = 1/2 Bias.
+     * |        |          |10 = 1/3 Bias.
+     * |        |          |11 = 1/4 Bias.
+     * |        |          |Note: The register can't be changed after LCD enable.
+     * |[4:2]   |DUTY      |LCD Duty Ratio Selection
+     * |        |          |This field is used to select the LCD duty ratio.
+     * |        |          |000 = 1/1 Duty.
+     * |        |          |001 = 1/2 Duty.
+     * |        |          |010 = 1/3 Duty.
+     * |        |          |011 = 1/4 Duty.
+     * |        |          |100 = 1/5 Duty.
+     * |        |          |101 = 1/6 Duty.
+     * |        |          |110 = 1/7 Duty.
+     * |        |          |111 = 1/8 Duty.
+     * |        |          |Note: The register can't be changed after LCD enable.
+     * |[5]     |TYPE      |LCD Waveform Type Selection
+     * |        |          |This bit is used to select the LCD waveform type.
+     * |        |          |0 = LCD waveform type A.
+     * |        |          |1 = LCD waveform type B.
+     * |        |          |Note: The register can't be changed after LCD enable.
+     * |[6]     |INV       |LCD Waveform Inverse Control
+     * |        |          |This bit is used to inverse LCD waveform.
+     * |        |          |0 = LCD waveform inverse function Disabled.
+     * |        |          |1 = LCD waveform inverse function Enabled.
+     * |        |          |Note: The register can¡¦t be changed after LCD enabled.
+     * |[17:8]  |LCDDIV    |LCD Operating Clock Divide Number from LCDCLK Clock Source
+     * |        |          |LCDOPCLK = LCDCLK / (LCDDIV + 1).
+     * |        |          |Note: The register can't be changed after LCD enable.
+     * @var LCD_T::FSET
+     * Offset: 0x08  LCD Frame Setting Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |BLINK     |LCD Blinking Function Enable Bit
+     * |        |          |0 = LCD blinking function Disabled.
+     * |        |          |1 = LCD blinking function Enabled.
+     * |[17:8]  |FCV       |Frame Counter Comparison Value
+     * |        |          |This field indicates the frame counter comparison value.
+     * @var LCD_T::OSET
+     * Offset: 0x10  LCD Output Setting Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |SEL9      |LCD_PIN9 Output Selection
+     * |        |          |0 = LCD_COM4 is shown on LCD_PIN9.
+     * |        |          |1 = LCD_SEG43 is shown on LCD_PIN9.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[1]     |SEL10     |LCD_PIN10 Output Selection
+     * |        |          |0 = LCD_COM5 is shown on LCD_PIN10.
+     * |        |          |1 = LCD_SEG42 is shown on LCD_PIN10.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[2]     |SEL11     |LCD_PIN11 Output Selection
+     * |        |          |0 = LCD_SEG20 is shown on LCD_PIN11.
+     * |        |          |1 = LCD_COM0 is shown on LCD_PIN11.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[3]     |SEL12     |LCD_PIN12 Output Selection
+     * |        |          |0 = LCD_SEG19 is shown on LCD_PIN12.
+     * |        |          |1 = LCD_COM1 is shown on LCD_PIN12.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[4]     |SEL13     |LCD_PIN13 Output Selection
+     * |        |          |0 = LCD_SEG18 is shown on LCD_PIN13.
+     * |        |          |1 = LCD_COM2 is shown on LCD_PIN13.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[5]     |SEL14     |LCD_PIN14 Output Selection
+     * |        |          |0 = LCD_SEG17 is shown on LCD_PIN14.
+     * |        |          |1 = LCD_COM3 is shown on LCD_PIN14.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[6]     |SEL15     |LCD_PIN15 Output Selection
+     * |        |          |0 = LCD_COM6 is shown on LCD_PIN15.
+     * |        |          |1 = LCD_SEG41 is shown on LCD_PIN15.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[7]     |SEL16     |LCD_PIN16 Output Selection
+     * |        |          |0 = LCD_COM7 is shown on LCD_PIN16.
+     * |        |          |1 = LCD_SEG40 is shown on LCD_PIN16.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[8]     |SEL24     |LCD_PIN24 Output Selection
+     * |        |          |0 = LCD_SEG31 is shown on LCD_PIN24.
+     * |        |          |1 = LCD_COM4 is shown on LCD_PIN24.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[9]     |SEL25     |LCD_PIN25 Output Selection
+     * |        |          |0 = LCD_SEG30 is shown on LCD_PIN25.
+     * |        |          |1 = LCD_COM5 is shown on LCD_PIN25.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[10]    |SEL26     |LCD_PIN26 Output Selection
+     * |        |          |0 = LCD_SEG29 is shown on LCD_PIN26.
+     * |        |          |1 = LCD_COM6 is shown on LCD_PIN26.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[11]    |SEL27     |LCD_PIN27 Output Selection
+     * |        |          |0 = LCD_SEG28 is shown on LCD_PIN27.
+     * |        |          |1 = LCD_COM7 is shown on LCD_PIN27.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[12]    |SEL28     |LCD_PIN28 Output Selection
+     * |        |          |0 = LCD_SEG27 is shown on LCD_PIN28.
+     * |        |          |1 = LCD_COM2 is shown on LCD_PIN28.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[13]    |SEL29     |LCD_PIN29 Output Selection
+     * |        |          |0 = LCD_SEG26 is shown on LCD_PIN29.
+     * |        |          |1 = LCD_COM3 is shown on LCD_PIN29.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[15:14] |SEL37     |LCD_PIN37 Output Selection
+     * |        |          |00 = LCD_SEG18 is shown on LCD_PIN37.
+     * |        |          |01 = LCD_COM6 is shown on LCD_PIN37.
+     * |        |          |10 = LCD_SEG45 is shown on LCD_PIN37.
+     * |        |          |11 = Reserved.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[17:16] |SEL38     |LCD_PIN38 Output Selection
+     * |        |          |00 = LCD_SEG17 is shown on LCD_PIN38.
+     * |        |          |01 = LCD_COM7 is shown on LCD_PIN38.
+     * |        |          |10 = LCD_SEG44 is shown on LCD_PIN38.
+     * |        |          |11 = Reserved.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[18]    |SEL39     |LCD_PIN39 Output Selection
+     * |        |          |0 = LCD_SEG14 is shown on LCD_PIN39 .
+     * |        |          |1 = LCD_COM0 is shown on LCD_PIN39.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * |[19]    |SEL40     |LCD_PIN40 Output Selection
+     * |        |          |0 = LCD_SEG13 is shown on LCD_PIN40.
+     * |        |          |1 = LCD_COM1 is shown on LCD_PIN40.
+     * |        |          |Note 1: The register can't be changed after LCD enable.
+     * |        |          |Note 2: Please refer to Error! Reference source not found..
+     * @var LCD_T::STS
+     * Offset: 0x14  LCD Status Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |FSCEND    |Frame Counter Interrupt Flag
+     * |        |          |0 = No frame counter interrupt event.
+     * |        |          |1 = Frame counter interrupt event occurred.
+     * |        |          |Note: This bit can be written 1 to clear.
+     * |[1]     |FSEND     |Frame End Interrupt Flag
+     * |        |          |0 = No frame end interrupt event.
+     * |        |          |1 = Frame end interrupt event occurred.
+     * |        |          |Note: This bit can be written 1 to clear.
+     * @var LCD_T::INTEN
+     * Offset: 0x18  LCD Interrupt Enable Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |FIECEND   |Frame Counter Interrupt Enable Bit
+     * |        |          |This bit is used to enable the LCD interrupt when frame counter interrupt event occurred.
+     * |        |          |0 = Frame counter interrupt Disabled.
+     * |        |          |1 = Frame counter interrupt Enabled.
+     * |[1]     |FIEEND    |Frame End Interrupt Enable Bit
+     * |        |          |This bit is used to enable the LCD interrupt when frame end interrupt event occurred.
+     * |        |          |0 = Frame end interrupt Disabled.
+     * |        |          |1 = Frame end interrupt Enabled.
 
- * @var LCD_T::SEGDAT
- * Offset: 0x20  LCD Segment Display Data Register 0 (SEG0 ~ SEG3)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG0      |SEG0 Display Data
- * |        |          |This bit field indicates the display data of SEG0 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG0[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG1      |SEG1 Display Data
- * |        |          |This bit field indicates the display data of SEG1 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG1[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG2      |SEG2 Display Data
- * |        |          |This bit field indicates the display data of SEG2 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG2[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG3      |SEG3 Display Data
- * |        |          |This bit field indicates the display data of SEG3 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG3[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x24  LCD Segment Display Data Register 1 (SEG4 ~ SEG7)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG4      |SEG4 Display Data
- * |        |          |This bit field indicates the display data of SEG4 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG4[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG5      |SEG5 Display Data
- * |        |          |This bit field indicates the display data of SEG5 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG5[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG6      |SEG6 Display Data
- * |        |          |This bit field indicates the display data of SEG6 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG6[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG7      |SEG7 Display Data
- * |        |          |This bit field indicates the display data of SEG7 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG7[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x28  LCD Segment Display Data Register 2 (SEG8 ~ SEG11)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG8      |SEG8 Display Data
- * |        |          |This bit field indicates the display data of SEG8 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG8[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG9      |SEG9 Display Data
- * |        |          |This bit field indicates the display data of SEG9 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG9[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG10     |SEG10 Display Data
- * |        |          |This bit field indicates the display data of SEG10 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG10[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG11     |SEG11 Display Data
- * |        |          |This bit field indicates the display data of SEG11 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG11[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x2C  LCD Segment Display Data Register 3 (LCD SEG12 ~ SEG15)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG12     |SEG12 Display Data
- * |        |          |This bit field indicates the display data of SEG12 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG12[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG13     |SEG13 Display Data
- * |        |          |This bit field indicates the display data of SEG13 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG13[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG14     |SEG14 Display Data
- * |        |          |This bit field indicates the display data of SEG14 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG14[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG15     |SEG15 Display Data
- * |        |          |This bit field indicates the display data of SEG15 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG15[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x30  LCD Segment Display Data Register 4 (LCD SEG16 ~ SEG19)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG16     |SEG16 Display Data
- * |        |          |This bit field indicates the display data of SEG16 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG16[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG17     |SEG17 Display Data
- * |        |          |This bit field indicates the display data of SEG17 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG17[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG18     |SEG18 Display Data
- * |        |          |This bit field indicates the display data of SEG18 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG18[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG19     |SEG19 Display Data
- * |        |          |This bit field indicates the display data of SEG19 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG19[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x34  LCD Segment Display Data Register 5 (SEG20 ~ SEG23)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG20     |SEG20 Display Data
- * |        |          |This bit field indicates the display data of SEG20 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG20[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG21     |SEG21 Display Data
- * |        |          |This bit field indicates the display data of SEG21 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG21[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG22     |SEG22 Display Data
- * |        |          |This bit field indicates the display data of SEG22 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG22[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG23     |SEG23 Display Data
- * |        |          |This bit field indicates the display data of SEG23 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG23[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x38  LCD Segment Display Data Register 6 (SEG24 ~ SEG27)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG24     |SEG24 Display Data
- * |        |          |This bit field indicates the display data of SEG24 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG24[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG25     |SEG25 Display Data
- * |        |          |This bit field indicates the display data of SEG25 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG25[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG26     |SEG26 Display Data
- * |        |          |This bit field indicates the display data of SEG26 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG26[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG27     |SEG27 Display Data
- * |        |          |This bit field indicates the display data of SEG27 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG27[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x3C  LCD Segment Display Data Register 7 (SEG28 ~ SEG31)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG28     |SEG28 Display Data
- * |        |          |This bit field indicates the display data of SEG28 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG28[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG29     |SEG29 Display Data
- * |        |          |This bit field indicates the display data of SEG29 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG29[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG30     |SEG30 Display Data
- * |        |          |This bit field indicates the display data of SEG30 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG30[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG31     |SEG31 Display Data
- * |        |          |This bit field indicates the display data of SEG31 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG31[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x40  LCD Segment Display Data Register 8 (SEG32 ~ SEG35)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG32     |SEG32 Display Data
- * |        |          |This bit field indicates the display data of SEG32 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG32[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG33     |SEG33 Display Data
- * |        |          |This bit field indicates the display data of SEG33 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG33[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG34     |SEG34 Display Data
- * |        |          |This bit field indicates the display data of SEG34 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG34[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG35     |SEG35 Display Data
- * |        |          |This bit field indicates the display data of SEG35 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG35[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x44  LCD Segment Display Data Register 9 (SEG36 ~ SEG39)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG36     |SEG36 Display Data
- * |        |          |This bit field indicates the display data of SEG36 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG36[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG37     |SEG37 Display Data
- * |        |          |This bit field indicates the display data of SEG37 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG37[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG38     |SEG38 Display Data
- * |        |          |This bit field indicates the display data of SEG38 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG38[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG39     |SEG39 Display Data
- * |        |          |This bit field indicates the display data of SEG39 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG39[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x48  LCD Segment Display Data Register 10 (SEG40 ~ SEG43)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG40     |SEG40 Display Data
- * |        |          |This bit field indicates the display data of SEG40 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG40[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG41     |SEG41 Display Data
- * |        |          |This bit field indicates the display data of SEG41 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG41[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[23:16] |SEG42     |SEG42 Display Data
- * |        |          |This bit field indicates the display data of SEG42 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG42[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[31:24] |SEG43     |SEG43 Display Data
- * |        |          |This bit field indicates the display data of SEG43 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG43[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * Offset: 0x4C  LCD Segment Display Data Register 11 (SEG44 ~ SEG45)
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[7:0]   |SEG44     |SEG44 Display Data
- * |        |          |This bit field indicates the display data of SEG44 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG44[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * |[15:8]  |SEG45     |SEG45 Display Data
- * |        |          |This bit field indicates the display data of SEG45 corresponding to COM0 ~ COM7.
- * |        |          |0 = This dot is inactive.
- * |        |          |1 = This dot is active.
- * |        |          |Note 1: Each bit of SEG45[n] is corresponding to COMn, n = 0 ~ 7.
- * |        |          |Note 2: Refer to Error! Reference source not found..
- * @var LCD_T::ASET1
- * Offset: 0x60  LCD Analog Setting Register 1
- * ---------------------------------------------------------------------------------------------------
- * |Bits    |Field     |Descriptions
- * | :----: | :----:   | :---- |
- * |[0]     |LCDPEN    |LCD Power Enable Bit
- * |        |          |This bit is used to turn on the LCD power.
- * |        |          |0 = LCD power Disabled.
- * |        |          |1 = LCD power Enabled.
- * |        |          |Note: The register canu2019t be changed after LCD enable.
- * |[2:1]   |PSTRUC    |LCD Power Structure Selection
- * |        |          |This bit field is used to select the LCD power structure.
- * |        |          |00 = Internal charge pump.
- * |        |          |01 = External resistance divider.
- * |        |          |10 = Capacitor split.
- * |        |          |11= Reserved.
- * |        |          |Note: The register canu2019t be changed after LCD enable.
- * |[6:3]   |VL1SEL    |LCD Charge Pump Unit Voltage VL1 Selection
- * |        |          |This setting is available only when power structure is internal charge pump mode by setting PSTRUC (LCD_ASET1[2:1]) to u201C00bu201D.
- * |        |          |0000 = 1.00 V.
- * |        |          |0001 = 1.05 V.
- * |        |          |0010 = 1.10 V.
- * |        |          |0011 = 1.15 V.
- * |        |          |0100 = 1.20 V.
- * |        |          |0101 = 1.25 V.
- * |        |          |0110 = 1.30 V.
- * |        |          |0111 = 1.35 V.
- * |        |          |1000 = 1.40 V.
- * |        |          |1001 = 1.45 V.
- * |        |          |1010 = 1.50 V.
- * |        |          |1011 = 1.55 V.
- * |        |          |1100 = 1.60 V.
- * |        |          |1101 = 1.65 V.
- * |        |          |1110 = 1.70 V.
- * |        |          |1111 = 1.75 V.
- */
+     * @var LCD_T::SEGDAT
+     * Offset: 0x20  LCD Segment Display Data Register 0 (SEG0 ~ SEG3)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG0      |SEG0 Display Data
+     * |        |          |This bit field indicates the display data of SEG0 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG0[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG1      |SEG1 Display Data
+     * |        |          |This bit field indicates the display data of SEG1 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG1[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG2      |SEG2 Display Data
+     * |        |          |This bit field indicates the display data of SEG2 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG2[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG3      |SEG3 Display Data
+     * |        |          |This bit field indicates the display data of SEG3 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG3[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x24  LCD Segment Display Data Register 1 (SEG4 ~ SEG7)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG4      |SEG4 Display Data
+     * |        |          |This bit field indicates the display data of SEG4 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG4[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG5      |SEG5 Display Data
+     * |        |          |This bit field indicates the display data of SEG5 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG5[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG6      |SEG6 Display Data
+     * |        |          |This bit field indicates the display data of SEG6 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG6[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG7      |SEG7 Display Data
+     * |        |          |This bit field indicates the display data of SEG7 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG7[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x28  LCD Segment Display Data Register 2 (SEG8 ~ SEG11)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG8      |SEG8 Display Data
+     * |        |          |This bit field indicates the display data of SEG8 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG8[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG9      |SEG9 Display Data
+     * |        |          |This bit field indicates the display data of SEG9 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG9[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG10     |SEG10 Display Data
+     * |        |          |This bit field indicates the display data of SEG10 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG10[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG11     |SEG11 Display Data
+     * |        |          |This bit field indicates the display data of SEG11 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG11[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x2C  LCD Segment Display Data Register 3 (LCD SEG12 ~ SEG15)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG12     |SEG12 Display Data
+     * |        |          |This bit field indicates the display data of SEG12 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG12[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG13     |SEG13 Display Data
+     * |        |          |This bit field indicates the display data of SEG13 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG13[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG14     |SEG14 Display Data
+     * |        |          |This bit field indicates the display data of SEG14 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG14[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG15     |SEG15 Display Data
+     * |        |          |This bit field indicates the display data of SEG15 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG15[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x30  LCD Segment Display Data Register 4 (LCD SEG16 ~ SEG19)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG16     |SEG16 Display Data
+     * |        |          |This bit field indicates the display data of SEG16 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG16[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG17     |SEG17 Display Data
+     * |        |          |This bit field indicates the display data of SEG17 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG17[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG18     |SEG18 Display Data
+     * |        |          |This bit field indicates the display data of SEG18 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG18[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG19     |SEG19 Display Data
+     * |        |          |This bit field indicates the display data of SEG19 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG19[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x34  LCD Segment Display Data Register 5 (SEG20 ~ SEG23)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG20     |SEG20 Display Data
+     * |        |          |This bit field indicates the display data of SEG20 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG20[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG21     |SEG21 Display Data
+     * |        |          |This bit field indicates the display data of SEG21 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG21[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG22     |SEG22 Display Data
+     * |        |          |This bit field indicates the display data of SEG22 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG22[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG23     |SEG23 Display Data
+     * |        |          |This bit field indicates the display data of SEG23 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG23[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x38  LCD Segment Display Data Register 6 (SEG24 ~ SEG27)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG24     |SEG24 Display Data
+     * |        |          |This bit field indicates the display data of SEG24 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG24[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG25     |SEG25 Display Data
+     * |        |          |This bit field indicates the display data of SEG25 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG25[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG26     |SEG26 Display Data
+     * |        |          |This bit field indicates the display data of SEG26 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG26[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG27     |SEG27 Display Data
+     * |        |          |This bit field indicates the display data of SEG27 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG27[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x3C  LCD Segment Display Data Register 7 (SEG28 ~ SEG31)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG28     |SEG28 Display Data
+     * |        |          |This bit field indicates the display data of SEG28 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG28[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG29     |SEG29 Display Data
+     * |        |          |This bit field indicates the display data of SEG29 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG29[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG30     |SEG30 Display Data
+     * |        |          |This bit field indicates the display data of SEG30 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG30[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG31     |SEG31 Display Data
+     * |        |          |This bit field indicates the display data of SEG31 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG31[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x40  LCD Segment Display Data Register 8 (SEG32 ~ SEG35)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG32     |SEG32 Display Data
+     * |        |          |This bit field indicates the display data of SEG32 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG32[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG33     |SEG33 Display Data
+     * |        |          |This bit field indicates the display data of SEG33 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG33[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG34     |SEG34 Display Data
+     * |        |          |This bit field indicates the display data of SEG34 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG34[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG35     |SEG35 Display Data
+     * |        |          |This bit field indicates the display data of SEG35 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG35[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x44  LCD Segment Display Data Register 9 (SEG36 ~ SEG39)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG36     |SEG36 Display Data
+     * |        |          |This bit field indicates the display data of SEG36 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG36[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG37     |SEG37 Display Data
+     * |        |          |This bit field indicates the display data of SEG37 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG37[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG38     |SEG38 Display Data
+     * |        |          |This bit field indicates the display data of SEG38 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG38[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG39     |SEG39 Display Data
+     * |        |          |This bit field indicates the display data of SEG39 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG39[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x48  LCD Segment Display Data Register 10 (SEG40 ~ SEG43)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG40     |SEG40 Display Data
+     * |        |          |This bit field indicates the display data of SEG40 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG40[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG41     |SEG41 Display Data
+     * |        |          |This bit field indicates the display data of SEG41 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG41[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[23:16] |SEG42     |SEG42 Display Data
+     * |        |          |This bit field indicates the display data of SEG42 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG42[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[31:24] |SEG43     |SEG43 Display Data
+     * |        |          |This bit field indicates the display data of SEG43 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG43[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * Offset: 0x4C  LCD Segment Display Data Register 11 (SEG44 ~ SEG45)
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[7:0]   |SEG44     |SEG44 Display Data
+     * |        |          |This bit field indicates the display data of SEG44 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG44[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * |[15:8]  |SEG45     |SEG45 Display Data
+     * |        |          |This bit field indicates the display data of SEG45 corresponding to COM0 ~ COM7.
+     * |        |          |0 = This dot is inactive.
+     * |        |          |1 = This dot is active.
+     * |        |          |Note 1: Each bit of SEG45[n] is corresponding to COMn, n = 0 ~ 7.
+     * |        |          |Note 2: Refer to Error! Reference source not found..
+     * @var LCD_T::ASET1
+     * Offset: 0x60  LCD Analog Setting Register 1
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[0]     |LCDPEN    |LCD Power Enable Bit
+     * |        |          |This bit is used to turn on the LCD power.
+     * |        |          |0 = LCD power Disabled.
+     * |        |          |1 = LCD power Enabled.
+     * |        |          |Note: The register can't be changed after LCD enable.
+     * |[2:1]   |PSTRUC    |LCD Power Structure Selection
+     * |        |          |This bit field is used to select the LCD power structure.
+     * |        |          |00 = Internal charge pump.
+     * |        |          |01 = External resistance divider.
+     * |        |          |10 = Capacitor split.
+     * |        |          |11= Reserved.
+     * |        |          |Note: The register can't be changed after LCD enable.
+     * |[6:3]   |VL1SEL    |LCD Charge Pump Unit Voltage VL1 Selection
+     * |        |          |This setting is available only when power structure is internal charge pump mode by setting PSTRUC (LCD_ASET1[2:1]) to "00b".
+     * |        |          |0000 = 1.00 V.
+     * |        |          |0001 = 1.05 V.
+     * |        |          |0010 = 1.10 V.
+     * |        |          |0011 = 1.15 V.
+     * |        |          |0100 = 1.20 V.
+     * |        |          |0101 = 1.25 V.
+     * |        |          |0110 = 1.30 V.
+     * |        |          |0111 = 1.35 V.
+     * |        |          |1000 = 1.40 V.
+     * |        |          |1001 = 1.45 V.
+     * |        |          |1010 = 1.50 V.
+     * |        |          |1011 = 1.55 V.
+     * |        |          |1100 = 1.60 V.
+     * |        |          |1101 = 1.65 V.
+     * |        |          |1110 = 1.70 V.
+     * |        |          |1111 = 1.75 V.
+     */
     __IO uint32_t CTL;                   /*!< [0x0000] LCD Control Register                                             */
     __IO uint32_t PSET;                  /*!< [0x0004] LCD Panel Setting Register                                       */
     __IO uint32_t FSET;                  /*!< [0x0008] LCD Frame Setting Register                                       */

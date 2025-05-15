@@ -180,19 +180,19 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
     /* If VLCD source is from Charge Pump, then select VL1 voltage level */
     if (pLCDSET->u32VSrc == LCD_VOLTAGE_SOURCE_CP)
         LCD_SET_CP_VOLTAGE(pLCDSET->u32VL1Select);
-    
+
     /* Select voltage source */
     LCD_VOLTAGE_SOURCE(pLCDSET->u32VSrc);
-    
+
     /* If VLCD source is not from VLCD R_mode, bandgap must be set in active mode at least short time */
     if (pLCDSET->u32VSrc ==LCD_VOLTAGE_SOURCE_VLCD_C_MODE)
     {
         /* Unlock protected registers */
         SYS_UnlockReg();
-        
+
         /* Set bandgap in active mode */
         CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
-        
+
         /* Set delay 50 ms (VL1/VL2/VL3 connected to 0.47uF) */
         for (u32DelayCycle=0; u32DelayCycle<50; u32DelayCycle++)
             CLK_SysTickLongDelay(1000);
@@ -207,7 +207,7 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
 
         /* Set bandgap in active mode */
         CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
-        
+
         /* Set delay 500 ms (VL1/VL2/VL3 connected to 0.47uF) */
         for (u32DelayCycle=0; u32DelayCycle<50; u32DelayCycle++)
             CLK_SysTickLongDelay(1000);

@@ -169,7 +169,7 @@ int main(void)
     printf("+-----------------------------------------------------+\n\n");
 
     /* Unlock protected registers */
-    SYS_UnlockReg();                   
+    SYS_UnlockReg();
 
     /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC_Open();

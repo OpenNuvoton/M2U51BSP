@@ -19,14 +19,14 @@
 
 typedef enum
 {
-    G_A0, G_A1,	G_A2, G_A3, G_A4, G_A5,	G_A6, G_A7, G_A8, G_A9,	G_A10, G_A11, G_A12, G_A13,	G_A14, G_A15,
-    G_B0, G_B1,	G_B2, G_B3, G_B4, G_B5,	G_B6, G_B7, G_B8, G_B9,	G_B10, G_B11, G_B12, G_B13,	G_B14, G_B15,
-    G_C0, G_C1,	G_C2, G_C3, G_C4, G_C5,	G_C6, G_C7, G_C8, G_C9,	G_C10, G_C11, G_C12, G_C13,	G_C14, G_C15,
-    G_D0, G_D1,	G_D2, G_D3, G_D4, G_D5,	G_D6, G_D7, G_D8, G_D9,	G_D10, G_D11, G_D12, G_D13,	G_D14, G_D15,
-    G_E0, G_E1,	G_E2, G_E3, G_E4, G_E5,	G_E6, G_E7, G_E8, G_E9,	G_E10, G_E11, G_E12, G_E13,	G_E14, G_E15,
-    G_F0, G_F1,	G_F2, G_F3, G_F4, G_F5,	G_F6, G_F7, G_F8, G_F9,	G_F10, G_F11, G_F12, G_F13,	G_F14, G_F15,
-    G_G0, G_G1,	G_G2, G_G3, G_G4, G_G5,	G_G6, G_G7, G_G8, G_G9,	G_G10, G_G11, G_G12, G_G13,	G_G14, G_G15,
-    G_H0, G_H1,	G_H2, G_H3, G_H4, G_H5,	G_H6, G_H7, G_H8, G_H9,	G_H10, G_H11, G_H12, G_H13,	G_H14, G_H15
+    G_A0, G_A1, G_A2, G_A3, G_A4, G_A5, G_A6, G_A7, G_A8, G_A9, G_A10, G_A11, G_A12, G_A13, G_A14, G_A15,
+    G_B0, G_B1, G_B2, G_B3, G_B4, G_B5, G_B6, G_B7, G_B8, G_B9, G_B10, G_B11, G_B12, G_B13, G_B14, G_B15,
+    G_C0, G_C1, G_C2, G_C3, G_C4, G_C5, G_C6, G_C7, G_C8, G_C9, G_C10, G_C11, G_C12, G_C13, G_C14, G_C15,
+    G_D0, G_D1, G_D2, G_D3, G_D4, G_D5, G_D6, G_D7, G_D8, G_D9, G_D10, G_D11, G_D12, G_D13, G_D14, G_D15,
+    G_E0, G_E1, G_E2, G_E3, G_E4, G_E5, G_E6, G_E7, G_E8, G_E9, G_E10, G_E11, G_E12, G_E13, G_E14, G_E15,
+    G_F0, G_F1, G_F2, G_F3, G_F4, G_F5, G_F6, G_F7, G_F8, G_F9, G_F10, G_F11, G_F12, G_F13, G_F14, G_F15,
+    G_G0, G_G1, G_G2, G_G3, G_G4, G_G5, G_G6, G_G7, G_G8, G_G9, G_G10, G_G11, G_G12, G_G13, G_G14, G_G15,
+    G_H0, G_H1, G_H2, G_H3, G_H4, G_H5, G_H6, G_H7, G_H8, G_H9, G_H10, G_H11, G_H12, G_H13, G_H14, G_H15
 } E_PIN_DEF;
 
 typedef struct
@@ -58,20 +58,20 @@ const MFP_LCD LCD_DH12_PIN[]=
 };
 
 /* COM0 ~ 7 */
-const MFP_LCD LCD_COM_PIN[]=	
+const MFP_LCD LCD_COM_PIN[]=
 {
     G_B5,   0x08,       //COM0
     G_B4,   0x08,       //COM1
     G_B3,   0x08,       //COM2
     G_B2,   0x08,       //COM3
-    G_D11,	0x08,       //COM5, SEG43
-    G_D10,	0x08,       //COM4, SEG42
-    G_E13,	0x08,       //COM6, SEG41
-    G_C8,	0x08,       //COM7, SEG40
+    G_D11,  0x08,       //COM5, SEG43
+    G_D10,  0x08,       //COM4, SEG42
+    G_E13,  0x08,       //COM6, SEG41
+    G_C8,   0x08,       //COM7, SEG40
 };
 
 /* SEG0 ~ 45 */
-const MFP_LCD_SEG LCD_SEG_PIN[]=	
+const MFP_LCD_SEG LCD_SEG_PIN[]=
 {
     G_A8,   0x08,   0,  //SEG00
     G_C12,  0x08,   1,  //SEG01
@@ -88,8 +88,8 @@ const MFP_LCD_SEG LCD_SEG_PIN[]=
     G_B14,  0x08,   12, //SEG12
     G_B15,  0x08,   13, //SEG13, COM1
     G_C14,  0x08,   14, //SEG14, COM0
-    G_E6,   0x08,   15, //SEG15     
-    G_E7,   0x08,   16, //SEG16     
+    G_E6,   0x08,   15, //SEG15
+    G_E7,   0x08,   16, //SEG16
     G_E11,  0x08,   17, //SEG17, COM3
     G_E10,  0x08,   18, //SEG18, COM2
     G_E9,   0x08,   19, //SEG19, COM1
@@ -113,19 +113,20 @@ const MFP_LCD_SEG LCD_SEG_PIN[]=
     G_A7,   0x08,   37, //SEG37
     G_C6,   0x08,   38, //SEG38
     G_C7,   0x08,   39, //SEG39
-    
+
 #if OPT_SEG45_LCD
     G_C8,   0x08,   40, //SEG40, COM7
     G_E13,  0x08,   41, //SEG41, COM6
     G_D10,  0x08,   42, //SEG42, COM4
     G_D11,  0x08,   43, //SEG43, COM5
-    G_H9,   0x08,   44,	//SEG44, COM6, SEG18
-    G_H8,   0x08,   45,	//SEG45, COM7, SEG17
+    G_H9,   0x08,   44, //SEG44, COM6, SEG18
+    G_H8,   0x08,   45, //SEG45, COM7, SEG17
 #endif
 };
 
-typedef enum {
-	eCHARGE_PUMP = 0x0, 
+typedef enum
+{
+    eCHARGE_PUMP = 0x0,
     eR_MODE,
     eC_MODE,
 } E_POWER_MODE;
@@ -326,7 +327,7 @@ void LCD_Init(void)
 #if OPT_SEG45_LCD
     /* Output Setting Select */
     LCD_OUTPUT_SET(LCD_OUTPUT_SEL9_COM4_TO_SEG43 | LCD_OUTPUT_SEL10_COM5_TO_SEG42 | LCD_OUTPUT_SEL15_COM6_TO_SEG41 |
-                  LCD_OUTPUT_SEL16_COM7_TO_SEG40 | LCD_OUTPUT_SEL37_SEG18_TO_SEG45 | LCD_OUTPUT_SEL38_SEG17_TO_SEG44);
+                   LCD_OUTPUT_SEL16_COM7_TO_SEG40 | LCD_OUTPUT_SEL37_SEG18_TO_SEG45 | LCD_OUTPUT_SEL38_SEG17_TO_SEG44);
 #endif
 
     /* LCD Initialize and calculate real frame rate */
@@ -432,8 +433,8 @@ int main(void)
     printf(" * Driving waveform is Type-%c\n", (g_LCDCfg.u32WaveformType == LCD_PSET_TYPE_Msk) ? 'B' : 'A');
     printf(" * Target frame rate is %uHz\n\n", g_LCDCfg.u32Framerate);
     printf("*** Notes:\n");
-    printf("   Since PB12 pin is used as SEG10, if this sample code is executed in the NuMaker Board, \n"); 
-    printf("   please do not enable the VCOM setting for PB12 in Nu-Link2-Me ICE. \n\n"); 
+    printf("   Since PB12 pin is used as SEG10, if this sample code is executed in the NuMaker Board, \n");
+    printf("   please do not enable the VCOM setting for PB12 in Nu-Link2-Me ICE. \n\n");
 
     /* Init LCD multi-function pins and settings */
     LCD_Init();

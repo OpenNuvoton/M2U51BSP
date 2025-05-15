@@ -113,7 +113,7 @@ void ACMP_Open(ACMP_T *acmp, uint32_t u32ChNum, uint32_t u32NegSrc, uint32_t u32
   */
 void ACMP_Close(ACMP_T *acmp, uint32_t u32ChNum)
 {
-        acmp->CTL[u32ChNum] &= (~ACMP_CTL_ACMPEN_Msk);
+    acmp->CTL[u32ChNum] &= (~ACMP_CTL_ACMPEN_Msk);
 }
 
 /*@}*/ /* end of group ACMP_EXPORTED_FUNCTIONS */
