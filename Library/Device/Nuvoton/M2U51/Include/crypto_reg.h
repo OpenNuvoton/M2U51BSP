@@ -58,7 +58,7 @@ typedef struct
      * |        |          |0 = No AES error.
      * |        |          |1 = AES error interrupt.
      * |        |          |Note: This bit is cleared by writing 1, and it has no effect by writing 0.
-     * @var CRPT_T::AES_FDBCK
+     * @var CRPT_T::AES_FDBCK[4]
          * Offset: 0x50-0x5C  AES Engine Output Feedback Data After Cryptographic Operation
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
@@ -191,8 +191,8 @@ typedef struct
      * |[31:0]  |DATOUT    |AES Engine Output Port
      * |        |          |CPU gets results from the AES engine through this port by checking CRPT_AES_STS
      * |        |          |Get data as OUTBUFEMPTY is 0.
-         * @var CRPT_T::AES_KEY
-         * Offset: 0x110-0x12C  AES Key Word Register
+     * @var CRPT_T::AES_KEY[8]
+     * Offset: 0x110~0x12C  AES Key Word 0~7 Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
@@ -203,8 +203,8 @@ typedef struct
      * |        |          |{CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 128-bit security key for AES operation.
      * |        |          |{CRPT_AES_KEY5, CRPT_AES_KEY4, CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 192-bit security key for AES operation.
      * |        |          |{CRPT_AES_KEY7, CRPT_AES_KEY6, CRPT_AES_KEY5, CRPT_AES_KEY4, CRPT_AES_KEY3, CRPT_AES_KEY2, CRPT_AES_KEY1, CRPT_AES_KEY0} stores the 256-bit security key for AES operation.
-         * @var CRPT_T::AES_IV
-         * Offset: 0x130-0x13C  AES Initial Vector Word Register
+     * @var CRPT_T::AES_IV[4]
+     * Offset: 0x130~0x13C  AES Initial Vector Word 0~3 Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |

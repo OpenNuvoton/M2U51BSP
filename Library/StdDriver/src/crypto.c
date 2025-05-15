@@ -41,9 +41,11 @@
 
 /* // @cond HIDDEN_SYMBOLS */
 
+/* // @endcond HIDDEN_SYMBOLS */
+
 /**
   * @brief  Open AES encrypt/decrypt function.
-  * @param[in]  crpt         The pointer of CRYPTO module
+  * @param[in]  crpt         The pointer of CRPT module
   * @param[in]  u32Channel   AES channel. Must be 0~3.
   * @param[in]  u32EncDec    1: AES encode;  0: AES decode
   * @param[in]  u32OpMode    AES operation mode, including:
@@ -80,7 +82,7 @@ void AES_Open(CRPT_T *crpt, uint32_t u32Channel, uint32_t u32EncDec,
 
 /**
   * @brief  Start AES encrypt/decrypt
-  * @param[in]  crpt        The pointer of CRYPTO module
+  * @param[in]  crpt        The pointer of CRPT module
   * @param[in]  u32Channel  AES channel. Must be 0~3.
   * @param[in]  u32DMAMode  AES DMA control, including:
   *         - \ref CRYPTO_DMA_ONE_SHOT   One shot AES encrypt/decrypt.
@@ -97,7 +99,7 @@ void AES_Start(CRPT_T *crpt, int32_t u32Channel, uint32_t u32DMAMode)
 
 /**
   * @brief  Set AES keys
-  * @param[in]  crpt        The pointer of CRYPTO module
+  * @param[in]  crpt        The pointer of CRPT module
   * @param[in]  u32Channel  AES channel. Must be 0~3.
   * @param[in]  au32Keys    An word array contains AES keys.
   * @param[in]  u32KeySize is AES key size, including:
@@ -127,7 +129,7 @@ void AES_SetKey(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32Keys[], uint32_t
 
 /**
   * @brief  Set AES initial vectors
-  * @param[in]  crpt        The pointer of CRYPTO module
+  * @param[in]  crpt        The pointer of CRPT module
   * @param[in]  u32Channel  AES channel. Must be 0~3.
   * @param[in]  au32IV      A four entry word array contains AES initial vectors.
   * @return None
@@ -149,7 +151,7 @@ void AES_SetInitVect(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32IV[])
 
 /**
   * @brief  Set AES DMA transfer configuration.
-  * @param[in]  crpt         The pointer of CRYPTO module
+  * @param[in]  crpt         The pointer of CRPT module
   * @param[in]  u32Channel   AES channel. Must be 0~3.
   * @param[in]  u32SrcAddr   AES DMA source address
   * @param[in]  u32DstAddr   AES DMA destination address
@@ -166,6 +168,7 @@ void AES_SetDMATransfer(CRPT_T *crpt, uint32_t u32Channel, uint32_t u32SrcAddr,
     crpt->AES_CNT   = u32TransCnt;
 
 }
+
 
 /**@}*/ /* end of group CRYPTO_EXPORTED_FUNCTIONS */
 

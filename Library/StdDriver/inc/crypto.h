@@ -6,8 +6,8 @@
  * @copyright SPDX-License-Identifier: Apache-2.0
  * @copyright Copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
-#ifndef __CRPT_H__
-#define __CRPT_H__
+#ifndef __CRYPTO_H__
+#define __CRYPTO_H__
 
 #ifdef __cplusplus
 extern "C"
@@ -18,12 +18,12 @@ extern "C"
   @{
 */
 
-/** @addtogroup CRPT_Driver CRYPTO Driver
+/** @addtogroup CRYPTO_Driver CRYPTO Driver
   @{
 */
 
 
-/** @addtogroup CRPT_EXPORTED_CONSTANTS CRPT Exported Constants
+/** @addtogroup CRYPTO_EXPORTED_CONSTANTS CRYPTO Exported Constants
   @{
 */
 
@@ -54,10 +54,10 @@ extern "C"
 #define CRYPTO_DMA_LAST         (0x7UL)   /*!< Do last encrypt/decrypt in DMA cascade          \hideinitializer */
 
 
-/**@}*/ /* end of group CRPT_EXPORTED_CONSTANTS */
+/**@}*/ /* end of group CRYPTO_EXPORTED_CONSTANTS */
 
 
-/** @addtogroup CRPT_EXPORTED_MACROS CRPT Exported Macros
+/** @addtogroup CRYPTO_EXPORTED_MACROS CRYPTO Exported Macros
   @{
 */
 
@@ -114,10 +114,10 @@ extern "C"
 #define AES_DISABLE_KEY_PROTECT(crpt) ((crpt)->AES_CTL = ((crpt)->AES_CTL & ~CRPT_AES_CTL_KEYPRT_Msk) | (0x16UL<<CRPT_AES_CTL_KEYUNPRT_Pos)); \
                                       ((crpt)->AES_CTL &= ~CRPT_AES_CTL_KEYPRT_Msk)
 
-/**@}*/ /* end of group CRPT_EXPORTED_MACROS */
+/**@}*/ /* end of group CRYPTO_EXPORTED_MACROS */
 
 
-/** @addtogroup CRPT_EXPORTED_FUNCTIONS CRPT Exported Functions
+/** @addtogroup CRYPTO_EXPORTED_FUNCTIONS CRYPTO Exported Functions
   @{
 */
 
@@ -130,9 +130,9 @@ void AES_SetKey(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32Keys[], uint32_t
 void AES_SetInitVect(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32IV[]);
 void AES_SetDMATransfer(CRPT_T *crpt, uint32_t u32Channel, uint32_t u32SrcAddr, uint32_t u32DstAddr, uint32_t u32TransCnt);
 
-/**@}*/ /* end of group CRPT_EXPORTED_FUNCTIONS */
+/**@}*/ /* end of group CRYPTO_EXPORTED_FUNCTIONS */
 
-/**@}*/ /* end of group CRPT_Driver */
+/**@}*/ /* end of group CRYPTO_Driver */
 
 /**@}*/ /* end of group Standard_Driver */
 
@@ -140,5 +140,5 @@ void AES_SetDMATransfer(CRPT_T *crpt, uint32_t u32Channel, uint32_t u32SrcAddr, 
 }
 #endif
 
-#endif  /* __CRPT_H__ */
+#endif  /* __CRYPTO_H__ */
 
