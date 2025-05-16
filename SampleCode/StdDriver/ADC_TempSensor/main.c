@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Convert Band-gap (channel 16) and print conversion result.
+ * @brief    Convert temperature sensor and print conversion result.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2025 Nuvoton Technology Corp. All rights reserved.
@@ -55,8 +55,8 @@ void SYS_Init(void)
     /* Set multi-function pins for UART0 RXD(PB.12) and TXD(PB.13) */
     Uart0DefaultMPF();
 
-    /* Force enable internal voltage Band-gap. */
-    SYS->VREFCTL |= SYS_VREFCTL_VBGFEN_Msk;
+    /* Enable temperature sensor */
+    SYS->IVSCTL |= SYS_IVSCTL_VTEMPEN_Msk;
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -68,14 +68,14 @@ void ADC_FunctionTest()
 
     printf("\n");
     printf("+-------------------------------------------------------------------+\n");
-    printf("|                  ADC for Band-gap test                            |\n");
+    printf("|                   ADC Temperature sensor test                     |\n");
     printf("+-------------------------------------------------------------------+\n");
 
     printf("+-------------------------------------------------------------------+\n");
     printf("|   ADC clock source -> HIRC   = 16 MHz                             |\n");
     printf("|   ADC clock divider          = 1                                  |\n");
     printf("|   ADC clock                  = 16 MHz / 1 = 16 MHz                |\n");
-    printf("|   If the internal channel for band-gap voltage is active,         |\n");
+    printf("|   If the internal channel for temperature sensor is active,       |\n");
     printf("|      the maximum sampling rate will be 100 KSPS.                  |\n");
     printf("|   ADC extended sampling time = 144                                |\n");
     printf("|   ADC conversion time = 16 + ADC extended sampling time = 160     |\n");
@@ -85,10 +85,10 @@ void ADC_FunctionTest()
     /* Enable ADC converter */
     ADC_POWER_ON(ADC);
 
-    /* Set ADC to Single mode, and select channel 16 (band-gap voltage) */
-    ADC_Open(ADC, (uint32_t)NULL, ADC_ADCR_ADMD_SINGLE, BIT16);
+    /* Set ADC to Single mode, and select channel 17 (temperature sensor) */
+    ADC_Open(ADC, (uint32_t)NULL, ADC_ADCR_ADMD_SINGLE, BIT17);
 
-    /* If the internal channel for band-gap voltage is active,
+    /* If the internal channel for temperature sensor is active,
        the maximum sampling rate will be 100 KSPS. */
     /* Set sample module external sampling time to 144 */
     ADC_SetExtendSampleTime(ADC, 0, 144);
@@ -110,11 +110,20 @@ void ADC_FunctionTest()
     /* Disable the A/D interrupt */
     ADC_DISABLE_INT(ADC, ADC_ADF_INT);
 
-    /* Get the conversion result of the channel 16 */
-    i32ConversionData = ADC_GET_CONVERSION_DATA(ADC, 16);
+    /* Get the conversion result of the channel 17 */
+    i32ConversionData = ADC_GET_CONVERSION_DATA(ADC, 17);
     printf("ADC Conversion result of Band-gap: 0x%X (%d)\n", i32ConversionData, i32ConversionData);
-    printf("Band-gap  voltage is %4dmV if Reference voltage is 3300mV\n", (3300*i32ConversionData)/4095);
-    printf("Reference voltage is %4dmV if Band-gap  voltage is  814mV\n", (814*4095)/i32ConversionData);
+
+    /* The equation of converting to real temperature is as below
+     *      Vtemp = Tc * (temperature - Ta) + Vtemp_os
+     *      Vtemp = EADC_result / 4095 * ADC_Vref
+     *      so, temperature = Ta + (Vtemp - Vtemp_os) / Tc
+     *                      = Ta + ((EADC_result / 4095 * ADC_Vref) - Vtemp_os) / Tc
+     *      where Vtemp_os (offset voltage), Tc (temperature coefficient), and Ta (ambient temperature)
+     *            can be got from the data sheet document.
+     *            ADC_Vref is the ADC Vref that according to the configuration of SYS and ADC.
+     */
+    printf("Current Temperature = %2.1f degrees Celsius if EADC Vref = 3300mV\n\n", (25+(((float)i32ConversionData/4095*3300)-684)/(-1.72)));
 }
 
 void ADC0_INT0_IRQHandler(void)
