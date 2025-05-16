@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Demonstrate how to trigger ADC by PWM.
+ * @brief    Demonstrate how to trigger ADC by BPWM.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2025 Nuvoton Technology Corp. All rights reserved.
@@ -49,8 +49,8 @@ void SYS_Init(void)
     /* Enable ADC module clock */
     CLK_EnableModuleClock(ADC0_MODULE);
 
-    /* Enable PWM0 module clock */
-    CLK_EnableModuleClock(PWM0_MODULE);
+    /* Enable BPWM0 module clock */
+    CLK_EnableModuleClock(BPWM0_MODULE);
 
     /*----------------------------------------------*/
     /* Init I/O Multi-function                      */
@@ -66,36 +66,36 @@ void SYS_Init(void)
     /* Disable the PB.2 - PB.3 digital input path to avoid the leakage current. */
     GPIO_DISABLE_DIGITAL_PATH(PB, BIT2|BIT3);
 
-    /* Set PA multi-function pins for PWM0 Channel 0 */
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA5MFP_Msk)) |
-                    (SYS_GPA_MFPL_PA5MFP_PWM0_CH0);
+    /* Set PA multi-function pins for BPWM0 Channel 0 */
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA0MFP_Msk)) |
+                    (SYS_GPA_MFPL_PA0MFP_BPWM0_CH0);
 
     /* Lock protected registers */
     SYS_LockReg();
 }
 
-void PWM0_Init()
+void BPWM0_Init()
 {
-    /* Set PWM0 timer clock prescaler */
-    PWM_SET_PRESCALER(PWM0, 0, 10);
+    /* Set BPWM0 timer clock prescaler */
+    BPWM_SET_PRESCALER(BPWM0, 0, 10);
 
     /* Set up counter type */
-    PWM0->CTL1 &= ~PWM_CTL1_CNTTYPE0_Msk;
+    BPWM0->CTL1 &= ~BPWM_CTL1_CNTTYPE0_Msk;
 
-    /* Set PWM0 timer duty */
-    PWM_SET_CMR(PWM0, 0, 1000);
+    /* Set BPWM0 timer duty */
+    BPWM_SET_CMR(BPWM0, 0, 1000);
 
-    /* Set PWM0 timer period */
-    PWM_SET_CNR(PWM0, 0, 2000);
+    /* Set BPWM0 timer period */
+    BPWM_SET_CNR(BPWM0, 0, 2000);
 
-    /* PWM period point trigger ADC enable */
-    PWM_EnableADCTrigger(PWM0, 0, PWM_TRIGGER_ADC_EVEN_PERIOD_POINT);
+    /* BPWM period point trigger ADC enable */
+    BPWM_EnableADCTrigger(BPWM0, 0, BPWM_TRIGGER_ADC_EVEN_PERIOD_POINT);
 
     /* Set output level at zero, compare up, period(center) and compare down of specified channel */
-    PWM_SET_OUTPUT_LEVEL(PWM0, BIT0, PWM_OUTPUT_HIGH, PWM_OUTPUT_LOW, PWM_OUTPUT_NOTHING, PWM_OUTPUT_NOTHING);
+    BPWM_SET_OUTPUT_LEVEL(BPWM0, BIT0, BPWM_OUTPUT_HIGH, BPWM_OUTPUT_LOW, BPWM_OUTPUT_NOTHING, BPWM_OUTPUT_NOTHING);
 
-    /* Enable output of PWM0 channel 0 */
-    PWM_EnableOutput(PWM0, BIT0);
+    /* Enable output of BPWM0 channel 0 */
+    BPWM_EnableOutput(BPWM0, BIT0);
 }
 
 void ADC_FunctionTest()
@@ -106,7 +106,7 @@ void ADC_FunctionTest()
 
     printf("\n");
     printf("+----------------------------------------------------------------------+\n");
-    printf("|                      ADC trigger by PWM test                         |\n");
+    printf("|                      ADC trigger by BPWM test                        |\n");
     printf("+----------------------------------------------------------------------+\n");
 
     printf("\nIn this test, software will get 6 conversion result from the specified channel.\n");
@@ -125,8 +125,8 @@ void ADC_FunctionTest()
             /* Set ADC to Single mode, and select channel 2 */
             ADC_Open(ADC, (uint32_t)NULL, ADC_ADCR_ADMD_SINGLE, BIT2);
 
-            /* Configure the sample module and enable PWM0 trigger source */
-            ADC_EnableHWTrigger(ADC, ADC_ADCR_TRGS_PWM, 0);
+            /* Configure the sample module and enable BPWM0 trigger source */
+            ADC_EnableHWTrigger(ADC, ADC_ADCR_TRGS_BPWM, 0);
 
             /* Clear the A/D interrupt flag for safe */
             ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT);
@@ -137,10 +137,10 @@ void ADC_FunctionTest()
 
             printf("Conversion result of channel 2:\n");
 
-            /* Reset the ADC indicator and enable PWM0 channel 0 counter */
+            /* Reset the ADC indicator and enable BPWM0 channel 0 counter */
             g_u32AdcIntFlag = 0;
             g_u32COVNUMFlag = 0;
-            PWM_Start(PWM0, PWM_CH_0_MASK); /* PWM0 channel 0 counter start running. */
+            BPWM_Start(BPWM0, BPWM_CH_0_MASK); /* BPWM0 channel 0 counter start running. */
 
             while(1)
             {
@@ -158,8 +158,8 @@ void ADC_FunctionTest()
                     break;
             }
 
-            /* Disable PWM0 channel 0 counter */
-            PWM_ForceStop(PWM0, BIT0);  /* PWM0 counter stop running. */
+            /* Disable BPWM0 channel 0 counter */
+            BPWM_ForceStop(BPWM0, BIT0);  /* BPWM0 counter stop running. */
 
             for(i = 0; i < 6; i++)
                 printf("                                0x%X (%d)\n", i32ConversionData[i], i32ConversionData[i]);
@@ -196,8 +196,8 @@ int32_t main(void)
     /* Init UART0 for printf */
     UART0_Init();
 
-    /* Init PWM for ADC */
-    PWM0_Init();
+    /* Init BPWM for ADC */
+    BPWM0_Init();
 
     printf("\nSystem clock rate: %d Hz", SystemCoreClock);
 
@@ -207,8 +207,8 @@ int32_t main(void)
     /* Disable ADC IP clock */
     CLK_DisableModuleClock(ADC0_MODULE);
 
-    /* Disable PWM0 IP clock */
-    CLK_DisableModuleClock(PWM0_MODULE);
+    /* Disable BPWM0 IP clock */
+    CLK_DisableModuleClock(BPWM0_MODULE);
 
     /* Disable External Interrupt */
     NVIC_DisableIRQ(ADC0_INT0_IRQn);
