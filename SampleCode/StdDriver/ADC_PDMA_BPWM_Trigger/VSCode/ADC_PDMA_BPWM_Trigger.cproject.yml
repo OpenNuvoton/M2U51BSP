@@ -96,7 +96,7 @@ project:
         - file: ../../../../Library/StdDriver/src/gpio.c
         - file: ../../../../Library/StdDriver/src/adc.c
         - file: ../../../../Library/StdDriver/src/pdma.c
-        - file: ../../../../Library/StdDriver/src/pwm.c
+        - file: ../../../../Library/StdDriver/src/bpwm.c
     - group: User
       files:
         - file: ../main.c
