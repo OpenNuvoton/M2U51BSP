@@ -504,7 +504,7 @@ extern "C"
  * @param[in] pwm The pointer of the specified PWM module
  * @param[in] u32ChannelMask Combination of enabled channels. Each bit corresponds to a channel
  *                           Bit 0 represents channel 0, bit 1 represents channel 2 and bit 2 represents channel 4
- * @param[in] u32BrakeType Type of brake trigger. PWM_FB_EDGE of this macro is only supported in M45xD/M45xC.
+ * @param[in] u32BrakeType Type of brake trigger.
  *              - \ref PWM_FB_EDGE
  *              - \ref PWM_FB_LEVEL
  * @return None
