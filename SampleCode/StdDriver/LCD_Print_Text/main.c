@@ -184,7 +184,7 @@ static void Set_MFP(uint8_t u8Pin, uint8_t FunEnBit)
     pin_offset = u8Pin & 0x01;
     if(u8Pin >= 2) u8Pin >>= 1;
 
-    *(GPAddr + u8Pin) &= (uint8_t)( ~((0x07U)<<(pin_offset*4)) );
+    *(GPAddr + u8Pin) &= (uint8_t)( ~((0x0FU)<<(pin_offset*4)) );
     *(GPAddr + u8Pin) |= (uint8_t)( FunEnBit << (pin_offset*4));
 }
 
