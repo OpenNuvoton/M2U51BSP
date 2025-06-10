@@ -986,7 +986,6 @@ void PWM_DisableBrakePinInverse(PWM_T *pwm, uint32_t u32BrakePinNum)
  * @param[in] u32SelAnotherModule Select to another module. Valid values are TRUE or FALSE.
  * @return None
  * @details This function is used to set PWM brake pin source.
- * @note This function is only supported in M45xD/M45xC.
  */
 void PWM_SetBrakePinSource(PWM_T *pwm, uint32_t u32BrakePinNum, uint32_t u32SelAnotherModule)
 {
