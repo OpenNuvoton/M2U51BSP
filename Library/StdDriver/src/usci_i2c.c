@@ -680,12 +680,12 @@ uint32_t UI2C_WriteMultiBytes(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t *data, 
             break;
 
         case UI2C_PROTSTS_ARBLOIF_Msk:                                  /* Arbitration Lost */
-        default:                                                        /* Unknow status */
+        default:                                                        /* Unknown status */
             u8Ctrl = (UI2C_CTL_PTRG | UI2C_CTL_STO);                    /* Clear SI and send STOP */
             break;
         }
 
-        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write controlbit to UI2C_CTL register */
+        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write control bit to UI2C_CTL register */
     }
 
     return u32txLen;                                                        /* Return bytes length that have been transmitted */
@@ -799,12 +799,12 @@ uint32_t UI2C_WriteMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u
             break;
 
         case UI2C_PROTSTS_ARBLOIF_Msk:                                  /* Arbitration Lost */
-        default:                                                        /* Unknow status */
+        default:                                                        /* Unknown status */
             u8Ctrl = (UI2C_CTL_PTRG | UI2C_CTL_STO);                    /* Clear SI and send STOP */
             break;
         }
 
-        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write controlbit to UI2C_CTL register */
+        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write control bit to UI2C_CTL register */
     }
 
     return u32txLen;                                                        /* Return bytes length that have been transmitted */
@@ -928,12 +928,12 @@ uint32_t UI2C_WriteMultiBytesTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t
             break;
 
         case UI2C_PROTSTS_ARBLOIF_Msk:                                      /* Arbitration Lost */
-        default:                                                            /* Unknow status */
+        default:                                                            /* Unknown status */
             u8Ctrl = (UI2C_CTL_PTRG | UI2C_CTL_STO);                        /* Clear SI and send STOP */
             break;
         }
 
-        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                     /* Write controlbit to UI2C_CTL register */
+        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                     /* Write control bit to UI2C_CTL register */
     }
 
     return u32txLen;                                                            /* Return bytes length that have been transmitted */
@@ -1057,12 +1057,12 @@ uint32_t UI2C_ReadMultiBytes(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t *rdata, 
             break;
 
         case UI2C_PROTSTS_ARBLOIF_Msk:                                  /* Arbitration Lost */
-        default:                                                        /* Unknow status */
+        default:                                                        /* Unknown status */
             u8Ctrl = (UI2C_CTL_PTRG | UI2C_CTL_STO);                    /* Clear SI and send STOP */
             break;
         }
 
-        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write controlbit to UI2C_PROTCTL register */
+        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write control bit to UI2C_PROTCTL register */
     }
 
     return u32rxLen;                                                        /* Return bytes length that have been received */
@@ -1211,12 +1211,12 @@ uint32_t UI2C_ReadMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8
             break;
 
         case UI2C_PROTSTS_ARBLOIF_Msk:                                  /* Arbitration Lost */
-        default:                                                        /* Unknow status */
+        default:                                                        /* Unknown status */
             u8Ctrl = (UI2C_CTL_PTRG | UI2C_CTL_STO);                    /* Clear SI and send STOP */
             break;
         }
 
-        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write controlbit to UI2C_PROTCTL register */
+        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write control bit to UI2C_PROTCTL register */
     }
 
     return u32rxLen;                                               /* Return bytes length that have been received */
@@ -1370,12 +1370,12 @@ uint32_t UI2C_ReadMultiBytesTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t 
             break;
 
         case UI2C_PROTSTS_ARBLOIF_Msk:                                  /* Arbitration Lost */
-        default:                                                        /* Unknow status */
+        default:                                                        /* Unknown status */
             u8Ctrl = (UI2C_CTL_PTRG | UI2C_CTL_STO);                    /* Clear SI and send STOP */
             break;
         }
 
-        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write controlbit to UI2C_PROTCTL register */
+        UI2C_SET_CONTROL_REG(ui2c, u8Ctrl);                                 /* Write control bit to UI2C_PROTCTL register */
     }
 
     return u32rxLen;                                                        /* Return bytes length that have been received */
