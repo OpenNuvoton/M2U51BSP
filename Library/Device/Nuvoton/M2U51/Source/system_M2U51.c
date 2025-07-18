@@ -78,6 +78,9 @@ void SystemInit(void)
     /* Disable LDO adaptive bias feature */
     outp32(0x40000168, inp32(0x40000168) | BIT28);
 
+    /* Set Band-gap LP mode wakeup mode to "Analog refresh and digital timeout" */
+    outp32(0x40000180, inp32(0x40000180) | BIT30);
+    
     /* Set the Band-gap to LP mode to save power consumption. */
     CLK->PMUCTL = (CLK->PMUCTL & ~(CLK_PMUCTL_NRBGLPEL_Msk)) | CLK_PMUCTL_NRBGLPEL_LP;
 

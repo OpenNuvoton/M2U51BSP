@@ -255,12 +255,15 @@ uint32_t SYS_SetPowerRegulator(uint32_t u32PowerRegulator)
     uint32_t u32Ret = 1UL;
     uint32_t u32PowerRegStatus;
     uint32_t u32BGPowerRegStatus;
+    uint32_t u32Delay;
 
     /* Get Band-gap power mode status */
     u32BGPowerRegStatus = (CLK->PMUCTL & CLK_PMUCTL_NRBGLPEL_Msk);
 
     /* Must set Band-gap power mode to normal mode before change regulator type */
     CLK->PMUCTL = (CLK->PMUCTL & ~(CLK_PMUCTL_NRBGLPEL_Msk)) | CLK_PMUCTL_NRBGLPEL_NORMAL;
+    /* MUST delay 100us between CLK_PMUCTL_NRBGLPEL_NORMAL and CLK_PMUCTL_NRBGLPEL_PL */
+    for (u32Delay = SystemCoreClock/10000; u32Delay > 0; u32Delay--);
 
     /* Get main voltage regulator type status */
     u32PowerRegStatus = (SYS->PLSTS & SYS_PLSTS_CURMVR_Msk);
