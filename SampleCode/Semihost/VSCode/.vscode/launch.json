@@ -2,14 +2,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Arm Debug",
-            "type": "arm-debugger",
+            "name": "CMSIS_DAP@pyOCD (launch)",
+            "type": "cortex-debug-nuvoton",
             "request": "launch",
-            "serialNumber": "${command:device-manager.getSerialNumber}",
-            "program": "${command:arm-debugger.getApplicationFile}",
-            "cmsisPack": "${command:cmsis-csolution.getTargetPack}",
-            "deviceName": "${command:cmsis-csolution.getDeviceName}",
-            "processorName": "${command:cmsis-csolution.getProcessorName}"
+            "cwd": "${workspaceFolder}",
+            "executable": "${command:embedded-debug.getApplicationFile}",
+            "servertype": "openocd",
+            "serverpath": "${command:openocd-helper.getOpenOcdPath}",
+            "svdFile": "${command:openocd-helper.getSvdPath}",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "${command:openocd-helper.getOpenOcdConfigPath}"
+            ],
+            "runToEntryPoint": "main",
+			"overrideLaunchCommands": [
+            "monitor reset halt"
         }
     ]
 }
