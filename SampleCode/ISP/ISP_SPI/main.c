@@ -15,6 +15,12 @@ uint32_t Pclk1;
 
 int32_t FMC_SetVectorAddr(uint32_t u32PageAddr);
 
+/* Add implementations to fix linker warnings from the newlib-nano C library in VSCode-GCC14.3.1 */
+void _close(void) {}
+void _lseek(void) {}
+void _read_r(void) {}
+void _write_r(void) {}
+
 void TIMER_Init(void)
 {
     uint32_t u32Prescale = 32;

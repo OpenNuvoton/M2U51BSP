@@ -1,8 +1,9 @@
 /* Linker script to configure memory regions. */
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x8000    /* 32k */
-  RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x800     /* 2k */
+  FLASH (rx) : ORIGIN = FLASH_BASE, LENGTH = 0x00004000    /* 16K */
+  RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x00008000    /* 32k */
+
 }
 
 /* Library configurations */
@@ -69,7 +70,7 @@ SECTIONS
  		*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
  		*(SORT(.dtors.*))
  		*(.dtors)
-
+        
 		*(.rodata*)
 
 		KEEP(*(.eh_frame*))
@@ -156,6 +157,7 @@ SECTIONS
 		__data_end__ = .;
 
 	} > RAM
+    
 
 	.bss :
 	{

@@ -4,6 +4,9 @@
 ;Note: Add '-mcmse' to first line if your software model is "Secure Mode".
 ;      #! armclang -E --target=arm-arm-none-eabi -mcpu=<CPU> -xc -mcmse
 
+#ifndef FLASH_BASE
+    #define FLASH_BASE      0x00000000
+#endif
 
 #ifndef FLASH_SIZE
     #define FLASH_SIZE      0x00040000
@@ -24,7 +27,7 @@
 /* ----------------------------------------------------------------------------
   Flash Base Address and Size Configuration
  *----------------------------------------------------------------------------*/
-#define __FLASH_BASE        0x00000000
+#define __FLASH_BASE        FLASH_BASE
 #define __FLASH_SIZE        FLASH_SIZE
 
 /* ----------------------------------------------------------------------------
