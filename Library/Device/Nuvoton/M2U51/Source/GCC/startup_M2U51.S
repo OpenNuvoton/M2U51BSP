@@ -120,7 +120,7 @@ __Vectors:
     .long   Default_Handler         /* 52:                          */
     .long   Default_Handler         /* 53:                          */
     .long   Default_Handler         /* 54:                          */
-    .long   CRYPTO_IRQHandler       /* 55: CRYPTO                   */
+    .long   CRPT_IRQHandler         /* 55: CRYPTO                   */
     .long   Default_Handler         /* 56:                          */
     .long   I2C2_IRQHandler         /* 57: I2C2                     */
     .long   Default_Handler         /* 58:                          */
@@ -349,7 +349,7 @@ Default_Handler:
     def_irq_handler USCI0_IRQHandler
     def_irq_handler SPI1_IRQHandler
     def_irq_handler SPI2_IRQHandler
-    def_irq_handler CRYPTO_IRQHandler
+    def_irq_handler CRPT_IRQHandler
     def_irq_handler I2C2_IRQHandler
     def_irq_handler LCD_IRQHandler
     def_irq_handler CRC0_IRQHandler
