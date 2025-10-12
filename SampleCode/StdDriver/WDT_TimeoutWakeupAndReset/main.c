@@ -21,13 +21,13 @@ volatile uint32_t g_u32WDTINTCounts;
 volatile uint8_t g_u8IsWDTWakeupINT;
 
 /**
- * @brief       IRQ Handler for WDT and WWDT Interrupt
+ * @brief       IRQ Handler for WDT Interrupt
  *
  * @param       None
  *
  * @return      None
  *
- * @details     The WDT_IRQHandler is default IRQ of WDT and WWDT, declared in startup_M031Series.s.
+ * @details     The WDT_IRQHandler is default IRQ of WDT.
  */
 void WDT_IRQHandler(void)
 {
