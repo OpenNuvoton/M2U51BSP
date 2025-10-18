@@ -113,7 +113,7 @@ void ADC_FunctionTest()
 
             /* Reset the ADC indicator and wait falling edge on STADC pin */
             g_u32AdcIntFlag = 0;
-            g_u32COVNUMFlag = 0;
+            g_u32COVNUMFlag = 1;
 
             while(1)
             {
@@ -125,9 +125,10 @@ void ADC_FunctionTest()
 
                 /* Get the conversion result of ADC channel 2 */
                 i = g_u32COVNUMFlag - 1;
-                i32ConversionData[i] = ADC_GET_CONVERSION_DATA(ADC, 2);
 
-                if(g_u32COVNUMFlag >= 6)
+                if(i < 6)
+                    i32ConversionData[i] = ADC_GET_CONVERSION_DATA(ADC, 2);
+                else
                     break;
             }
 
