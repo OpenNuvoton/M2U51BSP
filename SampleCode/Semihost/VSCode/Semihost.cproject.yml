@@ -65,6 +65,9 @@ project:
     - -g
     - --specs=nano.specs
     - -Wl,--gc-sections,-Map="$elf()$.map"
+  linker:
+    - for-compiler: GCC
+      script: ../../../Library/Device/Nuvoton/M2U51/Source/GCC/gcc_arm.ld    
   setups:
   - output:
       type:
