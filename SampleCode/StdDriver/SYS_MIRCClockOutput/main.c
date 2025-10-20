@@ -116,7 +116,7 @@ void SYS_MIRC_Test(void)
         */
         CLK_SetCoreClock(g_au32MIRCSetting[i]);
 
-        printf("  Change system clock to %d Hz and calculate Pi .............. ", SystemCoreClock);
+        printf("  Change system clock to %d Hz and calculate Pi .............. \n", SystemCoreClock);
 
         /* Output HCLK to CKO, CKO Clock = HCLK / 1 */
         CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 0, 1);

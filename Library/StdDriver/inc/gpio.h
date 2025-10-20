@@ -98,6 +98,15 @@ extern "C"
 #define GPIO_INT_EDETCTL_FALLING    0x2UL   /*!< GPIO INT_EDETCTL setting for Falling edge detect \hideinitializer */
 #define GPIO_INT_EDETCTL_BOTH_EDGE  0x3UL   /*!< GPIO INT_EDETCTL setting for Both edge detect \hideinitializer */
 
+#define GPIO_INT_NFSEL_HCLK_DIV_1   0x0UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_2   0x1UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/2 \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_4   0x2UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/4 \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_8   0x3UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/8 \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_16  0x4UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/16 \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_32  0x5UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/32 \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_64  0x6UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/64 \hideinitializer */
+#define GPIO_INT_NFSEL_HCLK_DIV_128 0x7UL   /*!< GPIO INT_INNF setting for de-bounce counter clock source is the HCLK/128 \hideinitializer */
+
 /*--------------------------------------------------------------------------*/
 /*  GPIO Auto Operation Control Type Constant Definitions                   */
 /*--------------------------------------------------------------------------*/
@@ -436,9 +445,84 @@ extern "C"
  */
 #define GPIO_TOGGLE(u32Pin) ((u32Pin) ^= 1)
 
-#define GPIO_EnableEINT     GPIO_EnableInt
+/**
+ * @brief       Clear GPIO External Interrupt Flag
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ *
+ * @return      None
+ *
+ * @details     Clear the external interrupt status of specified EINT number.
+ * \hideinitializer
+ */
+#define GPIO_CLR_EINT_FLAG(u32EINTn)         (GPIO->INT_EDSTS = (GPIO_INT_EDSTS_EDIF0_Msk << (u32EINTn)))
 
-#define GPIO_DisableEINT    GPIO_DisableInt
+/**
+ * @brief       Get GPIO External Interrupt Flag
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ *
+ * @retval      0           No interrupt at specified EINT number
+ * @retval      1           The specified EINT number generate an interrupt
+ *
+ * @details     Get the external interrupt status of specified EINT number.
+ * \hideinitializer
+ */
+#define GPIO_GET_EINT_FLAG(u32EINTn)     (GPIO->INT_EDSTS & (GPIO_INT_EDSTS_EDIF0_Msk << (u32EINTn)))
+
+/**
+ * @brief       Set EINT De-bounce Sampling Cycle Time
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ * @param[in]   u32ClkSrc   The de-bounce counter clock source. It could be
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_1
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_2
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_4
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_8
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_16
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_32
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_64
+ *                            - \ref GPIO_INT_NFSEL_HCLK_DIV_128
+ * @param[in]   u32ClkSel   The de-bounce sampling cycle selection. It could be 0 ~ 7
+ *
+ * @return      None
+ *
+ * @details     Set the external interrupt de-bounce sampling cycle time based on the debounce counter clock source. \n
+ *              Example: GPIO_SET_EINT_DEBOUNCE_TIME(0, GPIO_INT_NFSEL_HCLK_DIV_4, 5). \n
+ *              It's meaning the De-debounce counter clock source is HCLK/4 and sampling cycle selection is 5. \n
+ *              Then the target de-bounce sampling cycle time is ((1/(HCLK/4))*5) s = 0.5 us if HCLK is 40MHz
+ *              System will sampling interrupt input once per 0.5 us.
+ */
+#define GPIO_SET_EINT_DEBOUNCE_TIME(u32EINTn, u32ClkSrc, u32ClkSel)     (GPIO->INT_INNF[(u32EINTn)] = (((u32ClkSrc)<<GPIO_INT_INNF_NFSEL_Pos) | ((u32ClkSel)<<GPIO_INT_INNF_NFCNT_Pos)))
+
+/**
+ * @brief       Disable EINT Pin De-bounce Function
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ *
+ * @return      None
+ *
+ * @details     Disable the external interrupt de-bounce function of specified EINT number.
+ * \hideinitializer
+ */
+#define GPIO_DISABLE_EINT_DEBOUNCE(u32EINTn)    (GPIO->INT_INNF[(u32EINTn)] &= ~(GPIO_INT_INNF_NFEN_Msk))
+
+/**
+ * @brief       Enable EINT Pin De-bounce Function
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ *
+ * @return      None
+ *
+ * @details     Enable the external interrupt de-bounce function of specified EINT number.
+ * \hideinitializer
+ */
+#define GPIO_ENABLE_EINT_DEBOUNCE(u32EINTn)     (GPIO->INT_INNF[(u32EINTn)] |= (GPIO_INT_INNF_NFEN_Msk))
 
 /*@}*/ /* end of group GPIO_EXPORTED_MACROS */
 
@@ -452,6 +536,8 @@ void GPIO_SetSlewCtl (GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode);
 void GPIO_SetPullCtl (GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode);
 void GPIO_EnableAuto (uint32_t u32PortMask);
 void GPIO_DisableAuto(uint32_t u32PortMask);
+void GPIO_EnableEINT (uint32_t u32EINTn, uint32_t u32IntAttribs);
+void GPIO_DisableEINT(uint32_t u32EINTn);
 
 /*@}*/ /* end of group GPIO_EXPORTED_FUNCTIONS */
 

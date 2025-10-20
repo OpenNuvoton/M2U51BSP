@@ -214,7 +214,7 @@ int32_t main(void)
     /* Check system work */
     CheckSystemWork();
 
-    printf("\nSample code end.");
+    printf("\nSample code end.\n");
 
     while(1);
 }
