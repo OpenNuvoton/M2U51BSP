@@ -275,19 +275,19 @@ int32_t main(void)
         switch(s_u32PowerDownMode)
         {
         case CLK_PMUCTL_PDMSEL_NPD0:
-            printf("\nSystem enters to NPD0 power-down mode ... ");
+            printf("\nSystem enters to NPD0 power-down mode ... \n");
             break;
         case CLK_PMUCTL_PDMSEL_NPD1:
-            printf("\nSystem enters to NPD1 power-down mode ... ");
+            printf("\nSystem enters to NPD1 power-down mode ... \n");
             break;
         case CLK_PMUCTL_PDMSEL_NPD2:
-            printf("\nSystem enters to NPD2 power-down mode ... ");
+            printf("\nSystem enters to NPD2 power-down mode ... \n");
             break;
         case CLK_PMUCTL_PDMSEL_SPD0:
-            printf("\nSystem enters to SPD0 power-down mode ... ");
+            printf("\nSystem enters to SPD0 power-down mode ... \n");
             break;
         case CLK_PMUCTL_PDMSEL_DPD0:
-            printf("\nSystem enters to DPD0 power-down mode ... ");
+            printf("\nSystem enters to DPD0 power-down mode ... \n");
             break;
         default:
             printf("\nInit sample code. Press Reset Button and continue.\n");

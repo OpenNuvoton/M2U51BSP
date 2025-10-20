@@ -7,8 +7,8 @@
  * @copyright (C) 2025 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
+#include <math.h>
 #include "NuMicro.h"
-
 
 /*------------------------------------------------------*/
 /* Define global variables and constants                */
@@ -65,6 +65,7 @@ void SYS_Init(void)
 void ADC_FunctionTest()
 {
     int32_t  i32ConversionData;
+    float temperature;
 
     printf("\n");
     printf("+-------------------------------------------------------------------+\n");
@@ -112,7 +113,7 @@ void ADC_FunctionTest()
 
     /* Get the conversion result of the channel 17 */
     i32ConversionData = ADC_GET_CONVERSION_DATA(ADC, 17);
-    printf("ADC Conversion result of Band-gap: 0x%X (%d)\n", i32ConversionData, i32ConversionData);
+    printf("ADC Conversion result of Temperature Sensor: 0x%X (%d)\n", i32ConversionData, i32ConversionData);
 
     /* The equation of converting to real temperature is as below
      *      Vtemp = Tc * (temperature - Ta) + Vtemp_os
@@ -123,7 +124,25 @@ void ADC_FunctionTest()
      *            can be got from the data sheet document.
      *            ADC_Vref is the ADC Vref that according to the configuration of SYS and ADC.
      */
-    printf("Current Temperature = %2.1f degrees Celsius if EADC Vref = 3300mV\n\n", (25+(((float)i32ConversionData/4095*3300)-684)/(-1.72)));
+    temperature = 25+(((float)i32ConversionData/4095*3300)-684)/(-1.72);
+    #if defined (__CC_ARM)
+        /* for ARM 5 */
+        printf("Current Temperature = %2.1f degrees Celsius if EADC Vref = 3300mV\n\n", temperature);
+    #elif defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+        /* for ARM 6 that __ARMCC_VERSION >= 6010050 or VSCode ARMCLANG */
+        printf("Current Temperature = %2.1f degrees Celsius if EADC Vref = 3300mV\n\n", temperature);
+    #elif defined (__ICCARM__)
+        /* for IAR */
+        printf("Current Temperature = %2.1f degrees Celsius if EADC Vref = 3300mV\n\n", temperature);
+    #elif defined (__GNUC__)
+        /* for VSCode GNUC */
+        /* Convert one floating to two integers since printf() don't support format %f */
+        {
+            double intPart, fracPart;
+            fracPart = modf(temperature, &intPart);
+            printf("Current Temperature = %d.%d degrees Celsius if EADC Vref = 3300mV\n\n", (uint32_t)intPart, (uint32_t)round(fabs(fracPart*10)));
+        }
+    #endif
 }
 
 void ADC0_INT0_IRQHandler(void)

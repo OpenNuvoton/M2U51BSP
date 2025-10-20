@@ -12,7 +12,8 @@
 /*------------------------------------------------------*/
 /* Define global variables and constants                */
 /*------------------------------------------------------*/
-volatile uint32_t g_u32AdcIntFlag, g_u32COVNUMFlag = 0;
+#define DATA_NUMBER     (6)
+volatile uint32_t g_u32AdcIntFlag;
 
 
 void SYS_Init(void)
@@ -60,13 +61,13 @@ void SYS_Init(void)
     /* Set multi-function pins for UART0 RXD(PB.12) and TXD(PB.13) */
     Uart0DefaultMPF();
 
-    /* Set PB.2 - PB.3 to input mode */
-    GPIO_SetMode(PB, BIT2|BIT3, GPIO_MODE_INPUT);
-    /* Configure the PB.2 - PB.3 ADC analog input pins. */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk)) |
-                    (SYS_GPB_MFPL_PB2MFP_ADC0_CH2 | SYS_GPB_MFPL_PB3MFP_ADC0_CH3);
-    /* Disable the PB.2 - PB.3 digital input path to avoid the leakage current. */
-    GPIO_DISABLE_DIGITAL_PATH(PB, BIT2|BIT3);
+    /* Set PB.2 to input mode */
+    GPIO_SetMode(PB, BIT2, GPIO_MODE_INPUT);
+    /* Configure the PB.2 to ADC analog input pins. */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB2MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB2MFP_ADC0_CH2);
+    /* Disable the PB.2 digital input path to avoid the leakage current. */
+    GPIO_DISABLE_DIGITAL_PATH(PB, BIT2);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -74,8 +75,8 @@ void SYS_Init(void)
 
 void TIMER0_Init()
 {
-    /* Set timer0 periodic time-out frequency is 6Hz */
-    TIMER_Open(TIMER0, TIMER_PERIODIC_MODE, 6);
+    /* Set timer0 periodic time-out frequency is 1Hz */
+    TIMER_Open(TIMER0, TIMER_PERIODIC_MODE, 1);
 
     /* Enable timer interrupt trigger ADC */
     TIMER_SetTriggerSource(TIMER0, TIMER_TRGSRC_TIMEOUT_EVENT);
@@ -85,15 +86,15 @@ void TIMER0_Init()
 void ADC_FunctionTest()
 {
     uint8_t  u8Option;
-    int32_t  i32ConversionData[6] = {0};
-    uint32_t i;
+    int32_t  i32ConversionData[DATA_NUMBER] = {0};
+    uint32_t u32CovNum;
 
     printf("\n");
     printf("+----------------------------------------------------------------------+\n");
     printf("|                     ADC trigger by Timer test                        |\n");
     printf("+----------------------------------------------------------------------+\n");
 
-    printf("\nIn this test, software will get 6 conversion result from the specified channel within 1 second.\n");
+    printf("\nIn this test, software will get %d conversion result from the specified channel within 6 second.\n", DATA_NUMBER);
 
     /* Enable ADC converter */
     ADC_POWER_ON(ADC);
@@ -123,7 +124,7 @@ void ADC_FunctionTest()
 
             /* Reset the ADC indicator and enable Timer0 counter */
             g_u32AdcIntFlag = 0;
-            g_u32COVNUMFlag = 0;
+            u32CovNum = 0;
             TIMER_Start(TIMER0);
 
             while(1)
@@ -135,10 +136,11 @@ void ADC_FunctionTest()
                 g_u32AdcIntFlag = 0;
 
                 /* Get the conversion result of ADC channel 2 */
-                i = g_u32COVNUMFlag - 1;
-                i32ConversionData[i] = ADC_GET_CONVERSION_DATA(ADC, 2);
+                i32ConversionData[u32CovNum] = ADC_GET_CONVERSION_DATA(ADC, 2);
+                printf("                                0x%X (%d)\n", i32ConversionData[u32CovNum], i32ConversionData[u32CovNum]);
+                u32CovNum++;
 
-                if(g_u32COVNUMFlag >= 6)
+                if(u32CovNum >= DATA_NUMBER)
                     break;
             }
 
@@ -147,9 +149,6 @@ void ADC_FunctionTest()
 
             /* Disable the sample module interrupt */
             ADC_DISABLE_INT(ADC, ADC_ADF_INT);
-
-            for(i = 0; i < 6; i++)
-                printf("                                0x%X (%d)\n", i32ConversionData[i], i32ConversionData[i]);
         }
         else
             return ;
@@ -160,7 +159,6 @@ void ADC0_INT0_IRQHandler(void)
 {
     ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT); /* Clear the A/D interrupt flag */
     g_u32AdcIntFlag = 1;
-    g_u32COVNUMFlag++;
 }
 
 /*----------------------------------------------------------------------*/

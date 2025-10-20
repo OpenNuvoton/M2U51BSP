@@ -209,6 +209,136 @@ void GPIO_DisableAuto(uint32_t u32PortMask)
         GPIO->AUTOCTL &= ~(GPIO_AUTOCTL_PDMAAOEN_Msk);
 }
 
+
+/**
+ * @brief       Enable External GPIO interrupt
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ * @param[in]   u32IntAttribs   The interrupt attribute of specified EINT. It could be \n
+ *                              - \ref GPIO_INT_EDETCTL_DISABLE
+ *                              - \ref GPIO_INT_EDETCTL_RISING
+ *                              - \ref GPIO_INT_EDETCTL_FALLING
+ *                              - \ref GPIO_INT_EDETCTL_BOTH_EDGE
+ *
+ * @details     This function is used to enable specified EINT interrupt.
+ * \hideinitializer
+ */
+void GPIO_EnableEINT(uint32_t u32EINTn, uint32_t u32IntAttribs)
+{
+    switch (u32EINTn)
+    {
+        case 0:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL0_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL0_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN0_Msk;
+            break;
+
+        case 1:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL1_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL1_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN1_Msk;
+            break;
+
+        case 2:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL2_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL2_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN2_Msk;
+            break;
+
+        case 3:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL3_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL3_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN3_Msk;
+            break;
+
+        case 4:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL4_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL4_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN4_Msk;
+            break;
+
+        case 5:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL5_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL5_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN5_Msk;
+            break;
+
+        case 6:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL6_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL6_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN6_Msk;
+            break;
+
+        case 7:
+            GPIO->INT_EDETCTL = (GPIO->INT_EDETCTL & ~GPIO_INT_EDETCTL_EDETCTL7_Msk) | 
+                                (u32IntAttribs << GPIO_INT_EDETCTL_EDETCTL7_Pos);
+            GPIO->INT_EDINTEN |= GPIO_INT_EDINTEN_EDIEN7_Msk;
+            break;
+
+        default:
+            break;
+    }
+}
+
+/**
+ * @brief       Disable External GPIO interrupt
+ *
+ * @param[in]   u32EINTn    The specified EINT.
+ *                          It could be 0 ~ 7 for EINT0, EINT1, EINT2, EINT3, EINT4, EINT5, EINT6 and EINT7.
+ *
+ * @details     This function is used to disable specified EINT interrupt.
+ * \hideinitializer
+ */
+void GPIO_DisableEINT(uint32_t u32EINTn)
+{
+    switch (u32EINTn)
+    {
+        case 0:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL0_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN0_Msk);
+            break;
+
+        case 1:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL1_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN1_Msk);
+            break;
+
+        case 2:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL2_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN2_Msk);
+            break;
+
+        case 3:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL3_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN3_Msk);
+            break;
+
+        case 4:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL4_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN4_Msk);
+            break;
+
+        case 5:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL5_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN5_Msk);
+            break;
+
+        case 6:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL6_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN6_Msk);
+            break;
+
+        case 7:
+            GPIO->INT_EDETCTL &= ~(GPIO_INT_EDETCTL_EDETCTL7_Msk);
+            GPIO->INT_EDINTEN &= ~(GPIO_INT_EDINTEN_EDIEN7_Msk);
+            break;
+
+        default:
+            break;
+    }
+}
+
 /*@}*/ /* end of group GPIO_EXPORTED_FUNCTIONS */
 
 /*@}*/ /* end of group GPIO_Driver */

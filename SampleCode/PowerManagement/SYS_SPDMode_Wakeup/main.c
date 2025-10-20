@@ -196,8 +196,8 @@ void WakeUpBODFunction(uint32_t u32PDMode)
     /* Enable Brown-out detector function */
     SYS_ENABLE_BOD();
 
-    /* Set Brown-out detector voltage level as 3.0V */
-    SYS_SET_BOD_LEVEL(SYS_BODCTL_BODVL_3_0V);
+    /* Set Brown-out detector voltage level as 2.7V */
+    SYS_SET_BOD_LEVEL(SYS_BODCTL_BODVL_2_7V);
 
     /* Enable Brown-out detector reset function */
     SYS_ENABLE_BOD_RST();
@@ -364,7 +364,7 @@ int32_t main(void)
     printf("|[2] SPD Wake-up TIMER time-out interval is 1024 LIRC clocks.     |\n");
     printf("|[3] SPD Wake-up by RTC Tick.                                     |\n");
     printf("|[4] SPD Wake-up by RTC Alarm.                                    |\n");
-    printf("|[5] SPD Wake-up by BOD.                                          |\n");
+    printf("|[5] SPD Wake-up by BOD (< 2.7V).                                 |\n");
     printf("|[6] SPD Wake-up by LVR.                                          |\n");
     printf("+-----------------------------------------------------------------+\n");
     i32Item = getchar();
