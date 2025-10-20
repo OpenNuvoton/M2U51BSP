@@ -26,9 +26,7 @@ project:
           Link:
             - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
             - -Wl,--gc-sections,-Map="$elf()$.map"
-  linker:
-    - for-compiler: GCC
-      script: ../../../../Library/Device/Nuvoton/M2U51/Source/GCC/gcc_arm.ld            
+            - -Wl,--no-warn-rwx-segments          
   groups:
     - group: CMSIS
       files:

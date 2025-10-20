@@ -71,14 +71,12 @@ project:
     - -g
     - --specs=nano.specs --specs=nosys.specs
     - -Wl,--gc-sections,-Map="$elf()$.map"
+    - -Wl,--no-warn-rwx-segments
   setups:
   - output:
       type:
       - elf
       - bin
-  linker:
-    - for-compiler: GCC
-      script: ../../../../Library/Device/Nuvoton/M2U51/Source/GCC/gcc_arm.ld
   add-path:
   - ../../../../Library/CMSIS/Core/Include
   - ../../../../Library/StdDriver/inc
