@@ -26,16 +26,21 @@ project:
     - -D__MICROLIB
     - -masm=auto
     Link:
-    - --map
-    - --load_addr_map_info
-    - --symbols
-    - --info sizes
-    - --info totals
-    - --map --datacompressor=off --info=inline --entry Reset_Handler
-    - --strict
-    - --summary_stderr
-    - --info summarysizes
-    - --diag_suppress=6314
+        - --library_type=microlib
+        - --map
+        - --load_addr_map_info
+        - --xref
+        - --callgraph
+        - --symbols
+        - --info sizes
+        - --info totals
+        - --info unused
+        - --info veneers
+        - --map --datacompressor=off --info=inline --entry Reset_Handler
+        - --strict
+        - --summary_stderr
+        - --info summarysizes
+        - --diag_suppress=6314
   - for-compiler: GCC
     C:
     - -std=gnu11
@@ -63,7 +68,7 @@ project:
     - -fmessage-length=0
     - -fsigned-char
     - -g
-    - --specs=nano.specs
+    - --specs=nano.specs --specs=nosys.specs
     - -Wl,--gc-sections,-Map="$elf()$.map"
     - -Wl,--no-warn-rwx-segments 
   setups:
