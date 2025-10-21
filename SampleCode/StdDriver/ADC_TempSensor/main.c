@@ -62,6 +62,16 @@ void SYS_Init(void)
     SYS_LockReg();
 }
 
+float my_fabs(float x)
+{
+    return (x < 0) ? -x : x;
+}
+
+float my_round(float x)
+{
+    return (x >= 0.0f) ? (int)(x + 0.5f) : (int)(x - 0.5f);
+}
+
 void ADC_FunctionTest()
 {
     int32_t  i32ConversionData;
@@ -140,7 +150,7 @@ void ADC_FunctionTest()
         {
             double intPart, fracPart;
             fracPart = modf(temperature, &intPart);
-            printf("Current Temperature = %d.%d degrees Celsius if EADC Vref = 3300mV\n\n", (uint32_t)intPart, (uint32_t)round(fabs(fracPart*10)));
+            printf("Current Temperature = %d.%d degrees Celsius if EADC Vref = 3300mV\n\n", (uint32_t)intPart, (uint32_t)my_round(my_fabs(fracPart*10)));
         }
     #endif
 }
