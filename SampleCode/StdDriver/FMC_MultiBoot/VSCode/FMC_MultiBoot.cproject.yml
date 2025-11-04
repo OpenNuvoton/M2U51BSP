@@ -140,7 +140,7 @@ project:
         - file: ../../../../Library/Device/Nuvoton/M2U51/Source/system_M2U51.c
         - file: ../../../../Library/Device/Nuvoton/M2U51/Source/ARM/startup_M2U51.c
           for-compiler: AC6
-        - file: ../../../../Library/Device/Nuvoton/M2U51/Source/GCC/startup_M2U51.S
+        - file: ./startup_M2U51.S
           for-compiler: GCC        
     - group: User
       files:
