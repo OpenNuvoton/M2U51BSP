@@ -62,7 +62,6 @@ uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq)
     return(u32Clk / (u32Cmpr * (u32Prescale + 1UL)));
 }
 
-
 /**
   * @brief      Stop Timer Counting
   *
@@ -77,7 +76,6 @@ void TIMER_Close(TIMER_T *timer)
     timer->CTL = 0UL;
     timer->EXTCTL = 0UL;
 }
-
 
 /**
   * @brief      Create a specify Delay Time
@@ -176,7 +174,6 @@ int32_t TIMER_Delay(TIMER_T *timer, uint32_t u32Usec)
     return 0;
 }
 
-
 /**
   * @brief      Enable Timer Capture Function
   *
@@ -204,7 +201,6 @@ void TIMER_EnableCapture(TIMER_T *timer, uint32_t u32CapMode, uint32_t u32Edge)
                     u32CapMode | u32Edge | TIMER_EXTCTL_CAPEN_Msk;
 }
 
-
 /**
   * @brief      Disable Timer Capture Function
   *
@@ -218,7 +214,6 @@ void TIMER_DisableCapture(TIMER_T *timer)
 {
     timer->EXTCTL &= ~TIMER_EXTCTL_CAPEN_Msk;
 }
-
 
 /**
   * @brief      Enable Timer Counter Function
@@ -240,7 +235,6 @@ void TIMER_EnableEventCounter(TIMER_T *timer, uint32_t u32Edge)
     timer->CTL |= TIMER_CTL_EXTCNTEN_Msk;
 }
 
-
 /**
   * @brief      Disable Timer Counter Function
   *
@@ -254,7 +248,6 @@ void TIMER_DisableEventCounter(TIMER_T *timer)
 {
     timer->CTL &= ~TIMER_CTL_EXTCNTEN_Msk;
 }
-
 
 /**
   * @brief      Get Timer Clock Frequency
@@ -311,7 +304,6 @@ uint32_t TIMER_GetModuleClock(TIMER_T *timer)
     return u32Clk;
 }
 
-
 /**
   * @brief This function is used to enable the Timer frequency counter function
   *
@@ -344,7 +336,6 @@ void TIMER_EnableFreqCounter(TIMER_T *timer,
     return;
 }
 
-
 /**
   * @brief This function is used to disable the Timer frequency counter function.
   *
@@ -356,7 +347,6 @@ void TIMER_DisableFreqCounter(TIMER_T *timer)
 {
     timer->CTL &= ~TIMER_CTL_INTRGEN_Msk;
 }
-
 
 /**
   * @brief This function is used to select the interrupt source used to trigger other modules.
@@ -372,7 +362,6 @@ void TIMER_SetTriggerSource(TIMER_T *timer, uint32_t u32Src)
 {
     timer->TRGCTL = (timer->TRGCTL & ~TIMER_TRGCTL_TRGSSEL_Msk) | u32Src;
 }
-
 
 /**
   * @brief This function is used to set modules trigger by timer interrupt
@@ -390,7 +379,6 @@ void TIMER_SetTriggerTarget(TIMER_T *timer, uint32_t u32Mask)
     timer->TRGCTL = (timer->TRGCTL & ~(TIMER_TRGCTL_TRGPWM_Msk | TIMER_TRGCTL_TRGADC_Msk | TIMER_TRGCTL_TRGPDMA_Msk)) | u32Mask;
 }
 
-
 /**
   * @brief This function is used to select the auto operation interrupt source used to trigger other modules.
   *
@@ -406,7 +394,6 @@ void TIMER_SetATriggerSource(TIMER_T *timer, uint32_t u32Src)
     timer->ATRGCTL = (timer->ATRGCTL & ~TIMER_ATRGCTL_ATRGSSEL_Msk) | u32Src;
 }
 
-
 /**
   * @brief This function is used to set auto operation modules trigger by timer interrupt
   *
@@ -421,7 +408,6 @@ void TIMER_SetATriggerTarget(TIMER_T *timer, uint32_t u32Mask)
 {
     timer->ATRGCTL = (timer->ATRGCTL & ~(TIMER_ATRGCTL_ATRGEN_Msk | TIMER_ATRGCTL_ATRGPDMA_Msk)) | u32Mask;
 }
-
 
 /**
   * @brief      Select Timer Capture Source
@@ -456,7 +442,6 @@ void TIMER_CaptureSelect(TIMER_T *timer, uint32_t u32Src)
     }
 }
 
-
 /**
   * @brief      Reset Counter
   *
@@ -472,10 +457,10 @@ int32_t TIMER_ResetCounter(TIMER_T *timer)
 {
     uint32_t u32Delay;
 
-    timer->CTL |= TIMER_CNT_RSTACT_Msk;
+    timer->CNT |= TIMER_CNT_RSTACT_Msk;
     /* Takes 2~3 ECLKs to reset timer counter */
     u32Delay = (SystemCoreClock / TIMER_GetModuleClock(timer)) * 3;
-    while(((timer->CTL & TIMER_CNT_RSTACT_Msk) == TIMER_CNT_RSTACT_Msk) && (--u32Delay))
+    while(((timer->CNT & TIMER_CNT_RSTACT_Msk) == TIMER_CNT_RSTACT_Msk) && (--u32Delay))
     {
         __NOP();
     }
