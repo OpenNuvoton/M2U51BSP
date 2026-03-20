@@ -84,8 +84,13 @@ const MFP_LCD_SEG LCD_SEG_PIN[]=
     G_B9,   0x08,   7,  //SEG07
     G_B10,  0x08,   8,  //SEG08
     G_B11,  0x08,   9,  //SEG09
+#if OPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1    
+    G_H9,   0x08,   44, //SEG44, COM6, SEG18
+    G_H8,   0x08,   45, //SEG45, COM7, SEG17
+#else
     G_B12,  0x08,   10, //SEG10
     G_B13,  0x08,   11, //SEG11
+#endif
     G_B14,  0x08,   12, //SEG12
     G_B15,  0x08,   13, //SEG13, COM1
     G_C14,  0x08,   14, //SEG14, COM0
@@ -222,6 +227,12 @@ void LCD_Init(void)
     LCD_OUTPUT_SET(LCD_OUTPUT_SEL9_COM4_TO_SEG43 | LCD_OUTPUT_SEL10_COM5_TO_SEG42 | LCD_OUTPUT_SEL15_COM6_TO_SEG41 |
                    LCD_OUTPUT_SEL16_COM7_TO_SEG40 | LCD_OUTPUT_SEL37_SEG18_TO_SEG45 | LCD_OUTPUT_SEL38_SEG17_TO_SEG44);
 #endif
+
+#if OPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1
+    /* PH8/9 replaces PB12/13 */
+    LCD_OUTPUT_SET(LCD_OUTPUT_SEL37_SEG18_TO_SEG45 | LCD_OUTPUT_SEL38_SEG17_TO_SEG44);
+#endif
+
     /* LCD Initialize and calculate real frame rate */
     u32ActiveFPS = LCD_Open(&g_LCDCfg);
     printf("Working frame rate is %uHz on Type-%c.\n\n", u32ActiveFPS, (g_LCDCfg.u32WaveformType == LCD_PSET_TYPE_Msk) ? 'B' : 'A');

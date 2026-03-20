@@ -16,6 +16,7 @@ project:
           C:
             - -std=c11 -fno-rtti -funsigned-char -fshort-enums -fshort-wchar -ffunction-sections -fdata-sections -w
             - -D__MICROLIB
+            - -DOPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1=1
           ASM:
             - -masm=auto
           Link:
@@ -24,6 +25,7 @@ project:
         - for-compiler: GCC
           C:
             - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+            - -DOPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1=1
           Link:
             - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
             - -Wl,--gc-sections,-Map="$elf()$.map"

@@ -249,7 +249,7 @@ void LCD_SetPixel(uint32_t u32Com, uint32_t u32Seg, uint32_t u32OnFlag)
     uint32_t seg_num = (u32Seg / 4);
     uint32_t seg_shift = (8 * (u32Seg - (4 * seg_num)));
 
-    if (seg_num < 11)
+    if (seg_num < 12)
     {
         if (u32OnFlag)
         {

@@ -225,6 +225,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>DEBUG_ENABLE_SEMIHOST</state>
+                    <state>OPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1=1</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
