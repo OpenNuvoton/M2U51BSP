@@ -264,7 +264,7 @@ int32_t main(void)
 
     /*
         This sample code will enter to different Power-down mode and wake-up by RTC:
-        1. Normal Power-down mode (NPD0 ~ NPD2).
+        1. Normal Power-down mode (NPD0 ~ NPD1).
         2. Standby Power-down mode (SPD0).
         3. Deep Power-down mode (DPD0).
     */
@@ -279,9 +279,6 @@ int32_t main(void)
             break;
         case CLK_PMUCTL_PDMSEL_NPD1:
             printf("\nSystem enters to NPD1 power-down mode ... \n");
-            break;
-        case CLK_PMUCTL_PDMSEL_NPD2:
-            printf("\nSystem enters to NPD2 power-down mode ... \n");
             break;
         case CLK_PMUCTL_PDMSEL_SPD0:
             printf("\nSystem enters to SPD0 power-down mode ... \n");
@@ -323,9 +320,6 @@ int32_t main(void)
             M32(PDMD_FLAG_ADDR) = CLK_PMUCTL_PDMSEL_NPD1;
             break;
         case CLK_PMUCTL_PDMSEL_NPD1:
-            M32(PDMD_FLAG_ADDR) = CLK_PMUCTL_PDMSEL_NPD2;
-            break;
-        case CLK_PMUCTL_PDMSEL_NPD2:
             M32(PDMD_FLAG_ADDR) = CLK_PMUCTL_PDMSEL_SPD0;
             break;
         default:

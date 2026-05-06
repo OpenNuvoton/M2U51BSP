@@ -266,7 +266,6 @@ extern "C"
 #define CLK_PMUCTL_PDMSEL_PD        (0x0UL << CLK_PMUCTL_PDMSEL_Pos)        /*!< Select power down mode is Normal Power-down mode 0 \hideinitializer */
 #define CLK_PMUCTL_PDMSEL_NPD0      (0x0UL << CLK_PMUCTL_PDMSEL_Pos)        /*!< Select power down mode is Normal Power-down mode 0 \hideinitializer */
 #define CLK_PMUCTL_PDMSEL_NPD1      (0x1UL << CLK_PMUCTL_PDMSEL_Pos)        /*!< Select power down mode is Normal Power-down mode 1 \hideinitializer */
-#define CLK_PMUCTL_PDMSEL_NPD2      (0x2UL << CLK_PMUCTL_PDMSEL_Pos)        /*!< Select power down mode is Normal Power-down mode 2 \hideinitializer */
 #define CLK_PMUCTL_PDMSEL_SPD0      (0x4UL << CLK_PMUCTL_PDMSEL_Pos)        /*!< Select power down mode is Standby Power-down mode 0 \hideinitializer */
 #define CLK_PMUCTL_PDMSEL_DPD0      (0x6UL << CLK_PMUCTL_PDMSEL_Pos)        /*!< Select power down mode is Deep Power-down mode 0 \hideinitializer */
 

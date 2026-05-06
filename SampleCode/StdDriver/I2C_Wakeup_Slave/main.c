@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-/* I2C can support NPD0 ~ NDP2 power-down mode */
-#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD2
+/* I2C can support NPD0 ~ NPD1 power-down mode */
+#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD1
 
 uint32_t slave_buff_addr;
 uint8_t g_au8SlvData[256];

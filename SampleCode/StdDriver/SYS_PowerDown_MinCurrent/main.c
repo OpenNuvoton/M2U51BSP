@@ -28,7 +28,7 @@ void PowerDownFunction(void)
     UART_WAIT_TX_EMPTY(UART0);
 
     /* Set Power-down mode */
-    CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD2);
+    CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD1);
 
     /* Enter to Power-down mode */
     CLK_PowerDown();

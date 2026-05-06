@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-/* UI2C can support NPD0 ~ NDP2 power-down mode */
-#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD2
+/* UI2C can support NPD0 ~ NPD1 power-down mode */
+#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */

@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-/* UUART can support NPD0 ~ NDP2 power-down mode */
-#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD2
+/* UUART can support NPD0 ~ NPD1 power-down mode */
+#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define functions prototype                                                                              */

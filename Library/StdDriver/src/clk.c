@@ -832,7 +832,6 @@ void CLK_DisableSysTick(void)
   * @param[in]  u32PDMode is power down mode index. Including :
   *             - \ref CLK_PMUCTL_PDMSEL_NPD0
   *             - \ref CLK_PMUCTL_PDMSEL_NPD1
-  *             - \ref CLK_PMUCTL_PDMSEL_NPD2
   *             - \ref CLK_PMUCTL_PDMSEL_SPD0
   *             - \ref CLK_PMUCTL_PDMSEL_DPD0
   *

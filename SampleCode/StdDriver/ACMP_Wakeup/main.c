@@ -135,7 +135,7 @@ int32_t main(void)
     SYS_UnlockReg();
 
     /* Set Power-down mode */
-    CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD2);
+    CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD1);
 
     CLK_PowerDown();
     printf("Wake up by ACMP1!\n");

@@ -257,8 +257,7 @@ void AutoOperation_FunctionTest()
         g_u32PdmaIntFlag = 0;
 
         SYS_UnlockReg();
-        CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD2);
-//        CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD1);
+        CLK_SetPowerDownMode(CLK_PMUCTL_PDMSEL_NPD1);
         CLK_PowerDown();
         SYS_LockReg();
 

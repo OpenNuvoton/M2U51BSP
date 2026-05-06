@@ -26,8 +26,8 @@ void UART_RS485WakeUp(void);
 void UART_PowerDown_TestItem(void);
 void UART_PowerDownWakeUpTest(void);
 
-/* UART can support NPD0 ~ NDP2 power-down mode */
-#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD2
+/* UART can support NPD0 ~ NPD1 power-down mode */
+#define TEST_POWER_DOWN_MODE    CLK_PMUCTL_PDMSEL_NPD1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Function for System Entry to Power Down Mode                                                           */
