@@ -81,7 +81,7 @@ void UART_ClearIntFlag(UART_T* uart, uint32_t u32InterruptFlag)
  */
 void UART_Close(UART_T* uart)
 {
-    uart->INTEN = 0ul;
+    uart->INTEN = 0UL;
 }
 
 
@@ -188,9 +188,9 @@ void UART_EnableInt(UART_T*  uart, uint32_t u32InterruptFlag)
  */
 void UART_Open(UART_T* uart, uint32_t u32baudrate)
 {
-    uint32_t u32UartClkSrcSel, u32UartClkDivNum;
-    uint32_t u32ClkTbl[5] = {  0ul, __MIRC, __HIRC, __LIRC, __LXT};
-    uint32_t u32BaudDiv = 0ul;
+    uint32_t u32UartClkSrcSel = 0UL;
+    uint32_t u32UartClkDivNum = 0UL;
+    uint32_t u32ClkTbl[5] = {  0UL, __MIRC, __HIRC, __LIRC, __LXT};
 
     /* Get UART clock source selection and UART clock divider number */
     if (uart == (UART_T *)UART0)
@@ -214,6 +214,10 @@ void UART_Open(UART_T* uart, uint32_t u32baudrate)
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV & CLK_CLKDIV_UART2DIV_Msk) >> CLK_CLKDIV_UART2DIV_Pos;
     }
+    else
+    {
+
+    }
 
     /* Select UART function */
     uart->FUNCSEL = UART_FUNCSEL_UART;
@@ -225,7 +229,7 @@ void UART_Open(UART_T* uart, uint32_t u32baudrate)
     uart->FIFO &= ~(UART_FIFO_RFITL_Msk | UART_FIFO_RTSTRGLV_Msk);
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
-    if (u32UartClkSrcSel == 0ul)
+    if (u32UartClkSrcSel == 0UL)
     {
         /* UART Port as UART0 / UART2 */
         if ((uart == ((UART_T *)UART0)) || (uart == ((UART_T *)UART2)))
@@ -238,19 +242,23 @@ void UART_Open(UART_T* uart, uint32_t u32baudrate)
         }
 
     }
-    else if (u32UartClkSrcSel == 1ul)
+    else if (u32UartClkSrcSel == 1UL)
     {
         u32ClkTbl[u32UartClkSrcSel] = CLK_GetMIRCFreq();
     }
+    else
+    {
+
+    }
 
     /* Set UART baud rate */
-    if(u32baudrate != 0ul)
+    if(u32baudrate != 0UL)
     {
-        u32BaudDiv = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate);
+        uint32_t u32BaudDiv = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate);
 
-        if(u32BaudDiv > 0xFFFFul)
+        if(u32BaudDiv > 0xFFFFUL)
         {
-            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate));
+            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate));
         }
         else
         {
@@ -271,21 +279,21 @@ void UART_Open(UART_T* uart, uint32_t u32baudrate)
  *
  *    @details      The function is used to read Rx data from RX FIFO and the data will be stored in pu8RxBuf.
  */
-uint32_t UART_Read(UART_T* uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
+uint32_t UART_Read(const UART_T* uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
 {
-    uint32_t  u32Count, u32delayno;
-    uint32_t  u32Exit = 0ul;
+    uint32_t u32Count;
+    uint32_t u32Exit = 0UL;
 
-    for(u32Count = 0ul; u32Count < u32ReadBytes; u32Count++)
+    for(u32Count = 0UL; u32Count < u32ReadBytes; u32Count++)
     {
-        u32delayno = 0ul;
+        uint32_t u32delayno = 0UL;
 
         while(uart->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk)   /* Check RX empty => failed */
         {
             u32delayno++;
-            if(u32delayno >= 0x40000000ul)
+            if(u32delayno >= 0x40000000UL)
             {
-                u32Exit = 1ul;
+                u32Exit = 1UL;
                 break;
             }
             else
@@ -293,7 +301,7 @@ uint32_t UART_Read(UART_T* uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
             }
         }
 
-        if(u32Exit == 1ul)
+        if(u32Exit == 1UL)
         {
             break;
         }
@@ -335,9 +343,9 @@ uint32_t UART_Read(UART_T* uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
  */
 void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t  u32stop_bits)
 {
-    uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[5] = { 0ul, __MIRC, __HIRC, __LIRC, __LXT};
-    uint32_t u32Baud_Div = 0ul;
+    uint32_t u32UartClkSrcSel = 0UL;
+    uint32_t u32UartClkDivNum = 0UL;
+    uint32_t u32ClkTbl[5] = { 0UL, __MIRC, __HIRC, __LIRC, __LXT};
 
     /* Get UART clock source selection and UART clock divider number */
     if (uart == (UART_T *)UART0)
@@ -361,9 +369,13 @@ void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_wi
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV & CLK_CLKDIV_UART2DIV_Msk) >> CLK_CLKDIV_UART2DIV_Pos;
     }
+    else
+    {
+
+    }
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
-    if (u32UartClkSrcSel == 0ul)
+    if (u32UartClkSrcSel == 0UL)
     {
         if ((uart == ((UART_T *)UART0)) || (uart == ((UART_T *)UART2)))
         {
@@ -374,19 +386,23 @@ void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_wi
             u32ClkTbl[u32UartClkSrcSel] =  CLK_GetPCLK1Freq();
         }
     }
-    else if (u32UartClkSrcSel == 1ul)
+    else if (u32UartClkSrcSel == 1UL)
     {
         u32ClkTbl[u32UartClkSrcSel] = CLK_GetMIRCFreq();
     }
+    else
+    {
+
+    }
 
     /* Set UART baud rate */
-    if(u32baudrate != 0ul)
+    if(u32baudrate != 0UL)
     {
-        u32Baud_Div = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate);
+        uint32_t u32Baud_Div = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate);
 
-        if(u32Baud_Div > 0xFFFFul)
+        if(u32Baud_Div > 0xFFFFUL)
         {
-            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate));
+            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate));
         }
         else
         {
@@ -434,9 +450,9 @@ void UART_SetTimeoutCnt(UART_T* uart, uint32_t u32TOC)
  */
 void UART_SelectIrDAMode(UART_T* uart, uint32_t u32Buadrate, uint32_t u32Direction)
 {
-    uint32_t u32UartClkSrcSel = 0UL, u32UartClkDivNum = 1UL;
-    uint32_t u32ClkTbl[5] = {  0ul, __MIRC, __HIRC, __LIRC, __LXT};
-    uint32_t u32BaudDiv;
+    uint32_t u32UartClkSrcSel = 0UL;
+    uint32_t u32UartClkDivNum = 1UL;
+    uint32_t u32ClkTbl[5] = {  0UL, __MIRC, __HIRC, __LIRC, __LXT};
 
     /* Select IrDA function mode */
     uart->FUNCSEL = UART_FUNCSEL_IrDA;
@@ -463,9 +479,13 @@ void UART_SelectIrDAMode(UART_T* uart, uint32_t u32Buadrate, uint32_t u32Directi
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV & CLK_CLKDIV_UART2DIV_Msk) >> CLK_CLKDIV_UART2DIV_Pos;
     }
+    else
+    {
+
+    }
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
-    if (u32UartClkSrcSel == 0ul)
+    if (u32UartClkSrcSel == 0UL)
     {
         if ((uart == ((UART_T *)UART0)) || (uart == ((UART_T *)UART2)))
         {
@@ -476,17 +496,21 @@ void UART_SelectIrDAMode(UART_T* uart, uint32_t u32Buadrate, uint32_t u32Directi
             u32ClkTbl[u32UartClkSrcSel] =  CLK_GetPCLK1Freq();
         }
     }
-    else if (u32UartClkSrcSel == 1ul)
+    else if (u32UartClkSrcSel == 1UL)
     {
         u32ClkTbl[u32UartClkSrcSel] = CLK_GetMIRCFreq();
     }
+    else
+    {
+
+    }
 
     /* Set UART IrDA baud rate in mode 0 */
-    if(u32Buadrate != 0ul)
+    if(u32Buadrate != 0UL)
     {
-        u32BaudDiv = UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32Buadrate);
+        uint32_t u32BaudDiv = UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32Buadrate);
 
-        if(u32BaudDiv < 0xFFFFul)
+        if(u32BaudDiv < 0xFFFFUL)
         {
             uart->BAUD = (UART_BAUD_MODE0 | u32BaudDiv);
         }
@@ -544,20 +568,20 @@ void UART_SelectRS485Mode(UART_T* uart, uint32_t u32Mode, uint32_t u32Addr)
  *
  *    @details      The function is to write data into TX buffer to transmit data by UART.
  */
-uint32_t UART_Write(UART_T* uart, uint8_t pu8TxBuf[], uint32_t u32WriteBytes)
+uint32_t UART_Write(UART_T* uart, const uint8_t pu8TxBuf[], uint32_t u32WriteBytes)
 {
-    uint32_t  u32Count, u32delayno;
-    uint32_t  u32Exit = 0ul;
+    uint32_t u32Count;
+    uint32_t u32Exit = 0UL;
 
-    for(u32Count = 0ul; u32Count != u32WriteBytes; u32Count++)
+    for(u32Count = 0UL; u32Count != u32WriteBytes; u32Count++)
     {
-        u32delayno = 0ul;
+        uint32_t u32delayno = 0UL;
         while (uart->FIFOSTS & UART_FIFOSTS_TXFULL_Msk)   /* Check Tx Full */
         {
             u32delayno++;
-            if(u32delayno >= 0x40000000ul)
+            if(u32delayno >= 0x40000000UL)
             {
-                u32Exit = 1ul;
+                u32Exit = 1UL;
                 break;
             }
             else
@@ -565,7 +589,7 @@ uint32_t UART_Write(UART_T* uart, uint8_t pu8TxBuf[], uint32_t u32WriteBytes)
             }
         }
 
-        if(u32Exit == 1ul)
+        if(u32Exit == 1UL)
         {
             break;
         }
