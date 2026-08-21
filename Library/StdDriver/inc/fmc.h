@@ -95,13 +95,12 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 
 
-#define FMC_TIMEOUT_READ        ((SystemCoreClock/10)/4) /*!< Read command time-out 100 ms         \hideinitializer */
-#define FMC_TIMEOUT_WRITE       ((SystemCoreClock/10)/4) /*!< Write command time-out 100 ms        \hideinitializer */
-#define FMC_TIMEOUT_MUL_WRITE   (SystemCoreClock/1)      /*!< Write command time-out 100 ms        \hideinitializer */
-#define FMC_TIMEOUT_ERASE       ((SystemCoreClock/10)/2) /*!< Erase command time-out 200 ms        \hideinitializer */
-#define FMC_TIMEOUT_CHKSUM      (SystemCoreClock/2)      /*!< Get checksum command time-out 2 s    \hideinitializer */
-#define FMC_TIMEOUT_CHKALLONE   (SystemCoreClock/2)      /*!< Check-all-one command time-out 2 s   \hideinitializer */
-
+#define FMC_TIMEOUT_READ        ((SystemCoreClock / 10UL) / 4UL) /*!< Read command time-out 100 ms         \hideinitializer */
+#define FMC_TIMEOUT_WRITE       ((SystemCoreClock / 10UL) / 4UL) /*!< Write command time-out 100 ms        \hideinitializer */
+#define FMC_TIMEOUT_MUL_WRITE   (SystemCoreClock / 1UL)      /*!< Write command time-out 100 ms        \hideinitializer */
+#define FMC_TIMEOUT_ERASE       ((SystemCoreClock / 10UL) / 2UL) /*!< Erase command time-out 200 ms        \hideinitializer */
+#define FMC_TIMEOUT_CHKSUM      (SystemCoreClock / 2UL)      /*!< Get checksum command time-out 2 s    \hideinitializer */
+#define FMC_TIMEOUT_CHKALLONE   (SystemCoreClock / 2UL)      /*!< Check-all-one command time-out 2 s   \hideinitializer */
 /*@}*/ /* end of group FMC_EXPORTED_CONSTANTS */
 
 
@@ -361,20 +360,22 @@ __STATIC_INLINE uint32_t FMC_ReadCID(void)
     FMC->ISPCMD = FMC_ISPCMD_READ_CID;           /* Set ISP Command Code */
     FMC->ISPADDR = 0x0u;                         /* Must keep 0x0 when read CID */
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;          /* Trigger to start ISP procedure */
-#if ISBEN
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                           /* To make sure ISP/CPU be Synchronized */
+#endif                                        /* To make sure ISP/CPU be Synchronized */
+#endif
     while (tout-- > 0)
     {
         if (!(FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
         {
-            if (FMC->ISPDAT != 0x530000DA)
+            if (FMC->ISPDAT != 0x530000DAUL)
                 g_FMC_i32ErrCode = -1;
             return FMC->ISPDAT;
         }
     }
     g_FMC_i32ErrCode = -1;
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFFU;
 
 }
 
@@ -394,18 +395,20 @@ __STATIC_INLINE uint32_t FMC_ReadPID(void)
     g_FMC_i32ErrCode = 0;
 
     FMC->ISPCMD = FMC_ISPCMD_READ_DID;          /* Set ISP Command Code */
-    FMC->ISPADDR = 0x04u;                       /* Must keep 0x4 when read PID */
+    FMC->ISPADDR = 0x04U;                       /* Must keep 0x4 when read PID */
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;         /* Trigger to start ISP procedure */
-#if ISBEN
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                          /* To make sure ISP/CPU be Synchronized */
+#endif                                        /* To make sure ISP/CPU be Synchronized */
+#endif
     while (tout-- > 0)
     {
         if (!(FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
             return FMC->ISPDAT;
     }
     g_FMC_i32ErrCode = -1;
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFFU;
 }
 
 /**
@@ -424,11 +427,13 @@ __STATIC_INLINE uint32_t FMC_ReadUID(uint8_t u8Index)
     g_FMC_i32ErrCode = 0;
 
     FMC->ISPCMD = FMC_ISPCMD_READ_UID;
-    FMC->ISPADDR = ((uint32_t)u8Index << 2u);
-    FMC->ISPDAT = 0u;
-    FMC->ISPTRG = 0x1u;
-#if ISBEN
+    FMC->ISPADDR = ((uint32_t)u8Index << 2U);
+    FMC->ISPDAT = 0U;
+    FMC->ISPTRG = 0x1U;
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
+#endif                                        /* To make sure ISP/CPU be Synchronized */
 #endif
     while (tout-- > 0)
     {
@@ -436,7 +441,7 @@ __STATIC_INLINE uint32_t FMC_ReadUID(uint8_t u8Index)
             return FMC->ISPDAT;
     }
     g_FMC_i32ErrCode = -1;
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFFU;
 }
 
 /**
@@ -455,18 +460,20 @@ __STATIC_INLINE uint32_t FMC_ReadUCID(uint32_t u32Index)
     g_FMC_i32ErrCode = 0;
 
     FMC->ISPCMD = FMC_ISPCMD_READ_UID;            /* Set ISP Command Code */
-    FMC->ISPADDR = (0x04u * u32Index) + 0x10u;    /* The UCID is at offset 0x10 with word alignment. */
+    FMC->ISPADDR = (0x04U * u32Index) + 0x10U;    /* The UCID is at offset 0x10 with word alignment. */
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;           /* Trigger to start ISP procedure */
-#if ISBEN
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                            /* To make sure ISP/CPU be Synchronized */
+#endif                                        /* To make sure ISP/CPU be Synchronized */
+#endif
     while (tout-- > 0)
     {
         if (!(FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
             return FMC->ISPDAT;
     }
     g_FMC_i32ErrCode = -1;
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFFU;
 }
 
 /**
@@ -491,10 +498,12 @@ __STATIC_INLINE int32_t FMC_SetVectorPageAddr(uint32_t u32PageAddr)
 
     FMC->ISPCMD = FMC_ISPCMD_VECMAP;  /* Set ISP Command Code */
     FMC->ISPADDR = u32PageAddr;       /* The address of specified page which will be map to address 0x0. It must be page alignment. */
-    FMC->ISPTRG = 0x1u;               /* Trigger to start ISP procedure */
-#if ISBEN
+    FMC->ISPTRG = 0x1U;               /* Trigger to start ISP procedure */
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                /* To make sure ISP/CPU be Synchronized */
+#endif                                        /* To make sure ISP/CPU be Synchronized */
+#endif
     while (tout-- > 0)
     {
         if (!FMC->ISPTRG)             /* Waiting for ISP Done */
@@ -518,12 +527,12 @@ __STATIC_INLINE int32_t FMC_SetBankRemap(uint32_t u32OP)
     FMC->ISPCMD = FMC_ISPCMD_BANKREMAP;  /* Set ISP Command Code */
     FMC->ISPDAT = 0x5AA55AA5;
     FMC->ISPADDR = u32OP;                /* The address of specified page which will be map to address 0x0. It must be page alignment. */
-   
-    FMC->ISPTRG = 0x1u;                  /* Trigger to start ISP procedure */
-
-#if ISBEN
+    FMC->ISPTRG = 0x1U;                  /* Trigger to start ISP procedure */
+#ifdef ISBEN
+#if (ISBEN != 0)
     __ISB();
-#endif                                   /* To make sure ISP/CPU be Synchronized */
+#endif                                        /* To make sure ISP/CPU be Synchronized */
+#endif
     while (tout-- > 0)
     {
         if (!FMC->ISPTRG)                /* Waiting for ISP Done */
@@ -539,20 +548,20 @@ __STATIC_INLINE int32_t FMC_SetBankRemap(uint32_t u32OP)
 /*---------------------------------------------------------------------------------------------------------*/
 
 extern void     FMC_Close(void);
-extern int32_t  FMC_ConfigXOM(uint32_t xom_num, uint32_t xom_base, uint8_t xom_page);
+extern int32_t  FMC_ConfigXOM(uint32_t u32XomNum, uint32_t u32XomBase, uint8_t u8XomPage);
 extern int32_t  FMC_Erase(uint32_t u32PageAddr);
 extern int32_t  FMC_Erase_Bank(uint32_t u32BankAddr);
-extern int32_t  FMC_EraseXOM(uint32_t xom_num);
-extern int32_t  FMC_GetXOMState(uint32_t xom_num);
+extern int32_t  FMC_EraseXOM(uint32_t u32XomNum);
+extern int32_t  FMC_GetXOMState(uint32_t u32XomNum);
 extern int32_t  FMC_GetBootSource(void);
 extern void     FMC_Open(void);
 extern uint32_t FMC_Read(uint32_t u32Addr);
 extern uint32_t FMC_ReadDataFlashBaseAddr(void);
 extern void     FMC_SetBootSource(int32_t i32BootSrc);
 extern int32_t  FMC_Write(uint32_t u32Addr, uint32_t u32Data);
-extern int32_t  FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len);
+extern int32_t  FMC_WriteMultiple(uint32_t u32Addr, const uint32_t pu32Buf[], uint32_t u32Len);
 extern int32_t  FMC_ReadConfig(uint32_t u32Config[], uint32_t u32Count);
-extern int32_t  FMC_WriteConfig(uint32_t u32Config[], uint32_t u32Count);
+extern int32_t  FMC_WriteConfig(const uint32_t u32Config[], uint32_t u32Count);
 extern uint32_t FMC_GetChkSum(uint32_t u32addr, uint32_t u32count);
 extern uint32_t FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count);
 extern int32_t FMC_RemapBank(uint32_t u32BankIdx);

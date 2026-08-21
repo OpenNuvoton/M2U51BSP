@@ -39,10 +39,6 @@
   @{
 */
 
-/* // @cond HIDDEN_SYMBOLS */
-
-/* // @endcond HIDDEN_SYMBOLS */
-
 /**
   * @brief  Open AES encrypt/decrypt function.
   * @param[in]  crpt         The pointer of CRPT module
@@ -108,14 +104,16 @@ void AES_Start(CRPT_T *crpt, int32_t u32Channel, uint32_t u32DMAMode)
   *         - \ref AES_KEY_SIZE_256
   * @return None
   */
-void AES_SetKey(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32Keys[], uint32_t u32KeySize)
+void AES_SetKey(CRPT_T *crpt, uint32_t u32Channel, const uint32_t au32Keys[], uint32_t u32KeySize)
 {
-    uint32_t  i, wcnt, key_reg_addr;
+    uint32_t  i;
+    uint32_t wcnt;
+    uint32_t key_reg_addr;
 
     (void) u32Channel;
 
     key_reg_addr = (uint32_t)&crpt->AES_KEY[0];
-    wcnt = 4UL + u32KeySize * 2UL;
+    wcnt = 4UL + (u32KeySize * 2UL);
 
     for(i = 0U; i < wcnt; i++)
     {
@@ -134,9 +132,10 @@ void AES_SetKey(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32Keys[], uint32_t
   * @param[in]  au32IV      A four entry word array contains AES initial vectors.
   * @return None
   */
-void AES_SetInitVect(CRPT_T *crpt, uint32_t u32Channel, uint32_t au32IV[])
+void AES_SetInitVect(CRPT_T *crpt, uint32_t u32Channel, const uint32_t au32IV[])
 {
-    uint32_t  i, key_reg_addr;
+    uint32_t  i;
+    uint32_t  key_reg_addr;
 
     (void) u32Channel;
 
