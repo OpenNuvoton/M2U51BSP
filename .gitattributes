@@ -1,0 +1,3 @@
+# Preserve SBOM inputs and internal evidence byte-for-byte.
+# Disable Git line-ending normalization and text conversion.
+Document/SBOM/** -text
