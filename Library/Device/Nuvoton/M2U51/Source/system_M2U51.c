@@ -19,6 +19,9 @@ extern void *__Vectors;                   /* see startup file */
  *----------------------------------------------------------------------------*/
 uint32_t SystemCoreClock  = __SYSTEM_CLOCK;     /*!< System Clock Frequency (Core Clock) */
 uint32_t CyclesPerUs      = (__SYSTEM_CLOCK / 1000000UL);  /*!< Cycles per micro second             */
+
+/* MISRA C:2012 Rule 8.4: compatible declaration for external linkage object. */
+extern const uint32_t gau32ClkSrcTbl[8];
 const uint32_t gau32ClkSrcTbl[8] = {__MIRC, __HIRC, __LIRC, __LXT, 0UL, 0UL, 0UL, 0UL};
 
 /**
@@ -33,7 +36,8 @@ const uint32_t gau32ClkSrcTbl[8] = {__MIRC, __HIRC, __LIRC, __LXT, 0UL, 0UL, 0UL
  */
 void SystemCoreClockUpdate(void)
 {
-    uint32_t u32Freq, u32ClkSrc;
+    uint32_t u32Freq;
+    uint32_t u32ClkSrc;
     uint32_t u32HclkDiv;
 
     u32ClkSrc = CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk;
@@ -123,7 +127,10 @@ void AssertError(uint8_t *file, uint32_t line)
     printf("[%s] line %u : wrong parameters.\r\n", file, line);
 
     /* Infinite loop */
-    while (1) ;
+    for (;;)
+    {
+        /* Stay here. */
+    }
 }
 #endif
 

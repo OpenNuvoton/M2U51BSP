@@ -23,6 +23,7 @@ extern __NO_RETURN void __PROGRAM_START(void);
  *----------------------------------------------------------------------------*/
 __NO_RETURN void Reset_Handler(void);
 __NO_RETURN void Default_Handler(void);
+void Reset_Handler_PreInit(void);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Handler
@@ -99,7 +100,6 @@ void CRC0_IRQHandler(void)          __attribute__((weak, alias("Default_Handler"
 
 
 extern const VECTOR_TABLE_Type __VECTOR_TABLE[];
-#if 1
 const VECTOR_TABLE_Type __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE =
 {
     (VECTOR_TABLE_Type)(&__INITIAL_SP),     /*       Initial Stack Pointer          */
@@ -182,7 +182,6 @@ const VECTOR_TABLE_Type __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE =
     LCD_IRQHandler,                         /*    59: LCD                           */
     CRC0_IRQHandler,                        /*    60: CRC0                          */
 };
-#endif
 
 #if defined ( __GNUC__ )
 #pragma GCC diagnostic pop
@@ -244,7 +243,10 @@ __WEAK void HardFault_Handler(void)
  *----------------------------------------------------------------------------*/
 void Default_Handler(void)
 {
-    while (1);
+    while (1)
+    {
+
+    }
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
