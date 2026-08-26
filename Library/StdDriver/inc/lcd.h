@@ -29,94 +29,94 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Bias Voltage Level Selection Constant Definitions                                                  */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_BIAS_LV_1_2                 (1ul << LCD_PSET_BIAS_Pos) /*!< LCD bias voltage level selection - 1/2 Bias \hideinitializer */
-#define LCD_BIAS_LV_1_3                 (2ul << LCD_PSET_BIAS_Pos) /*!< LCD bias voltage level selection - 1/3 Bias \hideinitializer */
-#define LCD_BIAS_LV_1_4                 (3ul << LCD_PSET_BIAS_Pos) /*!< LCD bias voltage level selection - 1/4 Bias \hideinitializer */
+#define LCD_BIAS_LV_1_2                 (1UL << LCD_PSET_BIAS_Pos) /*!< LCD bias voltage level selection - 1/2 Bias \hideinitializer */
+#define LCD_BIAS_LV_1_3                 (2UL << LCD_PSET_BIAS_Pos) /*!< LCD bias voltage level selection - 1/3 Bias \hideinitializer */
+#define LCD_BIAS_LV_1_4                 (3UL << LCD_PSET_BIAS_Pos) /*!< LCD bias voltage level selection - 1/4 Bias \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD COM Duty Ratio Selection Constant Definitions                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_COM_DUTY_1_1                (0ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/1 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_2                (1ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/2 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_3                (2ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/3 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_4                (3ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/4 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_5                (4ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/5 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_6                (5ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/6 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_7                (6ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/7 Duty \hideinitializer */
-#define LCD_COM_DUTY_1_8                (7ul << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/8 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_1                (0UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/1 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_2                (1UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/2 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_3                (2UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/3 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_4                (3UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/4 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_5                (4UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/5 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_6                (5UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/6 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_7                (6UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/7 Duty \hideinitializer */
+#define LCD_COM_DUTY_1_8                (7UL << LCD_PSET_DUTY_Pos) /*!< LCD com duty ratio selection - 1/8 Duty \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Waveform Attribute Selection Constant Definitions                                                  */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_WAVEFORM_TYPE_A_NORMAL      (0ul << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-A, no inverse \hideinitializer */
-#define LCD_WAVEFORM_TYPE_B_NORMAL      (1ul << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-B, no inverse \hideinitializer */
-#define LCD_WAVEFORM_TYPE_A_INVERSE     (2ul << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-A and inverse \hideinitializer */
-#define LCD_WAVEFORM_TYPE_B_INVERSE     (3ul << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-B and inverse \hideinitializer */
+#define LCD_WAVEFORM_TYPE_A_NORMAL      (0UL << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-A, no inverse \hideinitializer */
+#define LCD_WAVEFORM_TYPE_B_NORMAL      (1UL << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-B, no inverse \hideinitializer */
+#define LCD_WAVEFORM_TYPE_A_INVERSE     (2UL << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-A and inverse \hideinitializer */
+#define LCD_WAVEFORM_TYPE_B_INVERSE     (3UL << LCD_PSET_TYPE_Pos) /*!< LCD waveform Type-B and inverse \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Charge Pump Voltage Selection Constant Definitions                                                 */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_CP_VOLTAGE_VL1_100          (0ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.00 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_105          (1ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.05 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_110          (2ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.10 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_115          (3ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.15 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_120          (4ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.20 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_125          (5ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.25 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_130          (6ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.30 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_135          (7ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.35 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_140          (8ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.40 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_145          (9ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.45 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_150          (10ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.50 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_155          (11ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.55 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_160          (12ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.60 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_165          (13ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.65 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_170          (14ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.70 V \hideinitializer */
-#define LCD_CP_VOLTAGE_VL1_175          (15ul << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.75 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_100          (0UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.00 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_105          (1UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.05 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_110          (2UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.10 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_115          (3UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.15 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_120          (4UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.20 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_125          (5UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.25 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_130          (6UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.30 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_135          (7UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.35 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_140          (8UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.40 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_145          (9UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.45 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_150          (10UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.50 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_155          (11UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.55 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_160          (12UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.60 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_165          (13UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.65 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_170          (14UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.70 V \hideinitializer */
+#define LCD_CP_VOLTAGE_VL1_175          (15UL << LCD_ASET1_VL1SEL_Pos) /*!< Select LCD charge pump voltage VL1 1.75 V \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Interrupt Source Constant Definitions                                                              */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_DISABLE_ALL_INT             (0ul << LCD_INTEN_FIECEND_Pos) /*!< Disable all LCD interrupt sources \hideinitializer */
-#define LCD_FRAME_COUNTING_END_INT      (1ul << LCD_INTEN_FIECEND_Pos) /*!< Indicate frame count end interrupt \hideinitializer */
-#define LCD_FRAME_END_INT               (1ul << LCD_INTEN_FIEEND_Pos)  /*!< Indicate frame end interrupt \hideinitializer */
-#define LCD_ENABLE_ALL_INT              (3ul << LCD_INTEN_FIECEND_Pos) /*!< Enable all LCD interrupt sources \hideinitializer */
+#define LCD_DISABLE_ALL_INT             (0UL << LCD_INTEN_FIECEND_Pos) /*!< Disable all LCD interrupt sources \hideinitializer */
+#define LCD_FRAME_COUNTING_END_INT      (1UL << LCD_INTEN_FIECEND_Pos) /*!< Indicate frame count end interrupt \hideinitializer */
+#define LCD_FRAME_END_INT               (1UL << LCD_INTEN_FIEEND_Pos)  /*!< Indicate frame end interrupt \hideinitializer */
+#define LCD_ENABLE_ALL_INT              (3UL << LCD_INTEN_FIECEND_Pos) /*!< Enable all LCD interrupt sources \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Operation Voltage Source Constant Definitions                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_VOLTAGE_SOURCE_CP           (0ul << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from built-in charge pump \hideinitializer */
-#define LCD_VOLTAGE_SOURCE_VLCD_R_MODE  (1ul << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from external VLCD power with external resistor divider \hideinitializer */
-#define LCD_VOLTAGE_SOURCE_VLCD_C_MODE  (2ul << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from external VLCD with capacitor split \hideinitializer */
+#define LCD_VOLTAGE_SOURCE_CP           (0UL << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from built-in charge pump \hideinitializer */
+#define LCD_VOLTAGE_SOURCE_VLCD_R_MODE  (1UL << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from external VLCD power with external resistor divider \hideinitializer */
+#define LCD_VOLTAGE_SOURCE_VLCD_C_MODE  (2UL << LCD_ASET1_PSTRUC_Pos) /*!< LCD voltage source from external VLCD with capacitor split \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Output Control Constant Definitions                                                                */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_OUTPUT_SEL9_COM4_TO_SEG43   (1ul << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is SEG43 \hideinitializer */
-#define LCD_OUTPUT_SEL10_COM5_TO_SEG42  (1ul << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is SEG42 \hideinitializer */
-#define LCD_OUTPUT_SEL11_SEG20_TO_COM0  (1ul << LCD_OSET_SEL11_Pos) /*!< The output SEL11 is COM0 \hideinitializer */
-#define LCD_OUTPUT_SEL12_SEG19_TO_COM1  (1ul << LCD_OSET_SEL12_Pos) /*!< The output SEL12 is COM1 \hideinitializer */
-#define LCD_OUTPUT_SEL13_SEG18_TO_COM2  (1ul << LCD_OSET_SEL13_Pos) /*!< The output SEL13 is COM2 \hideinitializer */
-#define LCD_OUTPUT_SEL14_SEG17_TO_COM3  (1ul << LCD_OSET_SEL14_Pos) /*!< The output SEL14 is COM3 \hideinitializer */
-#define LCD_OUTPUT_SEL15_COM6_TO_SEG41  (1ul << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is SEG41 \hideinitializer */
-#define LCD_OUTPUT_SEL16_COM7_TO_SEG40  (1ul << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM40 \hideinitializer */
-#define LCD_OUTPUT_SEL24_SEG31_TO_COM4  (1ul << LCD_OSET_SEL24_Pos) /*!< The output SEL24 is COM4 \hideinitializer */
-#define LCD_OUTPUT_SEL25_SEG30_TO_COM5  (1ul << LCD_OSET_SEL25_Pos) /*!< The output SEL25 is COM5 \hideinitializer */
-#define LCD_OUTPUT_SEL26_SEG29_TO_COM6  (1ul << LCD_OSET_SEL26_Pos) /*!< The output SEL26 is COM6 \hideinitializer */
-#define LCD_OUTPUT_SEL27_SEG28_TO_COM7  (1ul << LCD_OSET_SEL27_Pos) /*!< The output SEL27 is COM7 \hideinitializer */
-#define LCD_OUTPUT_SEL28_SEG27_TO_COM2  (1ul << LCD_OSET_SEL28_Pos) /*!< The output SEL28 is COM2 \hideinitializer */
-#define LCD_OUTPUT_SEL29_SEG26_TO_COM3  (1ul << LCD_OSET_SEL29_Pos) /*!< The output SEL29 is COM3 \hideinitializer */
-#define LCD_OUTPUT_SEL37_SEG18_TO_COM6  (1ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is COM6 \hideinitializer */
-#define LCD_OUTPUT_SEL37_SEG18_TO_SEG45 (2ul << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG45 \hideinitializer */
-#define LCD_OUTPUT_SEL38_SEG17_TO_COM7  (1ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is COM7 \hideinitializer */
-#define LCD_OUTPUT_SEL38_SEG17_TO_SEG44 (2ul << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG44 \hideinitializer */
-#define LCD_OUTPUT_SEL39_SEG14_TO_COM0  (1ul << LCD_OSET_SEL39_Pos) /*!< The output SEL39 is COM0 \hideinitializer */
-#define LCD_OUTPUT_SEL40_SEG13_TO_COM1  (1ul << LCD_OSET_SEL40_Pos) /*!< The output SEL42 is COM1 \hideinitializer */
+#define LCD_OUTPUT_SEL9_COM4_TO_SEG43   (1UL << LCD_OSET_SEL9_Pos)  /*!< The output SEL9  is SEG43 \hideinitializer */
+#define LCD_OUTPUT_SEL10_COM5_TO_SEG42  (1UL << LCD_OSET_SEL10_Pos) /*!< The output SEL10 is SEG42 \hideinitializer */
+#define LCD_OUTPUT_SEL11_SEG20_TO_COM0  (1UL << LCD_OSET_SEL11_Pos) /*!< The output SEL11 is COM0 \hideinitializer */
+#define LCD_OUTPUT_SEL12_SEG19_TO_COM1  (1UL << LCD_OSET_SEL12_Pos) /*!< The output SEL12 is COM1 \hideinitializer */
+#define LCD_OUTPUT_SEL13_SEG18_TO_COM2  (1UL << LCD_OSET_SEL13_Pos) /*!< The output SEL13 is COM2 \hideinitializer */
+#define LCD_OUTPUT_SEL14_SEG17_TO_COM3  (1UL << LCD_OSET_SEL14_Pos) /*!< The output SEL14 is COM3 \hideinitializer */
+#define LCD_OUTPUT_SEL15_COM6_TO_SEG41  (1UL << LCD_OSET_SEL15_Pos) /*!< The output SEL15 is SEG41 \hideinitializer */
+#define LCD_OUTPUT_SEL16_COM7_TO_SEG40  (1UL << LCD_OSET_SEL16_Pos) /*!< The output SEL16 is COM40 \hideinitializer */
+#define LCD_OUTPUT_SEL24_SEG31_TO_COM4  (1UL << LCD_OSET_SEL24_Pos) /*!< The output SEL24 is COM4 \hideinitializer */
+#define LCD_OUTPUT_SEL25_SEG30_TO_COM5  (1UL << LCD_OSET_SEL25_Pos) /*!< The output SEL25 is COM5 \hideinitializer */
+#define LCD_OUTPUT_SEL26_SEG29_TO_COM6  (1UL << LCD_OSET_SEL26_Pos) /*!< The output SEL26 is COM6 \hideinitializer */
+#define LCD_OUTPUT_SEL27_SEG28_TO_COM7  (1UL << LCD_OSET_SEL27_Pos) /*!< The output SEL27 is COM7 \hideinitializer */
+#define LCD_OUTPUT_SEL28_SEG27_TO_COM2  (1UL << LCD_OSET_SEL28_Pos) /*!< The output SEL28 is COM2 \hideinitializer */
+#define LCD_OUTPUT_SEL29_SEG26_TO_COM3  (1UL << LCD_OSET_SEL29_Pos) /*!< The output SEL29 is COM3 \hideinitializer */
+#define LCD_OUTPUT_SEL37_SEG18_TO_COM6  (1UL << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is COM6 \hideinitializer */
+#define LCD_OUTPUT_SEL37_SEG18_TO_SEG45 (2UL << LCD_OSET_SEL37_Pos) /*!< The output SEL37 is SEG45 \hideinitializer */
+#define LCD_OUTPUT_SEL38_SEG17_TO_COM7  (1UL << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is COM7 \hideinitializer */
+#define LCD_OUTPUT_SEL38_SEG17_TO_SEG44 (2UL << LCD_OSET_SEL38_Pos) /*!< The output SEL38 is SEG44 \hideinitializer */
+#define LCD_OUTPUT_SEL39_SEG14_TO_COM0  (1UL << LCD_OSET_SEL39_Pos) /*!< The output SEL39 is COM0 \hideinitializer */
+#define LCD_OUTPUT_SEL40_SEG13_TO_COM1  (1UL << LCD_OSET_SEL40_Pos) /*!< The output SEL42 is COM1 \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Pause Type Constant Definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#define LCD_FRAME_PAUSE                 (0ul << LCD_FSET_PTYPE_Pos)  /*!< Select frame pause type \hideinitializer */
-#define LCD_DUTY_PAUSE                  (1ul << LCD_FSET_PTYPE_Pos)  /*!< Select duty pause type \hideinitializer */
+#define LCD_FRAME_PAUSE                 (0UL << LCD_FSET_PTYPE_Pos)  /*!< Select frame pause type \hideinitializer */
+#define LCD_DUTY_PAUSE                  (1UL << LCD_FSET_PTYPE_Pos)  /*!< Select duty pause type \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  LCD Power Saving Level Constant Definitions                                                            */
@@ -202,7 +202,7 @@ typedef struct
   *
   * @details    This macro is used to set the LCD operarion frequency is (LCD source frequency / div).
   */
-#define LCD_SET_FREQDIV(div)        (LCD->PSET = (LCD->PSET & ~LCD_PSET_LCDDIV_Msk) | (((div)-1) << LCD_PSET_LCDDIV_Pos))
+#define LCD_SET_FREQDIV(div)        (LCD->PSET = (LCD->PSET & ~LCD_PSET_LCDDIV_Msk) | (((div) - 1UL) << (uint32_t)LCD_PSET_LCDDIV_Pos))
 
 /**
   * @brief      Set Charge Pump Voltage
@@ -287,7 +287,7 @@ typedef struct
   * @details    This macro is used to set the LCD frame counting value to configure the blink interval.
   * @note       For type-B waveform, the frame counter increases at the end of odd frames, not even frames.
   */
-#define LCD_SET_FRAME_COUNTING_VALUE(value)     (LCD->FSET = (LCD->FSET & ~LCD_FSET_FCV_Msk) | (((value)-1) << LCD_FSET_FCV_Pos))
+#define LCD_SET_FRAME_COUNTING_VALUE(value)     (LCD->FSET = (LCD->FSET & ~LCD_FSET_FCV_Msk) | (((value) - 1UL) << (uint32_t)LCD_FSET_FCV_Pos))
 
 /**
   * @brief      Set Pause Type
@@ -444,7 +444,7 @@ typedef struct
 /** @addtogroup LCD_EXPORTED_FUNCTIONS LCD Exported Functions
   @{
 */
-uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET);
+uint32_t LCD_Open(const S_LCD_CFG_T *pLCDSET);
 void LCD_Close(void);
 void LCD_SetPixel(uint32_t u32Com, uint32_t u32Seg, uint32_t u32OnFlag);
 void LCD_SetAllPixels(uint32_t u32OnOff);

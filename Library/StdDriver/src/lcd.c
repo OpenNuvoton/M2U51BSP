@@ -1,4 +1,4 @@
-/**************************************************************************//**
+/**
  * @file     lcd.c
  * @version  V3.00
  * @brief    Liquid-Crystal Display(LCD) driver source file
@@ -30,7 +30,7 @@ static uint32_t g_LCDFrameRate;
 
 /*@}*/ /* end of group LCD_EXPORTED_VARIABLES */
 
-/// @endcond /* HIDDEN_SYMBOLS */
+/// @endcond HIDDEN_SYMBOLS
 
 
 /** @addtogroup LCD_EXPORTED_FUNCTIONS LCD Exported Functions
@@ -93,16 +93,18 @@ static uint32_t g_LCDFrameRate;
   * @details    This function will configure the LCD properties for driving the LCD display well.
   *             After that, user can perform \ref LCD_ENABLE_DISPLAY() to enable LCD controller for LCD display.
   */
-uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
+uint32_t LCD_Open(const S_LCD_CFG_T *pLCDSET)
 {
-    uint32_t u32ComNum, u32FreqLCD, u32FreqDiv;
+    uint32_t u32ComNum;
+    uint32_t u32FreqLCD;
+    uint32_t u32FreqDiv;
     uint32_t u32DelayCycle;
 
     /* Display LCD display first */
     LCD_DISABLE_DISPLAY();
 
     /* Turn all segments off */
-    LCD_SetAllPixels(0);
+    LCD_SetAllPixels(0U);
 
     /* Set com and bias */
     LCD->PSET = (LCD->PSET & ~(LCD_PSET_DUTY_Msk | LCD_PSET_BIAS_Msk)) | (pLCDSET->u32ComDuty | pLCDSET->u32BiasLevel);
@@ -127,7 +129,7 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
                     F_LCD = 32 * 4 = (32768 / F_Div)
                     F_Div = (32768 / F_LCD) = 256
     */
-    u32ComNum = ((pLCDSET->u32ComDuty & LCD_PSET_DUTY_Msk) >> LCD_PSET_DUTY_Pos) + 1;
+    u32ComNum = ((pLCDSET->u32ComDuty & LCD_PSET_DUTY_Msk) >> LCD_PSET_DUTY_Pos) + 1U;
 
     if ((pLCDSET->u32WaveformType & LCD_PSET_TYPE_Msk) == LCD_PSET_TYPE_Msk)
     {
@@ -139,10 +141,10 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
         /* Calculate possible freq. divider */
         u32FreqDiv = (pLCDSET->u32SrcFreq  / u32FreqLCD);
 
-        if (u32FreqDiv > 1024)
+        if (u32FreqDiv > 1024UL)
         {
             /* Invalid frame rate */
-            g_LCDFrameRate = 0ul;
+            g_LCDFrameRate = 0UL;
         }
         else
         {
@@ -158,15 +160,15 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
         /* In type-A */
 
         /* Calculate LCD operation frequency */
-        u32FreqLCD = (pLCDSET->u32Framerate * u32ComNum) * 2;
+        u32FreqLCD = (pLCDSET->u32Framerate * u32ComNum) * 2U;
 
         /* Calculate possible freq. divider */
         u32FreqDiv = (pLCDSET->u32SrcFreq  / u32FreqLCD);
 
-        if (u32FreqDiv > 1024)
+        if (u32FreqDiv > 1024UL)
         {
             /* Invalid frame rate */
-            g_LCDFrameRate = 0ul;
+            g_LCDFrameRate = 0UL;
         }
         else
         {
@@ -174,12 +176,14 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
             LCD_SET_FREQDIV(u32FreqDiv);
 
             /* Calculate target frame rate */
-            g_LCDFrameRate = (pLCDSET->u32SrcFreq  / (u32ComNum * u32FreqDiv)) / 2;
+            g_LCDFrameRate = (pLCDSET->u32SrcFreq / (u32ComNum * u32FreqDiv)) / 2UL;
         }
     }
     /* If VLCD source is from Charge Pump, then select VL1 voltage level */
     if (pLCDSET->u32VSrc == LCD_VOLTAGE_SOURCE_CP)
+    {
         LCD_SET_CP_VOLTAGE(pLCDSET->u32VL1Select);
+    }
 
     /* Select voltage source */
     LCD_VOLTAGE_SOURCE(pLCDSET->u32VSrc);
@@ -194,8 +198,13 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
         CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
 
         /* Set delay 50 ms (VL1/VL2/VL3 connected to 0.47uF) */
-        for (u32DelayCycle=0; u32DelayCycle<50; u32DelayCycle++)
-            CLK_SysTickLongDelay(1000);
+        for (u32DelayCycle = 0U; u32DelayCycle < 50U; u32DelayCycle++)
+        {
+            if (CLK_SysTickLongDelay(1000UL) != 0)
+            {
+                break;
+            }
+        }
 
         /* Set bandgap in idle mode mode */
         CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
@@ -209,11 +218,20 @@ uint32_t LCD_Open(S_LCD_CFG_T *pLCDSET)
         CLK->PMUCTL &= ~CLK_PMUCTL_NRBGLPEL_Msk;
 
         /* Set delay 500 ms (VL1/VL2/VL3 connected to 0.47uF) */
-        for (u32DelayCycle=0; u32DelayCycle<50; u32DelayCycle++)
-            CLK_SysTickLongDelay(1000);
+        for (u32DelayCycle = 0U; u32DelayCycle < 50U; u32DelayCycle++)
+        {
+            if (CLK_SysTickLongDelay(1000UL) != 0)
+            {
+                break;
+            }
+        }
 
         /* Set bandgap in idle mode mode */
         CLK->PMUCTL |= CLK_PMUCTL_NRBGLPEL_Msk;
+    }
+    else
+    {
+        /* Other voltage sources need no additional preparation. */
     }
     return g_LCDFrameRate;
 }
@@ -246,18 +264,19 @@ void LCD_Close(void)
   */
 void LCD_SetPixel(uint32_t u32Com, uint32_t u32Seg, uint32_t u32OnFlag)
 {
-    uint32_t seg_num = (u32Seg / 4);
-    uint32_t seg_shift = (8 * (u32Seg - (4 * seg_num)));
+    uint32_t seg_num = (u32Seg / 4U);
 
-    if (seg_num < 12)
+    if (seg_num < 12U)
     {
-        if (u32OnFlag)
+        uint32_t seg_shift = (8U * (u32Seg - (4U * seg_num)));
+
+        if (u32OnFlag != 0U)
         {
-            LCD->SEGDAT[seg_num] |= ((uint32_t)(1 << u32Com) << seg_shift);
+            LCD->SEGDAT[seg_num] |= ((uint32_t)(1UL << u32Com) << seg_shift);
         }
         else
         {
-            LCD->SEGDAT[seg_num] &= (~((uint32_t)(1 << u32Com) << seg_shift));
+            LCD->SEGDAT[seg_num] &= (~((uint32_t)(1UL << u32Com) << seg_shift));
         }
     }
 }
@@ -274,19 +293,22 @@ void LCD_SetPixel(uint32_t u32Com, uint32_t u32Seg, uint32_t u32OnFlag)
   */
 void LCD_SetAllPixels(uint32_t u32OnOff)
 {
-    uint32_t i, u32Value;
+    uint32_t i;
+    uint32_t u32Value;
 
-    if (u32OnOff == 1ul)
+    if (u32OnOff == 1UL)
     {
-        u32Value = 0xFFFFFFFFul;
+        u32Value = 0xFFFFFFFFUL;
     }
     else
     {
-        u32Value = 0x00000000ul;
+        u32Value = 0x00000000UL;
     }
 
-    for (i = 0; i < 12; i++)
+    for (i = 0; i < 12U; i++)
+    {
         LCD->SEGDAT[i] = u32Value;
+    }
 }
 
 /**
@@ -300,26 +322,31 @@ void LCD_SetAllPixels(uint32_t u32OnOff)
   */
 uint32_t LCD_EnableBlink(uint32_t u32ms)
 {
-    uint32_t u32OneCountPeriod, u32TargetCounts;
+    uint32_t u32OneCountPeriod;
+    uint32_t u32TargetCounts;
 
     if ((LCD->PSET & LCD_PSET_TYPE_Msk) == LCD_PSET_TYPE_Msk)
     {
         /* In type-B */
-        u32OneCountPeriod = (1000 * 2) / g_LCDFrameRate; // ms
+        u32OneCountPeriod = (1000U * 2U) / g_LCDFrameRate; /* ms */
     }
     else
     {
         /* In type-A */
-        u32OneCountPeriod = 1000 / g_LCDFrameRate; // ms
+        u32OneCountPeriod = 1000U / g_LCDFrameRate; /* ms */
     }
 
     u32TargetCounts = (u32ms / u32OneCountPeriod);
 
-    if (u32TargetCounts == 0)
-        u32TargetCounts = 1;
+    if (u32TargetCounts == 0U)
+    {
+        u32TargetCounts = 1U;
+    }
 
-    if (u32TargetCounts > 1024)
-        u32TargetCounts = 1024;
+    if (u32TargetCounts > 1024U)
+    {
+        u32TargetCounts = 1024U;
+    }
 
     LCD_SET_FRAME_COUNTING_VALUE(u32TargetCounts);
 

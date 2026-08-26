@@ -184,7 +184,6 @@ extern "C"
 #define PWM_CLKSRC_TIMER1                        (2UL)    /*!< PWM Clock source selects to TIMER1 overflow \hideinitializer */
 #define PWM_CLKSRC_TIMER2                        (3UL)    /*!< PWM Clock source selects to TIMER2 overflow \hideinitializer */
 #define PWM_CLKSRC_TIMER3                        (4UL)    /*!< PWM Clock source selects to TIMER3 overflow \hideinitializer */
-//#define PWM_CLKSRC_TIMER3                        (4UL)    /*!< PWM Clock source selects to TIMER3 overflow \hideinitializer */
 
 
 /*@}*/ /* end of group PWM_EXPORTED_CONSTANTS */
@@ -200,7 +199,7 @@ extern "C"
  * @details This macro is used to enable complementary mode of PWM module.
  * \hideinitializer
  */
-#define PWM_ENABLE_COMPLEMENTARY_MODE(pwm) ((pwm)->CTL1 = (pwm)->CTL1 | (0x7ul<<PWM_CTL1_OUTMODE0_Pos))
+#define PWM_ENABLE_COMPLEMENTARY_MODE(pwm) ((pwm)->CTL1 = (pwm)->CTL1 | (0x7UL<<PWM_CTL1_OUTMODE0_Pos))
 
 /**
  * @brief This macro disable complementary mode, and enable independent mode.
@@ -209,7 +208,7 @@ extern "C"
  * @details This macro is used to disable complementary mode of PWM module.
  * \hideinitializer
  */
-#define PWM_DISABLE_COMPLEMENTARY_MODE(pwm) ((pwm)->CTL1 = (pwm)->CTL1 & ~(0x7ul<<PWM_CTL1_OUTMODE0_Pos))
+#define PWM_DISABLE_COMPLEMENTARY_MODE(pwm) ((pwm)->CTL1 = (pwm)->CTL1 & ~(0x7UL<<PWM_CTL1_OUTMODE0_Pos))
 
 /**
  * @brief This macro enable group mode
@@ -256,8 +255,9 @@ extern "C"
     do{ \
         int i;\
         for(i = 0; i < 6; i++) { \
-            if((u32ChannelMask) & (1 << i)) \
+            if((u32ChannelMask) & (1UL << i)) { \
                 (pwm)->SSCTL &= ~(1UL << i); \
+            } \
         } \
     }while(0)
 
@@ -400,7 +400,6 @@ extern "C"
  * @details This macro is used to get the period of specified channel.
  * \hideinitializer
  */
-//#define PWM_GET_CNR(pwm, u32ChannelNum)  ((pwm)->PERIOD[(u32ChannelNum)])
 #define PWM_GET_CNR(pwm, u32ChannelNum)  ((pwm)->PERIOD[((u32ChannelNum>>1)<<1)])
 
 /**
@@ -419,8 +418,9 @@ extern "C"
    do{ \
         int i; \
         for(i = 0; i < 6; i++) { \
-            if((u32ChannelMask) & (1 << i)) \
+            if((u32ChannelMask) & (1UL << i)) { \
                 (pwm)->CTL1 = (((pwm)->CTL1 & ~(3UL << (i << 1))) | ((u32AlignedType) << (i << 1))); \
+            } \
         } \
     }while(0)
 
@@ -544,7 +544,7 @@ void PWM_ForceStop(PWM_T *pwm, uint32_t u32ChannelMask);
 void PWM_EnableADCTrigger(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32Condition);
 void PWM_DisableADCTrigger(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearADCTriggerFlag(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32Condition);
-uint32_t PWM_GetADCTriggerFlag(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetADCTriggerFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableFaultBrake(PWM_T *pwm, uint32_t u32ChannelMask, uint32_t u32LevelMask, uint32_t u32BrakeSource);
 void PWM_EnableCapture(PWM_T *pwm, uint32_t u32ChannelMask);
 void PWM_DisableCapture(PWM_T *pwm, uint32_t u32ChannelMask);
@@ -557,29 +557,29 @@ void PWM_DisableDeadZone(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableCaptureInt(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32Edge);
 void PWM_DisableCaptureInt(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32Edge);
 void PWM_ClearCaptureIntFlag(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32Edge);
-uint32_t PWM_GetCaptureIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetCaptureIntFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableDutyInt(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32IntDutyType);
 void PWM_DisableDutyInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearDutyIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
-uint32_t PWM_GetDutyIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetDutyIntFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableFaultBrakeInt(PWM_T *pwm, uint32_t u32BrakeSource);
 void PWM_DisableFaultBrakeInt(PWM_T *pwm, uint32_t u32BrakeSource);
 void PWM_ClearFaultBrakeIntFlag(PWM_T *pwm, uint32_t u32BrakeSource);
-uint32_t PWM_GetFaultBrakeIntFlag(PWM_T *pwm, uint32_t u32BrakeSource);
+uint32_t PWM_GetFaultBrakeIntFlag(const PWM_T *pwm, uint32_t u32BrakeSource);
 void PWM_EnablePeriodInt(PWM_T *pwm, uint32_t u32ChannelNum,  uint32_t u32IntPeriodType);
 void PWM_DisablePeriodInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearPeriodIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
-uint32_t PWM_GetPeriodIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetPeriodIntFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableZeroInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_DisableZeroInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearZeroIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
-uint32_t PWM_GetZeroIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetZeroIntFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableAcc(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32IntFlagCnt, uint32_t u32IntAccSrc);
 void PWM_DisableAcc(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_DisableAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
-uint32_t PWM_GetAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetAccInt(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearFTDutyIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
 uint32_t PWM_GetFTDutyIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableLoadMode(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32LoadMode);
@@ -598,15 +598,9 @@ void PWM_EnableBrakePinInverse(PWM_T *pwm, uint32_t u32BrakePinNum);
 void PWM_DisableBrakePinInverse(PWM_T *pwm, uint32_t u32BrakePinNum);
 void PWM_SetBrakePinSource(PWM_T *pwm, uint32_t u32BrakePinNum, uint32_t u32SelAnotherModule);
 void PWM_SetLeadingEdgeBlanking(PWM_T *pwm, uint32_t u32TrigSrcSel, uint32_t u32TrigTyp, uint32_t u32BlankingCnt, uint32_t u32BlankingEnable);
-uint32_t PWM_GetWrapAroundFlag(PWM_T *pwm, uint32_t u32ChannelNum);
+uint32_t PWM_GetWrapAroundFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearWrapAroundFlag(PWM_T *pwm, uint32_t u32ChannelNum);
 
-void PWM_EnableAcc(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32IntFlagCnt, uint32_t u32IntAccSrc);
-void PWM_DisableAcc(PWM_T *pwm, uint32_t u32ChannelNum);
-void PWM_EnableAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
-void PWM_DisableAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
-void PWM_ClearAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
-uint32_t PWM_GetAccInt(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableAccPDMA(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_DisableAccPDMA(PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_EnableAccStopMode(PWM_T *pwm, uint32_t u32ChannelNum);
