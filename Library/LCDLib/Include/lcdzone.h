@@ -40,7 +40,7 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  COM and SEG Position of Symbol Constant Definitions                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#if OPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1    
+#if defined(OPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1) && (OPT_NuMaker_TNLCDSub_M254K_4P8V_V1_1)
 #define SYMBOL_PLUS_1                                       ((3)<<4 | (1)<<0)
 #define SYMBOL_MINUS_2                                      ((3)<<4 | (3)<<0)
 #define SYMBOL_S01_10                                       ((44)<<4 | (0)<<0)
@@ -222,8 +222,8 @@ typedef struct
 {
     unsigned char   u8LCDDispTableNum;          /*!< LCD Display Table Number */
     unsigned char   u8GetLCDComSegNum;          /*!< LCD Com Seg Table Number */
-    unsigned short  *pu16LCDDispTable;          /*!< LCD Display Table Pointer */
-    unsigned char   *pu8GetLCDComSeg;           /*!< LCD Com Seg Table Pointer */
+    const unsigned short  *pu16LCDDispTable;    /*!< LCD Display Table Pointer */
+    const unsigned char   *pu8GetLCDComSeg;     /*!< LCD Com Seg Table Pointer */
 
 } LCD_ZONE_INFO_T;
 
@@ -601,12 +601,12 @@ static const unsigned short auVERDigitMap[] =
 
 static const LCD_ZONE_INFO_T g_LCDZoneInfo[] =
 {
-    {ZONE_MAIN_DIG_CNT,         ZONE_MAIN_SEG_NUM, (unsigned short *)auMAINDigitMap, (unsigned char *)acMAINDigitRawData},
-    {ZONE_TIME_DIG_CNT,         ZONE_TIME_SEG_NUM, (unsigned short *)auTIMEDigitMap, (unsigned char *)acTIMEDigitRawData},
-    {ZONE_NUMICRO_DIG_CNT,      ZONE_NUMICRO_SEG_NUM, (unsigned short *)auNUMICRODigitMap, (unsigned char *)acNUMICRODigitRawData},
-    {ZONE_PPM_DIG_CNT,          ZONE_PPM_SEG_NUM, (unsigned short *)auPPMDigitMap, (unsigned char *)acPPMDigitRawData},
-    {ZONE_TEMP_DIG_CNT,         ZONE_TEMP_SEG_NUM, (unsigned short *)auTEMPDigitMap, (unsigned char *)acTEMPDigitRawData},
-    {ZONE_VER_DIG_CNT,          ZONE_VER_SEG_NUM, (unsigned short *)auVERDigitMap, (unsigned char *)acVERDigitRawData},
+    {ZONE_MAIN_DIG_CNT,         ZONE_MAIN_SEG_NUM, auMAINDigitMap, (const unsigned char *)acMAINDigitRawData},
+    {ZONE_TIME_DIG_CNT,         ZONE_TIME_SEG_NUM, auTIMEDigitMap, (const unsigned char *)acTIMEDigitRawData},
+    {ZONE_NUMICRO_DIG_CNT,      ZONE_NUMICRO_SEG_NUM, auNUMICRODigitMap, (const unsigned char *)acNUMICRODigitRawData},
+    {ZONE_PPM_DIG_CNT,          ZONE_PPM_SEG_NUM, auPPMDigitMap, (const unsigned char *)acPPMDigitRawData},
+    {ZONE_TEMP_DIG_CNT,         ZONE_TEMP_SEG_NUM, auTEMPDigitMap, (const unsigned char *)acTEMPDigitRawData},
+    {ZONE_VER_DIG_CNT,          ZONE_VER_SEG_NUM, auVERDigitMap, (const unsigned char *)acVERDigitRawData},
 
 };
 

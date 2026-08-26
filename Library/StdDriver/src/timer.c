@@ -41,7 +41,8 @@
 uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq)
 {
     uint32_t u32Clk = TIMER_GetModuleClock(timer);
-    uint32_t u32Cmpr = 0UL, u32Prescale = 0UL;
+    uint32_t u32Cmpr = 0UL;
+    uint32_t u32Prescale = 0UL;
 
     /* Fastest possible timer working freq is (u32Clk / 2). While cmpr = 2, prescaler = 0. */
     if(u32Freq > (u32Clk / 2UL))
@@ -53,7 +54,9 @@ uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq)
         u32Cmpr = u32Clk / u32Freq;
         u32Prescale = (u32Cmpr >> 24);  /* for 24 bits CMPDAT */
         if (u32Prescale > 0UL)
+        {
             u32Cmpr = u32Cmpr / (u32Prescale + 1UL);
+        }
     }
 
     timer->CTL = u32Mode | u32Prescale;
@@ -94,8 +97,14 @@ void TIMER_Close(TIMER_T *timer)
 int32_t TIMER_Delay(TIMER_T *timer, uint32_t u32Usec)
 {
     uint32_t u32Clk = TIMER_GetModuleClock(timer);
-    uint32_t u32Prescale = 0UL, u32Delay;
-    uint32_t u32Cmpr, u32Cntr, u32NsecPerTick, i = 0UL;
+    uint32_t u32Prescale = 0UL;
+    uint32_t u32Delay;
+    uint32_t u32Cmpr;
+    uint32_t u32Cntr;
+    uint32_t i = 0UL;
+    uint32_t u32DelayUsec;
+
+    u32DelayUsec = u32Usec;
 
     /* Clear current timer configuration */
     timer->CTL = 0UL;
@@ -105,37 +114,41 @@ int32_t TIMER_Delay(TIMER_T *timer, uint32_t u32Usec)
     {
         if(u32Usec < 1000UL)
         {
-            u32Usec = 1000UL;
+            u32DelayUsec = 1000UL;
         }
-        if(u32Usec > 1000000UL)
+        if(u32DelayUsec > 1000000UL)
         {
-            u32Usec = 1000000UL;
+            u32DelayUsec = 1000000UL;
         }
     }
     else
     {
         if(u32Usec < 100UL)
         {
-            u32Usec = 100UL;
+            u32DelayUsec = 100UL;
         }
-        if(u32Usec > 1000000UL)
+        if(u32DelayUsec > 1000000UL)
         {
-            u32Usec = 1000000UL;
+            u32DelayUsec = 1000000UL;
         }
     }
 
     if(u32Clk <= 1000000UL)
     {
+        uint32_t u32NsecPerTick;
+
         u32Prescale = 0UL;
         u32NsecPerTick = 1000000000UL / u32Clk;
-        u32Cmpr = (u32Usec * 1000UL) / u32NsecPerTick;
+        u32Cmpr = (u32DelayUsec * 1000UL) / u32NsecPerTick;
     }
     else
     {
-        u32Cmpr = u32Usec * (u32Clk / 1000000UL);
+        u32Cmpr = u32DelayUsec * (u32Clk / 1000000UL);
         u32Prescale = (u32Cmpr >> 24);  /* for 24 bits CMPDAT */
         if (u32Prescale > 0UL)
+        {
             u32Cmpr = u32Cmpr / (u32Prescale + 1UL);
+        }
     }
 
     timer->CMP = u32Cmpr;
@@ -152,18 +165,19 @@ int32_t TIMER_Delay(TIMER_T *timer, uint32_t u32Usec)
     /* Add a bail out counter here in case timer clock source is disabled accidentally.
        Prescale counter reset every ECLK * (prescale value + 1).
        The u32Delay here is to make sure timer counter value changed when prescale counter reset */
-    u32Delay = (SystemCoreClock / TIMER_GetModuleClock(timer)) * (u32Prescale + 1);
+    u32Delay = (SystemCoreClock / TIMER_GetModuleClock(timer)) * (u32Prescale + 1UL);
     u32Cntr = timer->CNT;
     i = 0;
-    while(timer->CTL & TIMER_CTL_ACTSTS_Msk)
+    while((timer->CTL & TIMER_CTL_ACTSTS_Msk) != 0UL)
     {
         /* Bailed out if timer stop counting e.g. Some interrupt handler close timer clock source. */
         if(u32Cntr == timer->CNT)
         {
-            if(i++ > u32Delay)
+            if(i > u32Delay)
             {
                 return TIMER_TIMEOUT_ERR;
             }
+            i++;
         }
         else
         {
@@ -259,9 +273,10 @@ void TIMER_DisableEventCounter(TIMER_T *timer)
   * @details    This API is used to get the timer clock frequency.
   * @note       This API cannot return correct clock rate if timer source is from external clock input.
   */
-uint32_t TIMER_GetModuleClock(TIMER_T *timer)
+uint32_t TIMER_GetModuleClock(const TIMER_T *timer)
 {
-    uint32_t u32Src, u32Clk;
+    uint32_t u32Src;
+    uint32_t u32Clk;
     const uint32_t au32Clk[] = {0UL, __MIRC, __HIRC, __LIRC, __LXT, 0UL};
 
     if(timer == TIMER0)
@@ -326,6 +341,9 @@ void TIMER_EnableFreqCounter(TIMER_T *timer,
                              uint32_t u32EnableInt)
 {
     TIMER_T *t;    /* store the timer base to configure compare value */
+
+    (void)u32DropCount;
+    (void)u32Timeout;
 
     t = (timer == TIMER0) ? TIMER1 : TIMER3;
 
@@ -459,12 +477,12 @@ int32_t TIMER_ResetCounter(TIMER_T *timer)
 
     timer->CNT |= TIMER_CNT_RSTACT_Msk;
     /* Takes 2~3 ECLKs to reset timer counter */
-    u32Delay = (SystemCoreClock / TIMER_GetModuleClock(timer)) * 3;
+    u32Delay = (SystemCoreClock / TIMER_GetModuleClock(timer)) * 3UL;
     while(((timer->CNT & TIMER_CNT_RSTACT_Msk) == TIMER_CNT_RSTACT_Msk) && (--u32Delay))
     {
         __NOP();
     }
-    return ((u32Delay > 0) ? 0 : TIMER_TIMEOUT_ERR);
+    return ((u32Delay > 0UL) ? 0 : TIMER_TIMEOUT_ERR);
 }
 
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */
