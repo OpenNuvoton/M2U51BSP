@@ -201,7 +201,7 @@ extern "C"
 
 /**
  * @brief       Clear Alignment Interrupt Status
-  *
+ *
  * @param[in]   pdma        The pointer of the specified PDMA module
  * @param[in]   u32Mask     The channel mask
  *
@@ -214,7 +214,7 @@ extern "C"
 
 /**
  * @brief       Clear Timeout Interrupt Status
-  *
+ *
  * @param[in]   pdma      The pointer of the specified PDMA module
  * @param[in]   u32Ch     The selected channel
  *
@@ -227,7 +227,7 @@ extern "C"
 
 /**
  * @brief       Check Channel Status
-  *
+ *
  * @param[in]   pdma      The pointer of the specified PDMA module
  * @param[in]   u32Ch     The selected channel
  *
@@ -241,7 +241,7 @@ extern "C"
 
 /**
  * @brief       Set Source Address
-  *
+ *
  * @param[in]   pdma      The pointer of the specified PDMA module
  * @param[in]   u32Ch     The selected channel
  * @param[in]   u32Addr   The selected address
@@ -269,7 +269,7 @@ extern "C"
 
 /**
  * @brief       Set Transfer Count
-  *
+ *
  * @param[in]   pdma           The pointer of the specified PDMA module
  * @param[in]   u32Ch          The selected channel
  * @param[in]   u32TransCount  Transfer Count
@@ -344,18 +344,18 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define PDMA functions prototype                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-void PDMA_Open(PDMA_T * pdma,uint32_t u32Mask);
-void PDMA_Close(PDMA_T * pdma);
-void PDMA_SetTransferCnt(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32Width, uint32_t u32TransCount);
-void PDMA_SetTransferAddr(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32SrcAddr, uint32_t u32SrcCtrl, uint32_t u32DstAddr, uint32_t u32DstCtrl);
-void PDMA_SetTransferMode(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32Peripheral, uint32_t u32ScatterEn, uint32_t u32DescAddr);
-void PDMA_SetBurstType(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32BurstType, uint32_t u32BurstSize);
-void PDMA_EnableTimeout(PDMA_T * pdma,uint32_t u32Mask);
-void PDMA_DisableTimeout(PDMA_T * pdma,uint32_t u32Mask);
-void PDMA_SetTimeOut(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32OnOff, uint32_t u32TimeOutCnt);
-void PDMA_Trigger(PDMA_T * pdma,uint32_t u32Ch);
-void PDMA_EnableInt(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32Mask);
-void PDMA_DisableInt(PDMA_T * pdma,uint32_t u32Ch, uint32_t u32Mask);
+void PDMA_Open(PDMA_T *pdma, uint32_t u32Mask);
+void PDMA_Close(PDMA_T *pdma);
+void PDMA_SetTransferCnt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Width, uint32_t u32TransCount);
+void PDMA_SetTransferAddr(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32SrcAddr, uint32_t u32SrcCtrl, uint32_t u32DstAddr, uint32_t u32DstCtrl);
+void PDMA_SetTransferMode(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Peripheral, uint32_t u32ScatterEn, uint32_t u32DescAddr);
+void PDMA_SetBurstType(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32BurstType, uint32_t u32BurstSize);
+void PDMA_EnableTimeout(PDMA_T *pdma, uint32_t u32Mask);
+void PDMA_DisableTimeout(PDMA_T *pdma, uint32_t u32Mask);
+void PDMA_SetTimeOut(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32OnOff, uint32_t u32TimeOutCnt);
+void PDMA_Trigger(PDMA_T *pdma, uint32_t u32Ch);
+void PDMA_EnableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask);
+void PDMA_DisableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask);
 
 
 /*@}*/ /* end of group PDMA_EXPORTED_FUNCTIONS */

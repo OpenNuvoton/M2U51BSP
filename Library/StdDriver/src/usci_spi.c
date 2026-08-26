@@ -53,7 +53,10 @@ uint32_t USPI_Open(USPI_T *uspi, uint32_t u32MasterSlave, uint32_t u32SPIMode,  
     {
         u32ClkDiv = (uint32_t) ((((((u32Pclk/2UL)*10UL)/(u32BusClock))+5UL)/10UL)-1UL); /* Compute proper divider for USCI_SPI clock */
     }
-    else {}
+    else
+    {
+
+    }
 
     /* Enable USCI_SPI protocol */
     uspi->CTL &= ~USPI_CTL_FUNMODE_Msk;
@@ -64,7 +67,7 @@ uint32_t USPI_Open(USPI_T *uspi, uint32_t u32MasterSlave, uint32_t u32SPIMode,  
     {
         u32DataWidthTmp = 0UL;
     }
-    else {}
+
     uspi->LINECTL &= ~USPI_LINECTL_DWIDTH_Msk;
     uspi->LINECTL |= (u32DataWidthTmp << USPI_LINECTL_DWIDTH_Pos);
 
@@ -94,7 +97,10 @@ uint32_t USPI_Open(USPI_T *uspi, uint32_t u32MasterSlave, uint32_t u32SPIMode,  
     {
         u32UspiClk = (uint32_t)(u32Pclk / (((u32ClkDiv + 1UL) << 1UL)));
     }
-    else {}
+    else
+    {
+
+    }
 
     return u32UspiClk;
 }
