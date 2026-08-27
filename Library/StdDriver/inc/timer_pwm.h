@@ -559,7 +559,7 @@ void TPWM_DisableAcc(TIMER_T *timer);
 void TPWM_EnableAccInt(TIMER_T *timer);
 void TPWM_DisableAccInt(TIMER_T *timer);
 void TPWM_ClearAccInt(TIMER_T *timer);
-uint32_t TPWM_GetAccInt(TIMER_T *timer);
+uint32_t TPWM_GetAccInt(const TIMER_T *timer);
 void TPWM_EnableAccPDMA(TIMER_T *timer);
 void TPWM_DisableAccPDMA(TIMER_T *timer);
 void TPWM_EnableAccStopMode(TIMER_T *timer);
