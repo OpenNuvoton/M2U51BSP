@@ -44,11 +44,11 @@ The approved M55M1 Product SBOM does not define a separate `_syscalls.c`,
 µOS++, or newlib component. The file is represented through the directory-level
 `Library/Device` product component.
 
-M2U51 follows this established SBOM representation:
+M2U51 uses the M55M1 treatment as historical reference, but applies an M2U51-specific evidence-based scope decision:
 
 - No separate `_syscalls.c` CycloneDX component is created.
 - No separate newlib or µOS++ component is asserted without reliable version evidence.
-- The file remains within the directory-level `M2U51 Device` component.
+- The file remains in the source repository but is excluded from the Product SBOM scope.
 - File-level third-party notices are preserved.
 - The directory-level Apache-2.0 declaration shall not be interpreted as
   relicensing the third-party portions of `_syscalls.c`.
@@ -89,9 +89,23 @@ This decision must be reviewed again if any of the following occurs:
 ## Release Decision
 
 For SBOM representation, the previous release-blocking finding is closed by
-following the established M55M1 directory-level treatment.
+using an M2U51-specific evidence-based scope exclusion.
 
 The file-level third-party notices remain documented and must be preserved in
 all source distributions.
 
 Resolution date: 2026-08-24
+
+## Associated Header Disposition
+
+The associated
+`Library/Device/Nuvoton/M2U51/Source/GCC/semihosting.h` header is used only
+by `_syscalls.c`. No external project or build configuration reference was
+identified for either file.
+
+Therefore, `_syscalls.c` and `semihosting.h` are retained in the repository
+but excluded from the Product SBOM. This disposition does not apply to
+`Library/Device/Nuvoton/M2U51/Source/semihost.s`, which remains in scope
+because multiple Keil sample projects explicitly reference it.
+
+Review update date: 2026-08-30

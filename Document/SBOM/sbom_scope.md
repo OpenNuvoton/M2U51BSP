@@ -1,4 +1,4 @@
-﻿# M2U51 BSP SBOM Scope Definition
+# M2U51 BSP SBOM Scope Definition
 
 ## 1. Purpose
 
@@ -6,7 +6,8 @@ This document defines the Product SBOM and Test Sample SBOM scopes for the M2U51
 
 ## 2. Product SBOM Scope
 
-The Product SBOM contains software components intended to support target firmware development and runtime integration.
+The Product SBOM contains software components intended to support target
+firmware development and runtime integration.
 
 ### Included Paths
 
@@ -19,6 +20,23 @@ The Product SBOM contains software components intended to support target firmwar
 
 - `Document/`
 - `SampleCode/`
+- `Library/CMSIS/Documentation/`
+- `Library/CMSIS/Core/Test/`
+- `Library/Device/Nuvoton/M2U51/Source/GCC/_syscalls.c`
+- `Library/Device/Nuvoton/M2U51/Source/GCC/semihosting.h`
+
+The GCC `_syscalls.c` and `semihosting.h` files are retained in the
+repository but excluded from the Product SBOM. Repository-wide project and
+build configuration review found no external reference that compiles or
+links these files.
+
+The separate `Library/Device/Nuvoton/M2U51/Source/semihost.s` file remains
+in scope because multiple Keil sample projects explicitly reference it.
+
+
+CMSIS documentation and CMSIS upstream test content are distributed as
+reference material but are not treated as Product runtime components.
+They are therefore excluded from the Product SBOM scan view.
 
 ## 3. Test Sample SBOM Scope
 

@@ -1,11 +1,13 @@
-﻿sbomType: Product SBOM
-
+sbomType: Product SBOM
 include:
   - path: Library/CMSIS
   - path: Library/Device
   - path: Library/LCDLib
   - path: Library/StdDriver
-
 exclude:
   - path: Document/
   - path: SampleCode/
+  - path: Library/CMSIS/Documentation/
+  - path: Library/CMSIS/Core/Test/
+  - path: Library/Device/Nuvoton/M2U51/Source/GCC/_syscalls.c
+  - path: Library/Device/Nuvoton/M2U51/Source/GCC/semihosting.h
