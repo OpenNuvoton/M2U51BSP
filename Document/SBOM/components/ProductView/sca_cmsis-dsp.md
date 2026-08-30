@@ -1,4 +1,4 @@
-﻿# CMSIS-DSP Third-Party Component Evidence
+# CMSIS-DSP Third-Party Component Evidence
 
 ## Component
 
@@ -78,3 +78,21 @@ An exact upstream repository tag and upstream commit have not been confirmed fro
 - Integration: Vendored source subset
 - Product relationship: Optional firmware library
 - Component version used by the SBOM: 1.10.0
+
+## Canonical Component Content Hash
+
+### Included Paths
+
+- `Library/CMSIS/DSP/Include`
+- `Library/CMSIS/DSP/PrivateInclude`
+- `Library/CMSIS/DSP/Source`
+
+- Algorithm: `sha256-path-nul-content-nul-v1`
+- File count: `304`
+- SHA-256: `7f7a6ee57bd2f809c4d925ca21a8ad0774232832b9478ad43a1e51471a04bd03`
+
+The hash is computed from all files in the included paths above. Files are
+ordered by repository-relative POSIX path. For each file, the SHA-256 input
+contains the UTF-8 repository-relative path, a NUL byte, the raw file bytes,
+and a terminating NUL byte. This is an evidence-backed content hash and is
+not derived from component metadata.

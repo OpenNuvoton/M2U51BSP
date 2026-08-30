@@ -1,4 +1,4 @@
-﻿# CMSIS Third-Party Component Evidence
+# CMSIS Third-Party Component Evidence
 
 ## Component
 
@@ -79,3 +79,21 @@ An exact upstream repository tag and upstream commit have not been confirmed fro
 - Integration: Vendored source subset
 - Product relationship: Required development and runtime support library
 - Component version used by the SBOM: 6.1.0
+
+## Canonical Component Content Hash
+
+### Included Paths
+
+- `Library/CMSIS/Core`
+- `Library/CMSIS/Driver`
+- `Library/CMSIS/RTOS2`
+
+- Algorithm: `sha256-path-nul-content-nul-v1`
+- File count: `152`
+- SHA-256: `65e0bc843cd9a72f84c8ee3447882c949f27ba505d4e39558c5e287cd1d92d5d`
+
+The hash is computed from all files in the included paths above. Files are
+ordered by repository-relative POSIX path. For each file, the SHA-256 input
+contains the UTF-8 repository-relative path, a NUL byte, the raw file bytes,
+and a terminating NUL byte. This is an evidence-backed content hash and is
+not derived from component metadata.

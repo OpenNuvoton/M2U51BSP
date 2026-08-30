@@ -63,6 +63,20 @@
         {
           "name": "bsp:upstream-traceability",
           "value": "exact-upstream-tag-and-commit-not-confirmed"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "152"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "65e0bc843cd9a72f84c8ee3447882c949f27ba505d4e39558c5e287cd1d92d5d"
         }
       ]
     }
