@@ -48,7 +48,7 @@
         },
         {
           "name": "bsp:binary-license-status",
-          "value": "not-independently-determined"
+          "value": "identified"
         },
         {
           "name": "bsp:relationship-evidence",
@@ -57,6 +57,26 @@
         {
           "name": "bsp:evidence-file",
           "value": "Document/SBOM/components/TestSampleView/sca_fmc-iap-binaries.md"
+        },
+        {
+          "name": "bsp:binary-license",
+          "value": "Apache-2.0"
+        },
+        {
+          "name": "bsp:binary-license-source",
+          "value": "manual-build-closure-review"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_fmc-iap-binaries.md"
+        }
+      ],
+      "purl": "pkg:generic/m2u51-fmc-iap-ldrom@iar?artifact=fmc_ld_iap.bin",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
         }
       ]
     },
@@ -108,7 +128,7 @@
         },
         {
           "name": "bsp:binary-license-status",
-          "value": "not-independently-determined"
+          "value": "identified"
         },
         {
           "name": "bsp:relationship-evidence",
@@ -117,6 +137,26 @@
         {
           "name": "bsp:evidence-file",
           "value": "Document/SBOM/components/TestSampleView/sca_fmc-iap-binaries.md"
+        },
+        {
+          "name": "bsp:binary-license",
+          "value": "Apache-2.0"
+        },
+        {
+          "name": "bsp:binary-license-source",
+          "value": "manual-build-closure-review"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_fmc-iap-binaries.md"
+        }
+      ],
+      "purl": "pkg:generic/m2u51-fmc-iap-ldrom@keil?artifact=fmc_ld_iap.bin",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
         }
       ]
     },
@@ -168,7 +208,7 @@
         },
         {
           "name": "bsp:binary-license-status",
-          "value": "not-independently-determined"
+          "value": "identified"
         },
         {
           "name": "bsp:relationship-evidence",
@@ -177,6 +217,26 @@
         {
           "name": "bsp:evidence-file",
           "value": "Document/SBOM/components/TestSampleView/sca_fmc-iap-binaries.md"
+        },
+        {
+          "name": "bsp:binary-license",
+          "value": "Apache-2.0"
+        },
+        {
+          "name": "bsp:binary-license-source",
+          "value": "manual-build-closure-review"
+        },
+        {
+          "name": "bsp:binary-license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_fmc-iap-binaries.md"
+        }
+      ],
+      "purl": "pkg:generic/m2u51-fmc-iap-ldrom@gcc?artifact=fmc_ld_iap.bin",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
         }
       ]
     }
