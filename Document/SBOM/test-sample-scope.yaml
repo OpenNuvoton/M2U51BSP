@@ -2,6 +2,7 @@
 
 include:
   - path: SampleCode/
+  - path: ThirdParty/
 
 exclude:
   - path: Document/

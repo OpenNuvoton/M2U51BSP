@@ -45,11 +45,17 @@ The Test Sample SBOM contains examples, demonstration projects, validation proje
 ### Included Paths
 
 - `SampleCode/`
+- `ThirdParty/`
 
 ### Excluded Paths
 
 - `Document/`
 - `Library/`
+
+`ThirdParty/FreeRTOS` contains the vendored FreeRTOS Kernel used by the
+FreeRTOS sample projects. It is represented as a third-party Test Sample
+component and is not part of the Product runtime scope unless explicitly
+integrated by the user.
 
 ## 4. Scope Relationship
 
