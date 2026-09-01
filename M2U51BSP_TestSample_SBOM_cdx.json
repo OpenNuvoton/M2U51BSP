@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:c4ccab18-49b7-487a-967b-fb5fd12b7958",
+  "serialNumber": "urn:uuid:08caaba3-010f-41a2-9d77-06d726ff28ac",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T18:34:37+08:00",
+    "timestamp": "2026-09-01T18:40:51+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "2fb3a25050d75aab",
+      "bom-ref": "0edfa9c638eb4893",
       "type": "application",
       "name": "MCU Test Sample",
-      "version": "V3.00.000-11-g2ea3b035",
+      "version": "V3.00.000-12-g2d7239bf",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.00.000-11-g2ea3b035",
+      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.00.000-12-g2d7239bf",
       "licenses": [
         {
           "license": {
@@ -91,14 +91,14 @@
       "type": "application",
       "bom-ref": "m2u51bsp:test-sample-component:samplecode",
       "name": "M2U51 SampleCode",
-      "version": "V3.00.000-11-g2ea3b035",
+      "version": "V3.00.000-12-g2d7239bf",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/samplecode@V3.00.000-11-g2ea3b035",
+      "purl": "pkg:generic/nuvoton/samplecode@V3.00.000-12-g2d7239bf",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -476,11 +476,11 @@
       "type": "file",
       "bom-ref": "binary-file:5c3c7de4395fe61af314bcca715a6bbf9ae1289d714775975ad4762148efa82c:0e0a1c77a5b88463",
       "name": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
-      "version": "V3.00.000-11-g2ea3b035",
+      "version": "V3.00.000-12-g2d7239bf",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-11-g2ea3b035?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-12-g2d7239bf?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -531,11 +531,11 @@
       "type": "file",
       "bom-ref": "binary-file:8174a77f0068f5a87164ffdd10cbe42634f6aa07115753b4c473d7dc67505241:cda7428ea71f0550",
       "name": "SampleCode/StdDriver/FMC_IAP/KEIL/obj/fmc_ld_iap.bin",
-      "version": "V3.00.000-11-g2ea3b035",
+      "version": "V3.00.000-12-g2d7239bf",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-11-g2ea3b035?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2Fobj%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-12-g2d7239bf?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2Fobj%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -586,11 +586,11 @@
       "type": "file",
       "bom-ref": "binary-file:b45a1ccb8981686794e456f272d8fd702e74cbef0d15d09160651c70f2e6fd01:336273ad62227882",
       "name": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
-      "version": "V3.00.000-11-g2ea3b035",
+      "version": "V3.00.000-12-g2d7239bf",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-11-g2ea3b035?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-12-g2d7239bf?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -640,7 +640,7 @@
   ],
   "dependencies": [
     {
-      "ref": "2fb3a25050d75aab",
+      "ref": "0edfa9c638eb4893",
       "dependsOn": [
         "binary-file:5c3c7de4395fe61af314bcca715a6bbf9ae1289d714775975ad4762148efa82c:0e0a1c77a5b88463",
         "binary-file:8174a77f0068f5a87164ffdd10cbe42634f6aa07115753b4c473d7dc67505241:cda7428ea71f0550",

@@ -1,15 +1,22 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:890daf3b-88d2-4071-af3c-d44425e43e45",
-  "createdAt": "2026-09-01T10:34:45.460887Z",
+  "serialNumber": "urn:uuid:a44627ce-d5dc-41fa-b183-fbb6ce41a70e",
+  "createdAt": "2026-09-01T10:40:55.113610Z",
   "bsp": {
     "name": "M2U51BSP",
-    "version": "V3.00.000-11-g2ea3b035",
+    "version": "V3.00.000-12-g2d7239bf",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "V3.00.000-11-g2ea3b035",
-    "gitCommit": "2ea3b0351c9953fe2f36bace75fe943fdea3f5c6",
+    "gitDescribe": "V3.00.000-12-g2d7239bf",
+    "gitCommit": "2d7239bf30845b214f2fb6af38e13244bd3b479a",
     "sourceTreeState": "clean"
+  },
+  "artifactDistribution": {
+    "sourceCommit": "2d7239bf30845b214f2fb6af38e13244bd3b479a",
+    "formalReleaseId": "V3.00.000-12-g2d7239bf",
+    "formalReleasePath": "bsp/m2u51/V3.00.000-12-g2d7239bf/",
+    "formalSvnRevision": 41,
+    "artifactCommitPolicy": "The Git commit that distributes these current SBOM files is artifact-only and is not a new SBOM scan source. Its commit SHA is intentionally not recorded here because a tracked file cannot contain the SHA of its own commit."
   },
   "generationTools": [
     {
@@ -48,14 +55,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:b29ea5ac-5ec7-4035-bdcf-1802eefaa1e9",
+      "serialNumber": "urn:uuid:ec537e1a-4dc9-49b2-bd8c-35b3e4547e81",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T18:34:28+08:00",
+      "generatedTimestamp": "2026-09-01T18:40:45+08:00",
       "metadataComponent": {
-        "bomRef": "f970ca40c2403a54",
+        "bomRef": "5b6e2021e7a917bc",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.00.000-11-g2ea3b035",
+        "version": "V3.00.000-12-g2d7239bf",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -136,7 +143,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "b54ce2bad3df72a85b097f38c057fdca886648aeda580f4864673845f6da2785"
+        "value": "82488cfb19e934af79027e6b0958384124c5806a6180e0ad5702b805e93e7043"
       }
     },
     {
@@ -144,14 +151,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:c4ccab18-49b7-487a-967b-fb5fd12b7958",
+      "serialNumber": "urn:uuid:08caaba3-010f-41a2-9d77-06d726ff28ac",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T18:34:37+08:00",
+      "generatedTimestamp": "2026-09-01T18:40:51+08:00",
       "metadataComponent": {
-        "bomRef": "2fb3a25050d75aab",
+        "bomRef": "0edfa9c638eb4893",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.00.000-11-g2ea3b035",
+        "version": "V3.00.000-12-g2d7239bf",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -209,7 +216,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "906064ac7bb88d03bba8b37d190f2ce6f2e67d5d69ef612558900689e5424983"
+        "value": "291a650fcc6d2fa47b412bc166c3435271b5e2483d25d32483ba68e2c0347188"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -229,6 +236,9 @@
     "Components in the Test Sample SBOM are not considered product firmware/runtime dependencies unless explicitly integrated by the user."
   ],
   "notes": [
-    "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM."
+    "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM.",
+    "The Test Sample Grype report records five CPE-based matches for FreeRTOS-Kernel 10.5.1; this package publishes no VEX applicability disposition.",
+    "The Product and Test Sample SBOM bytes match formal SVN release V3.00.000-12-g2d7239bf at SVN revision 41.",
+    "A later Git artifact/distribution commit does not change the recorded SBOM source identity."
   ]
 }

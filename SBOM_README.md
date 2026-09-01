@@ -14,8 +14,9 @@
 |------------------------|------------------------------------------|
 | SBOM Format            | CycloneDX                                |
 | CycloneDX Version      | 1.6                                      |
-| Source Git Commit      | 2ea3b0351c9953fe2f36bace75fe943fdea3f5c6 |
-| Current SBOM Identity  | V3.00.000-11-g2ea3b035                   |
+| Source Git Commit      | 2d7239bf30845b214f2fb6af38e13244bd3b479a |
+| Release Identifier     | V3.00.000-12-g2d7239bf                   |
+| Formal SVN Revision    | 41                                       |
 | Product Components     | 5                                        |
 | Test Sample Components | 8                                        |
 
@@ -33,21 +34,25 @@ The FMC IAP Firmware components are represented as first-party Build
 Artifacts with Apache-2.0 License Evidence supported by the recorded
 Build Closure Review.
 
-The current SBOM files were generated from clean Git source commit
-`2ea3b0351c9953fe2f36bace75fe943fdea3f5c6`. They supersede the current
-Git artifacts from formal SVN release `V3.00.000-5-g5b218455`.
+The current Product and Test Sample SBOM files are byte-for-byte copies of
+formal SVN release `V3.00.000-12-g2d7239bf`, generated from clean source
+commit `2d7239bf30845b214f2fb6af38e13244bd3b479a`.
 
-The latest formal SVN release remains
-`bsp/m2u51/V3.00.000-5-g5b218455/` until a new immutable release package is
-generated and validated from the merged Git SBOM artifact commit.
+The immutable evidence package is stored at
+`bsp/m2u51/V3.00.000-12-g2d7239bf/` in SVN revision 41.
 
-## Git Current Artifact
+## Vulnerability scan status
 
-The Git commit that distributes these current files is an SBOM artifact
-commit. The files record the preceding clean source/evidence commit because a
-tracked file cannot contain the SHA of its own commit. After this artifact
-commit is merged, it becomes the source identity for the next formal SVN
-release generation.
+The formal Product scan records zero matches. The Test Sample scan records
+five CPE-based matches for FreeRTOS-Kernel 10.5.1: one Critical and four High.
+The formal package preserves the raw findings but makes no affected or
+not-affected VEX applicability disposition.
+
+## Git Artifact Distribution
+
+The Git commit that distributes these files is artifact-only. It is not a new
+SBOM scan source, and its commit SHA is intentionally not recorded in the
+manifest because a tracked file cannot contain the SHA of its own commit.
 
 ## Regeneration
 
