@@ -1,15 +1,22 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:30426daa-4e27-4a79-a248-27933680c17f",
-  "createdAt": "2026-09-01T16:31:47.861576Z",
+  "serialNumber": "urn:uuid:e21a2028-26d2-428a-bfb0-c0e598802eeb",
+  "createdAt": "2026-09-01T16:46:20.995363Z",
   "bsp": {
     "name": "M2U51BSP",
-    "version": "ed801718",
+    "version": "V3.00.000-14-g00b0843b",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "ed801718",
-    "gitCommit": "ed801718d15370f136863c6307fc3b545a8289d9",
+    "gitDescribe": "V3.00.000-14-g00b0843b",
+    "gitCommit": "00b0843b3254c1c09961d0fc5d4b1b266a547ae8",
     "sourceTreeState": "clean"
+  },
+  "artifactDistribution": {
+    "sourceCommit": "00b0843b3254c1c09961d0fc5d4b1b266a547ae8",
+    "formalReleaseId": "V3.00.000-14-g00b0843b",
+    "formalReleasePath": "bsp/m2u51/V3.00.000-14-g00b0843b/",
+    "formalSvnRevision": 48,
+    "artifactCommitPolicy": "The Git commit that distributes these current SBOM files is artifact-only and is not a new SBOM scan source. Its commit SHA is intentionally not recorded here because a tracked file cannot contain the SHA of its own commit."
   },
   "generationTools": [
     {
@@ -48,14 +55,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:10b5067b-ca45-472a-a62b-79060b23aedc",
+      "serialNumber": "urn:uuid:44728e85-2b4a-44d8-ad75-bffc2acc7c38",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-02T00:31:39+08:00",
+      "generatedTimestamp": "2026-09-02T00:46:11+08:00",
       "metadataComponent": {
-        "bomRef": "9a9d5947a7bb30b8",
+        "bomRef": "bda88ea2260d8f50",
         "type": "library",
         "name": "MCU Driver",
-        "version": "ed801718",
+        "version": "V3.00.000-14-g00b0843b",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -136,7 +143,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "f2d5b50eea7bb5a7bd67ed39d56ef3f29413d2a406ad997ddb1dd27a1a4dbd91"
+        "value": "fa6b025e52e5370665a19e5d4e4058af380538b885988194e8a5d98185914b63"
       }
     },
     {
@@ -144,14 +151,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:c5427f2f-b8b2-4250-8b33-124cf1c15cf7",
+      "serialNumber": "urn:uuid:ea161d71-2879-4f73-8175-f146774ed547",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-02T00:31:44+08:00",
+      "generatedTimestamp": "2026-09-02T00:46:16+08:00",
       "metadataComponent": {
-        "bomRef": "499ec1d57e8255f7",
+        "bomRef": "f9e4fc231382e2af",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "ed801718",
+        "version": "V3.00.000-14-g00b0843b",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -209,7 +216,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "9008185a17bc1eac94c4ff9fbe24c6fc245bbbda67f1698c9592e46a2892c083"
+        "value": "5e256a7abfa652e87f034b158b58ff39171309aa6517c2a96201d398ad0a0f6f"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -230,8 +237,9 @@
   ],
   "notes": [
     "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM.",
-    "The validation scan records zero Product matches and five CPE-based Test Sample matches for FreeRTOS-Kernel 10.5.1: one Critical and four High.",
-    "No affected, not-affected, fixed, resolved, VEX, or Product Security approval disposition is asserted; disposition remains pending Product Security review.",
-    "The Grype database was schema v6.1.9, built 2026-08-31T06:37:31Z, and valid at scan time. CycloneDX identifier coverage and offline or stale database state can limit results; zero matches is not a clean-security claim."
+    "The Test Sample Grype report records five CPE-based matches for FreeRTOS-Kernel 10.5.1: one Critical and four High.",
+    "Findings are disclosed; Product Security disposition remains pending. This package publishes no VEX, not-affected, or approval assertion.",
+    "The Product and Test Sample SBOM bytes match formal SVN release V3.00.000-14-g00b0843b at SVN revision 48.",
+    "A later Git artifact/distribution commit does not change the recorded SBOM source identity."
   ]
 }
