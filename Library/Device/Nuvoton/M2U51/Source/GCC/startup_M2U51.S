@@ -286,22 +286,18 @@ Default_Handler:
 	b	.
 	.size	Default_Handler, . - Default_Handler
 
-    .align 2
-    .thumb_func
-    .weak HardFault_Handler
-    .type HardFault_Handler, % function
-
+	.align	1
+	.thumb_func
+	.weak	HardFault_Handler
+	.type	HardFault_Handler, %function
 HardFault_Handler:
-	.extern ProcessHardFault
-    MOV     R0, LR
-    MRS     R1, MSP
-    MRS     R2, PSP
-    LDR     R3, =ProcessHardFault
-    BLX     R3
-    BX      R0
-	b    .
-
-    .size   HardFault_Handler, . - HardFault_Handler
+	mov	r0, lr
+	mrs	r1, msp
+	mrs	r2, psp
+	ldr	r3, =ProcessHardFault
+	blx	r3
+	bx	r0
+	.size	HardFault_Handler, . - HardFault_Handler
 
 
 /*    Macro to define default handlers. Default handler
@@ -313,7 +309,6 @@ HardFault_Handler:
 	.endm
 
 	def_irq_handler	NMI_Handler
-    /*def_irq_handler	HardFault_Handler*/
     def_irq_handler	MemManage_Handler
     def_irq_handler	BusFault_Handler
     def_irq_handler	UsageFault_Handler
