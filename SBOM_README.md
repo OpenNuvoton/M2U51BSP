@@ -14,8 +14,8 @@
 |------------------------|------------------------------------------|
 | SBOM Format            | CycloneDX                                |
 | CycloneDX Version      | 1.6                                      |
-| Git Commit             | 9edfa5e9c4a084c0d313f3521f6bea29b6e768fc |
-| Release Identifier     | V3.00.000-4-g9edfa5e9                    |
+| Source Git Commit      | 5b218455116c756a5ca72ee97f8faa92ef8a97d3 |
+| Release Identifier     | V3.00.000-5-g5b218455                    |
 | Product Components     | 5                                        |
 | Test Sample Components | 7                                        |
 
@@ -34,7 +34,17 @@ Build Closure Review.
 
 The immutable, versioned SBOM Release Evidence Package is maintained in
 the corresponding SVN SBOM release directory:
-`bsp/m2u51/V3.00.000-4-g9edfa5e9/`.
+`bsp/m2u51/V3.00.000-5-g5b218455/`.
+
+## Git Artifact Distribution
+
+The Product and Test Sample SBOM files in this directory are byte-for-byte
+copies of formal SVN release `V3.00.000-5-g5b218455`, generated from clean
+source commit `5b218455116c756a5ca72ee97f8faa92ef8a97d3`.
+
+The Git commit that distributes these files is artifact-only. It is not a new
+SBOM scan source, and its commit SHA is intentionally not recorded in the
+manifest because a tracked file cannot contain the SHA of its own commit.
 
 ## Regeneration
 
@@ -42,4 +52,4 @@ The Current SBOM files shall be regenerated when the Git Commit, SBOM
 Scope, Component Evidence, Binary Hash, License Evidence, or Build
 Closure changes.
 
-Do not manually edit generated SBOM or Manifest files.
+Do not manually edit the generated Product or Test Sample SBOM files.

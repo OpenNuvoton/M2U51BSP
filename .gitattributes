@@ -2,7 +2,7 @@
 # Disable Git line-ending normalization and text conversion.
 Document/SBOM/** -text
 
-# Preserve generated current SBOM artifacts with their established CRLF bytes.
+# Preserve generated current SBOM artifacts byte-for-byte.
 M2U51BSP_Product_SBOM_cdx.json -text whitespace=cr-at-eol
 M2U51BSP_TestSample_SBOM_cdx.json -text whitespace=cr-at-eol
 M2U51BSP_SBOM_Manifest.json -text whitespace=cr-at-eol
