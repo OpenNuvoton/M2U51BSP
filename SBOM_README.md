@@ -14,25 +14,27 @@
 |------------------------|------------------------------------------|
 | SBOM Format            | CycloneDX                                |
 | CycloneDX Version      | 1.6                                      |
-| Git Commit             | 4318ab567a09306ea8183667249c65f08ec51df8 |
-| Release Identifier     | V3.00.000-3-g4318ab5                     |
+| Git Commit             | 9edfa5e9c4a084c0d313f3521f6bea29b6e768fc |
+| Release Identifier     | V3.00.000-4-g9edfa5e9                    |
 | Product Components     | 5                                        |
-| Test Sample Components | 4                                        |
+| Test Sample Components | 7                                        |
 
 The Product SBOM and Test Sample SBOM are separated by design.
 
 The Product SBOM is the primary input for Product vulnerability
 assessment.
 
-The Test Sample SBOM contains sample code and three FMC IAP LDROM
-Firmware components for the IAR, Keil, and GCC build environments.
+The Test Sample SBOM contains sample code, three FMC IAP LDROM
+Firmware components, and three exact-path binary file components for the IAR,
+Keil, and GCC build environments.
 
 The FMC IAP Firmware components are represented as first-party Build
 Artifacts with Apache-2.0 License Evidence supported by the recorded
 Build Closure Review.
 
 The immutable, versioned SBOM Release Evidence Package is maintained in
-the corresponding SVN SBOM release directory.
+the corresponding SVN SBOM release directory:
+`bsp/m2u51/V3.00.000-4-g9edfa5e9/`.
 
 ## Regeneration
 
