@@ -1,21 +1,15 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:d927c3be-6ad2-4dad-aa8d-c722dcb494f0",
-  "createdAt": "2026-09-01T08:28:27.344056Z",
+  "serialNumber": "urn:uuid:890daf3b-88d2-4071-af3c-d44425e43e45",
+  "createdAt": "2026-09-01T10:34:45.460887Z",
   "bsp": {
     "name": "M2U51BSP",
-    "version": "V3.00.000-5-g5b218455",
+    "version": "V3.00.000-11-g2ea3b035",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "V3.00.000-5-g5b218455",
-    "gitCommit": "5b218455116c756a5ca72ee97f8faa92ef8a97d3",
+    "gitDescribe": "V3.00.000-11-g2ea3b035",
+    "gitCommit": "2ea3b0351c9953fe2f36bace75fe943fdea3f5c6",
     "sourceTreeState": "clean"
-  },
-  "artifactDistribution": {
-    "sourceCommit": "5b218455116c756a5ca72ee97f8faa92ef8a97d3",
-    "formalReleaseId": "V3.00.000-5-g5b218455",
-    "formalReleasePath": "bsp/m2u51/V3.00.000-5-g5b218455/",
-    "artifactCommitPolicy": "The Git commit that distributes these current SBOM files is artifact-only and is not a new SBOM scan source. Its commit SHA is intentionally not recorded here because a tracked file cannot contain the SHA of its own commit."
   },
   "generationTools": [
     {
@@ -54,14 +48,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:4d4c0905-f440-4746-a40d-6eadd5ca9cea",
+      "serialNumber": "urn:uuid:b29ea5ac-5ec7-4035-bdcf-1802eefaa1e9",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T16:28:12+08:00",
+      "generatedTimestamp": "2026-09-01T18:34:28+08:00",
       "metadataComponent": {
         "bomRef": "f970ca40c2403a54",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.00.000-5-g5b218455",
+        "version": "V3.00.000-11-g2ea3b035",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -142,7 +136,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "4be7208876a84efd3392c7578805bc995fc6e96ff31cd5ba68447ac8ba5e8991"
+        "value": "b54ce2bad3df72a85b097f38c057fdca886648aeda580f4864673845f6da2785"
       }
     },
     {
@@ -150,14 +144,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:b69d9377-5a3f-4748-996b-888286f63b64",
+      "serialNumber": "urn:uuid:c4ccab18-49b7-487a-967b-fb5fd12b7958",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T16:28:20+08:00",
+      "generatedTimestamp": "2026-09-01T18:34:37+08:00",
       "metadataComponent": {
         "bomRef": "2fb3a25050d75aab",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.00.000-5-g5b218455",
+        "version": "V3.00.000-11-g2ea3b035",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -184,6 +178,10 @@
             "value": "SampleCode/"
           },
           {
+            "name": "bsp:test-sample-scope-include-path",
+            "value": "ThirdParty/"
+          },
+          {
             "name": "bsp:test-sample-scope-exclude-path",
             "value": "Document/"
           },
@@ -196,11 +194,12 @@
       "scope": "Components used only for examples, demonstrations, validation, host-side utilities, or testing; not included in product runtime unless explicitly integrated by the user.",
       "isProductRuntimeScope": false,
       "componentSummary": {
-        "componentCount": 7,
+        "componentCount": 8,
         "componentCountByType": {
           "application": 1,
           "file": 3,
-          "firmware": 3
+          "firmware": 3,
+          "library": 1
         },
         "applicationNames": [
           "M2U51 SampleCode"
@@ -210,7 +209,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "a7a5637094fc330905ca25c4b1d9bdda3fb289619decf9e8b01af387b9f61bb3"
+        "value": "906064ac7bb88d03bba8b37d190f2ce6f2e67d5d69ef612558900689e5424983"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -230,8 +229,6 @@
     "Components in the Test Sample SBOM are not considered product firmware/runtime dependencies unless explicitly integrated by the user."
   ],
   "notes": [
-    "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM.",
-    "The Product and Test Sample SBOM bytes match formal SVN release V3.00.000-5-g5b218455.",
-    "A later Git artifact/distribution commit does not change the recorded SBOM source identity."
+    "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM."
   ]
 }

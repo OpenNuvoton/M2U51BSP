@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:b69d9377-5a3f-4748-996b-888286f63b64",
+  "serialNumber": "urn:uuid:c4ccab18-49b7-487a-967b-fb5fd12b7958",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T16:28:20+08:00",
+    "timestamp": "2026-09-01T18:34:37+08:00",
     "tools": {
       "components": [
         {
@@ -20,14 +20,14 @@
       "bom-ref": "2fb3a25050d75aab",
       "type": "application",
       "name": "MCU Test Sample",
-      "version": "V3.00.000-5-g5b218455",
+      "version": "V3.00.000-11-g2ea3b035",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.00.000-5-g5b218455",
+      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.00.000-11-g2ea3b035",
       "licenses": [
         {
           "license": {
@@ -61,6 +61,10 @@
           "value": "SampleCode/"
         },
         {
+          "name": "bsp:test-sample-scope-include-path",
+          "value": "ThirdParty/"
+        },
+        {
           "name": "bsp:test-sample-scope-exclude-path",
           "value": "Document/"
         },
@@ -87,18 +91,18 @@
       "type": "application",
       "bom-ref": "m2u51bsp:test-sample-component:samplecode",
       "name": "M2U51 SampleCode",
-      "version": "V3.00.000-5-g5b218455",
+      "version": "V3.00.000-11-g2ea3b035",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/samplecode@V3.00.000-5-g5b218455",
+      "purl": "pkg:generic/nuvoton/samplecode@V3.00.000-11-g2ea3b035",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a25611a48978d304ee28aaa04601e7cfa2ebe2d0cef30812f0a95509651047c0"
+          "content": "f4d2c7717fd6c90cbed113d4cc7c1e7e626cfc6b40b3a7a7205372f645ab291a"
         }
       ],
       "licenses": [
@@ -382,14 +386,101 @@
       ]
     },
     {
+      "type": "library",
+      "bom-ref": "pkg:generic/freertos-kernel@10.5.1?path=ThirdParty%2FFreeRTOS&source=vendored",
+      "name": "FreeRTOS-Kernel",
+      "version": "10.5.1",
+      "scope": "required",
+      "author": "Amazon Web Services, Inc. (FreeRTOS project)",
+      "supplier": {
+        "name": "Amazon Web Services, Inc."
+      },
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:generic/freertos-kernel@10.5.1",
+      "cpe": "cpe:2.3:o:amazon:freertos:10.5.1:*:*:*:*:*:*:*",
+      "description": "FreeRTOS Kernel 10.5.1 vendored for the M2U51 FreeRTOS sample projects, including kernel source, headers, portable layers, memory managers, license material, and Demo/Common files.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8b5255922f674077cbb1ea038fc5fd78adb40b013e5dbdd8a9531758c8d42113"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/FreeRTOS/FreeRTOS-Kernel/tree/v10.5.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "ThirdParty/FreeRTOS"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_source"
+        },
+        {
+          "name": "freertos_kernel_version",
+          "value": "10.5.1"
+        },
+        {
+          "name": "freertos_included_top_level_paths",
+          "value": "Demo; License; Source; README.md; links_to_doc_pages_for_the_demo_projects.url"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "FreeRTOS Kernel (Amazon Web Services)"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_freertos.md"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "ThirdParty/FreeRTOS"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "ThirdParty/FreeRTOS/Source/manifest.yml; ThirdParty/FreeRTOS/Source/sbom.spdx; ThirdParty/FreeRTOS/Source/include/FreeRTOS.h"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "ThirdParty/FreeRTOS/License/license.txt; ThirdParty/FreeRTOS/Source/sbom.spdx"
+        },
+        {
+          "name": "bsp:upstream-traceability",
+          "value": "Embedded SPDX document identifies upstream tag v10.5.1; upstream commit is not recorded in the vendored files."
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "144"
+        }
+      ]
+    },
+    {
       "type": "file",
       "bom-ref": "binary-file:5c3c7de4395fe61af314bcca715a6bbf9ae1289d714775975ad4762148efa82c:0e0a1c77a5b88463",
       "name": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
-      "version": "V3.00.000-5-g5b218455",
+      "version": "V3.00.000-11-g2ea3b035",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-5-g5b218455?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-11-g2ea3b035?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -440,11 +531,11 @@
       "type": "file",
       "bom-ref": "binary-file:8174a77f0068f5a87164ffdd10cbe42634f6aa07115753b4c473d7dc67505241:cda7428ea71f0550",
       "name": "SampleCode/StdDriver/FMC_IAP/KEIL/obj/fmc_ld_iap.bin",
-      "version": "V3.00.000-5-g5b218455",
+      "version": "V3.00.000-11-g2ea3b035",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-5-g5b218455?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2Fobj%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-11-g2ea3b035?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2Fobj%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -495,11 +586,11 @@
       "type": "file",
       "bom-ref": "binary-file:b45a1ccb8981686794e456f272d8fd702e74cbef0d15d09160651c70f2e6fd01:336273ad62227882",
       "name": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
-      "version": "V3.00.000-5-g5b218455",
+      "version": "V3.00.000-11-g2ea3b035",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-5-g5b218455?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-11-g2ea3b035?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
