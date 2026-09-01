@@ -1,22 +1,15 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:a44627ce-d5dc-41fa-b183-fbb6ce41a70e",
-  "createdAt": "2026-09-01T10:40:55.113610Z",
+  "serialNumber": "urn:uuid:30426daa-4e27-4a79-a248-27933680c17f",
+  "createdAt": "2026-09-01T16:31:47.861576Z",
   "bsp": {
     "name": "M2U51BSP",
-    "version": "V3.00.000-12-g2d7239bf",
+    "version": "ed801718",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "V3.00.000-12-g2d7239bf",
-    "gitCommit": "2d7239bf30845b214f2fb6af38e13244bd3b479a",
+    "gitDescribe": "ed801718",
+    "gitCommit": "ed801718d15370f136863c6307fc3b545a8289d9",
     "sourceTreeState": "clean"
-  },
-  "artifactDistribution": {
-    "sourceCommit": "2d7239bf30845b214f2fb6af38e13244bd3b479a",
-    "formalReleaseId": "V3.00.000-12-g2d7239bf",
-    "formalReleasePath": "bsp/m2u51/V3.00.000-12-g2d7239bf/",
-    "formalSvnRevision": 41,
-    "artifactCommitPolicy": "The Git commit that distributes these current SBOM files is artifact-only and is not a new SBOM scan source. Its commit SHA is intentionally not recorded here because a tracked file cannot contain the SHA of its own commit."
   },
   "generationTools": [
     {
@@ -55,14 +48,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:ec537e1a-4dc9-49b2-bd8c-35b3e4547e81",
+      "serialNumber": "urn:uuid:10b5067b-ca45-472a-a62b-79060b23aedc",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T18:40:45+08:00",
+      "generatedTimestamp": "2026-09-02T00:31:39+08:00",
       "metadataComponent": {
-        "bomRef": "5b6e2021e7a917bc",
+        "bomRef": "9a9d5947a7bb30b8",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.00.000-12-g2d7239bf",
+        "version": "ed801718",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -143,7 +136,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "82488cfb19e934af79027e6b0958384124c5806a6180e0ad5702b805e93e7043"
+        "value": "f2d5b50eea7bb5a7bd67ed39d56ef3f29413d2a406ad997ddb1dd27a1a4dbd91"
       }
     },
     {
@@ -151,14 +144,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:08caaba3-010f-41a2-9d77-06d726ff28ac",
+      "serialNumber": "urn:uuid:c5427f2f-b8b2-4250-8b33-124cf1c15cf7",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T18:40:51+08:00",
+      "generatedTimestamp": "2026-09-02T00:31:44+08:00",
       "metadataComponent": {
-        "bomRef": "0edfa9c638eb4893",
+        "bomRef": "499ec1d57e8255f7",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.00.000-12-g2d7239bf",
+        "version": "ed801718",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -216,7 +209,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "291a650fcc6d2fa47b412bc166c3435271b5e2483d25d32483ba68e2c0347188"
+        "value": "9008185a17bc1eac94c4ff9fbe24c6fc245bbbda67f1698c9592e46a2892c083"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -237,8 +230,8 @@
   ],
   "notes": [
     "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM.",
-    "The Test Sample Grype report records five CPE-based matches for FreeRTOS-Kernel 10.5.1; this package publishes no VEX applicability disposition.",
-    "The Product and Test Sample SBOM bytes match formal SVN release V3.00.000-12-g2d7239bf at SVN revision 41.",
-    "A later Git artifact/distribution commit does not change the recorded SBOM source identity."
+    "The validation scan records zero Product matches and five CPE-based Test Sample matches for FreeRTOS-Kernel 10.5.1: one Critical and four High.",
+    "No affected, not-affected, fixed, resolved, VEX, or Product Security approval disposition is asserted; disposition remains pending Product Security review.",
+    "The Grype database was schema v6.1.9, built 2026-08-31T06:37:31Z, and valid at scan time. CycloneDX identifier coverage and offline or stale database state can limit results; zero matches is not a clean-security claim."
   ]
 }

@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:08caaba3-010f-41a2-9d77-06d726ff28ac",
+  "serialNumber": "urn:uuid:c5427f2f-b8b2-4250-8b33-124cf1c15cf7",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T18:40:51+08:00",
+    "timestamp": "2026-09-02T00:31:44+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "0edfa9c638eb4893",
+      "bom-ref": "499ec1d57e8255f7",
       "type": "application",
       "name": "MCU Test Sample",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.00.000-12-g2d7239bf",
+      "purl": "pkg:generic/nuvoton/mcu-test-sample@ed801718",
       "licenses": [
         {
           "license": {
@@ -91,14 +91,14 @@
       "type": "application",
       "bom-ref": "m2u51bsp:test-sample-component:samplecode",
       "name": "M2U51 SampleCode",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/samplecode@V3.00.000-12-g2d7239bf",
+      "purl": "pkg:generic/nuvoton/samplecode@ed801718",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -476,11 +476,11 @@
       "type": "file",
       "bom-ref": "binary-file:5c3c7de4395fe61af314bcca715a6bbf9ae1289d714775975ad4762148efa82c:0e0a1c77a5b88463",
       "name": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-12-g2d7239bf?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@ed801718?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -531,11 +531,11 @@
       "type": "file",
       "bom-ref": "binary-file:8174a77f0068f5a87164ffdd10cbe42634f6aa07115753b4c473d7dc67505241:cda7428ea71f0550",
       "name": "SampleCode/StdDriver/FMC_IAP/KEIL/obj/fmc_ld_iap.bin",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-12-g2d7239bf?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2Fobj%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@ed801718?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2Fobj%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -586,11 +586,11 @@
       "type": "file",
       "bom-ref": "binary-file:b45a1ccb8981686794e456f272d8fd702e74cbef0d15d09160651c70f2e6fd01:336273ad62227882",
       "name": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp."
       },
-      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@V3.00.000-12-g2d7239bf?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
+      "purl": "pkg:generic/nuvoton/m2u51bsp-binary@ed801718?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -640,7 +640,7 @@
   ],
   "dependencies": [
     {
-      "ref": "0edfa9c638eb4893",
+      "ref": "499ec1d57e8255f7",
       "dependsOn": [
         "binary-file:5c3c7de4395fe61af314bcca715a6bbf9ae1289d714775975ad4762148efa82c:0e0a1c77a5b88463",
         "binary-file:8174a77f0068f5a87164ffdd10cbe42634f6aa07115753b4c473d7dc67505241:cda7428ea71f0550",

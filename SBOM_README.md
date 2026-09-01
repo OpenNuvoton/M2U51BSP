@@ -14,9 +14,9 @@
 |------------------------|------------------------------------------|
 | SBOM Format            | CycloneDX                                |
 | CycloneDX Version      | 1.6                                      |
-| Source Git Commit      | 2d7239bf30845b214f2fb6af38e13244bd3b479a |
-| Release Identifier     | V3.00.000-12-g2d7239bf                   |
-| Formal SVN Revision    | 41                                       |
+| Source Git Commit      | ed801718d15370f136863c6307fc3b545a8289d9 |
+| Current SBOM Identity  | ed801718                                 |
+| Formal SVN Release     | Pending source review merge              |
 | Product Components     | 5                                        |
 | Test Sample Components | 8                                        |
 
@@ -34,25 +34,34 @@ The FMC IAP Firmware components are represented as first-party Build
 Artifacts with Apache-2.0 License Evidence supported by the recorded
 Build Closure Review.
 
-The current Product and Test Sample SBOM files are byte-for-byte copies of
-formal SVN release `V3.00.000-12-g2d7239bf`, generated from clean source
-commit `2d7239bf30845b214f2fb6af38e13244bd3b479a`.
+The current Product and Test Sample SBOM files were generated from clean source
+commit `ed801718d15370f136863c6307fc3b545a8289d9`. They are source-review
+artifacts, not a new formal release.
 
-The immutable evidence package is stored at
-`bsp/m2u51/V3.00.000-12-g2d7239bf/` in SVN revision 41.
+The prior immutable formal package remains
+`bsp/m2u51/V3.00.000-12-g2d7239bf/` at SVN revision 41. It and
+`latest-release.txt` are unchanged. A new canonical versioned SVN release may
+be generated only after this source/current review is merged, using the actual
+merged master commit.
 
 ## Vulnerability scan status
 
-The formal Product scan records zero matches. The Test Sample scan records
+The validation Product scan records zero matches. The Test Sample scan records
 five CPE-based matches for FreeRTOS-Kernel 10.5.1: one Critical and four High.
-The formal package preserves the raw findings but makes no affected or
-not-affected VEX applicability disposition.
+The raw Grype reports preserve all findings. No affected, not-affected, fixed,
+resolved, VEX, or Product Security approval disposition is asserted;
+disposition remains pending Product Security review.
 
-## Git Artifact Distribution
+The scan used Grype 0.117.0 with database schema v6.1.9, built
+2026-08-31T06:37:31Z and reported valid. CycloneDX inputs can omit identifiers
+needed for matching, while offline or stale databases further limit coverage.
+Zero matches is not a clean or complete security assessment.
 
-The Git commit that distributes these files is artifact-only. It is not a new
-SBOM scan source, and its commit SHA is intentionally not recorded in the
-manifest because a tracked file cannot contain the SHA of its own commit.
+## Two-stage delivery status
+
+This change is stage one: one source/current SBOM Git review. It does not create
+or modify an SVN release or an artifact-only Git commit. Stage two starts only
+after the source review is confirmed merged.
 
 ## Regeneration
 

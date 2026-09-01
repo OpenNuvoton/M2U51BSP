@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:ec537e1a-4dc9-49b2-bd8c-35b3e4547e81",
+  "serialNumber": "urn:uuid:10b5067b-ca45-472a-a62b-79060b23aedc",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T18:40:45+08:00",
+    "timestamp": "2026-09-02T00:31:39+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "5b6e2021e7a917bc",
+      "bom-ref": "9a9d5947a7bb30b8",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.00.000-12-g2d7239bf",
+      "purl": "pkg:generic/nuvoton/mcu-driver@ed801718",
       "licenses": [
         {
           "license": {
@@ -119,14 +119,14 @@
       "type": "library",
       "bom-ref": "m2u51bsp:product-component:library-device",
       "name": "M2U51 Device",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-device@V3.00.000-12-g2d7239bf",
+      "purl": "pkg:generic/nuvoton/library-device@ed801718",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -177,14 +177,14 @@
       "type": "library",
       "bom-ref": "m2u51bsp:product-component:library-lcdlib",
       "name": "M2U51 LCDLib",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-lcdlib@V3.00.000-12-g2d7239bf",
+      "purl": "pkg:generic/nuvoton/library-lcdlib@ed801718",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -235,14 +235,14 @@
       "type": "library",
       "bom-ref": "m2u51bsp:product-component:library-stddriver",
       "name": "M2U51 StdDriver",
-      "version": "V3.00.000-12-g2d7239bf",
+      "version": "ed801718",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.00.000-12-g2d7239bf",
+      "purl": "pkg:generic/nuvoton/library-stddriver@ed801718",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -444,7 +444,7 @@
   ],
   "dependencies": [
     {
-      "ref": "5b6e2021e7a917bc",
+      "ref": "9a9d5947a7bb30b8",
       "dependsOn": [
         "m2u51bsp:product-component:library-device",
         "m2u51bsp:product-component:library-lcdlib",
