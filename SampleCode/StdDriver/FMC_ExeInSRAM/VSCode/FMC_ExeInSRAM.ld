@@ -1,222 +1,189 @@
-/* Linker script to configure memory regions. */
+/*
+ * FMC_ExeInSRAM_gcc.ld
+ * GNU ld linker script converted from FMC_ExeInSRAM.sct
+ * Target: Cortex-M23
+ *
+ * Memory layout:
+ *   FLASH : 0x00000000 - 0x0003FFFF (256 KB)
+ *   RAM0  : 0x20000000 - 0x20003FFF ( 16 KB) : fmc.o RO executes here
+ *   RAM1  : 0x20004000 - 0x20007FFF ( 16 KB) : RW/ZI, heap, stack
+ *
+ * fmc.o has VMA in RAM0 and LMA in FLASH. This script emits a copy
+ * table for both .fmc_ram_code and .data. Pair this file with
+ * startup_M2U51_FMC_ExeInSRAM.S so both sections are copied at reset.
+ */
+
+ENTRY(Reset_Handler)
+
+FLASH_SIZE = DEFINED(FLASH_SIZE) ? FLASH_SIZE : 0x00040000;
+SRAM_SIZE  = DEFINED(SRAM_SIZE)  ? SRAM_SIZE  : 0x00008000;
+STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x00000200;
+HEAP_SIZE  = DEFINED(HEAP_SIZE)  ? HEAP_SIZE  : 0x00000200;
+
+FLASH_BASE = 0x00000000;
+SRAM_BASE  = 0x20000000;
+SRAM_SIZE0 = SRAM_SIZE / 2;
+SRAM_SIZE1 = SRAM_SIZE / 2;
+
 MEMORY
 {
-    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x3000    /* 8k */
-    RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x1000    /* 4k  */
-    RAM2 (rwx) : ORIGIN = 0x20001000, LENGTH = 0x1000    /* 4k */
+    FLASH (rx)  : ORIGIN = FLASH_BASE,             LENGTH = FLASH_SIZE
+    RAM0  (rwx) : ORIGIN = SRAM_BASE,              LENGTH = SRAM_SIZE0
+    RAM1  (rwx) : ORIGIN = SRAM_BASE + SRAM_SIZE0, LENGTH = SRAM_SIZE1
 }
-
-/* Library configurations */
-GROUP(libgcc.a libc.a libm.a libnosys.a)
-
-/* Linker script to place sections and symbol values. Should be used together
- * with other linker script that defines memory regions FLASH and RAM.
- * It references following symbols, which must be defined in code:
- *   Reset_Handler : Entry of reset handler
- *
- * It defines following symbols, which code can use without definition:
- *   __exidx_start
- *   __exidx_end
- *   __copy_table_start__
- *   __copy_table_end__
- *   __zero_table_start__
- *   __zero_table_end__
- *   __etext
- *   __data_start__
- *   __preinit_array_start
- *   __preinit_array_end
- *   __init_array_start
- *   __init_array_end
- *   __fini_array_start
- *   __fini_array_end
- *   __data_end__
- *   __bss_start__
- *   __bss_end__
- *   __end__
- *   end
- *   __HeapLimit
- *   __StackLimit
- *   __StackTop
- *   __stack
- *   __Vectors_End
- *   __Vectors_Size
- */
-ENTRY(Reset_Handler)
 
 SECTIONS
 {
-	.text :
-	{
-		KEEP(*(.vectors))
-		__Vectors_End = .;
-		__Vectors_Size = __Vectors_End - __Vectors;
-		__end__ = .;
+    /* Vector table / reset section must be first in FLASH. */
+    .vectors :
+    {
+        . = ALIGN(4);
+        KEEP(*(.isr_vector))
+        KEEP(*(.vectors))
+        KEEP(*(.intvec))
+        KEEP(*(RESET))
+        . = ALIGN(4);
+    } > FLASH
 
-		/**(.text*)*/
+    /*
+     * FMC driver executes from RAM0, but its initialization image is stored
+     * in FLASH. Put this output section before the generic .text/.rodata
+     * selectors so fmc.o is consumed here first.
+     */
+    .fmc_ram_code :
+    {
+        . = ALIGN(4);
+        __fmc_start__ = .;
+        *fmc.o(.text .text.*)
+        *fmc.o(.rodata .rodata.*)
+        *fmc.o(.constdata .constdata.*)
+        . = ALIGN(4);
+        __fmc_end__ = .;
+    } > RAM0 AT > FLASH
 
-        
-		KEEP(*(.init))
-		KEEP(*(.fini))
+    __fmc_load_start__ = LOADADDR(.fmc_ram_code);
+    __fmc_load_end__   = LOADADDR(.fmc_ram_code) + SIZEOF(.fmc_ram_code);
 
-		/* .ctors */
-		*crtbegin.o(.ctors)
-		*crtbegin?.o(.ctors)
-		*(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
-		*(SORT(.ctors.*))
-		*(.ctors)
+    /* All remaining executable/read-only content stays in FLASH. */
+    .text :
+    {
+        . = ALIGN(4);
+        *(.text .text.*)
+        *(.rodata .rodata.*)
+        *(.constdata .constdata.*)
+        KEEP(*(.init))
+        KEEP(*(.fini))
+        . = ALIGN(4);
+    } > FLASH
 
-		/* .dtors */
- 		*crtbegin.o(.dtors)
- 		*crtbegin?.o(.dtors)
- 		*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
- 		*(SORT(.dtors.*))
- 		*(.dtors)
-		*(.rodata*)
+    .ARM.extab :
+    {
+        *(.ARM.extab* .gnu.linkonce.armextab.*)
+    } > FLASH
 
+    .ARM.exidx :
+    {
+        __exidx_start = .;
+        *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+        __exidx_end = .;
+    } > FLASH
 
-		KEEP(*(.eh_frame*))
-	} > FLASH
+    /* C/C++ initialization arrays. */
+    .preinit_array :
+    {
+        PROVIDE_HIDDEN(__preinit_array_start = .);
+        KEEP(*(.preinit_array*))
+        PROVIDE_HIDDEN(__preinit_array_end = .);
+    } > FLASH
 
-	.ARM.extab :
-	{
-		*(.ARM.extab* .gnu.linkonce.armextab.*)
-	} > FLASH
+    .init_array :
+    {
+        PROVIDE_HIDDEN(__init_array_start = .);
+        KEEP(*(SORT(.init_array.*)))
+        KEEP(*(.init_array*))
+        PROVIDE_HIDDEN(__init_array_end = .);
+    } > FLASH
 
-	__exidx_start = .;
-	.ARM.exidx :
-	{
-		*(.ARM.exidx* .gnu.linkonce.armexidx.*)
-	} > FLASH
-	__exidx_end = .;
+    .fini_array :
+    {
+        PROVIDE_HIDDEN(__fini_array_start = .);
+        KEEP(*(SORT(.fini_array.*)))
+        KEEP(*(.fini_array*))
+        PROVIDE_HIDDEN(__fini_array_end = .);
+    } > FLASH
 
-    
-	__ExeSramBase = .;
-	.ExeSramCode :
-	{
-		. = ALIGN(4);
-
-		*/fmc.c.obj (.text*)
-		*/fmc.c.obj (.rodata*)
-		__ExeSramEnd = .; 
-	} > RAM2 AT > FLASH
-	
-    
-
-	/* To copy multiple ROM to RAM sections,
-	 * uncomment .copy.table section and,
-	 * define __STARTUP_COPY_MULTIPLE in startup_ARMCMx.S */
-	 
+    /*
+     * Startup copy table. startup_M2U51_FMC_ExeInSRAM.S walks this table
+     * when __STARTUP_COPY_MULTIPLE is enabled. Each entry is:
+     *   { LMA, VMA, size }
+     */
     .copy.table :
-	{
-		. = ALIGN(4);
-		__copy_table_start__ = .;
-		LONG (__etext)
-		LONG (__data_start__)
-		LONG (__data_end__ - __data_start__)
-		LONG (__ExeSramBase)
-		LONG (0x20001000)
-		LONG (__ExeSramEnd - 0x20001000)
-		__copy_table_end__ = .;
-	} > FLASH
+    {
+        . = ALIGN(4);
+        __copy_table_start__ = .;
+        LONG(LOADADDR(.fmc_ram_code));
+        LONG(ADDR(.fmc_ram_code));
+        LONG(SIZEOF(.fmc_ram_code));
+        LONG(LOADADDR(.data));
+        LONG(ADDR(.data));
+        LONG(SIZEOF(.data));
+        __copy_table_end__ = .;
+        . = ALIGN(4);
+    } > FLASH
 
+    /* Initialized data executes in RAM1 and is loaded from FLASH. */
+    .data :
+    {
+        . = ALIGN(4);
+        __data_start__ = .;
+        _sdata = .;
+        *(.data .data.*)
+        *(.RamFunc .RamFunc.*)
+        . = ALIGN(4);
+        __data_end__ = .;
+        _edata = .;
+    } > RAM1 AT > FLASH
 
-	/* To clear multiple BSS sections,
-	 * uncomment .zero.table section and,
-	 * define __STARTUP_CLEAR_BSS_MULTIPLE in startup_ARMCMx.S */
-	/*
-	.zero.table :
-	{
-		. = ALIGN(4);
-		__zero_table_start__ = .;
-		LONG (__bss_start__)
-		LONG (__bss_end__ - __bss_start__)
-		LONG (__bss2_start__)
-		LONG (__bss2_end__ - __bss2_start__)
-		__zero_table_end__ = .;
-	} > FLASH
-	*/
-	
-	/*. = 0x20000000;
-	
-	/*.exe_sram : AT (__exidx_end)*/
-	/*.exe_sram : 
-	{
-		./User/main.o(.text*)
-	} > RAM2  AT > FLASH*/
-    
-	__etext = .;
+    __data_load__ = LOADADDR(.data);
+    _sidata = LOADADDR(.data);
 
-	.data : AT (__etext)
-	{
-		__data_start__ = .;
-		*(vtable)
-		*(.data*)
-		
+    /* Zero-initialized data in RAM1. */
+    .bss (NOLOAD) :
+    {
+        . = ALIGN(4);
+        __bss_start__ = .;
+        _sbss = .;
+        *(.bss .bss.*)
+        *(COMMON)
+        . = ALIGN(4);
+        __bss_end__ = .;
+        _ebss = .;
+    } > RAM1
 
-		. = ALIGN(4);
-		/* preinit data */
-		PROVIDE_HIDDEN (__preinit_array_start = .);
-		KEEP(*(.preinit_array))
-		PROVIDE_HIDDEN (__preinit_array_end = .);
+    .noinit (NOLOAD) :
+    {
+        . = ALIGN(4);
+        *(.noinit .noinit.*)
+        . = ALIGN(4);
+    } > RAM1
 
-		. = ALIGN(4);
-		/* init data */
-		PROVIDE_HIDDEN (__init_array_start = .);
-		KEEP(*(SORT(.init_array.*)))
-		KEEP(*(.init_array))
-		PROVIDE_HIDDEN (__init_array_end = .);
+    /* Heap starts after RW/ZI, matching the scatter file's AlignExpr(+0, 8). */
+    .heap (NOLOAD) :
+    {
+        . = ALIGN(8);
+        __HeapBase = .;
+        . += HEAP_SIZE;
+        __HeapLimit = .;
+    } > RAM1
 
+    /* Stack is reserved at the top of SRAM. */
+    __StackTop   = ORIGIN(RAM1) + LENGTH(RAM1);
+    __StackLimit = __StackTop - STACK_SIZE;
+    PROVIDE(__stack = __StackTop);
 
-		. = ALIGN(4);
-		/* finit data */
-		PROVIDE_HIDDEN (__fini_array_start = .);
-		KEEP(*(SORT(.fini_array.*)))
-		KEEP(*(.fini_array))
-		PROVIDE_HIDDEN (__fini_array_end = .);
+    ASSERT(__HeapLimit <= __StackLimit,
+           "RAM1 overflow: RW/ZI/heap overlaps stack");
 
-		KEEP(*(.jcr*))
-		. = ALIGN(4);
-		/* All data end */
-		__data_end__ = .;
-		
-		
-
-	} > RAM
-	
-
-	.bss :
-	{
-		. = ALIGN(4);
-		__bss_start__ = .;
-		*(.bss*)
-		*(COMMON)
-		. = ALIGN(4);
-		__bss_end__ = .;
-	} > RAM
-
-	.heap (COPY):
-	{
-		__HeapBase = .;
-		__end__ = .;
-		end = __end__;
-		KEEP(*(.heap*))
-		__HeapLimit = .;
-	} > RAM
-
-	/* .stack_dummy section doesn't contains any symbols. It is only
-	 * used for linker to calculate size of stack sections, and assign
-	 * values to stack symbols later */
-	.stack_dummy (COPY):
-	{
-		KEEP(*(.stack*))
-	} > RAM
-
-	/* Set stack top to end of RAM, and stack limit move down by
-	 * size of stack_dummy section */
-	__StackTop = ORIGIN(RAM) + LENGTH(RAM);
-	__StackLimit = __StackTop - SIZEOF(.stack_dummy);
-	PROVIDE(__stack = __StackTop);
-
-	/* Check if data + heap + stack exceeds RAM limit */
-	ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")
+    ASSERT(SIZEOF(.fmc_ram_code) <= LENGTH(RAM0),
+           "RAM0 overflow: fmc.o RO does not fit in RAM0");
 }
