@@ -64,15 +64,15 @@ The binary is referenced by:
 
 ## Software Identifiers
 
-The firmware artifacts use generic Package URLs that identify the M2U51
-FMC_IAP LDROM artifact and the corresponding build toolchain:
+The firmware artifacts use the BSP release as the PURL version. The build
+toolchain is represented by a qualifier rather than occupying the version slot:
 
 - IAR:
-  `pkg:generic/m2u51-fmc-iap-ldrom@iar?artifact=fmc_ld_iap.bin`
+  `pkg:generic/nuvoton/m2u51-fmc-iap-ldrom@V3.00.000-14-g00b0843b?artifact=fmc_ld_iap.bin&toolchain=iar`
 - Keil:
-  `pkg:generic/m2u51-fmc-iap-ldrom@keil?artifact=fmc_ld_iap.bin`
+  `pkg:generic/nuvoton/m2u51-fmc-iap-ldrom@V3.00.000-14-g00b0843b?artifact=fmc_ld_iap.bin&toolchain=keil`
 - GCC:
-  `pkg:generic/m2u51-fmc-iap-ldrom@gcc?artifact=fmc_ld_iap.bin`
+  `pkg:generic/nuvoton/m2u51-fmc-iap-ldrom@V3.00.000-14-g00b0843b?artifact=fmc_ld_iap.bin&toolchain=gcc`
 
 The Package URLs were validated against CycloneDX 1.6 and accepted by the
 SBOM compliance checker as software identifiers. Package URL assignment
@@ -126,8 +126,13 @@ closure, build configuration, linked input, or toolchain runtime changes.
 
 ## SBOM Treatment
 
-The three binaries shall be represented in the Test Sample SBOM as firmware artifacts associated with the FMC_IAP sample.
+The three binaries are represented as three semantic firmware components, each
+with one exact `evidence.occurrences` path and SHA-256. They are not duplicated
+as additional `type=file` components.
 
 They shall not be represented as Product SBOM runtime components.
 
-They do not require a third-party binary license database entry unless subsequent analysis identifies an externally supplied binary or redistributable toolchain runtime.
+The repository proves project and embed references but does not contain
+reproducible build logs, final APROM link maps, or target runtime records.
+`fmc-build-link-runtime-evidence.json` binds this limitation to each artifact
+hash and keeps formal release blocked pending those records.

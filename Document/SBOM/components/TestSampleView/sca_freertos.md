@@ -50,11 +50,13 @@ asserted.
 
 - Algorithm: `sha256-path-nul-content-nul-v1`
 - File count: `144`
-- SHA-256: `8b5255922f674077cbb1ea038fc5fd78adb40b013e5dbdd8a9531758c8d42113`
+- Path base: `ThirdParty/FreeRTOS`
+- Exact inventory: `Document/SBOM/aggregate-inventory/test-freertos-kernel.json`
+- SHA-256: `d396d0257baa029714b1507428b4aeaed19e144b821e8677b1528737b32ed83b`
 
-The hash covers every Git-tracked file below `ThirdParty/FreeRTOS`. Files are
-ordered by repository-relative POSIX path. For each file, the SHA-256 input
-contains the UTF-8 repository-relative path, a NUL byte, the raw file bytes,
+The hash covers every file below `ThirdParty/FreeRTOS` at the scan source.
+Files are ordered by path relative to that path base. For each file, the
+SHA-256 input contains the UTF-8 relative path, a NUL byte, the raw file bytes,
 and a terminating NUL byte.
 
 ## Scope Classification
