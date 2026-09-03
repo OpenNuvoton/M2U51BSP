@@ -25,10 +25,12 @@ firmware development and runtime integration.
 - `Library/Device/Nuvoton/M2U51/Source/GCC/_syscalls.c`
 - `Library/Device/Nuvoton/M2U51/Source/GCC/semihosting.h`
 
-The GCC `_syscalls.c` and `semihosting.h` files are retained in the
-repository but excluded from the Product SBOM. Repository-wide project and
-build configuration review found no external reference that compiles or
-links these files.
+The GCC `_syscalls.c` and `semihosting.h` files are retained in the repository
+but excluded from the `M2U51 Device` aggregate. Their exact hashes and
+distribution status are recorded in `Document/SBOM/excluded-source-inventory.json`.
+Repository evidence does not establish authoritative µOS++/newlib upstream,
+GPL/exception, or redistribution terms, so OSS/Legal review remains a release
+blocker.
 
 The separate `Library/Device/Nuvoton/M2U51/Source/semihost.s` file remains
 in scope because multiple Keil sample projects explicitly reference it.
@@ -41,6 +43,11 @@ They are therefore excluded from the Product SBOM scan view.
 ## 3. Test Sample SBOM Scope
 
 The Test Sample SBOM contains examples, demonstration projects, validation projects, project configuration files, and generated sample binaries distributed with the BSP.
+
+The three FMC IAP binaries are modeled once each as semantic firmware
+components with exact occurrences. FreeRTOS is one library component. The
+metadata root reaches all five Test Sample components and every leaf has an
+explicit dependency entry.
 
 ### Included Paths
 

@@ -46,7 +46,7 @@
         },
         {
           "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
+          "value": "Document/SBOM/product-scope.yaml"
         },
         {
           "name": "bsp:runtime-scope",
@@ -130,7 +130,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "0b800b8af13bcaf32f81eeed844ad9b9eadba0576b90d6a4ee89fd44ca721782"
+          "content": "ed3d1c9782f8a26ab8e5b6975b5e982cc036a668670079e9724cad7c34b9c372"
         }
       ],
       "licenses": [
@@ -148,20 +148,12 @@
           "value": "product"
         },
         {
-          "name": "bsp:path",
-          "value": "Library/Device"
-        },
-        {
           "name": "bsp:component-origin",
           "value": "first-party"
         },
         {
-          "name": "bsp:component-granularity",
-          "value": "directory"
-        },
-        {
           "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
+          "value": "Document/SBOM/product-scope.yaml"
         },
         {
           "name": "bsp:runtime-scope",
@@ -170,6 +162,46 @@
         {
           "name": "bsp:included-in-product-firmware",
           "value": "true"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-path-base",
+          "value": "Library/Device"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "35"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/aggregate-inventory/product-m2u51-device.json"
+        },
+        {
+          "name": "bsp:hash-purpose",
+          "value": "content-identity"
+        },
+        {
+          "name": "bsp:identity-authority",
+          "value": "repository-relative path, source commit, exact inventory, and SHA-256"
+        },
+        {
+          "name": "bsp:source-commit",
+          "value": "00b0843b3254c1c09961d0fc5d4b1b266a547ae8"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file-inventory"
+        },
+        {
+          "name": "bsp:excluded-source-inventory",
+          "value": "Document/SBOM/excluded-source-inventory.json"
         }
       ]
     },
@@ -188,7 +220,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "6379a67966aaf9f57c7605f47ff2931014adf6ffbfce32c6e7084ab2aa6d2ffc"
+          "content": "66178b33a73ec0975f221098c0e9edc277cbf1394798c0fa73f872f9188de165"
         }
       ],
       "licenses": [
@@ -206,20 +238,12 @@
           "value": "product"
         },
         {
-          "name": "bsp:path",
-          "value": "Library/LCDLib"
-        },
-        {
           "name": "bsp:component-origin",
           "value": "first-party"
         },
         {
-          "name": "bsp:component-granularity",
-          "value": "directory"
-        },
-        {
           "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
+          "value": "Document/SBOM/product-scope.yaml"
         },
         {
           "name": "bsp:runtime-scope",
@@ -228,6 +252,42 @@
         {
           "name": "bsp:included-in-product-firmware",
           "value": "true"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/LCDLib"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-path-base",
+          "value": "Library/LCDLib"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "3"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/aggregate-inventory/product-m2u51-lcdlib.json"
+        },
+        {
+          "name": "bsp:hash-purpose",
+          "value": "content-identity"
+        },
+        {
+          "name": "bsp:identity-authority",
+          "value": "repository-relative path, source commit, exact inventory, and SHA-256"
+        },
+        {
+          "name": "bsp:source-commit",
+          "value": "00b0843b3254c1c09961d0fc5d4b1b266a547ae8"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "directory"
         }
       ]
     },
@@ -246,7 +306,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "c79813d335c5d1aff65e6f790ec080fc68c6fcef480d90e2db23ad6fd4fc9ab6"
+          "content": "3cb7d013c29273114db6510c14367368f510a19ae9d4a1cce8135a135301bdff"
         }
       ],
       "licenses": [
@@ -264,20 +324,12 @@
           "value": "product"
         },
         {
-          "name": "bsp:path",
-          "value": "Library/StdDriver"
-        },
-        {
           "name": "bsp:component-origin",
           "value": "first-party"
         },
         {
-          "name": "bsp:component-granularity",
-          "value": "directory"
-        },
-        {
           "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
+          "value": "Document/SBOM/product-scope.yaml"
         },
         {
           "name": "bsp:runtime-scope",
@@ -286,6 +338,42 @@
         {
           "name": "bsp:included-in-product-firmware",
           "value": "true"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/StdDriver"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-path-base",
+          "value": "Library/StdDriver"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "47"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/aggregate-inventory/product-m2u51-stddriver.json"
+        },
+        {
+          "name": "bsp:hash-purpose",
+          "value": "content-identity"
+        },
+        {
+          "name": "bsp:identity-authority",
+          "value": "repository-relative path, source commit, exact inventory, and SHA-256"
+        },
+        {
+          "name": "bsp:source-commit",
+          "value": "00b0843b3254c1c09961d0fc5d4b1b266a547ae8"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "directory"
         }
       ]
     },
@@ -346,12 +434,12 @@
           "value": "exact-upstream-tag-and-commit-not-confirmed"
         },
         {
-          "name": "bsp:component-hash-algorithm",
-          "value": "sha256-path-nul-content-nul-v1"
+          "name": "bsp:hash-purpose",
+          "value": "version-anchor"
         },
         {
-          "name": "bsp:component-hash-file-count",
-          "value": "304"
+          "name": "bsp:version-anchor-source",
+          "value": "Library/CMSIS/DSP/Include/arm_math.h"
         }
       ],
       "hashes": [
@@ -426,12 +514,12 @@
           "value": "exact-upstream-tag-and-commit-not-confirmed"
         },
         {
-          "name": "bsp:component-hash-algorithm",
-          "value": "sha256-path-nul-content-nul-v1"
+          "name": "bsp:hash-purpose",
+          "value": "version-anchor"
         },
         {
-          "name": "bsp:component-hash-file-count",
-          "value": "152"
+          "name": "bsp:version-anchor-source",
+          "value": "Library/CMSIS/Core/Include/cmsis_version.h; Library/CMSIS/RTOS2/Include/cmsis_os2.h"
         }
       ],
       "hashes": [
@@ -448,8 +536,30 @@
       "dependsOn": [
         "m2u51bsp:product-component:library-device",
         "m2u51bsp:product-component:library-lcdlib",
-        "m2u51bsp:product-component:library-stddriver"
+        "m2u51bsp:product-component:library-stddriver",
+        "pkg:generic/cmsis-dsp@1.10.0",
+        "pkg:generic/cmsis@6.1.0"
       ]
+    },
+    {
+      "ref": "m2u51bsp:product-component:library-device",
+      "dependsOn": []
+    },
+    {
+      "ref": "m2u51bsp:product-component:library-lcdlib",
+      "dependsOn": []
+    },
+    {
+      "ref": "m2u51bsp:product-component:library-stddriver",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/cmsis-dsp@1.10.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/cmsis@6.1.0",
+      "dependsOn": []
     }
   ]
 }
