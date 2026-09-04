@@ -171,6 +171,12 @@ SECTIONS
     .heap (NOLOAD) :
     {
         . = ALIGN(8);
+
+        /* Required by newlib/libnosys _sbrk(). */
+        __end__ = .;
+        end = .;
+        _end = .;
+
         __HeapBase = .;
         . += HEAP_SIZE;
         __HeapLimit = .;
@@ -182,8 +188,8 @@ SECTIONS
     PROVIDE(__stack = __StackTop);
 
     ASSERT(__HeapLimit <= __StackLimit,
-           "RAM1 overflow: RW/ZI/heap overlaps stack");
+           "RAM1 overflow: RW/ZI/heap overlaps stack")
 
     ASSERT(SIZEOF(.fmc_ram_code) <= LENGTH(RAM0),
-           "RAM0 overflow: fmc.o RO does not fit in RAM0");
+           "RAM0 overflow: fmc.o RO does not fit in RAM0")
 }
