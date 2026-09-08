@@ -61,8 +61,8 @@ LR_ROM __RO_BASE __RO_SIZE
         .ANY (+XO)
     }
 
-    ; Explicitly place the FMC object's RO sections in the first 16 KB SRAM.
-    ; The load image is automatically kept in LR_ROM (Flash), and Arm's
+    ; Explicitly place the RO sections of FMC in the first 16 KB SRAM.
+    ; The load image is automatically kept in LR_ROM (Flash), and the Arm linker
     ; scatter-load startup copies it to this execution address before main().
     RW_RAM0 __RW_BASE __SRAM_SIZE0
     {
