@@ -44,6 +44,8 @@ extern "C"
 #define FMC_USER_CONFIG_2       0x0F300008UL    /*!< User Config 2 address       \hideinitializer */
 #define FMC_APROM_SIZE          FMC_APROM_END   /*!< APROM Size                  \hideinitializer */
 #define FMC_LDROM_SIZE          0x1000UL        /*!< LDROM Size (4 Kbytes)       \hideinitializer */
+#define FMC_G_APWPROT_BLOCK_SIZE  0x2000UL      /*!< APWPROT block size (8 Kbytes) \hideinitializer */      
+#define FMC_C_APWPROT_BLOCK_SIZE  0x1000UL      /*!< APWPROT block size (4 Kbytes) \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  XOM region constant definitions                                                                        */
@@ -56,8 +58,8 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Bank Remap number constant definitions                                                                 */
 /*---------------------------------------------------------------------------------------------------------*/
-#define FMC_BANK_REMAP_OP0          0
-#define FMC_BANK_REMAP_OP1          1
+#define FMC_BANK_REMAP_OP0          0                           /*!< Remap Bank 0    \hideinitializer  */
+#define FMC_BANK_REMAP_OP1          1                           /*!< Remap Bank 1    \hideinitializer  */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  ISPCTL constant definitions                                                                            */
@@ -269,7 +271,7 @@ extern "C"
  * @details    This function will enable ISP action interrupt.
  *
  */
-#define FMC_ENABLE_ISP_INT()     (FMC->ISPCTL |=  FMC_ISPCTL_INTEN_Msk) /*!< Enable ISP interrupt */
+#define FMC_ENABLE_ISP_INT()     (FMC->ISPCTL |=  FMC_ISPCTL_INTEN_Msk) /*!< Enable ISP interrupt        \hideinitializer */
 
 /**
  * @brief      Disable ISP Interrupt
@@ -281,7 +283,7 @@ extern "C"
  * @details    This function will disable ISP action interrupt.
  *
  */
-#define FMC_DISABLE_ISP_INT()     (FMC->ISPCTL &= ~FMC_ISPCTL_INTEN_Msk) /*!< Disable ISP interrupt */
+#define FMC_DISABLE_ISP_INT()     (FMC->ISPCTL &= ~FMC_ISPCTL_INTEN_Msk) /*!< Disable ISP interrupt        \hideinitializer */
 
 /**
  * @brief      Get ISP Interrupt Flag
@@ -293,7 +295,7 @@ extern "C"
  * @details    This function will get ISP action interrupt status
  *
  */
-#define FMC_GET_ISP_INT_FLAG()     ((FMC->ISPSTS & FMC_ISPSTS_INTFLAG_Msk) ? 1UL : 0UL) /*!< Get ISP interrupt flag Status */
+#define FMC_GET_ISP_INT_FLAG()     ((FMC->ISPSTS & FMC_ISPSTS_INTFLAG_Msk) ? 1UL : 0UL) /*!< Get ISP interrupt flag Status        \hideinitializer */
 
 /**
  * @brief      Clear ISP Interrupt Flag
@@ -305,7 +307,48 @@ extern "C"
  * @details    This function will clear ISP interrupt flag
  *
  */
-#define FMC_CLEAR_ISP_INT_FLAG()     (FMC->ISPSTS = FMC_ISPSTS_INTFLAG_Msk) /*!< Clear ISP interrupt flag*/
+#define FMC_CLEAR_ISP_INT_FLAG()     (FMC->ISPSTS = FMC_ISPSTS_INTFLAG_Msk) /*!< Clear ISP interrupt flag        \hideinitializer */
+
+/**
+ * @brief      Enable APROM Write Protection
+ *
+ * @param[in]  u32BlockMask    APROM write protection block mask
+ *
+ * @return     None
+ *
+ * @details    This function will set the specified block bits of the APWPROT0 register
+ *             to enable APROM write protection for the selected blocks.
+ *
+ */
+#define FMC_ENABLE_APWPROT(u32BlockMask)    (FMC->APWPROT0 |= (1UL << u32BlockMask))      /*!< Enable APROM write protection  \hideinitializer */
+
+
+/**
+ * @brief      Disable APROM Write Protection
+ *
+ * @param[in]  u32BlockMask    APROM write protection block mask
+ *
+ * @return     None
+ *
+ * @details    This function will clear the specified block bits of the APWPROT0 register
+ *             to disable APROM write protection for the selected blocks.
+ *
+ */
+#define FMC_DISABLE_APWPROT(u32BlockMask)   (FMC->APWPROT0 &= ~(1UL << u32BlockMask))     /*!< Disable APROM write protection \hideinitializer */
+
+/**
+ * @brief      Check Whether APROM Write Protection Is Enabled
+ *
+ * @param[in]  u32BlockMask    APROM write protection block mask
+ *
+ * @retval     0    One or more of the specified APROM blocks are not write-protected
+ * @retval     1    All specified APROM blocks are write-protected
+ *
+ * @details    This function will check whether write protection is enabled for all
+ *             specified APROM blocks.
+ *
+ */
+#define FMC_IS_APWPROT(index) ((FMC->APWPROT0 & (1UL << (index))) ? 1UL : 0UL)           /*!< Check APROM write protection status \hideinitializer */
 
 /*@}*/ /* end of group FMC_EXPORTED_MACROS */
 
@@ -396,6 +439,38 @@ __STATIC_INLINE uint32_t FMC_ReadPID(void)
 
     FMC->ISPCMD = FMC_ISPCMD_READ_DID;          /* Set ISP Command Code */
     FMC->ISPADDR = 0x04U;                       /* Must keep 0x4 when read PID */
+    FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;         /* Trigger to start ISP procedure */
+#ifdef ISBEN
+#if (ISBEN != 0)
+    __ISB();
+#endif                                        /* To make sure ISP/CPU be Synchronized */
+#endif
+    while (tout-- > 0)
+    {
+        if (!(FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk))  /* Waiting for ISP Done */
+            return FMC->ISPDAT;
+    }
+    g_FMC_i32ErrCode = -1;
+    return 0xFFFFFFFFU;
+}
+
+/**
+  * @brief    Read Device ID
+  * @param    None
+  * @return   The Device ID
+  * @details  This function is used to read Device ID.
+  *
+  * @note     Global error code g_FMC_i32ErrCode
+  *           -1  Read time-out 
+  */
+__STATIC_INLINE uint32_t FMC_ReadDID(void)
+{
+    uint32_t volatile tout = FMC_TIMEOUT_READ;
+
+    g_FMC_i32ErrCode = 0;
+
+    FMC->ISPCMD = FMC_ISPCMD_READ_DID;          /* Set ISP Command Code */
+    FMC->ISPADDR = 0x00U;                       /* Must keep 0x0 when read DID */
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;         /* Trigger to start ISP procedure */
 #ifdef ISBEN
 #if (ISBEN != 0)
@@ -542,6 +617,24 @@ __STATIC_INLINE int32_t FMC_SetBankRemap(uint32_t u32OP)
     return -1;
 }
 
+/**
+ * @brief       Get APROM Write protection block size
+ * @param       None
+ * @return      The APROM Write protection block size
+ */
+__STATIC_INLINE uint32_t FMC_GetApwprotSize(void)
+{
+    uint32_t u32ID;
+    u32ID = FMC_ReadDID();
+	  if(u32ID == 0x7470)
+		{
+        return FMC_G_APWPROT_BLOCK_SIZE;
+		}
+		else
+		{
+        return FMC_C_APWPROT_BLOCK_SIZE;
+		}
+}
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Functions                                                                                              */
